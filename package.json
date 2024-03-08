@@ -6,9 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "husky install",
-    "format": "prettier --cache --write .",
-    "lint": "eslint --cache ."
+    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix './src//*.{ts,tsx}'",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "14.1.3",
