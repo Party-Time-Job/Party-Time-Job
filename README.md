@@ -1,36 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### < 프로젝트 세팅 >
+린트 프리티어 에어비엔비 허스키 테일윈드 폴더구조
 
-## Getting Started
+1. npx create-next-app@latest
 
-First, run the development server:
+2. eslint 및 prettier 설치 : npm install -D eslint prettier
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+3. airbnb eslint 설정 패키지 설치: npx install-peerdeps --dev eslint-config-airbnb
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. eslint & prettier 충돌 방지를 위한 플러그인 및 설정 패키지 설치: npm install -D eslint-config-prettier eslint-plugin-prettier
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. typescript를 위한 eslint-config-airbnb 설치: npm install -D eslint-config-airbnb-typescript
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+6. .eslintrc.js 작성 
 
-## Learn More
+7. .prettier.js 작성 
 
-To learn more about Next.js, take a look at the following resources:
+8. husky 설치 : npx husky install (처음 설치시)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+9. package.json 에 스크립트 추가 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+10. 터미널에서 명령어 실행 후 husky 폴더에 pre-commit, pre-push 폴더 확인
+- npx husky .husky/pre-commit "npm run format"
+- npx husky .husky/pre-push "npm run lint"
