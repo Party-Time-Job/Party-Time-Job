@@ -1,10 +1,10 @@
 interface InputComponentProps {
-  className: string;
-  type: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | null;
-  placeholder: string;
-  restProps: string[];
+  className?: string;
+  type?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | null;
+  placeholder?: string;
+  restProps?: string[];
 }
 
 const Input = ({
