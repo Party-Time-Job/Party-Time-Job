@@ -1,9 +1,9 @@
 interface ButtonComponentProps {
   options: {
-    className?: string | '';
+    className?: string | "";
     children: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    restProps?: { [key: string]: any } | '';
+    restProps?: { [key: string]: any } | "";
   };
 }
 
