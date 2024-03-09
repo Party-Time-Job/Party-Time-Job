@@ -4,25 +4,25 @@ interface InputComponentProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  restProps?: string[];
+  width: string;
+  height?: string;
 }
 
 const Input = ({
-  className,
   type,
   value,
   onChange,
   placeholder,
-  ...restProps
+  width,
+  height
 }: InputComponentProps) => {
   return (
     <input
-      className={className}
+      className={`${width} ${height} flex px-4 py-5 items-start gap-2 self-stretch rounded-md border bg-white`}
       type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      {...restProps}
     />
   );
 };
