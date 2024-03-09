@@ -18,4 +18,14 @@ module.exports = {
     jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
+  rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        "": "never"
+      },
+    ],
+    quotes: [1, 'single'],
+  },
 };

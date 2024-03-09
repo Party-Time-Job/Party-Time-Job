@@ -22,5 +22,5 @@
 
 10. 터미널에서 명령어 실행 후 husky 폴더에 pre-commit, pre-push 폴더 확인
 
-- npx husky .husky/pre-commit "npm run format"
-- npx husky .husky/pre-push "npm run lint"
+- .husky/pre-commit 위치에 "npm run format" 작성
+- .husky/pre-push 위치에 "npm run lint" 작성
