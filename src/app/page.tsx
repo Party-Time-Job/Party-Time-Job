@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <h1>HomePage</h1>
-      <Input width='w-80'/>
+      <Input width="w-80" />
       <div>
         <Button size="large">로그인하기</Button>
         <Button type="active" size="large">
