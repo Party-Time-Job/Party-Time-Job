@@ -32,7 +32,7 @@ const Button = ({
       className={`${type} ${size} align-center inline-flex justify-center gap-2 rounded-md border border-pt-primary`}
       onClick={onClick}
     >
-      <Text className="text-center leading-5">{children}</Text>
+      <Text className='text-center leading-5'>{children}</Text>
     </button>
   );
 };
