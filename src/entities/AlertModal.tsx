@@ -7,7 +7,11 @@ interface ModalComponentProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Modal = ({ modaltext, buttontext, onClick }: ModalComponentProps) => {
+const AlertModal = ({
+  modaltext,
+  buttontext,
+  onClick,
+}: ModalComponentProps) => {
   return (
     <div className="fixed left-0 top-0 flex h-screen w-screen flex-col items-center justify-center bg-black opacity-75">
       <div className="relative h-[220px] w-[370px] rounded-lg bg-white md:h-[250px] md:w-[540px]">
@@ -24,4 +28,4 @@ const Modal = ({ modaltext, buttontext, onClick }: ModalComponentProps) => {
   );
 };
 
-export default Modal;
+export default AlertModal;
