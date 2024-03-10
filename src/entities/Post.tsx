@@ -1,14 +1,24 @@
 import Image from 'next/image';
+import addWorkHours from '@/utils/getFinishTime';
 
-export const Post = () => {
+interface Props {
+  notice: Notice;
+}
+
+export const Post = ({ notice }: Props) => {
+  const comparePay =
+    (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
+    100;
+  const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
+
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
       <div className='relative flex h-[84px] w-[147px] items-center justify-center md:h-[160px] md:w-[280px]'>
         <Image
           fill
           sizes='280px'
-          src={'/default-image.png'}
-          alt='default-image'
+          src={notice.item.shop.item.imageUrl}
+          alt='preview-image'
           className='rounded-xl'
           style={{
             objectFit: 'cover',
@@ -18,7 +28,7 @@ export const Post = () => {
       <div className='flex flex-col items-start gap-4 self-stretch'>
         <div className='flex flex-col items-start gap-2'>
           <span className='text-base font-bold leading-[20px] md:text-xl '>
-            도토리식당
+            {notice.item.shop.item.name}
           </span>
           <div className='flex w-[147px] items-start gap-1.5 self-stretch md:w-[280px] md:items-center'>
             <Image
@@ -30,7 +40,7 @@ export const Post = () => {
             />
 
             <span className=' text-pt-gray30 inline-block text-xs md:text-sm md:leading-[22px]'>
-              2023-01-02 15:00~18:00 (3시간)
+              {notice.item.startsAt}~{finishTime} ({notice.item.workhour})
             </span>
           </div>
           <div className='flex items-start gap-1.5'>
@@ -42,18 +52,18 @@ export const Post = () => {
               className='h-4 w-4 md:h-5 md:w-5'
             />
             <span className='text-pt-gray30 text-xs md:text-sm md:leading-[22px]'>
-              서울시 송파구
+              {notice.item.shop.item.address1}
             </span>
           </div>
         </div>
         <div className='flex flex-col items-start self-stretch md:flex-row md:items-center md:justify-between'>
           <span className='text-lg font-bold leading-[22px] md:text-2xl'>
-            15,000원
+            {notice.item.hourlyPay}
           </span>
           <div className='flex text-pt-green40 md:h-9 md:items-center md:rounded-[20px] md:bg-pt-green40 md:p-3 md:text-white'>
             <div className='flex items-center md:gap-0.5'>
               <span className='pt-0.5 text-sm font-bold leading-4'>
-                기존 시급보다 100%
+                기존 시급보다 {comparePay}%
               </span>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
