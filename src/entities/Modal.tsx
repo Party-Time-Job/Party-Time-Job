@@ -8,7 +8,11 @@ const Modal = () => {
         <Text className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-lg">
           모달입니다.
         </Text>
-        <Button size="medium">확인</Button>
+        <div className="absolute bottom-0 right-0 m-7">
+          <Button size="medium" type="active">
+            확인
+          </Button>
+        </div>
       </div>
     </div>
   );
