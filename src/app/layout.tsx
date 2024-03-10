@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang='ko'>
       <body className={SpoqaHanSansNeo.className}>{children}</body>
     </html>
   );
