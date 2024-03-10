@@ -28,6 +28,7 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+  width: 350px;
 }
 
 .medium {
@@ -35,6 +36,7 @@
   font-size: 14px;
   font-weight: 700;
   line-height: normal;
+  width: 108px;
 }
 
 .small {
@@ -42,4 +44,5 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
+  width: 82px;
 }
