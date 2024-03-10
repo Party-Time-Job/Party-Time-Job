@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import addWorkHours from '@/utils/getFinishTime';
 
-interface Props {
-  notice: Notice;
-}
+/**
+ *
+ * @param {Notice} notice
+ * GET /shops/{shop_id}/notices/{notice_id} 결과를 반환한 객체입니다
+ * @returns 사장님 페이지 -가게 정보 상세, 공고 리스트 페이지, 공고 상세 페이지에 쓰일 Post component
+ */
 
-export const Post = ({ notice }: Props) => {
+export const Post = ({ notice }: { notice: Notice }) => {
   const comparePay =
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
     100;
