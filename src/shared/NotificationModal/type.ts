@@ -12,3 +12,11 @@ export interface NotificationModalInterface {
   onClose: (isOpen: boolean) => void;
   onClick: (alertId: string) => void;
 }
+
+export interface NotificationItemInterface {
+  id: string;
+  name: string;
+  duration: string;
+  createdAt: string;
+  onClick: (alertId: string) => void;
+}
