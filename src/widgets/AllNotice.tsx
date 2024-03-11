@@ -39,14 +39,21 @@ const notice: Notice = {
   ],
 };
 
-const CustomNotice = () => {
+const AllNotice = () => {
   return (
-    <section className='flex w-full items-start justify-center bg-pt-green10 px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
-      <div className='flex w-full flex-col gap-4 md:gap-8 lg:w-[980px]'>
-        <span className='text-[20px] font-bold leading-6 md:text-[28px]'>
-          맞춤 공고
-        </span>
-        <div className='scrollbar-hide inline-flex w-full items-start gap-1 overflow-x-scroll md:gap-[14px]'>
+    <section className='px-[12px] pb-[80px] pt-[40px]'>
+      <div className='flex flex-col gap-4'>
+        <div className='flex flex-col items-start gap-4'>
+          <span className='text-[20px] font-bold leading-6 md:text-[28px]'>
+            전체 공고
+          </span>
+          <div className='flex gap-[10px]'>
+            <button type='button'>마감임박순</button>
+            <button type='button'>상세 필터</button>
+          </div>
+        </div>
+        <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4'>
+          <Post notice={notice} />
           <Post notice={notice} />
           <Post notice={notice} />
           <Post notice={notice} />
@@ -58,4 +65,4 @@ const CustomNotice = () => {
   );
 };
 
-export default CustomNotice;
+export default AllNotice;
