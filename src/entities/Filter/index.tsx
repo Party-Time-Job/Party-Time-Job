@@ -1,1 +1,3 @@
-// 임포트는 model & ui 폴더 모두 몰아서 여기서 진행
+import Filter from './ui/Filter';
+
+export default Filter;

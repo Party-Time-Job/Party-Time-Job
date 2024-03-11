@@ -2,6 +2,12 @@ import Image from 'next/image';
 import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
 
+/**
+ * @위치 서버로부터 데이터를 받아와서 나열해주면 됩니다.
+ * @클릭이벤트 위치를 클릭하면 위치가 push 되는 이벤트를 추가해줘야합니다.
+ * @필요한_ui 위치 데이터를 불러오면 보이는 데이터들을 나열하는 Ui 처리를 해놓지 않습니다
+ */
+
 const Filter = () => {
   return (
     <div className='flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[color:var(--The-julge-gray-20,#E5E4E7)] px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)]'>
