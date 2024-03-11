@@ -1,4 +1,5 @@
 export interface NotificationItem {
+  id: string;
   storeName: string;
   duration: string;
   startsAt: string;
