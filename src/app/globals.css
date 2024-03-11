@@ -75,8 +75,8 @@ h3 {
 
 .approved {
   border-radius: 20px;
-  background: var(--The-julge-blue-10, #CCE6FF);
-  color: var(--The-julge-blue-20, #0080FF);
+  background: var(--The-julge-blue-10, #cce6ff);
+  color: var(--The-julge-blue-20, #0080ff);
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -84,19 +84,19 @@ h3 {
 }
 
 .pending {
-  color: var(--The-julge-green-20, #20A81E);
+  color: var(--The-julge-green-20, #20a81e);
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   border-radius: 20px;
-  background: var(--The-julge-green-10, #D4F7D4);
+  background: var(--The-julge-green-10, #d4f7d4);
 }
 
 .location {
   border-radius: 20px;
-  background: var(--The-julge-red-10, #FFEBE7);
-  color: var(--The-julge-primary, #EA3C12);
+  background: var(--The-julge-red-10, #ffebe7);
+  color: var(--The-julge-primary, #ea3c12);
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
