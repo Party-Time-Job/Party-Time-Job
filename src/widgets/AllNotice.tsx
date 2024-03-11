@@ -42,7 +42,7 @@ const notice: Notice = {
 const AllNotice = () => {
   // TODO(이시열) : Button component 적용, 페이지네이션
   return (
-    <section className='px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px]'>
+    <section className='px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:gap-8'>
         <div className='flex flex-col items-start gap-4 md:flex-row md:justify-between'>
           <span className='text-[20px] font-bold leading-6 md:text-[28px]'>
