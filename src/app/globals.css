@@ -72,3 +72,33 @@ h3 {
 .rounded-70 {
   border-radius: 70%;
 }
+
+.approved {
+  border-radius: 20px;
+  background: var(--The-julge-blue-10, #CCE6FF);
+  color: var(--The-julge-blue-20, #0080FF);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.pending {
+  color: var(--The-julge-green-20, #20A81E);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 20px;
+  background: var(--The-julge-green-10, #D4F7D4);
+}
+
+.location {
+  border-radius: 20px;
+  background: var(--The-julge-red-10, #FFEBE7);
+  color: var(--The-julge-primary, #EA3C12);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
