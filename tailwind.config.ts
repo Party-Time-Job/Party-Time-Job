@@ -14,6 +14,7 @@ const config: Config = {
         'pt-green30': '#6b8a8c',
         'pt-green20': '#9eb7b8',
         'pt-green10': '#cfdbdc',
+        'pt-gray30': '#7D7986',
         'pt-gray20': '#d9d9d9',
         'pt-gray10': '#ececec',
         'pt-white': '#ffffff',
