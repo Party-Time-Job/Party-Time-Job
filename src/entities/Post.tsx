@@ -11,7 +11,7 @@ import formatHourlyPay from '@/utils/formatHourlyPay';
  */
 
 export const Post = ({ notice }: { notice: Notice }) => {
-  const comparePay =
+  const comparePriceRate =
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
     100;
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
@@ -69,7 +69,7 @@ export const Post = ({ notice }: { notice: Notice }) => {
           <div className='flex text-pt-green40 md:h-9 md:items-center md:rounded-[20px] md:bg-pt-green40 md:p-3 md:text-white'>
             <div className='flex items-center md:gap-0.5'>
               <span className='pt-0.5 text-sm font-bold leading-4'>
-                기존 시급보다 {comparePay}%
+                기존 시급보다 {comparePriceRate}%
               </span>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
