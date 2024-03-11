@@ -1,5 +1,6 @@
 import Post from '@/entities/Post';
 
+// 임시로 만든 데이터 입니다.
 const notice: Notice = {
   item: {
     id: '99996477-82db-4bda-aae1-4044f11d9a8b',
@@ -39,8 +40,11 @@ const notice: Notice = {
   ],
 };
 
+/**
+ * @returns '/notice'의 전체 공고 영역
+ */
 const AllNotice = () => {
-  // TODO(이시열) : Button component 적용, 페이지네이션
+  // TODO(이시열) : Button component 적용, 페이지네이션, 전체 공고 list 받아오기
   return (
     <section className='px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:gap-8'>
