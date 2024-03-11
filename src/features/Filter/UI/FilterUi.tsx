@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Input from '@/shared/ui/Input';
-import Button from '@/shared/ui/Button';
+import Input from '@/shared/UI/Input';
+import Button from '@/shared/UI/Button';
 
 /**
  * @위치 서버로부터 데이터를 받아와서 나열해주면 됩니다.

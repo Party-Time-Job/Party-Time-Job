@@ -1,4 +1,4 @@
-import Text from './Text';
+import Text from '@/shared/UI/Text';
 
 /**
  * @param {string} type

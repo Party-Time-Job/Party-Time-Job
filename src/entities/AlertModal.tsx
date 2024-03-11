@@ -1,5 +1,5 @@
-import Button from '@/shared/ui/Button';
-import Text from '@/shared/ui/Text';
+import Button from '@/shared/UI/Button';
+import Text from '@/shared/UI/Text';
 
 /** 알림 전용 모달입니다.
  * @param {string} modalText
