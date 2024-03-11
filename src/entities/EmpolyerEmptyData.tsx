@@ -1,3 +1,12 @@
+/**
+ * @param {string} title
+ * 우측 상단 제목을 작성해주세요
+ * @param {string} comment
+ * 컴포넌트 내부에 안내 설명을 작성해주세요
+ * @param {string} content
+ * 버튼 이름을 작성해주세요
+ */
+
 import Button from '@/shared/UI/Button';
 
 interface EmployerEmptyDataComponentProps {
