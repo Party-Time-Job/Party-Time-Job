@@ -5,6 +5,14 @@ import {
   RejectedItem,
 } from '@/shared/NotificationModal/NotificationItem';
 
+/**
+ *
+ * @param {Array} items 알림 모달 안에 있는 내용(배열 데이터)
+ * @param {function} onClose 알림 모달 닫는 이벤트 핸들러
+ * @param {function} onClick 알림 모달 내 내용 클릭 이벤트 핸들러
+ * @returns 알림 모달 창
+ */
+
 const NotifiactionModal = ({
   items,
   onClose,
@@ -37,7 +45,7 @@ const NotifiactionModal = ({
             <AcceptedItem
               key={item.id}
               id={item.id}
-              name={item.storeName}
+              name={item.name}
               duration={item.duration}
               createdAt={item.createdAt}
               onClick={onClick}
@@ -46,7 +54,7 @@ const NotifiactionModal = ({
             <RejectedItem
               key={item.id}
               id={item.id}
-              name={item.storeName}
+              name={item.name}
               duration={item.duration}
               createdAt={item.createdAt}
               onClick={onClick}

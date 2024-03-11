@@ -1,6 +1,16 @@
 import { NotificationItemInterface } from '@/shared/NotificationModal/type';
 import calcDiff from '@/shared/NotificationModal/utils/calcDiff';
 
+/**
+ *
+ * @param {string} id 알림 모달 내용 아이디
+ * @param {string} name 공고 가게 이름
+ * @param {string} duration 공고 모집 기간
+ * @param {string} createdAt 생성 날짜
+ * @param {function} onClick 알림 모달 내 내용 클릭 이벤트 핸들러
+ * @returns 알림 공고 accepted 또는 rejected 내용
+ */
+
 export const AcceptedItem = ({
   id,
   name,

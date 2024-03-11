@@ -1,6 +1,6 @@
 export interface NotificationItem {
   id: string;
-  storeName: string;
+  name: string;
   duration: string;
   startsAt: string;
   workhour: number;
