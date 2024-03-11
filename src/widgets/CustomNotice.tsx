@@ -46,7 +46,7 @@ const CustomNotice = () => {
         <span className='text-[20px] font-bold leading-6 md:text-[28px]'>
           맞춤 공고
         </span>
-        <div className='scrollbar-hide inline-flex w-full items-start gap-1 overflow-x-scroll md:gap-[14px]'>
+        <div className='inline-flex w-full items-start gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'>
           <Post notice={notice} />
           <Post notice={notice} />
           <Post notice={notice} />
