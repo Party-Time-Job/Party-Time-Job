@@ -41,14 +41,14 @@ const notice: Notice = {
 
 const CustomNotice = () => {
   return (
-    <section>
-      <div>
-        <span>맞춤 공고</span>
-        <div>
-          <Post notice={notice} />
-          <Post notice={notice} />
-          <Post notice={notice} />
-        </div>
+    <section className='flex w-full flex-col items-start gap-4 bg-pt-green10 px-[12px] py-[40px] md:gap-8 md:px-[32px] md:py-[60px]'>
+      <span className='text-[20px] font-bold leading-6 md:text-[28px]'>
+        맞춤 공고
+      </span>
+      <div className='scrollbar-hide inline-flex w-full items-start gap-1 overflow-x-scroll md:gap-[14px]'>
+        <Post notice={notice} />
+        <Post notice={notice} />
+        <Post notice={notice} />
       </div>
     </section>
   );

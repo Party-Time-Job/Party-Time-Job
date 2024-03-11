@@ -31,8 +31,8 @@ export const Post = ({ notice }: { notice: Notice }) => {
         />
       </div>
       <div className='flex flex-col items-start gap-4 self-stretch'>
-        <div className='flex flex-col items-start gap-2'>
-          <span className='text-base font-bold leading-[20px] md:text-xl '>
+        <div className='flex h-[84px] flex-col items-start gap-2'>
+          <span className='text-base font-bold leading-[20px] md:text-[20px] '>
             {notice.item.shop.item.name}
           </span>
           <div className='flex w-[147px] items-start gap-1.5 self-stretch md:w-[280px] md:items-center'>
