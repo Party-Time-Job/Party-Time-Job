@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Input from '@/shared/ui/Input';
+import Button from '@/shared/ui/Button';
 
 const Filter = () => {
   return (
@@ -13,7 +14,7 @@ const Filter = () => {
       <div className='flex flex-col items-start gap-10'>
         <div className='flex w-[350px] flex-col items-start gap-6'>
           <div className='flex flex-col items-start gap-3'>
-            <span className='text-base font-normal leading-[26px] text-[#111322] '>
+            <span className='text-base font-normal leading-[26px] text-[#111322]'>
               위치
             </span>
             <div className='h-[258px] w-[350px] rounded-md border-solid border-[#E5E4E7] bg-white'>
@@ -28,14 +29,38 @@ const Filter = () => {
           <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
           <div className='flex items-start gap-3 self-stretch'>
             <div className='flex flex-[1_0_0] flex-col items-start gap-2'>
-              <span>시작일</span>
-              <Input></Input>
+              <span className='text-base font-normal leading-[26px] text-[#111322]'>
+                시작일
+              </span>
+              <Input
+                className='flex items-start gap-[10px] self-stretch px-4 py-5'
+                placeholder='입력'
+                type='date'
+              ></Input>
             </div>
           </div>
           <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
-          <div className='flex w-[350px] flex-col items-center justify-end gap-2'></div>
+          <div className='flex w-[350px] flex-col items-start justify-end gap-2'>
+            <span className='flex items-start gap-[10px] self-stretch px-4 py-5'>
+              금액
+            </span>
+            <div className='flex items-center justify-start gap-3'>
+              <div className='relative inline'>
+                <Input width='w-[169px]' placeholder='입력' />
+                <span className='absolute right-4 top-5'>원</span>
+              </div>
+              <span>이상부터</span>
+            </div>
+          </div>
         </div>
-        <div className=''></div>
+        <div className='flex w-[100%] justify-end gap-1'>
+          <Button type='default' size='medium'>
+            초기화
+          </Button>
+          <Button type='active' size='medium'>
+            적용하기
+          </Button>
+        </div>
       </div>
     </div>
   );
