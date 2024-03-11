@@ -23,13 +23,13 @@ interface Notice {
       };
       href: string;
     };
-    currentUserApplication: {
-      item: {
-        id: string; // application.id,
-        status: 'pending' | 'accepted' | 'rejected' | 'canceled'; // application.status
-        createdAt: string; // application.createdAt
-      };
-    };
   };
-  links: string[];
+  links: Links[];
+}
+
+interface Links {
+  rel: string;
+  description: string;
+  method: 'GET' | 'POST | PUT | DELETE';
+  href: string;
 }

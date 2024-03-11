@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import addWorkHours from '@/utils/getFinishTime';
+import formatDateTime from '@/utils/formatDateTime';
+import formatHourlyPay from '@/utils/formatHourlyPay';
 
 /**
  *
@@ -43,7 +45,8 @@ export const Post = ({ notice }: { notice: Notice }) => {
             />
 
             <span className=' inline-block text-xs text-pt-gray30 md:text-sm md:leading-[22px]'>
-              {notice.item.startsAt}~{finishTime} ({notice.item.workhour})
+              {formatDateTime(notice.item.startsAt)}~{finishTime} (
+              {notice.item.workhour}시간)
             </span>
           </div>
           <div className='flex items-start gap-1.5'>
@@ -61,7 +64,7 @@ export const Post = ({ notice }: { notice: Notice }) => {
         </div>
         <div className='flex flex-col items-start self-stretch md:flex-row md:items-center md:justify-between'>
           <span className='text-lg font-bold leading-[22px] md:text-2xl'>
-            {notice.item.hourlyPay}
+            {formatHourlyPay(notice.item.hourlyPay)}원
           </span>
           <div className='flex text-pt-green40 md:h-9 md:items-center md:rounded-[20px] md:bg-pt-green40 md:p-3 md:text-white'>
             <div className='flex items-center md:gap-0.5'>
