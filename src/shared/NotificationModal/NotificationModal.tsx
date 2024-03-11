@@ -28,7 +28,7 @@ const NotifiactionModal = ({
       </div>
       <div className='flex flex-col gap-8'>
         {items.length === 0 && (
-          <div className='flex flex-col items-center justify-center'>
+          <div className='h-300 flex flex-col items-center justify-center'>
             <span>알림이 없습니다!</span>
           </div>
         )}
