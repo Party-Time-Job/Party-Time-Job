@@ -42,7 +42,7 @@ const NoticeList = ({
     return null;
   };
   return (
-    <section className='px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
+    <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[678px] md:gap-8 lg:w-[971px]'>
         <div className='flex flex-col items-start gap-4 md:flex-row md:justify-between'>
           {updateNoticeCategory(category)}
