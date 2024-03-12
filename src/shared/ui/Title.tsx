@@ -1,5 +1,3 @@
-import { TitleInterface } from '@/shared/Title/type';
-
 /**
  *
  * @param {string} title 페이지 타이틀
@@ -11,6 +9,16 @@ import { TitleInterface } from '@/shared/Title/type';
  * @param {React.ReactNode} children 페이지 타이틀 밑 각 내용들
  * @returns 페이지 타이틀과 해당하는 각 내용들
  */
+
+interface TitleInterface {
+  title: string;
+  align?: 'start' | 'center';
+  size?: number;
+  subtitle?: string;
+  subSize?: number;
+  gap?: number;
+  children: React.ReactNode;
+}
 
 const Title = ({
   title,

@@ -12,7 +12,7 @@ interface InputComponentProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  width: string;
+  width?: string;
   height?: string;
 }
 

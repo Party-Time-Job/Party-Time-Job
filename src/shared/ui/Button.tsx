@@ -1,5 +1,3 @@
-import { ButtonInterface } from '@/shared/Button/type';
-
 /**
  *
  * @param {string} text 버튼에 들어갈 텍스트
@@ -11,6 +9,16 @@ import { ButtonInterface } from '@/shared/Button/type';
  * @param {function} onSubmit 버튼 제출 이벤트 핸들러
  * @returns 공통 버튼 컴포넌트
  */
+
+export interface ButtonInterface {
+  text: string;
+  type?: 'button' | 'submit';
+  confirm?: boolean;
+  size: 'large' | 'medium' | 'mediumSmall' | 'small';
+  status: 'active' | 'inactive';
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
 
 const Button = ({
   text,
