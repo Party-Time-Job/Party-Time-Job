@@ -43,7 +43,6 @@ export const Post = ({ notice }: { notice: Notice }) => {
               height={20}
               className='h-4 w-4 md:h-5 md:w-5'
             />
-
             <span className=' inline-block text-xs text-pt-gray30 md:text-sm md:leading-[22px]'>
               {formatDateTime(notice.item.startsAt)}~{finishTime} (
               {notice.item.workhour}시간)
