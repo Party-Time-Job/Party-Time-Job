@@ -1,19 +1,18 @@
-import EmpolyerEmptyData from '@/entities/EmpolyerEmptyData';
+import Filter from '@/features/Filter/Filter';
+import MyStore from '@/entities/Employer/MyStore';
+import Badge from '@/shared/UI/Badge';
+import RegisteredRecruitment from '@/entities/Employer/RegisteredRecruitment';
 
 export default function Home() {
   return (
     <>
       <h1>HomePage</h1>
-      <EmpolyerEmptyData
-        title='내 가게'
-        comment='내 가게를 소개하고 공고도 등록해 보세요'
-        content='가게 등록하기'
-      />
-      <EmpolyerEmptyData
-        title='등록한 공고'
-        comment='공고를 등록해 보세요'
-        content='공고 등록하기'
-      />
+      <Badge>승인완료</Badge>
+      <Badge>대기중</Badge>
+      <Badge>서울시 성동구</Badge>
+      <Filter></Filter>
+      <MyStore></MyStore>
+      <RegisteredRecruitment></RegisteredRecruitment>
     </>
   );
 }

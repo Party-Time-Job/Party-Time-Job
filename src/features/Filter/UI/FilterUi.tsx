@@ -1,12 +1,12 @@
-import Image from 'next/image';
-import Input from '@/shared/UI/Input';
-import Button from '@/shared/UI/Button';
-
 /**
  * @위치 서버로부터 데이터를 받아와서 나열해주면 됩니다.
  * @클릭이벤트 위치를 클릭하면 위치가 push 되는 이벤트를 추가해줘야합니다.
- * @필요한_ui 위치 데이터를 불러오면 보이는 데이터들을 나열하는 Ui 처리를 해놓지 않습니다
+ * @필요한_ui 위치 데이터를 불러오면 보이는 데이터들을 나열하는 Ui 처리를 해놓지 않았습니다
  */
+
+import Image from 'next/image';
+import Input from '@/shared/UI/Input';
+import Button from '@/shared/UI/Button';
 
 const Filter = () => {
   return (
@@ -15,7 +15,7 @@ const Filter = () => {
         <span className='text-xl font-bold leading-normal text-[#111322] '>
           상세필터
         </span>
-        <Image src='/close.svg' alt='close' width='24' height='24' />
+        <Image src={'/filter-close.svg'} alt='close' width='24' height='24' />
       </div>
       <div className='flex flex-col items-start gap-10'>
         <div className='flex w-[350px] flex-col items-start gap-6'>
