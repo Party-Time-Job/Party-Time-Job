@@ -44,7 +44,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               className='h-4 w-4 md:h-5 md:w-5'
             />
 
-            <span className=' inline-block text-xs text-pt-gray30 md:text-sm md:leading-[22px]'>
+            <span className=' text-pt-gray40 inline-block text-xs md:text-sm md:leading-[22px]'>
               {formatDateTime(noticeItem.startsAt)}~{finishTime} (
               {noticeItem.workhour}시간)
             </span>
@@ -57,7 +57,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               height={20}
               className='h-4 w-4 md:h-5 md:w-5'
             />
-            <span className='text-xs text-pt-gray30 md:text-sm md:leading-[22px]'>
+            <span className='text-pt-gray40 text-xs md:text-sm md:leading-[22px]'>
               {noticeItem.shop.item.address1}
             </span>
           </div>
