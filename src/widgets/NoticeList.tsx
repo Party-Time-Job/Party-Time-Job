@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Post from '@/entities/Post';
 
 interface Props {
@@ -52,7 +53,13 @@ const NoticeList = ({
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
           {noticeItemList.map(notice => {
-            return <Post key={notice.item.id} noticeItem={notice.item} />;
+            return (
+              <Link
+                href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
+              >
+                <Post key={notice.item.id} noticeItem={notice.item} />
+              </Link>
+            );
           })}
         </div>
       </div>
