@@ -12,7 +12,7 @@ import Text from '@/shared/UI/Text';
 
 interface ModalComponentProps {
   modalText?: string;
-  buttonText?: string;
+  buttonText: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -28,9 +28,12 @@ const AlertModal = ({
           {modalText}
         </Text>
         <div className='absolute bottom-0 left-1/2 mb-7 -translate-x-1/2 transform md:absolute md:bottom-0 md:left-auto md:right-0 md:m-7 md:transform-none'>
-          <Button onClick={onClick} size='medium' type='active'>
-            {buttonText}
-          </Button>
+          <Button
+            onClick={onClick}
+            size='medium'
+            status='active'
+            text={buttonText}
+          />
         </div>
       </div>
     </div>

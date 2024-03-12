@@ -16,7 +16,7 @@ export interface ButtonInterface {
   confirm?: boolean;
   size: 'large' | 'medium' | 'mediumSmall' | 'small';
   status: 'active' | 'inactive';
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   onSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 

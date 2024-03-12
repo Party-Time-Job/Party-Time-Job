@@ -60,12 +60,8 @@ const Filter = () => {
           </div>
         </div>
         <div className='flex w-[100%] justify-end gap-1'>
-          <Button type='default' size='medium'>
-            초기화
-          </Button>
-          <Button type='active' size='medium'>
-            적용하기
-          </Button>
+          <Button status='active' size='medium' text='초기화' />
+          <Button status='active' size='medium' text='적용하기' />
         </div>
       </div>
     </div>
