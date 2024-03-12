@@ -6,20 +6,18 @@
  * 기본값은 pendng으로 설정했습니다
  */
 
-import Text from './Text';
-
 interface BadgeComponentProps {
-  children: React.ReactNode;
   type?: string;
+  text: string;
 }
 
-const Badge = ({ children, type = 'pending' }: BadgeComponentProps) => {
+const Badge = ({ text, type = 'pending' }: BadgeComponentProps) => {
   return (
     <div className='flex items-start gap-1'>
       <div
         className={`${type} flex items-center justify-center rounded-[20px] px-[10px] py-[6px]`}
       >
-        <Text>{children}</Text>
+        {text}
       </div>
     </div>
   );

@@ -1,38 +1,42 @@
-import Text from '@/shared/UI/Text';
-
 /**
- * @param {string} type
- * 타입은 총 세가지가 있습니다. active, negative, default 세개중 골라 쓰시면 됩니다. 설정하지 않을 시 default로 처리됩니다.
- * @param {string} size
- * 사이즈는 총 세가지가 있습니다. large, medium, small
- * 타입과 사이즈는 클래스 네임으로서 테일윈드로 설정하기 어려운 조건은 따로 global.css 로 처리해 주었습니다.
- * 타입과 사이즈의 규격은 global.css 에서 확인하실 수 있습니다.
- * @param {string} children
- * 버튼에 들어갈 내용을 입력해주세요
- * @param {function} onClick
- * 이벤트 함수를 등록해주세요
- * @returns 타입과 사이즈에 맞는 버튼을 반환합니다.
+ *
+ * @param {string} text 버튼에 들어갈 텍스트
+ * @param {'button' | 'submit'} type 버튼 타입(기본값은 button)
+ * @param {boolean} confirm 확인을 위한 버튼
+ * @param {'large' | 'medium' | 'mediumSmall' | 'small'} size 버튼 크기
+ * @param {'active' | 'inactive'} status 버튼 활성화 상태 표시
+ * @param {function} onClick 버튼 클릭 이벤트 핸들러
+ * @param {function} onSubmit 버튼 제출 이벤트 핸들러
+ * @returns 공통 버튼 컴포넌트
  */
 
-interface ButtonComponentProps {
-  type?: string;
-  children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  size?: string;
+export interface ButtonInterface {
+  text: string;
+  type?: 'button' | 'submit';
+  confirm?: boolean;
+  size: 'large' | 'medium' | 'mediumSmall' | 'small';
+  status: 'active' | 'inactive';
+  onClick?: () => void;
+  onSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({
-  type = 'default',
-  size = 'large',
-  children,
+  text,
+  type = 'button',
+  confirm,
+  size,
+  status,
   onClick,
-}: ButtonComponentProps) => {
+  onSubmit,
+}: ButtonInterface) => {
   return (
     <button
-      className={`text-nowrap ${type} ${size} align-center inline-flex justify-center gap-2 rounded-md border border-pt-primary`}
+      type={type}
       onClick={onClick}
+      onSubmit={onSubmit}
+      className={`${size} ${status} ${confirm ? 'confirm' : ''} rounded-md border`}
     >
-      <Text className='text-center leading-5'>{children}</Text>
+      {text}
     </button>
   );
 };

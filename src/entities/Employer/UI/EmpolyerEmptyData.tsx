@@ -34,7 +34,7 @@ const EmpolyerEmptyData = ({
             {comment}
           </span>
           {button}
-          <Button type='active'>{content}</Button>
+          <Button size='large' status='active' text={content} />
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import Button from '@/shared/Button/Button';
+import Button from '@/shared/UI/Button';
 import { OmitButton } from '@/shared/Button/type';
 
 export const ActiveButton = (props: OmitButton) => {
