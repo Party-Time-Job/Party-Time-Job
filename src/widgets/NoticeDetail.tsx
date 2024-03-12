@@ -8,6 +8,11 @@ const getNoticeDetail = async (shopId: string, noticeId: string) => {
   return result;
 };
 
+/**
+ * @param {string} shopId router params에서 받은 가게 id
+ * @param {string} noticeId router params에서 받은 공고 id
+ * @returns '/detail/[shopId]/[noticeId]' 에 랜더링 될 공고 상세 컴포넌트
+ */
 const NoticeDetail = async ({
   shopId,
   noticeId,

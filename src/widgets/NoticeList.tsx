@@ -8,7 +8,12 @@ interface Props {
 }
 
 /**
- * @returns '/notice'의 전체 공고 영역
+ *
+ * @param {string} category 'all', or 'recent' or 'search'
+ * @param {string} searchValue caregory가 'search' 일때 검색어
+ * @param {Notice[]} noticeItemList notice 데이터 배열
+ *
+ * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
 const NoticeList = ({
   category = 'all',

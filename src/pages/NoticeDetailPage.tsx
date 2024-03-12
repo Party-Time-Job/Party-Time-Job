@@ -8,7 +8,12 @@ const getNotice = async () => {
   const noticeItemList: Notice[] = result.items;
   return noticeItemList;
 };
-
+/**
+ *
+ * @param {string} shopId router params에서 받은 가게 id
+ * @param {string} noticeId router params에서 받은 공고 id
+ * @returns '/detail/[shopId]/[noticeId]' 에 랜더링 될 페이지 컴포넌트
+ */
 const NoticeDetailPage = async ({
   shopId,
   noticeId,
