@@ -11,8 +11,9 @@ import formatHourlyPay from '@/utils/formatHourlyPay';
  */
 
 export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
-  const comparePriceRate =
-    (noticeItem.hourlyPay / noticeItem.shop.item.originalHourlyPay) * 100 - 100;
+  const comparePriceRate = Math.round(
+    (noticeItem.hourlyPay / noticeItem.shop.item.originalHourlyPay) * 100 - 100,
+  );
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
 
   return (
