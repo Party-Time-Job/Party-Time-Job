@@ -17,7 +17,7 @@ const NoticeDetail = async ({
 }) => {
   const data = await getNoticeDetail(shopId, noticeId);
   return (
-    <section className='px-[12px] py-[40px]'>
+    <section className='w-full px-[12px] py-[40px]'>
       <div className='flex flex-col gap-4'>
         <div className='flex flex-col gap-2'>
           <span className='text-[14px] font-bold text-pt-green40'>

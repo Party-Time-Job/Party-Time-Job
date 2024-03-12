@@ -17,6 +17,7 @@ const page = async () => {
   // TODO(이시열): 전체 공고에서 주소를 기준으로 맞춤 공고 가져오기.
   // 전체 공고 가져오는 fetch 함수 만들기.
   const noticeItemList = await getNotice();
+  console.log(noticeItemList);
   return (
     <div className='flex flex-col items-center justify-center'>
       <CustomNotice customNoticeList={noticeItemList} />

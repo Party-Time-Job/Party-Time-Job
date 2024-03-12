@@ -44,7 +44,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               className='h-4 w-4 md:h-5 md:w-5'
             />
 
-            <span className=' text-pt-gray40 inline-block text-xs md:text-sm md:leading-[22px]'>
+            <span className=' inline-block text-xs text-pt-gray40 md:text-sm md:leading-[22px]'>
               {formatDateTime(noticeItem.startsAt)}~{finishTime} (
               {noticeItem.workhour}시간)
             </span>
@@ -57,13 +57,13 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               height={20}
               className='h-4 w-4 md:h-5 md:w-5'
             />
-            <span className='text-pt-gray40 text-xs md:text-sm md:leading-[22px]'>
+            <span className='text-xs text-pt-gray40 md:text-sm md:leading-[22px]'>
               {noticeItem.shop.item.address1}
             </span>
           </div>
         </div>
         <div className='flex flex-col items-start self-stretch md:flex-row md:items-center md:justify-between'>
-          <span className='text-lg font-bold leading-[22px] md:text-2xl'>
+          <span className='overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold leading-[22px] md:text-2xl'>
             {formatHourlyPay(noticeItem.hourlyPay)}원
           </span>
           <div className='flex text-pt-green40 md:h-9 md:items-center md:rounded-[20px] md:bg-pt-green40 md:p-3 md:text-white'>
