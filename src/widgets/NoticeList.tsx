@@ -52,7 +52,7 @@ const NoticeList = ({
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
           {noticeItemList.map(notice => {
-            return <Post key={notice.item.id} notice={notice} />;
+            return <Post key={notice.item.id} noticeItem={notice.item} />;
           })}
         </div>
       </div>
