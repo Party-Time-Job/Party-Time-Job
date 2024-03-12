@@ -29,6 +29,18 @@ interface Notice {
   links: Links[];
 }
 
+interface NoticeDetail {
+  item: NoticeItem;
+  currentUserApplication: {
+    item: {
+      id: 'string';
+      status: 'pending | accepted | rejected | canceled';
+      createdAt: 'string';
+    };
+  };
+  links: Links[];
+}
+
 interface ShopItem {
   id: string;
   name: string;
@@ -56,4 +68,11 @@ interface Links {
   description: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   href: string;
+  body?: {
+    hourlyPay: number;
+    startsAt: string;
+    workhour: string;
+    description: string;
+  };
+  query?: { offset: undefined | number; limit: undefined | number };
 }

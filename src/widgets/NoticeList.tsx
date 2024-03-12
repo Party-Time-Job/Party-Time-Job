@@ -55,6 +55,7 @@ const NoticeList = ({
           {noticeItemList.map(notice => {
             return (
               <Link
+                key={notice.item.id}
                 href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
               >
                 <Post key={notice.item.id} noticeItem={notice.item} />
