@@ -10,4 +10,4 @@ export interface ButtonInterface {
   onSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export type OmitButton = Omit<ButtonInterface, 'confirm' | 'status'>;
+export type OmitButton = Omit<ButtonInterface, 'status' | 'confirm'>;
