@@ -1,5 +1,17 @@
 import { TitleInterface } from '@/shared/Title/type';
 
+/**
+ *
+ * @param {string} title 페이지 타이틀
+ * @param {'start' | 'center'} align 타이틀 정렬 (기본값은 start)
+ * @param {number} size 타이틀 폰트 크기
+ * @param {string} subtitle 페이지 서브타이틀
+ * @param {number} subSize 서브타이틀 폰트 크기
+ * @param {number} gap 타이틀과 본문 간격
+ * @param {React.ReactNode} children 페이지 타이틀 밑 각 내용들
+ * @returns 페이지 타이틀과 해당하는 각 내용들
+ */
+
 const Title = ({
   title,
   align = 'start',
