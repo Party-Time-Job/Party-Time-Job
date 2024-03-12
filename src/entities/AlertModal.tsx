@@ -1,6 +1,3 @@
-import Button from '@/shared/UI/Button';
-import Text from '@/shared/UI/Text';
-
 /** 알림 전용 모달입니다.
  * @param {string} modalText
  * 모달에 들어갈 텍스트를 입력해주세요
@@ -9,6 +6,9 @@ import Text from '@/shared/UI/Text';
  * @param {function} onClick
  * 버튼에 등록할 이벤트 함수를 입력해주세요
  */
+
+import Button from '@/shared/Button';
+import Text from '@/shared/ui/Text';
 
 interface ModalComponentProps {
   modalText?: string;

@@ -8,7 +8,7 @@
  */
 
 import { ReactNode } from 'react';
-import Button from '@/shared/UI/Button';
+import Button from '@/shared/Button';
 
 interface EmployerEmptyDataComponentProps {
   title: string;
