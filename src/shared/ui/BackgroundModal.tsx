@@ -20,9 +20,13 @@ const BackgroundModal = ({
   children,
 }: BackgroundModalInterface) => {
   return (
-    <div>
-      <div>
-        <button type='button' onClick={onClick}>
+    <div className='fixed inset-0 w-full overflow-auto bg-[#fafafa]'>
+      <div className='relative mx-auto my-0 max-w-[964px]'>
+        <button
+          type='button'
+          onClick={onClick}
+          className='absolute right-0 top-[60px] z-10'
+        >
           <Image
             src='/close.svg'
             alt='닫기 아이콘'
