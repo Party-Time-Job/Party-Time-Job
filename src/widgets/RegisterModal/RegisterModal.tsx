@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable no-return-assign */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import CreatePortal from '@/features/Filter/CreatePortal';
