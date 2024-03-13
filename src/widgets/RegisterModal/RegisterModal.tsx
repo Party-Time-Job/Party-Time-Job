@@ -8,16 +8,21 @@ import Title from '@/shared/ui/Title';
 import ADDRESS from '@/widgets/constants/Address';
 import Button from '@/shared/ui/Button';
 
+/**
+ * @param {string} defaultName 이름 영역에 해당하는 디폴트 값
+ * @param {string} defualtPhone 연락처 영역에 해당하는 디폴트 값
+ * @param {string} defaultAddress 선호지역 영역에 해당하는 디폴트 값
+ * @param {string} defaultBio 소개 영역에 해당하는 디폴트 값
+ * @param {function} onClickClose 모달 닫기 클릭 이벤트 핸들러
+ * @return 프로필 등록 모달 페이지
+ */
+
 export interface RegisterModalInterface {
   defaultName?: string;
   defaultPhone?: string;
   defaultAddress?: string;
   defaultBio?: string;
-  showModal?: boolean;
   onClickClose: () => void;
-  onClickOpen: () => void;
-  handleClick: (text: string) => void;
-  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const RegisterModal = ({
@@ -54,11 +59,11 @@ const RegisterModal = ({
 
   return (
     <CreatePortal id='register'>
-      <div>
+      <div className='z-10 opacity-0'>
         <BackgroundModal onClick={onClickClose}>
           <Title title='내 프로필' gap={24}>
-            <div>
-              <div>
+            <div className='grid w-full grid-cols-3 grid-rows-1 pb-6 pt-1 lg:grid-cols-2 lg:grid-rows-2'>
+              <div className='w-full pr-5'>
                 <Input
                   type='input'
                   title='이름*'
@@ -71,7 +76,7 @@ const RegisterModal = ({
                   }
                 />
               </div>
-              <div>
+              <div className='w-full pr-5'>
                 <Input
                   type='input'
                   title='연락처*'
@@ -84,7 +89,7 @@ const RegisterModal = ({
                   }
                 />
               </div>
-              <div>
+              <div className='w-full lg:pr-5'>
                 <Select
                   type='search'
                   title='선호지역*'
@@ -98,7 +103,7 @@ const RegisterModal = ({
                 />
               </div>
             </div>
-            <div>
+            <div className='pb-8'>
               <Input
                 type='description'
                 title='소개*'
@@ -111,7 +116,7 @@ const RegisterModal = ({
                 }
               />
             </div>
-            <div>
+            <div className='mx-auto my-0 w-[346px]'>
               {(defaultName && defaultPhone && defaultAddress && defaultBio) ||
               active ? (
                 <Button text='등록하기' size='large' status='active' />
