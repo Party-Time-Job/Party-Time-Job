@@ -125,3 +125,14 @@ h3 {
   font-weight: 700;
   line-height: normal;
 }
+
+.filter:hover {
+  background-color: #f2f2f3;
+}
+
+.search {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
