@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import Post from '@/entities/Post';
+import Post from '../Post/Post';
+import NoticeListHeader from './NoticeListHeader';
 
 interface Props {
   category?: string;
@@ -48,15 +49,10 @@ const NoticeList = ({
   };
   return (
     <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
-      <div className='flex flex-col gap-4 md:w-[678px] md:gap-8 lg:w-[971px]'>
-        <div className='flex flex-col items-start gap-4 md:flex-row md:justify-between'>
+      <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>
+        <div className='flex w-full flex-col items-start gap-4 md:flex-row md:justify-between'>
           {updateNoticeCategory(category)}
-          {category !== 'recent' ? (
-            <div className='flex gap-[10px]'>
-              <button type='button'>마감임박순</button>
-              <button type='button'>상세 필터</button>
-            </div>
-          ) : null}
+          {category !== 'recent' ? <NoticeListHeader /> : null}
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
           {noticeItemList.map(notice => {
