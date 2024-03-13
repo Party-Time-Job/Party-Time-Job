@@ -1,28 +1,69 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
+import AlertModal from '@/shared/ui/AlertModal';
 
 const LoginPage = () => {
+  const [showModal, setShowModal] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm({ mode: 'onBlur' });
+  const router = useRouter();
+
+  useEffect(() => {
+    if (window.localStorage.getItem('accessToken')) {
+      router.push('/notice');
+    }
+  }, [router]);
+
+  const onSubmit = async data => {
+    try {
+      const response = await axios.post(
+        'https://bootcamp-api.codeit.kr/api/3-2/the-julge/token',
+        data,
+      );
+      const { token } = response.data.item;
+      window.localStorage.setItem('accessToken', token);
+
+      if (response.status === 200) {
+        router.push('/notice');
+      }
+    } catch (error) {
+      if ((error?.response && error.response.status === 400) || 404) {
+        // 비밀번호 오류 시 모달을 띄웁니다.
+        setShowModal(true);
+      }
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div className='flex h-screen flex-col items-center justify-center'>
+      {showModal && (
+        <AlertModal
+          modalText='이메일 또는 비밀번호를 확인해주세요.'
+          buttonText='확인'
+          onClick={handleCloseModal}
+        />
+      )}
       <Link href='/notice'>
         <h1 className='mb-10 cursor-pointer text-3xl font-bold'>여기에 로고</h1>
       </Link>
       <form
         className='mx-auto flex w-80 flex-col gap-7'
         noValidate
-        onSubmit={handleSubmit(data => {
-          alert(JSON.stringify(data));
-        })}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className='flex flex-col gap-2'>
           <label htmlFor='email'>이메일</label>
