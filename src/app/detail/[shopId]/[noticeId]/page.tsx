@@ -1,4 +1,4 @@
-import NoticeDetailPage from '@/pages/NoticeDetailPage';
+import NoticeDetailPage from '@/pages/NoticeDetailPage/NoticeDetailPage';
 
 const page = async ({
   params: { shopId, noticeId },

@@ -1,4 +1,4 @@
-import DetailPost from '@/entities/DetailPost';
+import DetailPost from '../Post/DetailPost';
 
 const getNoticeDetail = async (shopId: string, noticeId: string) => {
   const response = await fetch(

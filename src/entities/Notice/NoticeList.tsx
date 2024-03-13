@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Post from '@/entities/Post';
+import Post from '../Post/Post';
 
 interface Props {
   category?: string;
