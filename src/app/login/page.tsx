@@ -43,7 +43,6 @@ const LoginPage = () => {
       );
       const { token } = response.data.item;
       window.localStorage.setItem('accessToken', token);
-      console.log(response);
 
       if (response.status === 200) {
         router.push('/notice');
