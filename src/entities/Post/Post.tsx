@@ -15,7 +15,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
 
   return (
-    <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
+    <div className='z-0 inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
       <div className='relative flex h-[84px] w-[147px] items-center justify-center md:h-[160px] md:w-[280px]'>
         <Image
           fill
