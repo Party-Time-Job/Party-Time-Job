@@ -1,4 +1,5 @@
 import React from 'react';
+import { Options } from '@/shared/ui/Select/type';
 
 export interface InputInterface {
   type: string;
@@ -20,14 +21,6 @@ export interface ValidInterface {
 export type Type = {
   type: 'input' | 'description';
 };
-
-export interface Option {
-  value: string;
-}
-
-export interface Options {
-  opitons: Option[];
-}
 
 // 한 곳에서 타입 제어
 export type InputProps = Type &
