@@ -54,7 +54,12 @@ const NoticeList = ({
           {category !== 'recent' ? (
             <div className='flex gap-[10px]'>
               <button type='button'>마감임박순</button>
-              <button type='button'>상세 필터</button>
+              <button
+                type='button'
+                className='flex h-[30px] items-center rounded-[5px] bg-pt-green30 p-[12px] text-[14px] font-bold text-white'
+              >
+                상세 필터
+              </button>
             </div>
           ) : null}
         </div>
