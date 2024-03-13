@@ -1,4 +1,5 @@
-/* eslint-disable consistent-return */
+'use client';
+
 import React from 'react';
 import { createPortal } from 'react-dom';
 
@@ -17,7 +18,7 @@ export interface CreatePortalInterface {
 // 따라서 브라우저 환경에서 우선 실행되는지 파악
 const CreatePortal = ({ id, children }: CreatePortalInterface) => {
   if (typeof window !== 'object') {
-    return;
+    return null;
   }
   const element = document.getElementById(id) as HTMLElement;
   return createPortal(children, element);
