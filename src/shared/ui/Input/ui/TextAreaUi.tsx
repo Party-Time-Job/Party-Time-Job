@@ -18,8 +18,10 @@ const TextAreaUi = forwardRef(
     ref: ForwardedRef<HTMLTextAreaElement>,
   ) => {
     return (
-      <div>
-        {type === 'description' && <div>{title}</div>}
+      <div className='flex-start flex flex-col justify-start gap-2'>
+        {type === 'description' && (
+          <div className='text-base font-normal leading-[26px]'>{title}</div>
+        )}
         <textarea
           placeholder={type === 'description' ? '입력' : title}
           defaultValue={defaultValue}
@@ -28,8 +30,13 @@ const TextAreaUi = forwardRef(
             onChange as (event: ChangeEvent<HTMLTextAreaElement>) => void
           }
           ref={ref}
+          className='h-[153px] w-full resize-none rounded-[5px] border border-solid border-[#cbc9cf] px-5 py-4 text-base font-normal leading-[26px] text-black placeholder:text-[#a4a1aa]'
         />
-        {isValid && <div>{valid}</div>}
+        {isValid && (
+          <div className='ml-2 text-xs font-normal leading-4 text-[#ff4040]'>
+            {valid}
+          </div>
+        )}
       </div>
     );
   },
