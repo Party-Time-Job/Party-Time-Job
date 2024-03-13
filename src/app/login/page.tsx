@@ -1,6 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
 
@@ -13,7 +14,9 @@ const LoginPage = () => {
 
   return (
     <div className='flex h-screen flex-col items-center justify-center'>
-      <h1 className='mb-10 text-3xl font-bold'>여기에 로고</h1>
+      <Link href='/notice'>
+        <h1 className='mb-10 cursor-pointer text-3xl font-bold'>여기에 로고</h1>
+      </Link>
       <form
         className='mx-auto flex w-80 flex-col gap-7'
         noValidate
@@ -73,7 +76,11 @@ const LoginPage = () => {
       </form>
       <span className='mt-5 font-light'>
         회원이 아니신가요?{' '}
-        <span className='font-bold text-pt-primary'>회원가입하기</span>
+        <Link href='/signup'>
+          <span className='cursor-pointer font-bold text-pt-primary'>
+            회원가입하기
+          </span>
+        </Link>
       </span>
     </div>
   );
