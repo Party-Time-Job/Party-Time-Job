@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import formatDateTime from '@/utils/formatDateTime';
-import addWorkHours from '@/utils/getFinishTime';
+import formatDateTime from '@/entities/Post/utils/formatDateTime';
+import addWorkHours from '@/entities/Post/utils/getFinishTime';
 
 const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
@@ -8,6 +8,7 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
       <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:h-[308px] lg:w-[509px]'>
         <Image
+          priority
           width={0}
           height={0}
           sizes='100vw'

@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import addWorkHours from '@/utils/getFinishTime';
-import formatDateTime from '@/utils/formatDateTime';
-import formatHourlyPay from '@/utils/formatHourlyPay';
+import addWorkHours from '@/entities/Post/utils/getFinishTime';
+import formatDateTime from '@/entities/Post/utils/formatDateTime';
+import formatHourlyPay from '@/entities/Post/utils/formatHourlyPay';
 
 /**
  *
@@ -15,7 +15,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
 
   return (
-    <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
+    <div className='z-0 inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
       <div className='relative flex h-[84px] w-[147px] items-center justify-center md:h-[160px] md:w-[280px]'>
         <Image
           fill
