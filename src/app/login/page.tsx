@@ -9,13 +9,24 @@ import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
 import AlertModal from '@/shared/ui/AlertModal';
 
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+interface TokenResponse {
+  item: {
+    token: string;
+  };
+}
+
 const LoginPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm({ mode: 'onBlur' });
+  } = useForm<LoginForm>({ mode: 'onBlur' });
   const router = useRouter();
 
   useEffect(() => {
@@ -24,22 +35,29 @@ const LoginPage = () => {
     }
   }, [router]);
 
-  const onSubmit = async data => {
+  const onSubmit = async (data: LoginForm): Promise<void> => {
     try {
-      const response = await axios.post(
+      const response = await axios.post<TokenResponse>(
         'https://bootcamp-api.codeit.kr/api/3-2/the-julge/token',
         data,
       );
       const { token } = response.data.item;
       window.localStorage.setItem('accessToken', token);
+      console.log(response);
 
       if (response.status === 200) {
         router.push('/notice');
       }
     } catch (error) {
-      if ((error?.response && error.response.status === 400) || 404) {
-        // 비밀번호 오류 시 모달을 띄웁니다.
-        setShowModal(true);
+      if (axios.isAxiosError(error)) {
+        if (
+          error?.response?.status === 400 ||
+          error?.response?.status === 404
+        ) {
+          setShowModal(true);
+        } else {
+          console.error(error);
+        }
       }
     }
   };
