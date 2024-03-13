@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import addWorkHours from '@/utils/getFinishTime';
-import formatDateTime from '@/utils/formatDateTime';
-import formatHourlyPay from '@/utils/formatHourlyPay';
+import addWorkHours from '@/entities/Post/utils/getFinishTime';
+import formatDateTime from '@/entities/Post/utils/formatDateTime';
+import formatHourlyPay from '@/entities/Post/utils/formatHourlyPay';
 
 /**
  *
