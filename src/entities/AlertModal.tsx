@@ -7,7 +7,7 @@
  * 버튼에 등록할 이벤트 함수를 입력해주세요
  */
 
-import Button from '@/shared/Button';
+import Button from '@/shared/ui/Button';
 import Text from '@/shared/ui/Text';
 
 interface ModalComponentProps {

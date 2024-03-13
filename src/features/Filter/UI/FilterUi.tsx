@@ -7,7 +7,7 @@
 import Image from 'next/image';
 
 import Input from '@/shared/ui/Input';
-import Button from '@/shared/Button';
+import Button from '@/shared/ui/Button';
 
 const Filter = () => {
   return (
