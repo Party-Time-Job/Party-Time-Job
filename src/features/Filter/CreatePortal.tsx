@@ -1,6 +1,20 @@
+/* eslint-disable consistent-return */
 import React from 'react';
+import { createPortal } from 'react-dom';
 
 export interface CreatePortalInterface {
   id: string;
   children: React.ReactNode;
 }
+
+// 로딩이 완료되었는지 확인이 필요하다함
+// 따라서 브라우저 환경에서 우선 실행되는지 파악
+const CreatePortal = ({ id, children }: CreatePortalInterface) => {
+  if (typeof window !== 'object') {
+    return;
+  }
+  const element = document.getElementById(id) as HTMLElement;
+  return createPortal(children, element);
+};
+
+export default CreatePortal;
