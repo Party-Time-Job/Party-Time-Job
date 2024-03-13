@@ -6,6 +6,8 @@
  * @returns 사이즈에 맞는 인풋을 반환합니다.
  */
 
+import { forwardRef } from 'react';
+
 interface InputComponentProps {
   className?: string;
   type?: string;
@@ -14,25 +16,15 @@ interface InputComponentProps {
   placeholder?: string;
   width?: string;
   height?: string;
+  id?: string;
 }
 
-const Input = ({
-  type,
-  value,
-  onChange,
-  placeholder,
-  width = 'w-80',
-  height,
-}: InputComponentProps) => {
-  return (
-    <input
-      className={`${width} ${height} flex items-start gap-2 self-stretch rounded-md border bg-white px-4 py-5`}
-      type={type}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-    />
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputComponentProps>(
+  ({ className, width = 'w-80', height = '', ...rest }, ref) => {
+    const inputClassName = `${width} ${height} ${className || ''} flex items-start gap-2 self-stretch rounded-md border bg-white px-4 py-5`;
+
+    return <input {...rest} ref={ref} className={inputClassName} />;
+  },
+);
 
 export default Input;
