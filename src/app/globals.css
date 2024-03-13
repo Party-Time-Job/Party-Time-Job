@@ -129,3 +129,10 @@ h3 {
 .filter:hover {
   background-color: #f2f2f3;
 }
+
+.serach {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}

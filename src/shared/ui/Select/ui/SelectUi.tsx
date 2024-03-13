@@ -26,7 +26,7 @@ const SelectUi = ({
       <div className='relative w-full'>
         <div className='relative'>
           {isOpen && (
-            <ul className='absolute top-2 flex w-full max-w-[230px] flex-col items-start justify-center overflow-y-auto rounded-md border border-solid border-[#e5e4e7] bg-white shadow-md'>
+            <ul className='absolute top-2 flex w-full max-w-[230px] flex-col items-center justify-start overflow-y-auto rounded-md border border-solid border-[#e5e4e7] bg-white shadow-md'>
               {options.map(option => (
                 <li
                   key={option.value}
