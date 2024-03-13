@@ -1,4 +1,5 @@
-import Post from '@/entities/Post';
+import Link from 'next/link';
+import Post from '../Post/Post';
 
 /**
  *
@@ -15,7 +16,14 @@ const CustomNotice = ({ customNoticeList }: { customNoticeList: Notice[] }) => {
         </span>
         <div className='inline-flex w-full items-start gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'>
           {customNoticeList.map(notice => {
-            return <Post key={notice.item.id} noticeItem={notice.item} />;
+            return (
+              <Link
+                key={notice.item.id}
+                href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
+              >
+                <Post key={notice.item.id} noticeItem={notice.item} />
+              </Link>
+            );
           })}
         </div>
       </div>
