@@ -1,3 +1,5 @@
+'use client';
+
 import { ForwardedRef, forwardRef } from 'react';
 import { SelectInterface } from '@/shared/ui/Select/type';
 import useSelect from '@/shared/hooks/useSelect';

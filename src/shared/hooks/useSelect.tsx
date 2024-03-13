@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { SelectInterface } from '@/shared/ui/Select/type';
 
