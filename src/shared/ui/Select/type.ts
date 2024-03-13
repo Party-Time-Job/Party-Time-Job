@@ -1,4 +1,4 @@
-import React, { ForwardedRef } from 'react';
+import React, { ChangeEvent, ForwardedRef } from 'react';
 
 export interface Option {
   value: string;
@@ -25,4 +25,13 @@ export interface SelectDropdownUiInterface {
   isRequired?: boolean;
   selected: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface SelectInterface {
+  defaultValue?: string;
+  options: Option[];
+  onClick?: (value: string) => void;
+  onChange?: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 }
