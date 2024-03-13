@@ -10,11 +10,14 @@ const useSelect = ({
   const [isOpen, setIsOpen] = useState(false);
   const [findOptions, setFindOptions] = useState(defaultValue || '');
   const [selected, setSelected] = useState(defaultValue || '');
-  const ref = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -56,7 +59,7 @@ const useSelect = ({
     isOpen,
     findOptions,
     selected,
-    ref,
+    dropdownRef,
     filtered,
     toggle,
     onClick: handleSelect,

@@ -28,7 +28,10 @@ export interface SelectDropdownUiInterface {
 }
 
 export interface SelectInterface {
+  type: 'search' | 'filter';
+  title?: string;
   defaultValue?: string;
+  isRequired?: boolean;
   options: Option[];
   onClick?: (value: string) => void;
   onChange?: (
