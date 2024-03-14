@@ -6,7 +6,13 @@ export interface ToastUiInterface {
 }
 
 const ToastUi = ({ status, children }: ToastUiInterface) => {
-  return <div className={`${status}`}>{children}</div>;
+  return (
+    <div
+      className={`${status === 'appear' ? 'appear' : 'disappear'} transform-fade fixed left-2/4 top-2/4 z-[100] inline-block rounded-[5px] px-4 py-2.5 text-base font-normal leading-[26px] text-white`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default ToastUi;
