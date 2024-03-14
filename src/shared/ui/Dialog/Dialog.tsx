@@ -35,7 +35,7 @@ export const CheckDialog = ({
         <CheckDialogUi
           text={text}
           accept={options[type as CheckType]}
-          cancel='아니요'
+          cancel='아니오'
           onAccept={onAccept}
           onCancel={onCancel}
         />
