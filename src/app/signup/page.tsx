@@ -25,6 +25,7 @@ interface TokenResponse {
 const SignupPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [completedModal, setCompletedModal] = useState<boolean>(false);
+  const [duplicateModal, setDuplicateModal] = useState<boolean>(false);
 
   const {
     register,
@@ -50,7 +51,7 @@ const SignupPage = () => {
       );
 
       if (response.status === 201) {
-        setCompletedModal(true); // 가입완료 모달 팝업
+        setCompletedModal(true);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -58,16 +59,20 @@ const SignupPage = () => {
           error?.response?.status === 400 ||
           error?.response?.status === 404
         ) {
-          setShowModal(true); // 이메일 또는 비밀번호 확인 모달 팝업
+          setShowModal(true);
         }
 
         if (error?.response?.status === 409) {
-          setShowModal(true); // 중복 이메일 모달 팝업
+          setDuplicateModal(true);
         } else {
           console.error(error);
         }
       }
     }
+  };
+
+  const handleCloseDuplicateModal = () => {
+    setDuplicateModal(false);
   };
 
   const handleCloseCompletedModal = () => {
@@ -90,9 +95,16 @@ const SignupPage = () => {
       )}
       {completedModal && (
         <AlertModal
-          modalText='회원가입이 완료되었습니다. 로그인해주세요.'
+          modalText='가입이 완료되었습니다.'
           buttonText='확인'
           onClick={handleCloseCompletedModal}
+        />
+      )}
+      {duplicateModal && (
+        <AlertModal
+          modalText='이미 사용중인 이메일입니다.'
+          buttonText='확인'
+          onClick={handleCloseDuplicateModal}
         />
       )}
       <Link href='/notice'>
