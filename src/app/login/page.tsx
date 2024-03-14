@@ -108,7 +108,7 @@ const LoginPage = () => {
           <Input
             id='password'
             type='password'
-            placeholder='**********'
+            placeholder='********'
             className={errors.password && 'border-red-600'}
             {...register('password', {
               required: '비밀번호는 필수 입력입니다.',
