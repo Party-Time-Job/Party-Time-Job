@@ -5,22 +5,32 @@
  */
 
 import Image from 'next/image';
-
 import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
 
-const Filter = () => {
+interface Props {
+  handleToggle: () => void;
+}
+
+const Filter = ({ handleToggle }: Props) => {
   return (
-    <div className='flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[color:var(--The-julge-gray-20,#E5E4E7)] px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)]'>
+    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[color:var(--The-julge-gray-20,#E5E4E7)] bg-white px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
         <span className='text-xl font-bold leading-normal text-[#111322] '>
           상세필터
         </span>
-        <Image src={'/filter-close.svg'} alt='close' width='24' height='24' />
+        <Image
+          src={'/filter-close.svg'}
+          alt='close'
+          width='24'
+          height='24'
+          onClick={handleToggle}
+          className='cursor-pointer'
+        />
       </div>
-      <div className='flex flex-col items-start gap-10'>
-        <div className='flex w-[350px] flex-col items-start gap-6'>
-          <div className='flex flex-col items-start gap-3'>
+      <div className='flex w-full flex-col items-start gap-10'>
+        <div className='flex w-[350px] flex-col items-start gap-6 max-md:w-full'>
+          <div className='flex flex-col items-start gap-3 max-md:w-full'>
             <span className='text-base font-normal leading-[26px] text-[#111322]'>
               위치
             </span>
@@ -47,11 +57,9 @@ const Filter = () => {
             </div>
           </div>
           <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
-          <div className='flex w-[350px] flex-col items-start justify-end gap-2'>
-            <span className='flex items-start gap-[10px] self-stretch px-4 py-5'>
-              금액
-            </span>
-            <div className='flex items-center justify-start gap-3'>
+          <div className='flex w-[350px] flex-col items-start justify-end gap-2 max-md:w-full'>
+            <span className='text-[16px]'>금액</span>
+            <div className='flex items-center justify-start gap-3 max-md:w-full'>
               <div className='relative inline'>
                 <Input width='w-[169px]' placeholder='입력' />
                 <span className='absolute right-4 top-5'>원</span>

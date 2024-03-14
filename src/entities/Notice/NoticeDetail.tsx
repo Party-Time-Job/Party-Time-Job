@@ -1,10 +1,10 @@
-import DetailPost from '@/entities/DetailPost';
+import DetailPost from '../Post/DetailPost';
 
 const getNoticeDetail = async (shopId: string, noticeId: string) => {
   const response = await fetch(
     `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices/${noticeId}`,
   );
-  const result: NoticeDetail = await response.json();
+  const result = (await response.json()) as NoticeDetail;
   return result;
 };
 

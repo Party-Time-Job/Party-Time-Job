@@ -1,10 +1,10 @@
-import NoticeDetail from '@/widgets/NoticeDetail';
-import NoticeList from '@/widgets/NoticeList';
+import NoticeDetail from '@/entities/Notice/NoticeDetail';
+import NoticeList from '@/entities/Notice/NoticeList';
 
 // 임시로 만든 함수. '/public/data/mock.json' 에서 데이터를 가져옵니다.
 const getNotice = async () => {
   const response = await fetch('http://localhost:3000/data/mock.json');
-  const result: AllNotice = await response.json();
+  const result = (await response.json()) as AllNotice;
   const noticeItemList: Notice[] = result.items;
   return noticeItemList;
 };
