@@ -1,4 +1,4 @@
-import classification from './classification';
-import location from './location';
+import classification from './Classification';
+import location from './Location';
 
 export { classification, location };

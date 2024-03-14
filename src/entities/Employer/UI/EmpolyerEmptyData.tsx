@@ -15,6 +15,7 @@ interface EmployerEmptyDataComponentProps {
   comment: string;
   content: string;
   button?: ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const EmpolyerEmptyData = ({
@@ -22,6 +23,7 @@ const EmpolyerEmptyData = ({
   comment,
   content,
   button,
+  onClick,
 }: EmployerEmptyDataComponentProps) => {
   return (
     <div className='felx flex-col items-start gap-2 px-[237px] py-[60px]'>
@@ -34,7 +36,12 @@ const EmpolyerEmptyData = ({
             {comment}
           </span>
           {button}
-          <Button size='medium' status='active' text={content} />
+          <Button
+            onClick={onClick}
+            size='medium'
+            status='active'
+            text={content}
+          />
         </div>
       </div>
     </div>

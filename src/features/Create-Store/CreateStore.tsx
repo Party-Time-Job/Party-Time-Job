@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
-// import { classification, location } from './Model/model';
+import { classification, location } from './Model/model';
 
 const CreateStore = () => {
   const {
@@ -24,7 +24,7 @@ const CreateStore = () => {
           <Image src={'/close.svg'} alt='close' width={32} height={32} />
         </div>
         <form
-          onSubmit={handleSubmit(data => console.log(data))}
+          onSubmit={handleSubmit(data => alert(JSON.stringify(data)))}
           className='flex h-[869px] w-[964px] flex-col gap-6'
         >
           <div className='flex w-[964px] items-start gap-5'>
@@ -45,9 +45,9 @@ const CreateStore = () => {
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='classification'>분류</label>
               <select {...register('classification')}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                {classification.map(item => (
+                  <option>{item}</option>
+                ))}
               </select>
             </div>
           </div>
@@ -55,9 +55,9 @@ const CreateStore = () => {
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address'>주소</label>
               <select {...register('address')}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                {location.map(item => (
+                  <option>{item}</option>
+                ))}
               </select>
             </div>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
@@ -103,6 +103,8 @@ const CreateStore = () => {
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
               text='가게 등록하기'
+              disabled={isSubmitting}
+              type='submit'
             />
           </div>
         </form>
