@@ -10,7 +10,7 @@ import BackgroundModal from '@/shared/ui/BackgroundModal';
 import Input from '@/shared/ui/Input/Input';
 import Select from '@/shared/ui/Select/Select';
 import Title from '@/shared/ui/Title';
-import ADDRESS from '@/widgets/constants/Address';
+import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
 import updateInformation from '@/widgets/api/updateInformation';
 
