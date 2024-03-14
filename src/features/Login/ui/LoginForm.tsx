@@ -1,11 +1,8 @@
 import { useForm } from 'react-hook-form';
+import { LoginFormProps } from '../Types.ts';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 
-interface LoginFormProps {
-  email: string;
-  password: string;
-}
 const LoginForm = ({ onSubmit }) => {
   const {
     register,
