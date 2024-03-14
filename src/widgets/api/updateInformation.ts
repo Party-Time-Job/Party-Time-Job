@@ -1,34 +1,42 @@
-export interface LinksInterface {
-  rel: string;
-  description: string;
-  method: string;
-  href: string;
-}
+import axios from 'axios';
+import { putMethod } from '@/shared/api/RequestMethod';
+import { UserInformationInterface } from '@/widgets/api/type';
 
-export interface UserShopInterface {
-  href: string;
-  item: {
-    id: string;
+const updateInformation = async (
+  userId: string,
+  params: {
     name: string;
-    category: string;
-    address1: string;
-    address2: string;
-    description: string;
-    imageUrl: string;
-    originalHourlyPay: number;
-  };
-}
+    phone: string;
+    address: string;
+    bio: string;
+    token?: string;
+  },
+): Promise<UserInformationInterface | string | Error> => {
+  try {
+    const response = await putMethod<UserInformationInterface>(
+      `/users/${userId}`,
+      {
+        name: params.name,
+        phone: params.phone,
+        address: params.address,
+        bio: params.bio,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${params?.token}`,
+        },
+      },
+    );
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (!error.response?.data.message) {
+        return error as Error;
+      }
+      return error.response?.data.message;
+    }
+    return error as Error;
+  }
+};
 
-export interface UserInformationInterface {
-  item: {
-    id: string;
-    email: string;
-    type: 'employer' | 'employee';
-    name?: string;
-    phone?: string;
-    address?: string;
-    bio?: string;
-    shop: UserShopInterface | null;
-  };
-  links?: LinksInterface[];
-}
+export default updateInformation;
