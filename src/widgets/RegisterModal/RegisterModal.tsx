@@ -1,7 +1,10 @@
 'use client';
 
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable no-return-assign */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { getCookie } from 'cookies-next';
 import CreatePortal from '@/features/Filter/CreatePortal';
 import BackgroundModal from '@/shared/ui/BackgroundModal';
 import Input from '@/shared/ui/Input/Input';
@@ -9,13 +12,17 @@ import Select from '@/shared/ui/Select/Select';
 import Title from '@/shared/ui/Title';
 import ADDRESS from '@/widgets/constants/Address';
 import Button from '@/shared/ui/Button';
+import updateInformation from '@/widgets/api/updateInformation';
 
 /**
  * @param {string} defaultName 이름 영역에 해당하는 디폴트 값
  * @param {string} defualtPhone 연락처 영역에 해당하는 디폴트 값
  * @param {string} defaultAddress 선호지역 영역에 해당하는 디폴트 값
  * @param {string} defaultBio 소개 영역에 해당하는 디폴트 값
+ * @param {boolean} showModal 모달 페이지 창 표시 여부
  * @param {function} onClickClose 모달 닫기 클릭 이벤트 핸들러
+ * @param {function} onClickOpen 모달 열기 클릭 이벤트 핸들러
+ * @param {function} setOpen 모달 열리고 닫히는 상태 관리
  * @return 프로필 등록 모달 페이지
  */
 
@@ -24,7 +31,11 @@ export interface RegisterModalInterface {
   defaultPhone?: string;
   defaultAddress?: string;
   defaultBio?: string;
+  showModal?: boolean;
   onClickClose: () => void;
+  onClickOpen: () => void;
+  handleClick: (text: string) => void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const RegisterModal = ({
@@ -32,7 +43,11 @@ const RegisterModal = ({
   defaultPhone,
   defaultAddress,
   defaultBio,
+  showModal,
   onClickClose,
+  onClickOpen,
+  handleClick,
+  setOpen,
 }: RegisterModalInterface) => {
   const [active, setActive] = useState<boolean>(false);
   const [name, setName] = useState<boolean>(false);
@@ -51,6 +66,48 @@ const RegisterModal = ({
       }
     };
 
+  const handleRegister = async () => {
+    const inputValue: Array<string | boolean> = [];
+    inputRef.current.forEach(ref => {
+      if (typeof ref !== 'function') {
+        if (ref.value) {
+          inputValue.push(ref.value);
+        } else {
+          inputValue.push(false);
+        }
+      }
+    });
+
+    let check = true;
+    inputValue.forEach(checkValue => {
+      if (checkValue === false) {
+        check = false;
+      }
+    });
+
+    if (check) {
+      const userId = getCookie('userid') as string;
+      setOpen(true);
+      const response = await updateInformation(userId, {
+        name: inputValue[0] as string,
+        phone: inputValue[1] as string,
+        address: inputValue[2] as string,
+        bio: inputValue[3] as string,
+      });
+      setOpen(false);
+
+      if (response instanceof Error) {
+        handleClick('알 수 없는 에러가 발생했습니다');
+      } else if (typeof response === 'string') {
+        handleClick(response);
+      } else {
+        window.location.reload();
+        onClickOpen();
+      }
+      onClickClose();
+    }
+  };
+
   useEffect(() => {
     if (name && phone && address && bio) {
       setActive(true);
@@ -61,7 +118,11 @@ const RegisterModal = ({
 
   return (
     <CreatePortal id='register'>
-      <div className='z-10 opacity-0'>
+      <div
+        className={
+          showModal ? 'opacity-100 transition-opacity' : 'z-10 opacity-0'
+        }
+      >
         <BackgroundModal onClick={onClickClose}>
           <Title title='내 프로필' gap={24}>
             <div className='grid w-full grid-cols-3 grid-rows-1 pb-6 pt-1 lg:grid-cols-2 lg:grid-rows-2'>
@@ -121,7 +182,12 @@ const RegisterModal = ({
             <div className='mx-auto my-0 w-[346px]'>
               {(defaultName && defaultPhone && defaultAddress && defaultBio) ||
               active ? (
-                <Button text='등록하기' size='large' status='active' />
+                <Button
+                  text='등록하기'
+                  size='large'
+                  status='active'
+                  onClick={handleRegister}
+                />
               ) : (
                 <Button
                   text='등록하기'
