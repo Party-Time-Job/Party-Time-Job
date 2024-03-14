@@ -9,9 +9,11 @@ import Input from '@/shared/ui/Input';
 import Button from '@/shared/ui/Button';
 import AlertModal from '@/shared/ui/AlertModal';
 
-interface LoginForm {
+interface SignupForm {
   email: string;
   password: string;
+  passwordConfirmation: string;
+  type: string;
 }
 
 interface TokenResponse {
@@ -20,14 +22,16 @@ interface TokenResponse {
   };
 }
 
-const LoginPage = () => {
+const SignupPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitting, errors },
-  } = useForm<LoginForm>({ mode: 'onBlur' });
+  } = useForm<SignupForm>({ mode: 'onBlur' });
   const router = useRouter();
+  const password = watch('password');
 
   useEffect(() => {
     if (window.localStorage.getItem('accessToken')) {
@@ -35,10 +39,11 @@ const LoginPage = () => {
     }
   }, [router]);
 
-  const onSubmit = async (data: LoginForm): Promise<void> => {
+  const onSubmit = async (data: SignupForm): Promise<void> => {
+    console.log(data);
     try {
       const response = await axios.post<TokenResponse>(
-        'https://bootcamp-api.codeit.kr/api/3-2/the-julge/token',
+        'https://bootcamp-api.codeit.kr/api/3-2/the-julge/users',
         data,
       );
       const { token } = response.data.item;
@@ -50,8 +55,10 @@ const LoginPage = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (
+          error?.response?.status === 201 ||
           error?.response?.status === 400 ||
-          error?.response?.status === 404
+          error?.response?.status === 404 ||
+          error?.response?.status === 409
         ) {
           setShowModal(true);
         } else {
@@ -124,19 +131,67 @@ const LoginPage = () => {
             </p>
           )}
         </div>
+
+        <div className='flex flex-col gap-2'>
+          <label htmlFor='passwordConfirmation'>비밀번호 확인</label>
+          <Input
+            id='passwordConfirmation'
+            type='password'
+            placeholder='********'
+            className={errors.passwordConfirmation && 'border-red-600'}
+            {...register('passwordConfirmation', {
+              required: '비밀번호를 입력해 주세요.',
+              validate: value =>
+                value === password || '비밀번호가 일치하지 않습니다.',
+            })}
+          />
+          {errors.passwordConfirmation && (
+            <p className='ml-2 text-xs text-red-600'>
+              {errors.passwordConfirmation.message?.toString()}
+            </p>
+          )}
+        </div>
+        <div>
+          <label>회원 유형</label>
+          <div>
+            <input
+              type='radio'
+              id='employer'
+              name='type'
+              value='employer'
+              {...register('type', { required: '회원 유형을 선택해 주세요.' })}
+            />
+            <label htmlFor='employer'>사장님</label>
+          </div>
+          <div>
+            <input
+              type='radio'
+              id='employee'
+              name='type'
+              value='employee'
+              {...register('type', { required: '회원 유형을 선택해 주세요.' })}
+            />
+            <label htmlFor='employee'>알바님</label>
+          </div>
+          {errors.type && (
+            <p className='ml-2 text-xs text-red-600'>
+              {errors.type.message?.toString()}
+            </p>
+          )}
+        </div>
         <Button
           type='submit'
           size='large'
-          text='로그인'
+          text='회원가입'
           disabled={isSubmitting}
           status='active'
         />
       </form>
       <span className='mt-5 font-light'>
-        회원이 아니신가요?{' '}
-        <Link href='/signup'>
+        이미 가입하셨나요?{' '}
+        <Link href='/login'>
           <span className='cursor-pointer font-bold text-pt-primary'>
-            회원가입하기
+            로그인하기
           </span>
         </Link>
       </span>
@@ -144,4 +199,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;
