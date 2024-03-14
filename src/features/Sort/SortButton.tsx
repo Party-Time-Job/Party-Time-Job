@@ -13,6 +13,15 @@ interface Props {
   handleToggleSort: () => void;
 }
 
+/**
+ * @param {Object} props - SortButton 컴포넌트의 props
+ * @param {string} props.category - 정렬 방식
+ * @param {Notice[]} props.itemList - 공고 리스트
+ * @param {Function} props.updateItemList - 정렬된 공고 리스트로 업데이트 하는 콜백함수
+ * @param {Function} props.updateSortCategory - 정렬 방식 표기를 업데이트 하는 콜백함수
+ * @param {Function} props.handleToggleSort - 토글 상태를 업데이트 하는 콜백함수
+ * @returns 공고 정렬 버튼
+ */
 const SortButton = ({
   category,
   itemList,

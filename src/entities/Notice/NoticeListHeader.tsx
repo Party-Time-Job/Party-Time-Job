@@ -10,6 +10,14 @@ interface Props {
   updateItemList: (sortedList: Notice[]) => void;
 }
 
+/**
+ * 공고 정렬기능, 상세 필터 버튼 영역
+ *
+ * @param {Object} props - NoticeListHeader 컴포넌트의 props
+ * @param {Notice[]} props.itemList - 렌더링할 공고 목록
+ * @param {Function} props.updateItemList - 정렬된 공고 목록을 업데이트하는 콜백함수
+ * @returns 공고 정렬기능, 상세 필터 버튼
+ */
 const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
@@ -38,7 +46,7 @@ const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
       <div className='relative flex flex-col gap-[8px]'>
         <SortSelect
           sortCategory={sortCategory}
-          handleToggle={handleToggleSort}
+          handleToggleSort={handleToggleSort}
         />
         {isToggleSort ? (
           <SortButtonList
