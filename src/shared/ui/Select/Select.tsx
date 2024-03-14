@@ -7,7 +7,7 @@ import SelectUi from './ui/SelectUi';
 import SelectDropdownUi from './ui/SelectDropdownUi';
 
 /**
- * @param {'serach' | 'filter'} type 단순 배열 나열 또는 분류
+ * @param {'search' | 'filter'} type 단순 배열 나열 또는 분류
  * @param {string} title 인풋 타이틀
  * @param {string} defaultValue 초기값 설정(인풋에 필요한 초기값을 세팅 -> 선택)
  * @param {boolean} isRequired 필수로 채워야 하는지 여부 파악
