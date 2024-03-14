@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Filter from '@/features/Filter/Filter';
-import SortButton from '@/features/Sort/SortButton';
+import SortButtonList from './SortButtonList';
+import SortSelect from '@/features/Sort/SortSelect';
 
 interface Props {
   itemList: Notice[];
@@ -10,41 +11,53 @@ interface Props {
 }
 
 const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
-  const [isToggle, setIsToggle] = useState(false);
-  const handleToggle = () => {
-    setIsToggle(prev => !prev);
+  const [isToggleSort, setIsToggleSort] = useState(false);
+  const [isToggleFilter, setIsToggleFilter] = useState(false);
+  const [sortCategory, setSortCategory] = useState('마감임박순');
+
+  const handleToggleSort = () => {
+    if (isToggleFilter) {
+      setIsToggleFilter(false);
+    }
+    setIsToggleSort(prev => !prev);
   };
+
+  const handleToggleFilter = () => {
+    if (isToggleSort) {
+      setIsToggleSort(false);
+    }
+    setIsToggleFilter(prev => !prev);
+  };
+
+  const updateSortCategory = (value: string) => {
+    setSortCategory(value);
+  };
+
   return (
     <div className='flex gap-[10px]'>
-      <SortButton
-        category='마감임박순'
-        updateItemList={updateItemList}
-        itemList={itemList}
-      />
-      <SortButton
-        category='시급많은순'
-        updateItemList={updateItemList}
-        itemList={itemList}
-      />
-      <SortButton
-        category='시간적은순'
-        updateItemList={updateItemList}
-        itemList={itemList}
-      />
-      <SortButton
-        category='가나다순'
-        updateItemList={updateItemList}
-        itemList={itemList}
-      />
+      <div className='relative flex flex-col gap-[8px]'>
+        <SortSelect
+          sortCategory={sortCategory}
+          handleToggle={handleToggleSort}
+        />
+        {isToggleSort ? (
+          <SortButtonList
+            itemList={itemList}
+            updateItemList={updateItemList}
+            updateSortCategory={updateSortCategory}
+            handleToggleSort={handleToggleSort}
+          />
+        ) : null}
+      </div>
       <div className='md:relative'>
         <button
           type='button'
           className='flex h-[30px] items-center rounded-[5px] bg-pt-green30 p-[12px] text-[14px] font-bold text-white'
-          onClick={handleToggle}
+          onClick={handleToggleFilter}
         >
           상세 필터
         </button>
-        {isToggle ? <Filter handleToggle={handleToggle} /> : null}
+        {isToggleFilter ? <Filter handleToggle={handleToggleFilter} /> : null}
       </div>
     </div>
   );

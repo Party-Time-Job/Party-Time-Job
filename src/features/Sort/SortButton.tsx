@@ -6,12 +6,20 @@ import {
 } from './utils/sortNotice.ts';
 
 interface Props {
-  category: '마감임박순' | '시급많은순' | '시간적은순' | '가나다순';
+  category: string;
   itemList: Notice[];
   updateItemList: (sortedList: Notice[]) => void;
+  updateSortCategory: (sortCategory: string) => void;
+  handleToggleSort: () => void;
 }
 
-const SortButton = ({ category, itemList, updateItemList }: Props) => {
+const SortButton = ({
+  category,
+  itemList,
+  updateItemList,
+  updateSortCategory,
+  handleToggleSort,
+}: Props) => {
   const sortItemList = () => {
     if (category === '마감임박순') {
       const newList = sortByDeadline(itemList);
@@ -34,8 +42,17 @@ const SortButton = ({ category, itemList, updateItemList }: Props) => {
   const handleSortClick = () => {
     const sortedList = sortItemList();
     updateItemList(sortedList);
+    updateSortCategory(category);
+    handleToggleSort();
   };
-  return <button onClick={handleSortClick}>{category}</button>;
+  return (
+    <button
+      onClick={handleSortClick}
+      className='text-center text-[14px] leading-[22px]'
+    >
+      {category}
+    </button>
+  );
 };
 
 export default SortButton;
