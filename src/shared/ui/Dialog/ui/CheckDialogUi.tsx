@@ -10,10 +10,16 @@ const CheckDialogUi = ({
   onCancel,
 }: CheckDialogUiInterface) => {
   return (
-    <div>
-      <Image src='/check.svg' alt='체크 아이콘' width={24} height={24} />
-      <h3>{text}</h3>
-      <div>
+    <div className='fixed left-2/4 top-2/4 flex w-[298px] -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-stretch rounded-xl bg-white p-6'>
+      <Image
+        src='/check.svg'
+        alt='체크 아이콘'
+        width={24}
+        height={24}
+        className='mb-4'
+      />
+      <h3 className='mb-8 text-base font-normal'>{text}</h3>
+      <div className='flex gap-2'>
         <Button
           text={cancel}
           size='mediumSmall'
