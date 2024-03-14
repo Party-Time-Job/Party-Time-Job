@@ -8,3 +8,7 @@ export interface TokenResponse {
     token: string;
   };
 }
+
+export interface LoginFormComponentProps {
+  onSubmit: (data: LoginFormProps) => Promise<void>;
+}
