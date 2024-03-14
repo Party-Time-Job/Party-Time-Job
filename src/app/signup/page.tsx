@@ -151,27 +151,35 @@ const SignupPage = () => {
             </p>
           )}
         </div>
-        <div>
+        <div className='flex flex-col gap-2'>
           <label>회원 유형</label>
-          <div>
-            <input
-              type='radio'
-              id='employer'
-              name='type'
-              value='employer'
-              {...register('type', { required: '회원 유형을 선택해 주세요.' })}
-            />
-            <label htmlFor='employer'>사장님</label>
-          </div>
-          <div>
-            <input
-              type='radio'
-              id='employee'
-              name='type'
-              value='employee'
-              {...register('type', { required: '회원 유형을 선택해 주세요.' })}
-            />
-            <label htmlFor='employee'>알바님</label>
+          <div className='flex items-center justify-center gap-5'>
+            <div
+              className={`flex gap-2 rounded-full border px-10 py-3 ${watch('type') === 'employer' ? 'border-pt-primary ring-pt-primary' : ''}`}
+            >
+              <input
+                type='radio'
+                id='employer'
+                value='employer'
+                {...register('type', {
+                  required: '회원 유형을 선택해 주세요.',
+                })}
+              />
+              <label htmlFor='employer'>사장님</label>
+            </div>
+            <div
+              className={`flex gap-2 rounded-full border px-10 py-3 ${watch('type') === 'employee' ? 'border-pt-primary ring-pt-primary' : ''}`}
+            >
+              <input
+                type='radio'
+                id='employee'
+                value='employee'
+                {...register('type', {
+                  required: '회원 유형을 선택해 주세요.',
+                })}
+              />
+              <label htmlFor='employee'>알바님</label>
+            </div>
           </div>
           {errors.type && (
             <p className='ml-2 text-xs text-red-600'>
