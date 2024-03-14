@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
+import Input from '@/shared/ui/Input';
+// import { classification, location } from './Model/model';
 
 const CreateStore = () => {
   const {
@@ -28,7 +30,7 @@ const CreateStore = () => {
           <div className='flex w-[964px] items-start gap-5'>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='storeName'>가게 이름</label>
-              <input
+              <Input
                 id='storeName'
                 type='text'
                 placeholder='입력'
@@ -60,7 +62,7 @@ const CreateStore = () => {
             </div>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='details'>상세 주소</label>
-              <input
+              <Input
                 id='details'
                 type='text'
                 placeholder='입력'
@@ -75,7 +77,7 @@ const CreateStore = () => {
           </div>
           <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
             <label htmlFor='hourlyRate'>기본 시급</label>
-            <input
+            <Input
               id='hourlyRate'
               type='text'
               {...register('hourlyRate', {
@@ -88,19 +90,21 @@ const CreateStore = () => {
           </div>
           <div className='flex w-[483px] flex-col items-start gap-2'>
             <label htmlFor='file'>가게 이미지</label>
-            <input type='file' />
+            <Input type='file' />
           </div>
           <div className='flex w-[964px] flex-col items-start gap-2'>
             <label id='description' htmlFor='textarea'>
               가게 설명
             </label>
-            <textarea className='w-[100%]' placeholder='입력'></textarea>
+            <Input className='w-[100%]' placeholder='입력'></Input>
           </div>
-          <Button
-            size='medium'
-            status={isSubmitting ? 'inactive' : 'active'}
-            text='가게 등록하기'
-          />
+          <div className='mx-auto my-0'>
+            <Button
+              size='medium'
+              status={isSubmitting ? 'inactive' : 'active'}
+              text='가게 등록하기'
+            />
+          </div>
         </form>
       </div>
     </div>
