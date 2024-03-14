@@ -9,7 +9,7 @@
 interface TextComponentProps {
   children: React.ReactNode;
   className?: string;
-  as: React.ElementType;
+  as?: React.ElementType;
 }
 
 const Text = ({ children, className, as = 'p' }: TextComponentProps) => {
