@@ -43,7 +43,6 @@ const SignupPage = () => {
   }, [router]);
 
   const onSubmit = async (data: SignupForm): Promise<void> => {
-    console.log(data);
     try {
       const response = await axios.post<TokenResponse>(
         'https://bootcamp-api.codeit.kr/api/3-2/the-julge/users',
