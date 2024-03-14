@@ -3,12 +3,6 @@
 import { useEffect, useState } from 'react';
 import ToastUi, { StatusInterface } from './ToastUi';
 
-/**
- * @param {function} onShow 토스트 보여주는 이벤트 핸들러
- * @param {string} children 토스트에 보여줄 텍스트
- * @return 토스트
- */
-
 export interface ShowToastInterface {
   onShow: () => void;
   children: string;
