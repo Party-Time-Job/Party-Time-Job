@@ -21,6 +21,10 @@ const SignUpPage = () => {
     }
   }, [router]);
 
+  /**
+   * 회원가입 폼을 제출하면 서버에 회원가입 요청을 보내고, 회원가입 성공 시 완료 모달을 띄웁니다.
+   * 409 에러 발생 시 이메일 중복 확인 모달을 띄웁니다.
+   */
   const onSubmit = async (data: SignupFormProps): Promise<void> => {
     try {
       const response = await axios.post<TokenResponse>(
@@ -46,6 +50,9 @@ const SignUpPage = () => {
     setDuplicateModal(false);
   };
 
+  /**
+   * 완료 모달을 닫으면 로그인 페이지로 이동합니다.
+   */
   const handleCloseCompletedModal = () => {
     setCompletedModal(false);
     router.push('/login');

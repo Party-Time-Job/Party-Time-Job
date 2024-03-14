@@ -19,6 +19,10 @@ const LogInPage = () => {
     }
   }, [router]);
 
+  /**
+   * 로그인 폼을 제출하면 서버에 로그인 요청을 보내고, 로그인 성공 시 토큰을 받아 로컬스토리지에 저장합니다.
+   * 400, 404 에러 발생 시 이메일 및 비밀번호 확인 모달을 띄웁니다.
+   */
   const onSubmit = async (data: LoginFormProps): Promise<void> => {
     try {
       const response = await axios.post<TokenResponse>(
