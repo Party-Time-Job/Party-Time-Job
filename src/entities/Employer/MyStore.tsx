@@ -1,10 +1,12 @@
+'use client';
+
 import { useRouter } from 'next/router';
 import EmpolyerEmptyData from './UI/EmpolyerEmptyData';
 
 const MyStore = () => {
   const router = useRouter();
   const handleClick = () => {
-    router.push('details/registration/store/1');
+    router.push('details/registration/store-info/1');
     // 1 -> userId로 바꿔줘야 합니다.
   };
   return (

@@ -47,6 +47,7 @@ const CreateStore = () => {
               <select {...register('classification')}>
                 {classification.map(item => (
                   <option>{item}</option>
+                  // 추후에 키를 넣어줘야 합니다
                 ))}
               </select>
             </div>
