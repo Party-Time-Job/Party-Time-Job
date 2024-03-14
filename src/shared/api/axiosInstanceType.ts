@@ -34,3 +34,9 @@ export interface AxiosInstanceInterface extends AxiosInstance {
     config?: InternalAxiosRequestConfig,
   ): Promise<T>;
 }
+
+export interface ResponseInterface<T> {
+  data: T;
+  status: number;
+  text: string;
+}
