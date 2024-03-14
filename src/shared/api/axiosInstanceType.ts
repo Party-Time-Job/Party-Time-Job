@@ -16,24 +16,21 @@ export interface AxiosInstanceInterface extends AxiosInstance {
     response: AxiosInterceptorManager<AxiosResponse<AxiosInstanceResponse>>;
   };
 
-  getRequest<T>(url: string, config?: InternalAxiosRequestConfig): Promise<T>;
-  postRequest<T>(
-    url: SVGAnimatedString,
-    config?: InternalAxiosRequestConfig,
-    data?: any,
-  ): Promise<T>;
-  putRequest<T>(
-    url: SVGAnimatedString,
-    config?: InternalAxiosRequestConfig,
-    data?: any,
-  ): Promise<T>;
-  deleteRequest<T>(
+  get<T>(url: string, config?: InternalAxiosRequestConfig): Promise<T>;
+  post<T>(
     url: string,
+    data?: any,
     config?: InternalAxiosRequestConfig,
   ): Promise<T>;
-  patchRequest<T>(
-    url: SVGAnimatedString,
-    config?: InternalAxiosRequestConfig,
+  put<T>(
+    url: string,
     data?: any,
+    config?: InternalAxiosRequestConfig,
+  ): Promise<T>;
+  delete<T>(url: string, config?: InternalAxiosRequestConfig): Promise<T>;
+  patch<T>(
+    url: string,
+    data?: any,
+    config?: InternalAxiosRequestConfig,
   ): Promise<T>;
 }
