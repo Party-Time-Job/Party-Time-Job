@@ -14,6 +14,15 @@ const options = {
   reject: '거절',
 };
 
+/**
+ *
+ * @param {'accept' | 'cancel' | 'reject'} type 다이얼로그 타입
+ * @param {string} text 다이얼로그 내용
+ * @param {function} onAccept accept 이벤트 핸들러
+ * @param {function} onCancel cancel 이벤트 핸들러
+ * @returns CheckDialog
+ */
+
 export const CheckDialog = ({
   type,
   text,
@@ -35,7 +44,14 @@ export const CheckDialog = ({
   );
 };
 
-export const Dialog = ({ text, onConfirm }: ConfirmDialogInterface) => {
+/**
+ *
+ * @param {string} text 다이얼로그 내용
+ * @param {function} onConfirm 확인 이벤트 핸들러
+ * @returns ConfirmDialog
+ */
+
+export const ConfirmDialog = ({ text, onConfirm }: ConfirmDialogInterface) => {
   return (
     <CreatePortal id='dialog'>
       <DialogContainer>
