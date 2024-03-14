@@ -23,7 +23,6 @@ interface TokenResponse {
 }
 
 const SignupPage = () => {
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [completedModal, setCompletedModal] = useState<boolean>(false);
   const [duplicateModal, setDuplicateModal] = useState<boolean>(false);
 
@@ -54,13 +53,6 @@ const SignupPage = () => {
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (
-          error?.response?.status === 400 ||
-          error?.response?.status === 404
-        ) {
-          setShowModal(true);
-        }
-
         if (error?.response?.status === 409) {
           setDuplicateModal(true);
         } else {
@@ -79,19 +71,8 @@ const SignupPage = () => {
     router.push('/login');
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
   return (
     <div className='flex h-screen flex-col items-center justify-center'>
-      {showModal && (
-        <AlertModal
-          modalText='이메일 또는 비밀번호를 확인해주세요.'
-          buttonText='확인'
-          onClick={handleCloseModal}
-        />
-      )}
       {completedModal && (
         <AlertModal
           modalText='가입이 완료되었습니다.'
