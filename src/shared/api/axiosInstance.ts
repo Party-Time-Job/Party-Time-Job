@@ -30,4 +30,6 @@ AxiosInstance.interceptors.request.use(
   (error: AxiosError | Error): Promise<AxiosError> => Promise.reject(error),
 );
 
+// 응답은....
+
 export default AxiosInstance;
