@@ -2,15 +2,40 @@
 
 import { useState } from 'react';
 import Filter from '@/features/Filter/Filter';
+import SortButton from '@/features/Sort/SortButton';
 
-const NoticeListHeader = () => {
+interface Props {
+  itemList: Notice[];
+  updateItemList: (sortedList: Notice[]) => void;
+}
+
+const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
   const [isToggle, setIsToggle] = useState(false);
   const handleToggle = () => {
     setIsToggle(prev => !prev);
   };
   return (
     <div className='flex gap-[10px]'>
-      <button type='button'>마감임박순</button>
+      <SortButton
+        category='마감임박순'
+        updateItemList={updateItemList}
+        itemList={itemList}
+      />
+      <SortButton
+        category='시급많은순'
+        updateItemList={updateItemList}
+        itemList={itemList}
+      />
+      <SortButton
+        category='시간적은순'
+        updateItemList={updateItemList}
+        itemList={itemList}
+      />
+      <SortButton
+        category='가나다순'
+        updateItemList={updateItemList}
+        itemList={itemList}
+      />
       <div className='md:relative'>
         <button
           type='button'
