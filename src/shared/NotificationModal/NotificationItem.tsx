@@ -1,5 +1,5 @@
 import { NotificationItemInterface } from '@/shared/NotificationModal/type';
-import calcDiff from '@/shared/NotificationModal/utils/calcDiff';
+import calcDiff from '@/shared/utils/calcDiff';
 
 /**
  *
