@@ -11,3 +11,17 @@ export interface CheckDialogUiInterface {
   onAccept: () => void;
   onCancel: () => void;
 }
+
+export interface ConfirmDialogInterface {
+  text: string;
+  onConfirm: () => void;
+}
+
+export type CheckType = 'accept' | 'cancel' | 'reject';
+
+export interface CheckDialogInterface {
+  type: CheckType;
+  text: string;
+  onAccept: () => void;
+  onCancel: () => void;
+}
