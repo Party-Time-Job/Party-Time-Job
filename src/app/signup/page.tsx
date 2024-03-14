@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
@@ -49,18 +49,21 @@ const SignupPage = () => {
       const { token } = response.data.item;
       window.localStorage.setItem('accessToken', token);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
+        setShowModal(true); // 가입완료 모달 팝업
         router.push('/notice');
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (
-          error?.response?.status === 201 ||
           error?.response?.status === 400 ||
-          error?.response?.status === 404 ||
-          error?.response?.status === 409
+          error?.response?.status === 404
         ) {
-          setShowModal(true);
+          setShowModal(true); // 이메일 또는 비밀번호 확인 모달 팝업
+        }
+
+        if (error?.response?.status === 409) {
+          setShowModal(true); // 중복 이메일 모달 팝업
         } else {
           console.error(error);
         }
