@@ -24,6 +24,8 @@ interface TokenResponse {
 
 const SignupPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [completedModal, setCompletedModal] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -46,12 +48,9 @@ const SignupPage = () => {
         'https://bootcamp-api.codeit.kr/api/3-2/the-julge/users',
         data,
       );
-      const { token } = response.data.item;
-      window.localStorage.setItem('accessToken', token);
 
       if (response.status === 201) {
-        setShowModal(true); // 가입완료 모달 팝업
-        router.push('/notice');
+        setCompletedModal(true); // 가입완료 모달 팝업
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -71,6 +70,11 @@ const SignupPage = () => {
     }
   };
 
+  const handleCloseCompletedModal = () => {
+    setCompletedModal(false);
+    router.push('/login');
+  };
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -82,6 +86,13 @@ const SignupPage = () => {
           modalText='이메일 또는 비밀번호를 확인해주세요.'
           buttonText='확인'
           onClick={handleCloseModal}
+        />
+      )}
+      {completedModal && (
+        <AlertModal
+          modalText='회원가입이 완료되었습니다. 로그인해주세요.'
+          buttonText='확인'
+          onClick={handleCloseCompletedModal}
         />
       )}
       <Link href='/notice'>
