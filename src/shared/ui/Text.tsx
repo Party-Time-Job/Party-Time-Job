@@ -12,7 +12,7 @@ interface TextComponentProps {
   as: React.ElementType;
 }
 
-const Text = ({ children, className, as }: TextComponentProps) => {
+const Text = ({ children, className, as = 'p' }: TextComponentProps) => {
   const Component = as;
   return <Component className={className}>{children}</Component>;
 };
