@@ -47,6 +47,7 @@ const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
         <SortSelect
           sortCategory={sortCategory}
           handleToggleSort={handleToggleSort}
+          isToggleSort={isToggleSort}
         />
         {isToggleSort ? (
           <SortButtonList
