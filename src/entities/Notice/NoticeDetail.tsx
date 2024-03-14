@@ -9,8 +9,9 @@ const getNoticeDetail = async (shopId: string, noticeId: string) => {
 };
 
 /**
- * @param {string} shopId router params에서 받은 가게 id
- * @param {string} noticeId router params에서 받은 공고 id
+ * @param {Object} props - NoticeDetail 컴포넌트의 props
+ * @param {string} props.shopId - router params에서 받은 가게 id
+ * @param {string} props.noticeId - router params에서 받은 공고 id
  * @returns '/detail/[shopId]/[noticeId]' 에 랜더링 될 공고 상세 컴포넌트
  */
 const NoticeDetail = async ({
