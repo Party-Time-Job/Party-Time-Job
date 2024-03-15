@@ -18,8 +18,8 @@ interface Props {
 
 const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
   const [selectedAddressList, setSelectedAddressList] = useState<string[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>();
-  const [selectedPay, setSelectedPay] = useState<string>();
+  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedPay, setSelectedPay] = useState<string>('');
 
   const removeAddress = (address: string) => {
     const newList = selectedAddressList.filter(item => item !== address);
@@ -47,6 +47,12 @@ const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
       setSelectedPay(e.target.value);
     }
     setSelectedPay(e.target.value);
+  };
+
+  const handleReset = () => {
+    setSelectedAddressList([]);
+    setSelectedDate('');
+    setSelectedPay('');
   };
 
   useEffect(() => {
@@ -109,6 +115,7 @@ const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
                 className='flex items-start gap-[10px] self-stretch px-4 py-5'
                 type='date'
                 onChange={e => handleChangeDate(e)}
+                value={selectedDate}
               />
             </div>
           </div>
@@ -131,7 +138,12 @@ const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
           </div>
         </div>
         <div className='flex w-[100%] justify-end gap-1'>
-          <Button status='active' size='medium' text='초기화' />
+          <Button
+            status='active'
+            size='medium'
+            text='초기화'
+            onClick={handleReset}
+          />
           <Button status='active' size='medium' text='적용하기' />
         </div>
       </div>
