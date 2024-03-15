@@ -2,6 +2,7 @@ import React, { ChangeEvent, ForwardedRef } from 'react';
 
 export interface Option {
   value: string;
+  key: number;
 }
 
 export interface Options {

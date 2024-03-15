@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { putMethod } from '@/shared/api/RequestMethod';
+import { putMethod } from '@/shared/api/requestMethod';
 import { UserInformationInterface } from '@/widgets/api/type';
 
 /**
