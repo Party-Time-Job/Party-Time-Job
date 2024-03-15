@@ -13,8 +13,12 @@ import {
   TableBodyRow,
 } from '@/shared/ui/Table/ui/TableBodyUi';
 
-const slicePhoneNumber = (phone: string) =>
-  `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}`;
+/**
+ *
+ * @param {ProfileInterface[]} data 프로필 테이블에 필요한 데이터 -> @/shared/ui/Table/type에서 ProfileInterface 타입 참고
+ * @param {ReactNode} pagination 페이지네이션(아직 미구현)
+ * @returns 프로필 페이지 내 테이블 컴포넌트
+ */
 
 export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
   const tableData: TableInterface[] = data.map(item => ({
@@ -46,6 +50,16 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
     </TableContainerUi>
   );
 };
+
+const slicePhoneNumber = (phone: string) =>
+  `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}`;
+
+/**
+ *
+ * @param {StoreInterface[]} data 가게 공고 상세 테이블에 필요한 데이터 -> @/shared/ui/Table/type에서 StoreInterface 타입 참고
+ * @param {ReactNode} pagination 페이지네이션(아직 미구현)
+ * @returns 가게 공고 상세 페이지 내 테이블 컴포넌트
+ */
 
 export const StoreTable = ({ data, pagination, page }: StoreTableInterface) => {
   const tableData: TableInterface[] = data.map(item => ({
