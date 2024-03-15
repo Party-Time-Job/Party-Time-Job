@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Post from '../Post/Post';
+import { Notice } from '../Post/types.ts';
 
 /**
  *

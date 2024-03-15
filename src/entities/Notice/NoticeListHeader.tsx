@@ -4,10 +4,19 @@ import { useState } from 'react';
 import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
+import { Notice } from '../Post/types.ts';
+import { FilterCondition } from './types.ts';
 
 interface Props {
   itemList: Notice[];
   updateItemList: (sortedList: Notice[]) => void;
+  filterCondition: FilterCondition;
+  updateFilterCondition: (
+    address?: string[],
+    date?: string,
+    pay?: string,
+  ) => void;
+  applyFilter: () => void;
 }
 
 /**
@@ -18,7 +27,13 @@ interface Props {
  * @param {Function} props.updateItemList - 정렬된 공고 목록을 업데이트하는 콜백함수
  * @returns 공고 정렬기능, 상세 필터 버튼
  */
-const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
+const NoticeListHeader = ({
+  itemList,
+  updateItemList,
+  filterCondition,
+  updateFilterCondition,
+  applyFilter,
+}: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
   const [sortCategory, setSortCategory] = useState('마감임박순');
@@ -66,7 +81,14 @@ const NoticeListHeader = ({ itemList, updateItemList }: Props) => {
         >
           상세 필터
         </button>
-        {isToggleFilter ? <Filter handleToggle={handleToggleFilter} /> : null}
+        {isToggleFilter ? (
+          <Filter
+            handleToggleFilter={handleToggleFilter}
+            filterCondition={filterCondition}
+            updateFilterCondition={updateFilterCondition}
+            applyFilter={applyFilter}
+          />
+        ) : null}
       </div>
     </div>
   );
