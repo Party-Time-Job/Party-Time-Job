@@ -13,14 +13,17 @@ import RegisteredRecruitment from '@/entities/Employer/RegisteredRecruitment';
 
 const DetailsPage = () => {
   const router = useRouter();
-  const handleClick = () => {
-    router.push('details/registration/store-info/1');
-    // 1 -> userId로 바꿔줘야 합니다.
+  const handleNavigate = (route: string) => {
+    router.push(route);
   };
   return (
     <>
-      <MyStore onClick={handleClick} />
-      <RegisteredRecruitment></RegisteredRecruitment>
+      <MyStore
+        onClick={() => handleNavigate('details/registration/store-info/1')}
+      />
+      <RegisteredRecruitment
+        onClick={() => handleNavigate('details/registration/recruitment/1')}
+      />
     </>
   );
 };
