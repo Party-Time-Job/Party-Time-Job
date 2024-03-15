@@ -13,3 +13,20 @@ const STATUS = {
 } as const;
 
 export type Status = (typeof STATUS)[keyof typeof STATUS];
+
+export interface ProfileTableInterface {
+  id: string;
+  status: Status;
+  name: string;
+  hourlyPay: number;
+  startsAt: string;
+  workhour: number;
+}
+
+export interface StoreTableInterface {
+  id: string;
+  status: Status;
+  name?: string;
+  description?: string;
+  phone?: string;
+}
