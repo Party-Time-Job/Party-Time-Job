@@ -1,18 +1,34 @@
-/**
- * @위치 서버로부터 데이터를 받아와서 나열해주면 됩니다.
- * @클릭이벤트 위치를 클릭하면 위치가 push 되는 이벤트를 추가해줘야합니다.
- * @필요한_ui 위치 데이터를 불러오면 보이는 데이터들을 나열하는 Ui 처리를 해놓지 않았습니다
- */
+'use client';
 
+import { MouseEvent, useState } from 'react';
 import Image from 'next/image';
-import Input from '@/shared/ui/Input';
+import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
+import Input from '@/shared/ui/Input';
+import SelectedAddress from './SelectedAddress';
 
 interface Props {
   handleToggle: () => void;
 }
 
 const Filter = ({ handleToggle }: Props) => {
+  const [selectedAddressList, setSelectedAddressList] = useState<string[]>([]);
+
+  const handleAddressClick = (e: MouseEvent<HTMLSpanElement>) => {
+    const addItem = (e.target as HTMLSpanElement).innerText;
+    if (selectedAddressList.includes(addItem)) {
+      const newList = selectedAddressList.filter(item => item !== addItem);
+      setSelectedAddressList(newList);
+      return;
+    }
+    setSelectedAddressList(prev => [...prev, addItem]);
+  };
+
+  const removeAddress = (address: string) => {
+    const newList = selectedAddressList.filter(item => item !== address);
+    setSelectedAddressList(newList);
+  };
+
   return (
     <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[color:var(--The-julge-gray-20,#E5E4E7)] bg-white px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
@@ -30,19 +46,38 @@ const Filter = ({ handleToggle }: Props) => {
       </div>
       <div className='flex w-full flex-col items-start gap-10'>
         <div className='flex w-[350px] flex-col items-start gap-6 max-md:w-full'>
+          {/* 주소 선택 영역 */}
           <div className='flex flex-col items-start gap-3 max-md:w-full'>
             <span className='text-base font-normal leading-[26px] text-[#111322]'>
               위치
             </span>
-            <div className='h-[258px] w-[350px] rounded-md border-solid border-[#E5E4E7] bg-white'>
-              <div className='inline-flex flex-col items-start gap-5 '>
-                [주소 불러와서 뿌려주기]
+            {/* 주소 선택 리스트 */}
+            <div className='h-[258px] w-full rounded-md border-[1px] border-solid border-pt-gray30 md:w-[350px]'>
+              <div className='grid h-[258px] grid-cols-2 gap-[20px] overflow-y-scroll px-[28px] py-[20px]'>
+                {ADDRESS.map(item => {
+                  return (
+                    <div>
+                      <span key={item.key} onClick={e => handleAddressClick(e)}>
+                        {item.value}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            <div className='flex flex-col items-start gap-2'>
-              [주소 누르면 주소 추가]
+            {/* 주소 선택 확인 영역 */}
+            <div className='flex flex-wrap items-start gap-[8px]'>
+              {selectedAddressList.map(item => {
+                return (
+                  <SelectedAddress
+                    address={item}
+                    removeAddress={removeAddress}
+                  />
+                );
+              })}
             </div>
           </div>
+
           <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
           <div className='flex items-start gap-3 self-stretch'>
             <div className='flex flex-[1_0_0] flex-col items-start gap-2'>
