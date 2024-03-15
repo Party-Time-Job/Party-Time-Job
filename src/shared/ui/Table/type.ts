@@ -37,8 +37,8 @@ export interface TableInterface {
   id: string;
   status: Status;
   name?: string;
-  time?: string;
-  pay?: string;
+  firstValue?: string;
+  secondValue?: string;
 }
 
 export interface ProfileTableInterface {
@@ -49,4 +49,5 @@ export interface ProfileTableInterface {
 export interface StoreTableInterface {
   data: StoreInterface[];
   pagination: ReactNode;
+  page: number;
 }
