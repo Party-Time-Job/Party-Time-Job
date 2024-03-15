@@ -1,4 +1,4 @@
-import CreatePortal from '@/features/Filter/CreatePortal';
+import CreatePortal from '@/features/CreatePortal';
 import DialogContainer from '@/shared/ui/Dialog/ui/DialogContainer';
 import ConfirmDialogUi from '@/shared/ui/Dialog/ui/ConfirmDialogUi';
 import CheckDialogUi from '@/shared/ui/Dialog/ui/CheckDialogUi';

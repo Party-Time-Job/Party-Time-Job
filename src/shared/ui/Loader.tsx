@@ -1,4 +1,4 @@
-import CreatePortal from '@/features/Filter/CreatePortal';
+import CreatePortal from '@/features/CreatePortal';
 
 const Loader = () => {
   return (

@@ -1,4 +1,4 @@
-import CreatePortal from '@/features/Filter/CreatePortal';
+import CreatePortal from '@/features/CreatePortal';
 import ShowToast from './ui/ShowToast';
 
 /**

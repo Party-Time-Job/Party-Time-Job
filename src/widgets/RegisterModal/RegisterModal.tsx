@@ -5,7 +5,7 @@
 /* eslint-disable no-return-assign */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { getCookie } from 'cookies-next';
-import CreatePortal from '@/features/Filter/CreatePortal';
+import CreatePortal from '@/features/CreatePortal';
 import BackgroundModal from '@/shared/ui/BackgroundModal';
 import Input from '@/shared/ui/Input/Input';
 import Select from '@/shared/ui/Select/Select';
