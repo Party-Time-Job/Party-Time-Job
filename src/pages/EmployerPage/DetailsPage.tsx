@@ -1,3 +1,6 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import MyStore from '@/entities/Employer/MyStore';
 import RegisteredRecruitment from '@/entities/Employer/RegisteredRecruitment';
 
@@ -9,9 +12,14 @@ import RegisteredRecruitment from '@/entities/Employer/RegisteredRecruitment';
  */
 
 const DetailsPage = () => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push('details/registration/store-info/1');
+    // 1 -> userId로 바꿔줘야 합니다.
+  };
   return (
     <>
-      <MyStore />
+      <MyStore onClick={handleClick} />
       <RegisteredRecruitment></RegisteredRecruitment>
     </>
   );
