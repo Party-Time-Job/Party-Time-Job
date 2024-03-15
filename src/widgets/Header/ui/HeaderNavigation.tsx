@@ -28,6 +28,8 @@ const HeaderNavigation = () => {
       // 토큰 상태에 저장
       try {
         const decoded: DecodedToken = jwtDecode(storedToken);
+        // jwt-decode 라이브러리 설치해야 사용 가능함 (jwt 토큰을 디코드 해주는 라이브러리)
+        // 명세서에 해당 라이브러리 사용하라고 명시되어 있음
         // 토큰을 디코드하여 userId를 가져옴
         if (decoded && typeof decoded === 'object' && decoded.userId) {
           axios

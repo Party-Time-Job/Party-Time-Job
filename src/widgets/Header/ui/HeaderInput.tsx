@@ -1,3 +1,4 @@
+// 검색 로직 이쪽에 구현해주세요!
 const HeaderInput = () => {
   return (
     <div className='relative'>

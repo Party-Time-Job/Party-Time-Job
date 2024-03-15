@@ -1,57 +1,10 @@
-import Header from '@/widgets/Header/Header';
+import Footer from '@/widgets/Footer/Footer';
 
 export default function Home() {
   return (
     <>
-      <Header />
       <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
-      <h1>HomePage</h1>
+      <Footer />
     </>
   );
 }

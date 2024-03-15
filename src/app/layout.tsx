@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import Header from '@/widgets/Header/Header';
 
 export const metadata: Metadata = {
   title: 'Party Time Job',
@@ -44,7 +45,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={SpoqaHanSansNeo.className}>{children}</body>
+      <body className={SpoqaHanSansNeo.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
