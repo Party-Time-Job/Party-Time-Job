@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Post from '../Post/Post';
 import NoticeListHeader from './NoticeListHeader';
+import { Notice } from '../Post/types.ts';
+import filterNotice from '@/features/Filter/utils/filterNotice.ts';
+import { FilterCondition } from './types.ts';
 
 interface Props {
   category?: string;
@@ -25,6 +28,28 @@ const NoticeList = ({
 }: Props) => {
   // TODO(이시열) : Button component 적용, 페이지네이션
   const [itemList, setItemList] = useState(noticeItemList);
+  const [filterCondition, setFilterCondition] = useState<FilterCondition>({
+    address: [],
+    date: '',
+    pay: '',
+  });
+
+  const applyFilter = () => {
+    filterNotice(noticeItemList, filterCondition, setItemList);
+  };
+
+  const updateFilterCondition = (
+    address?: string[],
+    date?: string,
+    pay?: string,
+  ) => {
+    setFilterCondition(prev => ({
+      ...prev,
+      address,
+      date,
+      pay,
+    }));
+  };
 
   const updateItemList = (sortedList: Notice[]) => {
     setItemList(sortedList);
@@ -55,7 +80,6 @@ const NoticeList = ({
     }
     return null;
   };
-
   return (
     <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>
@@ -65,6 +89,9 @@ const NoticeList = ({
             <NoticeListHeader
               updateItemList={updateItemList}
               itemList={itemList}
+              filterCondition={filterCondition}
+              updateFilterCondition={updateFilterCondition}
+              applyFilter={applyFilter}
             />
           ) : null}
         </div>

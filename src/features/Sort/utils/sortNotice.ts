@@ -1,3 +1,5 @@
+import { Notice } from '@/entities/Post/types.ts';
+
 export const sortByDeadline = (list: Notice[]) => {
   const newList = [...list].sort((a, b) => {
     const startA = new Date(a.item.startsAt).getTime();

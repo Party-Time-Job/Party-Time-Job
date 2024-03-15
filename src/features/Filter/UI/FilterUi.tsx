@@ -1,18 +1,91 @@
-/**
- * @위치 서버로부터 데이터를 받아와서 나열해주면 됩니다.
- * @클릭이벤트 위치를 클릭하면 위치가 push 되는 이벤트를 추가해줘야합니다.
- * @필요한_ui 위치 데이터를 불러오면 보이는 데이터들을 나열하는 Ui 처리를 해놓지 않았습니다
- */
+'use client';
 
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
-import Input from '@/shared/ui/Input';
+import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
+import Input from '@/shared/ui/Input';
+import SelectedAddress from './SelectedAddress';
+import { FilterCondition } from '@/entities/Notice/types';
 
 interface Props {
-  handleToggle: () => void;
+  handleToggleFilter: () => void;
+  filterCondition: FilterCondition;
+  updateFilterCondition: (
+    address?: string[],
+    date?: string,
+    pay?: string,
+  ) => void;
+  applyFilter: () => void;
 }
 
-const Filter = ({ handleToggle }: Props) => {
+/**
+ * @param {Object} props - Filter 컴포넌트의 props
+ * @param {Function} props.handleToggleFilter - Filter 컴포넌트 토글 제어 콜백 함수
+ * @param {FilterCondition} props.filterCondition - 필터 조건
+ * @param {Function} props.updateFilterCondition - 필터 조건 업데이트 콜백 함수
+ * @param {Function} props.applyFilter - 필터 조건으로 공고 리스트 업데이트 콜백함수
+ * @returns 상세 필터 UI
+ */
+const Filter = ({
+  handleToggleFilter,
+  filterCondition,
+  updateFilterCondition,
+  applyFilter,
+}: Props) => {
+  const [selectedAddressList, setSelectedAddressList] = useState<string[]>(
+    filterCondition.address || [],
+  );
+  const [selectedDate, setSelectedDate] = useState<string>(
+    filterCondition.date || '',
+  );
+  const [selectedPay, setSelectedPay] = useState<string>(
+    filterCondition.pay || '',
+  );
+
+  const removeAddress = (address: string) => {
+    const newList = selectedAddressList.filter(item => item !== address);
+    setSelectedAddressList(newList);
+  };
+
+  const handleAddressClick = (e: MouseEvent<HTMLSpanElement>) => {
+    const addItem = (e.target as HTMLSpanElement).innerText;
+    if (selectedAddressList.includes(addItem)) {
+      removeAddress(addItem);
+      return;
+    }
+    setSelectedAddressList(prev => [...prev, addItem]);
+  };
+
+  const handleChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
+    setSelectedDate(e.target.value);
+  };
+
+  const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length >= 6) {
+      e.preventDefault();
+      const trimmedValue = e.target.value.slice(0, 6);
+      e.target.value = trimmedValue;
+      setSelectedPay(e.target.value);
+    }
+    setSelectedPay(e.target.value);
+  };
+
+  const handleReset = () => {
+    setSelectedAddressList([]);
+    setSelectedDate('');
+    setSelectedPay('');
+  };
+
+  const handleClickApply = () => {
+    applyFilter();
+    handleToggleFilter();
+  };
+
+  useEffect(() => {
+    updateFilterCondition(selectedAddressList, selectedDate, selectedPay);
+  }, [selectedAddressList, selectedDate, selectedPay]);
+
   return (
     <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[color:var(--The-julge-gray-20,#E5E4E7)] bg-white px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
@@ -24,7 +97,7 @@ const Filter = ({ handleToggle }: Props) => {
           alt='close'
           width='24'
           height='24'
-          onClick={handleToggle}
+          onClick={handleToggleFilter}
           className='cursor-pointer'
         />
       </div>
@@ -34,15 +107,35 @@ const Filter = ({ handleToggle }: Props) => {
             <span className='text-base font-normal leading-[26px] text-[#111322]'>
               위치
             </span>
-            <div className='h-[258px] w-[350px] rounded-md border-solid border-[#E5E4E7] bg-white'>
-              <div className='inline-flex flex-col items-start gap-5 '>
-                [주소 불러와서 뿌려주기]
+            <div className='h-[258px] w-full rounded-md border-[1px] border-solid border-pt-gray30 md:w-[350px]'>
+              <div className='grid h-[258px] grid-cols-2 gap-[20px] overflow-y-scroll px-[28px] py-[20px]'>
+                {ADDRESS.map(item => {
+                  return (
+                    <div>
+                      <span
+                        key={item.key}
+                        onClick={e => handleAddressClick(e)}
+                        className='cursor-pointer p-2 hover:bg-pt-gray20'
+                      >
+                        {item.value}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            <div className='flex flex-col items-start gap-2'>
-              [주소 누르면 주소 추가]
+            <div className='flex flex-wrap items-start gap-[8px]'>
+              {selectedAddressList.map(item => {
+                return (
+                  <SelectedAddress
+                    address={item}
+                    removeAddress={removeAddress}
+                  />
+                );
+              })}
             </div>
           </div>
+
           <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
           <div className='flex items-start gap-3 self-stretch'>
             <div className='flex flex-[1_0_0] flex-col items-start gap-2'>
@@ -51,9 +144,10 @@ const Filter = ({ handleToggle }: Props) => {
               </span>
               <Input
                 className='flex items-start gap-[10px] self-stretch px-4 py-5'
-                placeholder='입력'
                 type='date'
-              ></Input>
+                onChange={e => handleChangeDate(e)}
+                value={selectedDate}
+              />
             </div>
           </div>
           <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
@@ -61,7 +155,13 @@ const Filter = ({ handleToggle }: Props) => {
             <span className='text-[16px]'>금액</span>
             <div className='flex items-center justify-start gap-3 max-md:w-full'>
               <div className='relative inline'>
-                <Input width='w-[169px]' placeholder='입력' />
+                <Input
+                  width='w-[169px]'
+                  placeholder='입력'
+                  type='number'
+                  onChange={e => handleInputValue(e)}
+                  value={selectedPay}
+                />
                 <span className='absolute right-4 top-5'>원</span>
               </div>
               <span>이상부터</span>
@@ -69,8 +169,18 @@ const Filter = ({ handleToggle }: Props) => {
           </div>
         </div>
         <div className='flex w-[100%] justify-end gap-1'>
-          <Button status='active' size='medium' text='초기화' />
-          <Button status='active' size='medium' text='적용하기' />
+          <Button
+            status='active'
+            size='medium'
+            text='초기화'
+            onClick={handleReset}
+          />
+          <Button
+            status='active'
+            size='medium'
+            text='적용하기'
+            onClick={handleClickApply}
+          />
         </div>
       </div>
     </div>
