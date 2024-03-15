@@ -20,7 +20,7 @@ const NoTableUi = ({
   const pathName = usePathname();
 
   return (
-    <div>
+    <div className='flex h-[400px] w-full flex-col items-center justify-center gap-5 text-xl text-[#7d7986]'>
       <span>
         {message ? TEXT_PER_TYPE.message : TEXT_PER_TYPE.noData[userType]}
       </span>
