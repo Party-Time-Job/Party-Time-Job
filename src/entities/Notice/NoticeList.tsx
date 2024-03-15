@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Post from '../Post/Post';
 import NoticeListHeader from './NoticeListHeader';
+import { Notice } from '../Post/types.ts';
 
 interface Props {
   category?: string;

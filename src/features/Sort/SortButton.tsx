@@ -1,3 +1,4 @@
+import { Notice } from '@/entities/Post/types.ts';
 import {
   sortByDeadline,
   sortByHourlyPay,

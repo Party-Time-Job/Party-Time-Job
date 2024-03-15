@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
+import { Notice } from '../Post/types.ts';
 
 interface Props {
   itemList: Notice[];

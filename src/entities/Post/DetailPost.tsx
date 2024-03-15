@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
+import { NoticeItem } from './types.ts';
 
 const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
