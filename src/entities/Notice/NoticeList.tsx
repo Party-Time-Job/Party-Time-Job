@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 import Post from '../Post/Post';
 import NoticeListHeader from './NoticeListHeader';
 
@@ -9,11 +12,10 @@ interface Props {
 }
 
 /**
- *
- * @param {string} category 'all', or 'recent' or 'search'
- * @param {string} searchValue caregory가 'search' 일때 검색어
- * @param {Notice[]} noticeItemList notice 데이터 배열
- *
+ * @param {Object} props - NoticeList 컴포넌트의 props
+ * @param {string} props.category - 'all', or 'recent' or 'search'
+ * @param {string} props.searchValue - category가 'search' 일때 검색어
+ * @param {Notice[]} props.noticeItemList - notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
 const NoticeList = ({
@@ -21,7 +23,13 @@ const NoticeList = ({
   searchValue,
   noticeItemList,
 }: Props) => {
-  // TODO(이시열) : Button component 적용, 페이지네이션, 전체 공고 list 받아오기
+  // TODO(이시열) : Button component 적용, 페이지네이션
+  const [itemList, setItemList] = useState(noticeItemList);
+
+  const updateItemList = (sortedList: Notice[]) => {
+    setItemList(sortedList);
+  };
+
   const updateNoticeCategory = (value: string) => {
     if (value === 'all') {
       return (
@@ -47,15 +55,21 @@ const NoticeList = ({
     }
     return null;
   };
+
   return (
     <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>
         <div className='flex w-full flex-col items-start gap-4 md:flex-row md:justify-between'>
           {updateNoticeCategory(category)}
-          {category !== 'recent' ? <NoticeListHeader /> : null}
+          {category !== 'recent' ? (
+            <NoticeListHeader
+              updateItemList={updateItemList}
+              itemList={itemList}
+            />
+          ) : null}
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
-          {noticeItemList.map(notice => {
+          {itemList.map(notice => {
             return (
               <Link
                 key={notice.item.id}
