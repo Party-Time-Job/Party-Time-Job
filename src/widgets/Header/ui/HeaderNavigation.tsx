@@ -9,11 +9,7 @@ import MyProfileLink from './MyProfileLink';
 import LogoutButton from './LogoutButton';
 import MyStoreLink from './MyStoreLink';
 import NotificationIcon from './NotificationIcon';
-
-interface DecodedToken {
-  userId: string;
-  type: 'employee' | 'employer';
-}
+import { DecodedToken } from '../Type.ts';
 
 /**
  * 로그인을 한 상태가 아닐 경우 로그인, 회원가입을 보여준다.
