@@ -1,4 +1,5 @@
 import LogoLink from '@/features/LogoLink/LogoLink';
+import HeaderNavigation from './ui/HeaderNavigation';
 
 const Header = () => {
   return (
@@ -8,10 +9,8 @@ const Header = () => {
           <div className='flex flex-col gap-3 md:flex-row md:items-center lg:gap-10'>
             <div className='flex justify-between'>
               <LogoLink />
-              <div className='flex items-center gap-3 md:hidden lg:gap-10'>
-                <h5>로그인</h5>
-                <h5>회원가입</h5>
-                <div>알림아이콘</div>
+              <div className='flex items-center gap-3 font-bold md:hidden lg:gap-10'>
+                <HeaderNavigation />
               </div>
             </div>
             <input
@@ -19,10 +18,8 @@ const Header = () => {
               className='h-10 w-[344px] rounded-md bg-gray-300 p-2 lg:w-[450px]'
             />
           </div>
-          <div className='hidden items-center gap-3 md:flex lg:gap-10'>
-            <h5>로그인</h5>
-            <h5>회원가입</h5>
-            <div>알림아이콘</div>
+          <div className='hidden items-center gap-3 font-bold md:flex lg:gap-10'>
+            <HeaderNavigation />
           </div>
         </div>
       </div>
