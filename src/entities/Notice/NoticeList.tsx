@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Post from '../Post/Post';
 import NoticeListHeader from './NoticeListHeader';
 import { Notice } from '../Post/types.ts';
+import filterNotice from '@/features/Filter/utils/filterNotice.ts';
 
 interface Props {
   category?: string;
@@ -12,7 +13,7 @@ interface Props {
   noticeItemList: Notice[];
 }
 
-interface Filter {
+export interface FilterForm {
   address?: string[];
   date?: string;
   pay?: string;
@@ -32,11 +33,15 @@ const NoticeList = ({
 }: Props) => {
   // TODO(이시열) : Button component 적용, 페이지네이션
   const [itemList, setItemList] = useState(noticeItemList);
-  const [filterCondition, setFilterCondition] = useState<Filter>({
+  const [filterCondition, setFilterCondition] = useState<FilterForm>({
     address: [],
     date: '',
     pay: '',
   });
+
+  const applyFilter = () => {
+    filterNotice(noticeItemList, filterCondition, setItemList);
+  };
 
   const updateFilterCondition = (
     address?: string[],
@@ -80,7 +85,6 @@ const NoticeList = ({
     }
     return null;
   };
-
   console.log(filterCondition);
   return (
     <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
@@ -91,7 +95,9 @@ const NoticeList = ({
             <NoticeListHeader
               updateItemList={updateItemList}
               itemList={itemList}
+              filterCondition={filterCondition}
               updateFilterCondition={updateFilterCondition}
+              applyFilter={applyFilter}
             />
           ) : null}
         </div>

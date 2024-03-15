@@ -9,11 +9,17 @@ import { Notice } from '../Post/types.ts';
 interface Props {
   itemList: Notice[];
   updateItemList: (sortedList: Notice[]) => void;
+  filterCondition: {
+    address?: string[];
+    date?: string;
+    pay?: string;
+  };
   updateFilterCondition: (
     address?: string[],
     date?: string,
     pay?: string,
   ) => void;
+  applyFilter: () => void;
 }
 
 /**
@@ -27,7 +33,9 @@ interface Props {
 const NoticeListHeader = ({
   itemList,
   updateItemList,
+  filterCondition,
   updateFilterCondition,
+  applyFilter,
 }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
@@ -78,8 +86,10 @@ const NoticeListHeader = ({
         </button>
         {isToggleFilter ? (
           <Filter
-            handleToggle={handleToggleFilter}
+            handleToggleFilter={handleToggleFilter}
+            filterCondition={filterCondition}
             updateFilterCondition={updateFilterCondition}
+            applyFilter={applyFilter}
           />
         ) : null}
       </div>

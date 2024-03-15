@@ -8,18 +8,35 @@ import Input from '@/shared/ui/Input';
 import SelectedAddress from './SelectedAddress';
 
 interface Props {
-  handleToggle: () => void;
+  handleToggleFilter: () => void;
+  filterCondition: {
+    address?: string[];
+    date?: string;
+    pay?: string;
+  };
   updateFilterCondition: (
     address?: string[],
     date?: string,
     pay?: string,
   ) => void;
+  applyFilter: () => void;
 }
 
-const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
-  const [selectedAddressList, setSelectedAddressList] = useState<string[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>('');
-  const [selectedPay, setSelectedPay] = useState<string>('');
+const Filter = ({
+  handleToggleFilter,
+  filterCondition,
+  updateFilterCondition,
+  applyFilter,
+}: Props) => {
+  const [selectedAddressList, setSelectedAddressList] = useState<string[]>(
+    filterCondition.address || [],
+  );
+  const [selectedDate, setSelectedDate] = useState<string>(
+    filterCondition.date || '',
+  );
+  const [selectedPay, setSelectedPay] = useState<string>(
+    filterCondition.pay || '',
+  );
 
   const removeAddress = (address: string) => {
     const newList = selectedAddressList.filter(item => item !== address);
@@ -55,6 +72,11 @@ const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
     setSelectedPay('');
   };
 
+  const handleClickApply = () => {
+    applyFilter();
+    handleToggleFilter();
+  };
+
   useEffect(() => {
     updateFilterCondition(selectedAddressList, selectedDate, selectedPay);
   }, [selectedAddressList, selectedDate, selectedPay]);
@@ -70,7 +92,7 @@ const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
           alt='close'
           width='24'
           height='24'
-          onClick={handleToggle}
+          onClick={handleToggleFilter}
           className='cursor-pointer'
         />
       </div>
@@ -144,7 +166,12 @@ const Filter = ({ handleToggle, updateFilterCondition }: Props) => {
             text='초기화'
             onClick={handleReset}
           />
-          <Button status='active' size='medium' text='적용하기' />
+          <Button
+            status='active'
+            size='medium'
+            text='적용하기'
+            onClick={handleClickApply}
+          />
         </div>
       </div>
     </div>
