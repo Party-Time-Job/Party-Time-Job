@@ -6,14 +6,11 @@ import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import SelectedAddress from './SelectedAddress';
+import { FilterCondition } from '@/entities/Notice/types';
 
 interface Props {
   handleToggleFilter: () => void;
-  filterCondition: {
-    address?: string[];
-    date?: string;
-    pay?: string;
-  };
+  filterCondition: FilterCondition;
   updateFilterCondition: (
     address?: string[],
     date?: string,
@@ -22,6 +19,14 @@ interface Props {
   applyFilter: () => void;
 }
 
+/**
+ * @param {Object} props - Filter 컴포넌트의 props
+ * @param {Function} props.handleToggleFilter - Filter 컴포넌트 토글 제어 콜백 함수
+ * @param {FilterCondition} props.filterCondition - 필터 조건
+ * @param {Function} props.updateFilterCondition - 필터 조건 업데이트 콜백 함수
+ * @param {Function} props.applyFilter - 필터 조건으로 공고 리스트 업데이트 콜백함수
+ * @returns 상세 필터 UI
+ */
 const Filter = ({
   handleToggleFilter,
   filterCondition,

@@ -6,17 +6,12 @@ import Post from '../Post/Post';
 import NoticeListHeader from './NoticeListHeader';
 import { Notice } from '../Post/types.ts';
 import filterNotice from '@/features/Filter/utils/filterNotice.ts';
+import { FilterCondition } from './types.ts';
 
 interface Props {
   category?: string;
   searchValue?: string;
   noticeItemList: Notice[];
-}
-
-export interface FilterForm {
-  address?: string[];
-  date?: string;
-  pay?: string;
 }
 
 /**
@@ -33,7 +28,7 @@ const NoticeList = ({
 }: Props) => {
   // TODO(이시열) : Button component 적용, 페이지네이션
   const [itemList, setItemList] = useState(noticeItemList);
-  const [filterCondition, setFilterCondition] = useState<FilterForm>({
+  const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
     date: '',
     pay: '',

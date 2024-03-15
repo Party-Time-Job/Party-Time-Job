@@ -5,15 +5,12 @@ import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
 import { Notice } from '../Post/types.ts';
+import { FilterCondition } from './types.ts';
 
 interface Props {
   itemList: Notice[];
   updateItemList: (sortedList: Notice[]) => void;
-  filterCondition: {
-    address?: string[];
-    date?: string;
-    pay?: string;
-  };
+  filterCondition: FilterCondition;
   updateFilterCondition: (
     address?: string[],
     date?: string,
