@@ -85,7 +85,6 @@ const NoticeList = ({
     }
     return null;
   };
-  console.log(filterCondition);
   return (
     <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>

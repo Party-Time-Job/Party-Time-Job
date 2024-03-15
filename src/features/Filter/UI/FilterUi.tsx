@@ -107,7 +107,11 @@ const Filter = ({
                 {ADDRESS.map(item => {
                   return (
                     <div>
-                      <span key={item.key} onClick={e => handleAddressClick(e)}>
+                      <span
+                        key={item.key}
+                        onClick={e => handleAddressClick(e)}
+                        className='cursor-pointer p-2 hover:bg-pt-gray20'
+                      >
                         {item.value}
                       </span>
                     </div>

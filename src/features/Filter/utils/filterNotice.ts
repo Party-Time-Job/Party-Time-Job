@@ -18,12 +18,10 @@ const filterNotice = (
   setItemList: Dispatch<SetStateAction<Notice[]>>,
 ) => {
   const addressCondition = filterCondition.address;
-  const dateCondition = filterCondition.date;
+  const dateCondition = filterCondition.date || '';
   const payCondition = filterCondition.pay
     ? parseInt(filterCondition.pay, 10)
     : undefined;
-
-  console.log('조건 : ', addressCondition, dateCondition, payCondition);
 
   if (addressCondition?.length === 0 && !dateCondition && !payCondition) {
     setItemList(noticeItemList);
@@ -31,9 +29,11 @@ const filterNotice = (
   }
 
   const filteredNotice = noticeItemList.filter(notice => {
-    const addressMatch =
-      !addressCondition ||
-      addressCondition.includes(notice.item.shop.item.address1);
+    let addressMatch = true; // 초기값을 true로 설정
+
+    if (addressCondition && addressCondition.length > 0) {
+      addressMatch = addressCondition.includes(notice.item.shop.item.address1);
+    }
 
     const dateMatch =
       !dateCondition || dateCondition === formatDate(notice.item.startsAt);
@@ -43,8 +43,6 @@ const filterNotice = (
 
     return addressMatch && dateMatch && payMatch;
   });
-
-  console.log('filter', filteredNotice);
 
   setItemList(filteredNotice);
 };
