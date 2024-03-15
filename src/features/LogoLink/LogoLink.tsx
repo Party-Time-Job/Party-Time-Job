@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logo from '@/shared/ui/Logo';
 
 /**
  * 아직 로고가 만들어지지 않아서 임시로 h1 태그를 사용했고, 클래스네임도 임시로 지정했습니다.
@@ -7,7 +8,7 @@ import Link from 'next/link';
 const LogoLink = () => {
   return (
     <Link href='/notice'>
-      <h1 className='mb-10 cursor-pointer text-3xl font-bold'>여기에 로고</h1>
+      <Logo />
     </Link>
   );
 };
