@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 const USERTYPE = {
   Employer: 'employer',
   Employee: 'employee',
@@ -14,7 +16,7 @@ const STATUS = {
 
 export type Status = (typeof STATUS)[keyof typeof STATUS];
 
-export interface ProfileTableInterface {
+export interface ProfileInterface {
   id: string;
   status: Status;
   name: string;
@@ -23,10 +25,28 @@ export interface ProfileTableInterface {
   workhour: number;
 }
 
-export interface StoreTableInterface {
+export interface StoreInterface {
   id: string;
   status: Status;
   name?: string;
   description?: string;
   phone?: string;
+}
+
+export interface TableInterface {
+  id: string;
+  status: Status;
+  name?: string;
+  time?: string;
+  pay?: string;
+}
+
+export interface ProfileTableInterface {
+  data: ProfileInterface[];
+  pagination: ReactNode;
+}
+
+export interface StoreTableInterface {
+  data: StoreInterface[];
+  pagination: ReactNode;
 }
