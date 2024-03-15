@@ -8,9 +8,9 @@
  * forwardRef를 사용하여 리액트 훅 폼의 register를 props로 받아 사용할 수 있도록 하였습니다.
  */
 
-import { forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
-interface InputComponentProps {
+interface InputComponentProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   type?: string;
   value?: string;

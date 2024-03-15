@@ -12,6 +12,12 @@ interface Props {
   noticeItemList: Notice[];
 }
 
+interface Filter {
+  address?: string[];
+  date?: string;
+  pay?: string;
+}
+
 /**
  * @param {Object} props - NoticeList 컴포넌트의 props
  * @param {string} props.category - 'all', or 'recent' or 'search'
@@ -26,7 +32,25 @@ const NoticeList = ({
 }: Props) => {
   // TODO(이시열) : Button component 적용, 페이지네이션
   const [itemList, setItemList] = useState(noticeItemList);
+  const [filterCondition, setFilterCondition] = useState<Filter>({
+    address: [],
+    date: '',
+    pay: '',
+  });
 
+  const updateFilterCondition = (
+    address?: string[],
+    date?: string,
+    pay?: string,
+  ) => {
+    setFilterCondition(prev => ({
+      ...prev,
+      address,
+      date,
+      pay,
+    }));
+  };
+  console.log(filterCondition);
   const updateItemList = (sortedList: Notice[]) => {
     setItemList(sortedList);
   };
@@ -66,6 +90,7 @@ const NoticeList = ({
             <NoticeListHeader
               updateItemList={updateItemList}
               itemList={itemList}
+              updateFilterCondition={updateFilterCondition}
             />
           ) : null}
         </div>
