@@ -1,5 +1,6 @@
 import LogoLink from '@/features/LogoLink/LogoLink';
 import HeaderNavigation from './ui/HeaderNavigation';
+import HeaderInput from './ui/HeaderInput';
 
 const Header = () => {
   return (
@@ -13,10 +14,7 @@ const Header = () => {
                 <HeaderNavigation />
               </div>
             </div>
-            <input
-              placeholder='가게 이름으로 찾아보세요'
-              className='h-10 w-[344px] rounded-md bg-gray-300 p-2 lg:w-[450px]'
-            />
+            <HeaderInput />
           </div>
           <div className='hidden items-center gap-3 font-bold md:flex lg:gap-10'>
             <HeaderNavigation />
