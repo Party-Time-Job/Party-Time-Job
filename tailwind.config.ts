@@ -22,6 +22,15 @@ const config: Config = {
         'pt-black': '#353535',
         'pt-blue': '#284b63',
       },
+      keyframes: {
+        scale: {
+          '0%, 20%, 80%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.5) ' },
+        },
+      },
+      animation: {
+        scale: 'scale 1.2s linear infinite',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],

@@ -5,7 +5,8 @@
 /* eslint-disable no-return-assign */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { getCookie } from 'cookies-next';
-import CreatePortal from '@/features/Filter/CreatePortal';
+import { useRouter } from 'next/navigation';
+import CreatePortal from '@/features/CreatePortal';
 import BackgroundModal from '@/shared/ui/BackgroundModal';
 import Input from '@/shared/ui/Input/Input';
 import Select from '@/shared/ui/Select/Select';
@@ -55,6 +56,7 @@ const RegisterModal = ({
   const [address, setAddress] = useState<boolean>(false);
   const [bio, setBio] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement[]>([]);
+  const router = useRouter();
 
   const handleChange =
     (setter: Dispatch<SetStateAction<boolean>>) =>
@@ -101,7 +103,7 @@ const RegisterModal = ({
       } else if (typeof response === 'string') {
         handleClick(response);
       } else {
-        window.location.reload();
+        router.refresh();
         onClickOpen();
       }
       onClickClose();
