@@ -1,13 +1,6 @@
+import { getMethod } from '@/shared/api/RequestMethod.ts';
 import DetailPost from '../Post/DetailPost';
 import { NoticeDetails } from '../Post/types.ts';
-
-const getNoticeDetail = async (shopId: string, noticeId: string) => {
-  const response = await fetch(
-    `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices/${noticeId}`,
-  );
-  const result = (await response.json()) as NoticeDetails;
-  return result;
-};
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -22,7 +15,10 @@ const NoticeDetail = async ({
   shopId: string;
   noticeId: string;
 }) => {
-  const data = await getNoticeDetail(shopId, noticeId);
+  const data = await getMethod<NoticeDetails>(
+    `https://bootcamp-api.codeit.kr/api/0-1/the-julge/shops/${shopId}/notices/${noticeId}`,
+  );
+
   return (
     <section className='flex w-full items-center justify-center px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
       <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
