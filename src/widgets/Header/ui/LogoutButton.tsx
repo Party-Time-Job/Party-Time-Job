@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import Text from '@/shared/ui/Text';
+import HeaderButton from './HeaderButton';
 
 const LogoutButton = () => {
   const router = useRouter();
@@ -9,11 +9,7 @@ const LogoutButton = () => {
     window.location.reload();
   };
 
-  return (
-    <Text onClick={handleLogout} className='cursor-pointer' as='span'>
-      로그아웃
-    </Text>
-  );
+  return <HeaderButton text='로그아웃' onClick={handleLogout} />;
 };
 
 export default LogoutButton;

@@ -8,7 +8,7 @@ const Header = () => {
       <div className='fixed z-10 flex h-24 w-full items-center justify-center bg-black md:h-16'>
         <div className='fixed z-10 flex items-center justify-between md:w-[800px] md:px-9 lg:w-[1440px] lg:px-56'>
           <div className='flex flex-col gap-2 md:hidden md:flex-row md:items-center'>
-            <div className='flex justify-between'>
+            <div className='flex items-center justify-between'>
               <LogoLink />
               <div className='flex items-center gap-5 font-bold md:hidden'>
                 <HeaderNavigation />

@@ -52,10 +52,10 @@ const HeaderNavigation = () => {
   return (
     <>
       {!token && (
-        <>
+        <div className='flex gap-2'>
           <LoginLink />
           <SignUpLink />
-        </>
+        </div>
       )}
 
       {token && userType === 'employee' && (
