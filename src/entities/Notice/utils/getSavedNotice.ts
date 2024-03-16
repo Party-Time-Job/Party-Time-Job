@@ -1,8 +1,11 @@
 import { Notice } from '@/entities/Post/types';
 
 const getSavedNotice = (): Notice[] => {
-  const storedNotices = localStorage.getItem('recentNotices');
-  return storedNotices ? JSON.parse(storedNotices) : [];
+  if (typeof window !== 'undefined') {
+    const storedNotices = sessionStorage.getItem('recentNotices');
+    return storedNotices ? JSON.parse(storedNotices) : [];
+  }
+  return [];
 };
 
 export default getSavedNotice;

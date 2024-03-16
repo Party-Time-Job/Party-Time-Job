@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import NoticeDetail from '@/entities/Notice/NoticeDetail';
 import NoticeList from '@/entities/Notice/NoticeList';
 import getSavedNotice from '@/entities/Notice/utils/getSavedNotice';
+import { Notice } from '@/entities/Post/types';
 
 /**
  *
@@ -17,8 +19,13 @@ const NoticeDetailPage = ({
   shopId: string;
   noticeId: string;
 }) => {
-  // 로컬 스토리지에서 최근 본 공고 리스트 불러와야함
-  const recentNoticeList = getSavedNotice();
+  const [recentNoticeList, setRecentNoticeList] = useState<Notice[]>([]);
+
+  useEffect(() => {
+    const recent = getSavedNotice();
+    setRecentNoticeList(recent);
+  }, []);
+
   return (
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>
       <NoticeDetail shopId={shopId} noticeId={noticeId} />

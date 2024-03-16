@@ -1,7 +1,7 @@
 import { Notice } from '@/entities/Post/types';
 
 const saveSeenNotice = (notice: Notice) => {
-  const storedNotices = localStorage.getItem('recentNotices');
+  const storedNotices = sessionStorage.getItem('recentNotices');
 
   const noticesArray: Notice[] = storedNotices ? JSON.parse(storedNotices) : [];
 
@@ -18,7 +18,7 @@ const saveSeenNotice = (notice: Notice) => {
     }
   }
 
-  localStorage.setItem('recentNotices', JSON.stringify(noticesArray));
+  sessionStorage.setItem('recentNotices', JSON.stringify(noticesArray));
 };
 
 export default saveSeenNotice;
