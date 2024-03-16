@@ -5,7 +5,7 @@ const EmployeeOverview = () => {
   return (
     <article className='w-[450px]'>
       <div className='flex h-full w-full flex-col items-center justify-center gap-5'>
-        <div className='bg-test-blue flex h-8 w-16 items-center justify-center rounded-lg text-black'>
+        <div className='flex h-8 w-16 items-center justify-center rounded-lg bg-test-blue text-black'>
           <Text as='span' className='font-bold'>
             알바님
           </Text>
@@ -31,7 +31,7 @@ const EmployeeOverview = () => {
           </Text>
         </div>
         <Link href='/login'>
-          <button className='border-test-blue hover:bg-test-blue rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
+          <button className='rounded-xl border-2 border-test-blue px-4 py-2 font-bold text-white transition-all duration-300 hover:bg-test-blue hover:font-bold hover:text-black'>
             시작하기
           </button>
         </Link>
