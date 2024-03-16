@@ -45,7 +45,7 @@ export default function Home() {
                   빠르게 일자리를 구하고 싶으신 분들을 위한 플랫폼입니다.
                 </p>
               </div>
-              <button className='border-test-green rounded-xl border-2 px-4 py-2 text-white'>
+              <button className='border-test-green hover:bg-test-green rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
                 시작하기
               </button>
             </div>
@@ -73,7 +73,7 @@ export default function Home() {
                   빠르게 일자리를 구하고 싶으신 분들을 위한 플랫폼입니다.
                 </p>
               </div>
-              <button className='border-test-blue rounded-xl border-2 px-4 py-2 text-white'>
+              <button className='border-test-blue hover:bg-test-blue rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
                 시작하기
               </button>
             </div>
@@ -101,12 +101,44 @@ export default function Home() {
           </div>
           <div className='mt-10 flex w-[900px] flex-col items-center justify-center gap-10'>
             <div className='flex gap-10'>
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
+              <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-green font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
+              <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-green font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
             </div>
             <div className='flex gap-10'>
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
+              <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-green font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
+              <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-green font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -132,15 +164,60 @@ export default function Home() {
           </div>
           <div className='mt-10 flex w-[900px] flex-col items-center justify-center gap-10'>
             <div className='flex gap-10'>
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
+              <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-blue font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
+              <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-blue font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
             </div>
             <div className='flex gap-10'>
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
-              <div className='bg-test-black h-80 w-[450px] rounded-3xl border border-gray-500' />
+              <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-blue font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
+              <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
+                <div className='flex flex-col items-center gap-2 text-2xl'>
+                  <span>우리 서비스만의 장점 하나</span>
+                  <span>
+                    장점에 대한 설명{' '}
+                    <span className='text-test-blue font-bold'>간단하게</span>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <section className='flex h-[500px] w-full items-center justify-center bg-black text-white'>
+        <article className='flex flex-col items-center gap-6'>
+          <div className='border-test-green flex h-24 w-24 items-center justify-center rounded-xl border-2 text-sm text-white'>
+            로고
+          </div>
+          <h1 className='text-test-green text-4xl'>PARTY TIME JOB</h1>
+          <div className='flex flex-col items-center'>
+            <p>마무리 우리 서비스의 아이덴티티와 목표를 간단하게 설명하기</p>
+            <p>대충 명언 하나 끼워맞춰서 사람들한테 감동주기 ㅋㅋ</p>
+          </div>
+        </article>
       </section>
     </>
   );
