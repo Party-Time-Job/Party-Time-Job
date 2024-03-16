@@ -4,8 +4,8 @@ export default function Home() {
       <section className='flex h-[800px] w-full items-center justify-center bg-black text-white'>
         <div className='flex w-[900px] flex-col px-12'>
           <div>
-            <h2 className='font-light'>아르바이트</h2>
-            <h2 className='font-light'>구인구직 플랫폼</h2>
+            <h2 className='text-xl font-light'>당신의 알바 구인구직</h2>
+            <h2 className='text-xl font-light'>이제는 파티처럼 신나게!</h2>
           </div>
           <div className='flex items-end gap-8'>
             <h1 className='text-test-green text-4xl'>PARTY TIME JOB</h1>
@@ -36,13 +36,13 @@ export default function Home() {
               </div>
               <div className='flex flex-col items-center justify-center gap-2'>
                 <p className='font-light text-white'>
-                  서비스가 너무 기본적이라서 딱히 넣을 말이 없습니다.
+                  시장 조건에 맞춰 가장 적합한 인재를 찾습니다.
                 </p>
                 <p className='font-light text-white'>
-                  저는 알바천국 쓸 것 같습니다. 장점도 별로 없는 것 같습니다.
+                  신속한 매칭으로 비즈니스의 공백을 최소화하세요.
                 </p>
                 <p className='font-bold text-white'>
-                  빠르게 일자리를 구하고 싶으신 분들을 위한 플랫폼입니다.
+                  복잡한 절차 없이 긴급한 인력 수요를 해결하세요.
                 </p>
               </div>
               <button className='border-test-green hover:bg-test-green rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
@@ -64,13 +64,13 @@ export default function Home() {
               </div>
               <div className='flex flex-col items-center justify-center gap-2'>
                 <p className='font-light text-white'>
-                  서비스가 너무 기본적이라서 딱히 넣을 말이 없습니다.
+                  맞춤형 공고 탐색으로 최적의 알바 경험을 제공합니다.
                 </p>
                 <p className='font-light text-white'>
-                  저는 알바천국 쓸 것 같습니다. 장점도 별로 없는 것 같습니다.
+                  원하는 조건에 맞는 알바를 쉽게 찾아 신속히 시작하세요.
                 </p>
                 <p className='font-bold text-white'>
-                  빠르게 일자리를 구하고 싶으신 분들을 위한 플랫폼입니다.
+                  복잡한 절차 없이 알바를 바로 시작하세요.
                 </p>
               </div>
               <button className='border-test-blue hover:bg-test-blue rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
@@ -81,7 +81,7 @@ export default function Home() {
         </article>
       </section>
 
-      <section className='flex h-[1200px] w-full items-center justify-center bg-black text-white'>
+      <section className='flex h-[1200px] w-full items-center justify-center bg-black font-light text-white'>
         <div className='flex w-[900px] flex-col gap-8'>
           <div className='flex gap-4'>
             <div className='bg-test-green flex h-8 w-16 items-center justify-center rounded-lg text-black'>
@@ -102,40 +102,44 @@ export default function Home() {
           <div className='mt-10 flex w-[900px] flex-col items-center justify-center gap-10'>
             <div className='flex gap-10'>
               <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl font-light'>
+                  <span>급하게 일손이 필요할 때</span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-green font-bold'>간단하게</span>
+                    <span className='text-test-green font-bold'>
+                      PARTY TIME JOB
+                    </span>
+                    이 해결사가 됩니다!
                   </span>
                 </div>
               </div>
               <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl'>
+                  <span>실시간으로 알바생과 연결되어</span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-green font-bold'>간단하게</span>
+                    <span className='text-test-green font-bold'>급한 일손</span>
+                    을 즉시 해결하세요
                   </span>
                 </div>
               </div>
             </div>
             <div className='flex gap-10'>
               <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl'>
+                  <span>시급을 조절하여 최적의 알바생을 찾아보세요</span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-green font-bold'>간단하게</span>
+                    <span className='text-test-green font-bold'>경쟁업체</span>
+                    보다 한 발 앞서 나갈 수 있습니다.
                   </span>
                 </div>
               </div>
               <div className='bg-test-black hover:shadow-test-green flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl'>
+                  <span>급할수록 든든한 파트너</span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-green font-bold'>간단하게</span>
+                    <span className='text-test-green font-bold'>
+                      PARTY TIME JOB
+                    </span>
+                    이 함께합니다.
                   </span>
                 </div>
               </div>
@@ -165,16 +169,18 @@ export default function Home() {
           <div className='mt-10 flex w-[900px] flex-col items-center justify-center gap-10'>
             <div className='flex gap-10'>
               <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl'>
+                  <span>내일 당장 일할 알바를 찾아요?</span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-blue font-bold'>간단하게</span>
+                    <span className='text-test-blue font-bold'>
+                      PARTY TIME JOB
+                    </span>
+                    에서 시작하세요!
                   </span>
                 </div>
               </div>
               <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
+                <div className='flex flex-col items-center gap-2 text-xl'>
                   <span>우리 서비스만의 장점 하나</span>
                   <span>
                     장점에 대한 설명{' '}
@@ -185,21 +191,23 @@ export default function Home() {
             </div>
             <div className='flex gap-10'>
               <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl'>
+                  <span>당신에게 딱 맞는 일자리를</span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-blue font-bold'>간단하게</span>
+                    <span className='text-test-blue font-bold'>
+                      빠르고 쉽게
+                    </span>{' '}
+                    찾을 수 있습니다.
                   </span>
                 </div>
               </div>
               <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-                <div className='flex flex-col items-center gap-2 text-2xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                <div className='flex flex-col items-center gap-2 text-xl'>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-blue font-bold'>간단하게</span>
+                    <span className='text-test-blue font-bold'>신속하게 </span>
+                    알바를 찾고
                   </span>
+                  <span>바로 일할 수 있는 기회를 제공합니다.</span>
                 </div>
               </div>
             </div>
@@ -214,8 +222,10 @@ export default function Home() {
           </div>
           <h1 className='text-test-green text-4xl'>PARTY TIME JOB</h1>
           <div className='flex flex-col items-center'>
-            <p>마무리 우리 서비스의 아이덴티티와 목표를 간단하게 설명하기</p>
-            <p>대충 명언 하나 끼워맞춰서 사람들한테 감동주기 ㅋㅋ</p>
+            <p>구인구직 과정을 파티처럼 즐겁고, 더욱 쉽게 만들고자 합니다.</p>
+            <p>
+              당신의 다음 파티는 어디에서 시작될까요? 지금 바로 시작해 보세요!
+            </p>
           </div>
         </article>
       </section>
