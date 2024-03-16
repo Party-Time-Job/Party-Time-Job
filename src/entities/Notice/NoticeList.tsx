@@ -11,7 +11,7 @@ import { FilterCondition } from './types.ts';
 interface Props {
   category?: string;
   searchValue?: string;
-  noticeItemList: Notice[];
+  noticeItemList: Notice[] | [];
 }
 
 /**
