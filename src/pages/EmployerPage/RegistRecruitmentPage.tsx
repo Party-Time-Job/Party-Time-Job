@@ -1,5 +1,7 @@
+import CreateRecruitment from '@/features/Create-Recruitment/CreateRecruitment';
+
 const RegistRecruitmentPage = () => {
-  return <h1>모집 공고 등록 페이지</h1>;
+  return <CreateRecruitment />;
 };
 
 export default RegistRecruitmentPage;

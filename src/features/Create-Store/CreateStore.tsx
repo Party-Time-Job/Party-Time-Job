@@ -1,40 +1,77 @@
 'use client';
 
 import { FieldValues, useForm } from 'react-hook-form';
-import axios from 'axios';
 import Image from 'next/image';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
-import Select from '@/shared/ui/Select/Select';
-import ADDRESS from '@/shared/constants/Address';
 import Text from '@/shared/ui/Text';
+import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
-
-const baseURL = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge/';
 
 const CreateStore = () => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: '',
+      category: '',
+      address1: '',
+      address2: '',
+      description: '',
+      imageUrl: '',
+      originalHourlyPay: '',
+    },
+  });
 
-  // const postInfo = (data: DataProps) => {
-  //   postMethod('/shops', JSON.stringify(data));
+  // const postStoreInfo = async (data: FieldValues): Promise<any> => {
+  //   const token = localStorage.getItem('accessToken');
+  //   console.log(token);
+  //   console.log(data);
+  //   try {
+  //     const response = await postMethod<FieldValues>('/shops', data, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     return response;
+  //   } catch (error) {
+  //     if (axios.isAxiosError(error)) {
+  //       if (!error.response?.data.message) {
+  //         return error as Error;
+  //       }
+  //       return error.response?.data.message;
+  //     }
+  //     return error as Error;
+  //   }
   // };
 
-  const token = localStorage.getItem('accessToken');
-
-  const postInfo = async (data: FieldValues) => {
-    axios.post(`${baseURL}/shops`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-        Accept: '*/*',
-      },
-      body: JSON.stringify(data),
-    });
+  const postInfo = async (data: FieldValues): Promise<any> => {
+    const token = localStorage.getItem('accessToken');
+    console.log(token);
+    console.log(JSON.stringify(data));
+    try {
+      const response = await fetch(
+        'https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops',
+        {
+          method: 'POST',
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+          body: JSON.stringify(data),
+        },
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   };
 
   return (
@@ -52,38 +89,42 @@ const CreateStore = () => {
         >
           <div className='flex w-[964px] items-start gap-5'>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
-              <label htmlFor='storeName'>가게 이름</label>
+              <label htmlFor='name'>가게 이름</label>
               <Input
                 width='w-[100%]'
                 className='border-[#CBC9CF)] border'
-                id='storeName'
+                id='name'
                 type='text'
                 placeholder='입력'
-                {...register('storeName', {
+                {...register('name', {
                   required: '가게 이름 입력은 필수 입니다.',
                 })}
               />
-              {errors.storeName && (
-                <span>{errors.storeName.message?.toString()}</span>
-              )}
+              {errors.name && <span>{errors.name.message?.toString()}</span>}
             </div>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
-              <label htmlFor='classification'>분류</label>
-              <Select
-                type='search'
-                options={CLASSIFICATION}
-                {...register('classification')}
-              />
+              <label htmlFor='category'>분류</label>
+              <select {...register('category')}>
+                {CLASSIFICATION.map(item => (
+                  <option key={item.key}>{item.value}</option>
+                ))}
+              </select>
+              {errors.category && (
+                <span>{errors.category.message?.toString()}</span>
+              )}
             </div>
           </div>
           <div className='flex w-[964px] items-start gap-5'>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address1'>주소</label>
-              <Select
-                type='search'
-                options={ADDRESS}
-                {...register('address1')}
-              />
+              <select {...register('address1')}>
+                {ADDRESS.map(item => (
+                  <option key={item.key}>{item.value}</option>
+                ))}
+              </select>
+              {errors.address1 && (
+                <span>{errors.address1.message?.toString()}</span>
+              )}
             </div>
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address2'>상세 주소</label>
@@ -135,17 +176,29 @@ const CreateStore = () => {
                 </div>
               </label>
             </div>
-            <Input id='imageUrl' className='hidden' type='file' />
+            <Input
+              id='imageUrl'
+              // className='hidden'
+              type='text'
+              {...register('imageUrl', {
+                required: '시급을 입력해주세요.',
+              })}
+            />
+            {errors.imageUrl && (
+              <span>{errors.imageUrl.message?.toString()}</span>
+            )}
           </div>
           <div className='flex w-[964px] flex-col items-start gap-2'>
-            <label id='description' htmlFor='textarea'>
-              가게 설명
-            </label>
+            <label htmlFor='description'>가게 설명</label>
             <textarea
+              id='description'
               className='w-full place-content-center p-2.5'
               placeholder='입력'
               rows={8}
               cols={30}
+              {...register('description', {
+                required: '가게 이름 입력은 필수 입니다.',
+              })}
             />
           </div>
           <div className='mx-auto my-0'>
