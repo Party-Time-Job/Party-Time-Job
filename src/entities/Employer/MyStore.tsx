@@ -22,8 +22,12 @@ const MyStore = ({
   userId,
 }: GetMyStoreProps) => {
   const router = useRouter();
-  const handleClick = () => {
-    router.push(`/store/registration/recruitment/${userId}`);
+  const handleClick = (action: 'edit' | 'register') => {
+    const routes = {
+      edit: `/store/registration/store-info/${userId}`,
+      register: `/store/registration/recruitment/${userId}`,
+    };
+    router.push(routes[action]);
   };
 
   return (
@@ -65,13 +69,14 @@ const MyStore = ({
                 size='medium'
                 type='button'
                 text='편집하기'
+                onClick={() => handleClick('edit')}
               />
               <Button
                 status='active'
                 size='medium'
                 type='submit'
                 text='공고 등록하기'
-                onClick={handleClick}
+                onClick={() => handleClick('register')}
               />
             </div>
           </div>
