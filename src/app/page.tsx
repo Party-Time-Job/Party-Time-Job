@@ -170,7 +170,7 @@ export default function Home() {
             <div className='flex gap-10'>
               <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
                 <div className='flex flex-col items-center gap-2 text-xl'>
-                  <span>내일 당장 일할 알바를 찾아요?</span>
+                  <span>내일 당장 일할 알바를 찾으세요?</span>
                   <span>
                     <span className='text-test-blue font-bold'>
                       PARTY TIME JOB
@@ -181,10 +181,13 @@ export default function Home() {
               </div>
               <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
                 <div className='flex flex-col items-center gap-2 text-xl'>
-                  <span>우리 서비스만의 장점 하나</span>
+                  <span>다양한 업체의 시급을 비교하며 </span>
                   <span>
-                    장점에 대한 설명{' '}
-                    <span className='text-test-blue font-bold'>간단하게</span>
+                    당신에게{' '}
+                    <span className='text-test-blue font-bold'>
+                      최적의 알바
+                    </span>
+                    를 찾아드립니다.
                   </span>
                 </div>
               </div>
