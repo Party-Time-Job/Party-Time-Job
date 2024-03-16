@@ -15,7 +15,7 @@ const LandingPageTopContents = () => {
               이제는 파티처럼 신나게!
             </Text>
           </div>
-          <div className='flex items-end gap-8'>
+          <div className='flex items-center gap-8'>
             <TextLogo />
             <LandingLogo />
           </div>
