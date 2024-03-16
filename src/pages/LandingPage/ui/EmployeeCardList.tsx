@@ -3,9 +3,9 @@ import Text from '@/shared/ui/Text';
 const EmployeeCardList = () => {
   return (
     <div className='mt-10 flex w-[900px] flex-col items-center justify-center gap-10'>
-      <div className='flex gap-10'>
-        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-          <div className='flex flex-col items-center gap-2 text-xl'>
+      <div className='flex flex-col gap-10 lg:flex lg:flex-row'>
+        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[300px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md lg:w-[450px]'>
+          <div className='flex flex-col items-center gap-2 text-sm lg:text-xl'>
             <Text as='span'>내일 당장 일할 알바를 찾으세요?</Text>
             <Text as='span'>
               <Text as='span' className='text-test-blue font-bold'>
@@ -15,8 +15,8 @@ const EmployeeCardList = () => {
             </Text>
           </div>
         </div>
-        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-          <div className='flex flex-col items-center gap-2 text-xl'>
+        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[300px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md lg:w-[450px]'>
+          <div className='flex flex-col items-center gap-2 text-sm lg:text-xl'>
             <Text as='span'>다양한 업체의 시급을 비교하며 </Text>
             <Text as='span'>
               당신에게{' '}
@@ -28,9 +28,9 @@ const EmployeeCardList = () => {
           </div>
         </div>
       </div>
-      <div className='flex gap-10'>
-        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-          <div className='flex flex-col items-center gap-2 text-xl'>
+      <div className='flex flex-col gap-10 lg:flex lg:flex-row'>
+        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[300px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md lg:w-[450px]'>
+          <div className='flex flex-col items-center gap-2 text-sm lg:text-xl'>
             <Text as='span'>당신에게 딱 맞는 일자리를</Text>
             <Text as='span'>
               <Text as='span' className='text-test-blue font-bold'>
@@ -40,8 +40,8 @@ const EmployeeCardList = () => {
             </Text>
           </div>
         </div>
-        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[450px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md'>
-          <div className='flex flex-col items-center gap-2 text-xl'>
+        <div className='bg-test-black hover:shadow-test-blue flex h-80 w-[300px] cursor-pointer items-center justify-center rounded-3xl border border-gray-500 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md lg:w-[450px]'>
+          <div className='flex flex-col items-center gap-2 text-sm lg:text-xl'>
             <Text as='span'>
               <Text as='span' className='text-test-blue font-bold'>
                 신속하게{' '}

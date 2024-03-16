@@ -43,14 +43,14 @@ const LandingPage = () => {
         </article>
       </section>
 
-      <section className='flex h-[1200px] w-full items-center justify-center bg-black font-light text-white'>
+      <section className='flex h-[1900px] w-full items-center justify-center bg-black font-light text-white lg:h-[1200px]'>
         <div className='flex w-[900px] flex-col gap-8'>
           <EmployerTitle />
           <EmployerCardList />
         </div>
       </section>
 
-      <section className='flex h-[1200px] w-full items-center justify-center bg-black text-white'>
+      <section className='flex h-[1900px] w-full items-center justify-center bg-black text-white lg:h-[1200px]'>
         <div className='flex w-[900px] flex-col gap-8'>
           <EmployeeTitle />
           <EmployeeCardList />
