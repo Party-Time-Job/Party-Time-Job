@@ -1,7 +1,7 @@
 /**
  * GET '/notices' 결과를 반환한 객체를 그대로 타입으로 정의했습니다.
  */
-interface AllNotice {
+export interface AllNotice {
   offset: number;
   limit: number;
   address: string[];
@@ -11,7 +11,7 @@ interface AllNotice {
   links: Links[];
 }
 
-interface NoticeItem {
+export interface NoticeItem {
   id: string;
   hourlyPay: number;
   startsAt: string;
@@ -24,12 +24,12 @@ interface NoticeItem {
 /**
  *  type AllNotice의 items 속성을 따로 정의했습니다.
  */
-interface Notice {
+export interface Notice {
   item: NoticeItem;
   links: Links[];
 }
 
-interface NoticeDetail {
+export interface NoticeDetails {
   item: NoticeItem;
   currentUserApplication: {
     item: {
@@ -41,7 +41,7 @@ interface NoticeDetail {
   links: Links[];
 }
 
-interface ShopItem {
+export interface ShopItem {
   id: string;
   name: string;
   category: string;
@@ -55,7 +55,7 @@ interface ShopItem {
 /**
  * 가게 정보 타입입니다.
  */
-interface Shop {
+export interface Shop {
   item: ShopItem;
   href: string;
 }
@@ -63,7 +63,7 @@ interface Shop {
 /**
  * type AllNotice의 links 속성을 따로 정의했습니다.
  */
-interface Links {
+export interface Links {
   rel: string;
   description: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';

@@ -1,4 +1,5 @@
 import SortButton from '@/features/Sort/SortButton';
+import { Notice } from '../Post/types.ts';
 
 interface Props {
   itemList: Notice[];

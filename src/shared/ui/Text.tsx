@@ -9,12 +9,22 @@
 interface TextComponentProps {
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
   as?: React.ElementType;
 }
 
-const Text = ({ children, className, as = 'p' }: TextComponentProps) => {
+const Text = ({
+  onClick,
+  children,
+  className,
+  as = 'p',
+}: TextComponentProps) => {
   const Component = as;
-  return <Component className={className}>{children}</Component>;
+  return (
+    <Component onClick={onClick} className={className}>
+      {children}
+    </Component>
+  );
 };
 
 export default Text;

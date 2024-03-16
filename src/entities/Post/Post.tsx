@@ -2,6 +2,7 @@ import Image from 'next/image';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import formatHourlyPay from '@/entities/Post/utils/formatHourlyPay';
+import { NoticeItem } from './types.ts';
 
 /**
  *

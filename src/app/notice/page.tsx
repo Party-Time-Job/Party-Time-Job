@@ -1,6 +1,6 @@
 import NoticePage from '@/pages/NoticePage/NoticePage';
 
-const page = async () => {
+const page = () => {
   return <NoticePage />;
 };
 

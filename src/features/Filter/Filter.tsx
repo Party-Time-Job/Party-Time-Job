@@ -1,3 +1,3 @@
-import Filter from './UI/FilterUI';
+import Filter from './UI/FilterUi';
 
 export default Filter;
