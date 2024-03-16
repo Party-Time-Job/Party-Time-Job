@@ -4,7 +4,9 @@ import Text from '@/shared/ui/Text';
 const SignUpLink = () => {
   return (
     <Link href='/signup'>
-      <Text as='span'>회원가입</Text>
+      <Text as='span' className='text-white'>
+        회원가입
+      </Text>
     </Link>
   );
 };
