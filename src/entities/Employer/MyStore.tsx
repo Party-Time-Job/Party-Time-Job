@@ -1,3 +1,6 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/shared/ui/Button';
 
@@ -7,6 +10,7 @@ interface GetMyStoreProps {
   name: string | null;
   address1: string | null;
   description: string | null;
+  userId: string | null;
 }
 
 const MyStore = ({
@@ -15,7 +19,13 @@ const MyStore = ({
   name,
   address1,
   description,
+  userId,
 }: GetMyStoreProps) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/store/registration/recruitment/${userId}`);
+  };
+
   return (
     <div className='flex h-[540px] flex-col items-center justify-center gap-2'>
       <div className='flex w-[965px] flex-col gap-[23px]'>
@@ -25,7 +35,7 @@ const MyStore = ({
         <div className='inline-flex items-start justify-between gap-6 rounded-xl bg-slate-300 p-6'>
           {/* 상호 이미지 */}
           <div className='flex h-[346px] w-full items-center justify-center rounded-xl bg-red-300'>
-            <div className='relative h-full w-full overflow-hidden rounded-xl'>
+            <div className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl'>
               <Image fill src={`/${imageUrl}` || ''} alt={name || ''} />
             </div>
           </div>
@@ -61,6 +71,7 @@ const MyStore = ({
                 size='medium'
                 type='submit'
                 text='공고 등록하기'
+                onClick={handleClick}
               />
             </div>
           </div>

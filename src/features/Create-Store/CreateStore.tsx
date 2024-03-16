@@ -48,29 +48,21 @@ const CreateStore = () => {
   //   }
   // };
 
-  const postInfo = async (data: FieldValues): Promise<any> => {
+  const postInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
-    console.log(token);
-    console.log(JSON.stringify(data));
     try {
-      const response = await fetch(
-        'https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops',
-        {
-          method: 'POST',
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify(data),
+      await fetch('https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops', {
+        method: 'POST',
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      );
-      console.log(response);
-      return response;
+        body: JSON.stringify(data),
+      });
     } catch (error) {
       console.log(error);
-      return error;
     }
   };
 

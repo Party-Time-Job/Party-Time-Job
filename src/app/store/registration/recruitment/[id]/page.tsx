@@ -1,7 +1,7 @@
 import RegistRecruitmentPage from '@/pages/EmployerPage/RegistRecruitmentPage';
 
-const Recruitment = () => {
+const Store = () => {
   return <RegistRecruitmentPage />;
 };
 
-export default Recruitment;
+export default Store;

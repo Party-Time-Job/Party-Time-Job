@@ -14,6 +14,7 @@ import MyStore from '@/entities/Employer/MyStore';
  */
 interface DetailsPageProps {
   storeId: string | null;
+  userId: string | null;
 }
 interface StoreInfoProps {
   imageUrl: string | null;
@@ -23,7 +24,7 @@ interface StoreInfoProps {
   description: string | null;
 }
 
-const DetailsPage = ({ storeId }: DetailsPageProps) => {
+const DetailsPage = ({ userId, storeId }: DetailsPageProps) => {
   const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
     imageUrl: null,
     category: null,
@@ -67,14 +68,19 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
           name={storeInfo.name}
           address1={storeInfo.address1}
           description={storeInfo.description}
+          userId={userId}
         />
       ) : (
         <EmptyStore
-          onClick={() => handleNavigate('details/registration/store-info/1')}
+          onClick={() =>
+            handleNavigate(`/store/registration/store-info/${userId}`)
+          }
         />
       )}
       <EmptyRecruitment
-        onClick={() => handleNavigate('details/registration/recruitment/1')}
+        onClick={() =>
+          handleNavigate(`/store/registration/recruitment/${userId}`)
+        }
       />
     </>
   );
