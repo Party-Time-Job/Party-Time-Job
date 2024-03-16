@@ -2,7 +2,7 @@ import Text from './Text';
 
 const TextLogo = () => {
   return (
-    <Text as='h1' className='text-test-green text-4xl'>
+    <Text as='h1' className='text-4xl text-test-green'>
       PARTY TIME JOB
     </Text>
   );
