@@ -26,7 +26,7 @@ const EmpolyerEmptyData = ({
   onClick,
 }: EmployerEmptyDataComponentProps) => {
   return (
-    <div className='felx flex-col items-start gap-2 px-[237px] py-[60px]'>
+    <div className='flex h-[400px] flex-col items-center justify-center gap-2'>
       <div className='flex h-[275px] w-[965px] flex-col gap-[23px]'>
         <span className='text-[28px] font-bold tracking-[0.56px] text-[#111322]'>
           {title}

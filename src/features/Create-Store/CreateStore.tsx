@@ -76,7 +76,7 @@ const CreateStore = () => {
 
   return (
     <div className='flex flex-col items-start gap-2 bg-[#FAFAFA] px-[238px] py-[60px]'>
-      <div className='felx flex-col items-center gap-8'>
+      <div className='flex flex-col items-center gap-8'>
         <div className='flex w-[964px] items-center justify-between'>
           <Title title='가게정보'>
             <div></div>
