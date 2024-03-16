@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <>
@@ -45,9 +47,11 @@ export default function Home() {
                   복잡한 절차 없이 긴급한 인력 수요를 해결하세요.
                 </p>
               </div>
-              <button className='border-test-green hover:bg-test-green rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
-                시작하기
-              </button>
+              <Link href='/login'>
+                <button className='border-test-green hover:bg-test-green rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
+                  시작하기
+                </button>
+              </Link>
             </div>
           </article>
 
@@ -73,9 +77,11 @@ export default function Home() {
                   복잡한 절차 없이 알바를 바로 시작하세요.
                 </p>
               </div>
-              <button className='border-test-blue hover:bg-test-blue rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
-                시작하기
-              </button>
+              <Link href='/login'>
+                <button className='border-test-blue hover:bg-test-blue rounded-xl border-2 px-4 py-2 font-bold text-white transition-all duration-300 hover:font-bold hover:text-black'>
+                  시작하기
+                </button>
+              </Link>
             </div>
           </article>
         </article>
