@@ -37,7 +37,7 @@ const LandingPage = () => {
           </Text>
         </div>
 
-        <article className='flex h-[450px] justify-center gap-10'>
+        <article className='flex h-[800px] flex-col items-center justify-center gap-20 lg:flex lg:h-[450px] lg:flex-row lg:gap-10'>
           <EmployerOverview />
           <EmployeeOverview />
         </article>
