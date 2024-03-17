@@ -2,6 +2,14 @@ import PaginationUi from '@/shared/ui/Pagination/ui/PaginationUi';
 
 const MAX_PAGE = 7;
 
+/**
+ *
+ * @param {number} page 페이지
+ * @param {number} showedItems 보여질 아이템 개수
+ * @param {number} total 총 아이템 개수
+ * @returns 페이지네이션
+ */
+
 const Pagination = ({
   page,
   showedItems,
