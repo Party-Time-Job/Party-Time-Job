@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Button from '@/shared/ui/Button';
-import RegisterModal from '../RegisterModal/RegisterModal';
+import RegisterModal from '@/widgets/RegisterModal/RegisterModal';
 import Toast from '@/shared/ui/Toast/Toast';
 import Loader from '@/shared/ui/Loader';
 import { ConfirmDialog } from '@/shared/ui/Dialog/Dialog';
