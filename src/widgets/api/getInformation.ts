@@ -2,6 +2,12 @@ import axios from 'axios';
 import { getMethod } from '@/shared/api/RequestMethod';
 import { UserInformationInterface } from '@/widgets/api/type';
 
+/**
+ *
+ * @param {string} userId 사용자 ID
+ * @returns items, links 반환
+ */
+
 const getInformation = async (
   userId: string,
 ): Promise<UserInformationInterface | string | Error> => {
