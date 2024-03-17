@@ -2,6 +2,15 @@ import axios from 'axios';
 import { getMethod } from '@/shared/api/RequestMethod';
 import { ApplicationInterface } from '@/widgets/Application/type';
 
+/**
+ *
+ * @param {string} userId 사용자 ID
+ * @param {number} offset 조회 시작 기준
+ * @param {number} limit 조회 개수
+ * @param {string} token 토큰(선택)
+ * @returns itmes, links 반환
+ */
+
 const getApplication = async (
   userId: string,
   params?: {
