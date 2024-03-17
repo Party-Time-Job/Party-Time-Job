@@ -11,6 +11,9 @@ const HeaderInput = () => {
   };
 
   const handleSubmit = (e: KeyboardEvent) => {
+    if (!searchValue) {
+      return;
+    }
     if (e.key === 'Enter') {
       router.push(`/search?keyword=${searchValue}`);
     }
@@ -23,6 +26,7 @@ const HeaderInput = () => {
         value={searchValue}
         onChange={e => updateSearchValue(e)}
         onKeyDown={e => handleSubmit(e)}
+        required
       />
       <img
         src='/search.svg'
