@@ -26,6 +26,7 @@ const NoticeDetail = ({
 }) => {
   const [detail, setDetail] = useState<Notice>();
   const [isApplied, setIsApplied] = useState(false);
+  const [applicationId, setApplicationId] = useState('');
 
   const token = getUserToken();
 
@@ -53,8 +54,9 @@ const NoticeDetail = ({
           return userId === apply.item.user.item.id;
         });
 
-        if (userApply.length !== 0) {
+        if (userApply.length !== 0 && userApply[0].item.status === 'pending') {
           setIsApplied(true);
+          setApplicationId(userApply[0].item.id);
         }
       };
       testUserApplyList();
@@ -81,6 +83,7 @@ const NoticeDetail = ({
               noticeId={noticeId}
               isApplied={isApplied}
               token={token}
+              applicationId={applicationId}
             />
           ) : null}
           <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>

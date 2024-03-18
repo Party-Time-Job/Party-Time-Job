@@ -16,6 +16,7 @@ interface Props {
   noticeId: string;
   isApplied: boolean;
   token: string;
+  applicationId: string;
 }
 
 const DetailPost = ({
@@ -25,6 +26,7 @@ const DetailPost = ({
   noticeId,
   isApplied,
   token,
+  applicationId,
 }: Props) => {
   const [isToggle, setIsToggle] = useState(false);
   const [modalCategory, setModalCategory] = useState('');
@@ -57,6 +59,25 @@ const DetailPost = ({
     }
   };
 
+  const cancelNotice = async () => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'canceled' }),
+      },
+    );
+
+    if (response.status === 200) {
+      setModalCategory('canceled');
+      setIsToggle(true);
+    }
+  };
+
   const handleApplyClick = () => {
     if (!token) {
       setModalCategory('noLogin');
@@ -79,7 +100,7 @@ const DetailPost = ({
   };
 
   const handleCancelClick = () => {
-    console.log('지원 취소');
+    cancelNotice();
   };
 
   useEffect(() => {

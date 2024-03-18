@@ -4,13 +4,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
 
-const Modal = ({
-  handleToggle,
-  category,
-}: {
+interface Props {
   handleToggle: () => void;
   category: string;
-}) => {
+}
+
+const Modal = ({ handleToggle, category }: Props) => {
   const router = useRouter();
 
   const setModalComment = () => {
@@ -25,6 +24,9 @@ const Modal = ({
     }
     if (category === 'success') {
       return '성공적으로 공고에 지원했습니다.';
+    }
+    if (category === 'canceled') {
+      return '정상적으로 취소되었습니다.';
     }
     return '';
   };
@@ -44,6 +46,11 @@ const Modal = ({
     }
     if (category === 'success') {
       handleToggle();
+      window.location.reload();
+    }
+    if (category === 'canceled') {
+      handleToggle();
+      window.location.reload();
     }
   };
 
