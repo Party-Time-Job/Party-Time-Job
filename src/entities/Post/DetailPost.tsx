@@ -6,8 +6,13 @@ import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import { Notice } from './types.ts';
 import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
+import formatHourlyPay from './utils/formatHourlyPay.ts';
 
 const DetailPost = ({ notice }: { notice: Notice }) => {
+  const comparePriceRate = Math.round(
+    (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
+      100,
+  );
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
 
   useEffect(() => {
@@ -39,11 +44,11 @@ const DetailPost = ({ notice }: { notice: Notice }) => {
             </span>
             <div className='flex items-center gap-1 md:gap-2'>
               <span className='text-[24px] font-bold leading-5 md:text-[28px]'>
-                15000원
+                {formatHourlyPay(notice.item.hourlyPay)}원
               </span>
               <div className='item-center flex gap-[2px] rounded-[20px] bg-pt-green40 px-2 py-1 md:p-[10px]'>
                 <span className='text-[12px] leading-4 text-white md:text-[14px] md:leading-[20px]'>
-                  기존 시급보다 50%
+                  기존 시급보다 {comparePriceRate}%
                 </span>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
