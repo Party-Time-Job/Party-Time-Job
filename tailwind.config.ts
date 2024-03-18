@@ -21,6 +21,9 @@ const config: Config = {
         'pt-white': '#ffffff',
         'pt-black': '#353535',
         'pt-blue': '#284b63',
+        'test-green': '#00FF85',
+        'test-black': '#1E1E1E',
+        'test-blue': '#3994FF',
       },
       keyframes: {
         scale: {
