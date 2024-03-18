@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
@@ -8,6 +8,7 @@ import { Notice, User } from './types.ts';
 import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
 import formatHourlyPay from './utils/formatHourlyPay.ts';
 import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
+import Modal from '@/features/Modal/Modal.tsx';
 
 const DetailPost = ({
   notice,
@@ -16,6 +17,11 @@ const DetailPost = ({
   notice: Notice;
   userInfo: User | undefined;
 }) => {
+  const [isToggle, setIsToggle] = useState(false);
+  const handleToggle = () => {
+    setIsToggle(prev => !prev);
+  };
+
   const comparePriceRate = Math.round(
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
       100,
@@ -33,7 +39,7 @@ const DetailPost = ({
       !userInfo?.item.name ||
       !userInfo?.item.phone
     ) {
-      console.log('프로필 등록 하세요');
+      setIsToggle(true);
       return;
     }
 
@@ -127,6 +133,7 @@ const DetailPost = ({
           신청하기
         </button>
       </div>
+      {isToggle ? <Modal handleToggle={handleToggle} /> : null}
     </div>
   );
 };
