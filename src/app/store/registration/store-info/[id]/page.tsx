@@ -1,15 +1,16 @@
 import ResgistStorePage from '@/pages/EmployerPage/RegistStorePage';
+import { StoreData } from '@/features/Create-Store/Type';
 
-const getStoreData = async (storeId: string): Promise<any> => {
+const getStoreData = async (storeId: string): Promise<StoreData> => {
   try {
     const response = await fetch(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}`,
     );
-    const result = await response.json();
+    const result: StoreData = await response.json();
     return result;
   } catch (error) {
     console.log(error);
-    return error;
+    throw error;
   }
 };
 
@@ -23,7 +24,8 @@ const Store = async ({
 }) => {
   const { storeId } = searchParams;
   const storeData = await getStoreData(storeId);
-  return <ResgistStorePage storeData={storeData.item} />;
+  const { item } = storeData;
+  return <ResgistStorePage storeData={item} />;
 };
 
 export default Store;

@@ -2,8 +2,9 @@
 
 import { FieldValues, useForm } from 'react-hook-form';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { ShopItemType } from './Type.ts';
+import { StoreItem } from './Type.ts';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -11,27 +12,20 @@ import Text from '@/shared/ui/Text';
 import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
 
-interface Props {
-  initialValues: ShopItemType;
+interface CreateStoreProps {
+  initialValues?: StoreItem;
 }
 
-const CreateStore = ({ initialValues }: Props) => {
+const CreateStore = ({ initialValues }: CreateStoreProps) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { isSubmitting, errors },
-  } = useForm({
-    defaultValues: {
-      name: '',
-      category: '',
-      address1: '',
-      address2: '',
-      originalHourlyPay: '',
-      imageUrl: '',
-      description: '',
-    },
+  } = useForm<FieldValues>({
+    defaultValues: initialValues,
   });
+  const router = useRouter();
   const postInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     try {
@@ -50,15 +44,7 @@ const CreateStore = ({ initialValues }: Props) => {
     }
   };
   useEffect(() => {
-    reset({
-      name: initialValues?.name,
-      category: initialValues?.category,
-      address1: initialValues?.address1,
-      address2: initialValues?.address2,
-      originalHourlyPay: initialValues?.originalHourlyPay,
-      imageUrl: initialValues?.imageUrl,
-      description: initialValues?.description,
-    });
+    reset(initialValues);
   }, []);
   return (
     <div className='flex flex-col items-start gap-2 bg-[#FAFAFA] px-[238px] py-[60px]'>
@@ -198,10 +184,20 @@ const CreateStore = ({ initialValues }: Props) => {
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text='가게 등록하기'
+              text={initialValues ? '가게 수정하기' : '가게 등록하기'}
               disabled={isSubmitting}
               type='submit'
             />
+            {initialValues && (
+              <Button
+                size='medium'
+                status={isSubmitting ? 'inactive' : 'active'}
+                text='취소하기'
+                disabled={isSubmitting}
+                type='button'
+                onClick={() => router.push('/store/details/1')}
+              />
+            )}
           </div>
         </form>
       </div>
