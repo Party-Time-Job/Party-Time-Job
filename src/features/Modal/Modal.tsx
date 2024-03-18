@@ -25,7 +25,7 @@ const Modal = ({
   return (
     <div
       onClick={handleClickOutside}
-      className=' absolute inset-0 flex items-center justify-center bg-black bg-opacity-70'
+      className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-70'
     >
       <div className='flex flex-col items-center gap-[32px] rounded-[12px] bg-white p-[24px]'>
         <div className='flex flex-col items-center gap-[16px]'>
