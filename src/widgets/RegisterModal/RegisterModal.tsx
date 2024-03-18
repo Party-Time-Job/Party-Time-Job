@@ -14,6 +14,7 @@ import Title from '@/shared/ui/Title';
 import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
 import updateInformation from '@/widgets/api/updateInformation';
+import { RegisterModalInterface } from '@/widgets/RegisterModal/type';
 
 /**
  * @param {string} defaultName 이름 영역에 해당하는 디폴트 값
@@ -26,18 +27,6 @@ import updateInformation from '@/widgets/api/updateInformation';
  * @param {function} setOpen 모달 열리고 닫히는 상태 관리
  * @return 프로필 등록 모달 페이지
  */
-
-export interface RegisterModalInterface {
-  defaultName?: string;
-  defaultPhone?: string;
-  defaultAddress?: string;
-  defaultBio?: string;
-  showModal?: boolean;
-  onClickClose: () => void;
-  onClickOpen: () => void;
-  handleClick: (text: string) => void;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-}
 
 const RegisterModal = ({
   defaultName,
