@@ -33,7 +33,6 @@ const MyStore = ({
     };
     router.push(routes[action]);
   };
-  // store/registration/store-info/user?userId=${userId}&userType=${userType}
   return (
     <div className='flex h-[540px] flex-col items-center justify-center gap-2'>
       <div className='flex w-[965px] flex-col gap-[23px]'>

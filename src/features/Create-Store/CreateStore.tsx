@@ -2,8 +2,8 @@
 
 import { FieldValues, useForm } from 'react-hook-form';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-// import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { ShopItemType } from './Type.ts';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -11,14 +11,15 @@ import Text from '@/shared/ui/Text';
 import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
 
-const CreateStore = () => {
-  // const [storeData, setStoreData] = useState(null);
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  console.log(id, '------------------id--------------');
+interface Props {
+  initialValues: ShopItemType;
+}
+
+const CreateStore = ({ initialValues }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting, errors },
   } = useForm({
     defaultValues: {
@@ -26,19 +27,11 @@ const CreateStore = () => {
       category: '',
       address1: '',
       address2: '',
-      description: '',
-      imageUrl: '',
       originalHourlyPay: '',
+      imageUrl: '',
+      description: '',
     },
   });
-  // name: storeData.name,
-  // category: storeData.category,
-  // address1: storeData.address1,
-  // address2: storeData.address2,
-  // description: storeData.description,
-  // imageUrl: storeData.imageUrl,
-  // originalHourlyPay: storeData.originalHourlyPay,
-
   const postInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     try {
@@ -56,11 +49,17 @@ const CreateStore = () => {
       console.log(error);
     }
   };
-  // 원래는 전역상태 관리 객체에서 값을 가져온다.
-  // useEffect(() => {
-  //   const response = fetch();
-  // }, []);
-
+  useEffect(() => {
+    reset({
+      name: initialValues?.name,
+      category: initialValues?.category,
+      address1: initialValues?.address1,
+      address2: initialValues?.address2,
+      originalHourlyPay: initialValues?.originalHourlyPay,
+      imageUrl: initialValues?.imageUrl,
+      description: initialValues?.description,
+    });
+  }, []);
   return (
     <div className='flex flex-col items-start gap-2 bg-[#FAFAFA] px-[238px] py-[60px]'>
       <div className='flex flex-col items-center gap-8'>
@@ -172,7 +171,6 @@ const CreateStore = () => {
             </div>
             <Input
               id='imageUrl'
-              // className='hidden'
               type='text'
               {...register('imageUrl', {
                 required: '이미지를 추가해주세요.',
