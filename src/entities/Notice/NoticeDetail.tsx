@@ -3,20 +3,23 @@
 import { useEffect, useState } from 'react';
 import { getMethod } from '@/shared/api/RequestMethod.ts';
 import DetailPost from '../Post/DetailPost';
-import { Notice } from '../Post/types.ts';
+import { Notice, User } from '../Post/types.ts';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
  * @param {string} props.shopId - router params에서 받은 가게 id
  * @param {string} props.noticeId - router params에서 받은 공고 id
+ * @param {User} props.userInfo - router params에서 받은 유저 정보
  * @returns '/detail/[shopId]/[noticeId]' 에 랜더링 될 공고 상세 컴포넌트
  */
 const NoticeDetail = ({
   shopId,
   noticeId,
+  userInfo,
 }: {
   shopId: string;
   noticeId: string;
+  userInfo: User | undefined;
 }) => {
   const [detail, setDetail] = useState<Notice>();
 
@@ -25,11 +28,12 @@ const NoticeDetail = ({
       const data = await getMethod<Notice>(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}`,
       );
+
       setDetail(data);
     };
     getData();
   }, []);
-
+  console.log(userInfo);
   return (
     <section className='flex w-full items-center justify-center px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
       <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
