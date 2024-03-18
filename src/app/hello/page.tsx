@@ -1,32 +1,49 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import Button from '@/shared/ui/Button';
 import Title from '@/shared/ui/Title';
 import NoProfileRegister from '@/widgets/NoProfile/NoProfileRegister';
-import RegisterButton from '@/widgets/RegisterButton/RegisterButton';
-import ProfileContainer from '@/widgets/ProfileContainer/ProfileContainer';
 
-export interface NoProfileInterface {
-  isExist: boolean;
-  profile?: {
-    name: string;
-    phone: string;
-    address: string;
-    bio: string;
+export const NoApplicationDataUi = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/notice');
   };
-}
 
-const NoProfile = ({ isExist, profile }: NoProfileInterface) => {
   return (
-    <div className='min-h-[376px] md:min-h-[316px] lg:min-h-[434px]'>
-      <Title title='내 프로필' size={28} gap={32}>
-        {!isExist && (
-          <NoProfileRegister
-            text='내 프로필을 등록하고 원하는 가게에 지원해 보세요.'
-            button={<RegisterButton />}
-          />
-        )}
-        {isExist && profile && <ProfileContainer {...profile} />}
+    <div className='bg-[#fafafa] pb-[60px]'>
+      <Title title='신청 내역' size={28} gap={32}>
+        <NoProfileRegister
+          text='아직 신청 내역이 없습니다.'
+          button={
+            <div className='w-[346px] md:w-auto'>
+              <Button
+                text='공고 보러가기'
+                size='large'
+                status='active'
+                onClick={handleClick}
+              />
+            </div>
+          }
+        />
       </Title>
     </div>
   );
 };
 
-export default NoProfile;
+export const ApplicationDataUi = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className='bg-[#fafafa] pb-[60px]'>
+      <Title title='신청 내역' size={28} gap={32}>
+        {children}
+      </Title>
+    </div>
+  );
+};
