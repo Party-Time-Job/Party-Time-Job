@@ -23,6 +23,9 @@ const Modal = ({
     if (category === 'noLogin') {
       return '로그인을 해주세요.';
     }
+    if (category === 'success') {
+      return '성공적으로 공고에 지원했습니다.';
+    }
     return '';
   };
 
@@ -38,6 +41,9 @@ const Modal = ({
     }
     if (category === 'noLogin') {
       router.push('/login');
+    }
+    if (category === 'success') {
+      handleToggle();
     }
   };
 

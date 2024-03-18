@@ -7,16 +7,25 @@ import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import { Notice, User } from './types.ts';
 import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
 import formatHourlyPay from './utils/formatHourlyPay.ts';
-import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
 import Modal from '@/features/Modal/Modal.tsx';
+
+interface Props {
+  notice: Notice;
+  userInfo: User | undefined;
+  shopId: string;
+  noticeId: string;
+  isApplied: boolean;
+  token: string;
+}
 
 const DetailPost = ({
   notice,
   userInfo,
-}: {
-  notice: Notice;
-  userInfo: User | undefined;
-}) => {
+  shopId,
+  noticeId,
+  isApplied,
+  token,
+}: Props) => {
   const [isToggle, setIsToggle] = useState(false);
   const [modalCategory, setModalCategory] = useState('');
 
@@ -30,13 +39,25 @@ const DetailPost = ({
   );
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
 
-  useEffect(() => {
-    saveSeenNotice(notice);
-  }, []);
+  const applyNotice = async () => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    if (response.status === 201) {
+      setModalCategory('success');
+      setIsToggle(true);
+    }
+  };
 
   const handleApplyClick = () => {
-    const token = getUserToken();
-
     if (!token) {
       setModalCategory('noLogin');
       setIsToggle(true);
@@ -51,7 +72,14 @@ const DetailPost = ({
     ) {
       setModalCategory('noProfile');
       setIsToggle(true);
+      return;
     }
+
+    applyNotice();
+  };
+
+  const handleCancelClick = () => {
+    console.log('지원 취소');
   };
 
   useEffect(() => {
@@ -64,6 +92,10 @@ const DetailPost = ({
       document.body.style.overflow = 'unset';
     };
   }, [isToggle]);
+
+  useEffect(() => {
+    saveSeenNotice(notice);
+  }, []);
 
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
@@ -144,12 +176,21 @@ const DetailPost = ({
             </p>
           </div>
         </div>
-        <button
-          className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
-          onClick={handleApplyClick}
-        >
-          신청하기
-        </button>
+        {isApplied ? (
+          <button
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            onClick={handleCancelClick}
+          >
+            취소하기
+          </button>
+        ) : (
+          <button
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            onClick={handleApplyClick}
+          >
+            신청하기
+          </button>
+        )}
       </div>
       {isToggle ? (
         <Modal handleToggle={handleToggle} category={modalCategory} />
