@@ -1,7 +1,7 @@
 import Title from '@/shared/ui/Title';
-import NoProfileRegister from './NoProfileRegister';
-import RegisterButton from '../RegisterButton/RegisterButton';
-import ProfileContainer from '../ProfileContainer/ProfileContainer';
+import NoProfileRegister from '@/widgets/NoProfile/NoProfileRegister';
+import RegisterButton from '@/widgets/RegisterButton/RegisterButton';
+import ProfileContainer from '@/widgets/ProfileContainer/ProfileContainer';
 
 export interface NoProfileInterface {
   isExist: boolean;

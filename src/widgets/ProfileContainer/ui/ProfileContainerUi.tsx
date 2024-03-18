@@ -8,8 +8,12 @@ export interface ProfileContainerUiInterface {
   bio: string;
 }
 
-const slicePhoneNumber = (phone: string) =>
-  `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}}`;
+const slicePhoneNumber = (phone: string) => {
+  if (!phone || phone.length < 11) {
+    return '';
+  }
+  return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}}`;
+};
 
 const ProfileContainerUi = ({
   name,
