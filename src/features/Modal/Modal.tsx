@@ -7,9 +7,10 @@ import { MouseEvent } from 'react';
 interface Props {
   handleToggle: () => void;
   category: string;
+  cancelClick: () => void;
 }
 
-const Modal = ({ handleToggle, category }: Props) => {
+const Modal = ({ handleToggle, category, cancelClick }: Props) => {
   const router = useRouter();
 
   const setModalComment = () => {
@@ -54,6 +55,14 @@ const Modal = ({ handleToggle, category }: Props) => {
     }
   };
 
+  const handleNoClick = () => {
+    handleToggle();
+  };
+
+  const handleCancelClick = () => {
+    cancelClick();
+  };
+
   return (
     <div
       onClick={handleClickOutside}
@@ -62,23 +71,49 @@ const Modal = ({ handleToggle, category }: Props) => {
       <div className='flex flex-col items-center gap-[32px] rounded-[12px] bg-white p-[24px]'>
         <div className='flex flex-col items-center gap-[16px]'>
           <div>
-            <Image
-              src={'/modal-alert.svg'}
-              alt='alert'
-              width={24}
-              height={24}
-            />
+            {category === 'cancel' ? (
+              <Image
+                src={'/modal-check.svg'}
+                alt='alert'
+                width={24}
+                height={24}
+              />
+            ) : (
+              <Image
+                src={'/modal-alert.svg'}
+                alt='alert'
+                width={24}
+                height={24}
+              />
+            )}
           </div>
           <span className='w-[250px] text-center leading-[26px]'>
             {setModalComment()}
           </span>
         </div>
-        <button
-          onClick={handleConfirm}
-          className='flex w-[80px] items-center justify-center rounded-[6px] border-[1px] border-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-pt-primary'
-        >
-          확인
-        </button>
+        {category === 'cancel' ? (
+          <div className='flex items-start gap-[8px]'>
+            <button
+              onClick={handleNoClick}
+              className='flex items-center justify-center rounded-[6px] border-[1px] border-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-pt-primary'
+            >
+              아니오
+            </button>
+            <button
+              onClick={handleCancelClick}
+              className='flex items-center justify-center rounded-[6px] border-[1px] border-pt-primary bg-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-white'
+            >
+              취소하기
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={handleConfirm}
+            className='flex w-[80px] items-center justify-center rounded-[6px] border-[1px] border-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-pt-primary'
+          >
+            확인
+          </button>
+        )}
       </div>
     </div>
   );

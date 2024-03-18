@@ -35,6 +35,11 @@ const DetailPost = ({
     setIsToggle(prev => !prev);
   };
 
+  const handleCancelToggle = () => {
+    setModalCategory('cancel');
+    setIsToggle(prev => !prev);
+  };
+
   const comparePriceRate = Math.round(
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
       100,
@@ -99,7 +104,7 @@ const DetailPost = ({
     applyNotice();
   };
 
-  const handleCancelClick = () => {
+  const cancelClick = () => {
     cancelNotice();
   };
 
@@ -200,7 +205,7 @@ const DetailPost = ({
         {isApplied ? (
           <button
             className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
-            onClick={handleCancelClick}
+            onClick={handleCancelToggle}
           >
             취소하기
           </button>
@@ -214,7 +219,11 @@ const DetailPost = ({
         )}
       </div>
       {isToggle ? (
-        <Modal handleToggle={handleToggle} category={modalCategory} />
+        <Modal
+          handleToggle={handleToggle}
+          category={modalCategory}
+          cancelClick={cancelClick}
+        />
       ) : null}
     </div>
   );
