@@ -19,6 +19,13 @@ export interface NoticeItem {
   description: string;
   closed: boolean;
   shop: Shop;
+  currentUserApplication?: {
+    item: {
+      id: 'string';
+      status: 'pending | accepted | rejected | canceled';
+      createdAt: 'string';
+    };
+  };
 }
 
 /**
@@ -26,18 +33,6 @@ export interface NoticeItem {
  */
 export interface Notice {
   item: NoticeItem;
-  links: Links[];
-}
-
-export interface NoticeDetails {
-  item: NoticeItem;
-  currentUserApplication: {
-    item: {
-      id: 'string';
-      status: 'pending | accepted | rejected | canceled';
-      createdAt: 'string';
-    };
-  };
   links: Links[];
 }
 

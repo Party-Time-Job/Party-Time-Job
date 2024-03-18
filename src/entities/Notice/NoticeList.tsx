@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Post from '../Post/Post';
 import NoticeListHeader from './NoticeListHeader';
 import { Notice } from '../Post/types.ts';
@@ -11,7 +11,7 @@ import { FilterCondition } from './types.ts';
 interface Props {
   category?: string;
   searchValue?: string;
-  noticeItemList: Notice[];
+  noticeItemList: Notice[] | [];
 }
 
 /**
@@ -27,12 +27,16 @@ const NoticeList = ({
   noticeItemList,
 }: Props) => {
   // TODO(이시열) : Button component 적용, 페이지네이션
-  const [itemList, setItemList] = useState(noticeItemList);
+  const [itemList, setItemList] = useState<Notice[]>([]);
   const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
     date: '',
     pay: '',
   });
+
+  useEffect(() => {
+    setItemList(noticeItemList);
+  }, [noticeItemList]);
 
   const applyFilter = () => {
     filterNotice(noticeItemList, filterCondition, setItemList);

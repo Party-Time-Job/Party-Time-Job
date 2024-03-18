@@ -1,10 +1,19 @@
+'use client';
+
+import { useEffect } from 'react';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
-import { NoticeItem } from './types.ts';
+import { Notice } from './types.ts';
+import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
 
-const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
-  const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
+const DetailPost = ({ notice }: { notice: Notice }) => {
+  const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
+
+  useEffect(() => {
+    saveSeenNotice(notice);
+  }, []);
+
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
       <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:h-[308px] lg:w-[509px]'>
@@ -13,7 +22,7 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           width={0}
           height={0}
           sizes='100vw'
-          src={noticeItem.shop.item.imageUrl}
+          src={notice.item.shop.item.imageUrl}
           alt='preview-image'
           className='rounded-xl'
           style={{
@@ -61,8 +70,8 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
                 className='h-4 w-4 md:h-5 md:w-5'
               />
               <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
-                {formatDateTime(noticeItem.startsAt)}~{finishTime} (
-                {noticeItem.workhour}시간)
+                {formatDateTime(notice.item.startsAt)}~{finishTime} (
+                {notice.item.workhour}시간)
               </span>
             </div>
             <div className='flex items-start gap-1.5'>
@@ -74,13 +83,13 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
                 className='h-4 w-4 md:h-5 md:w-5'
               />
               <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
-                {noticeItem.shop.item.address1}
+                {notice.item.shop.item.address1}
               </span>
             </div>
           </div>
           <div className='h-full'>
             <p className='text-[14px] leading-[22px] md:text-[16px] md:leading-[26px]'>
-              {noticeItem.shop.item.description}
+              {notice.item.shop.item.description}
             </p>
           </div>
         </div>
