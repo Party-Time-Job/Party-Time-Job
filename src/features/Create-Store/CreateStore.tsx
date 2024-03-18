@@ -2,6 +2,8 @@
 
 import { FieldValues, useForm } from 'react-hook-form';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+// import { useEffect, useState } from 'react';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -10,6 +12,10 @@ import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
 
 const CreateStore = () => {
+  // const [storeData, setStoreData] = useState(null);
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  console.log(id, '------------------id--------------');
   const {
     register,
     handleSubmit,
@@ -25,28 +31,13 @@ const CreateStore = () => {
       originalHourlyPay: '',
     },
   });
-
-  // const postStoreInfo = async (data: FieldValues): Promise<any> => {
-  //   const token = localStorage.getItem('accessToken');
-  //   console.log(token);
-  //   console.log(data);
-  //   try {
-  //     const response = await postMethod<FieldValues>('/shops', data, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     return response;
-  //   } catch (error) {
-  //     if (axios.isAxiosError(error)) {
-  //       if (!error.response?.data.message) {
-  //         return error as Error;
-  //       }
-  //       return error.response?.data.message;
-  //     }
-  //     return error as Error;
-  //   }
-  // };
+  // name: storeData.name,
+  // category: storeData.category,
+  // address1: storeData.address1,
+  // address2: storeData.address2,
+  // description: storeData.description,
+  // imageUrl: storeData.imageUrl,
+  // originalHourlyPay: storeData.originalHourlyPay,
 
   const postInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
@@ -65,6 +56,10 @@ const CreateStore = () => {
       console.log(error);
     }
   };
+  // 원래는 전역상태 관리 객체에서 값을 가져온다.
+  // useEffect(() => {
+  //   const response = fetch();
+  // }, []);
 
   return (
     <div className='flex flex-col items-start gap-2 bg-[#FAFAFA] px-[238px] py-[60px]'>
@@ -75,11 +70,13 @@ const CreateStore = () => {
           </Title>
           <Image src={'/close.svg'} alt='close' width={32} height={32} />
         </div>
+        {/* 여기서부터 폼 태그 */}
         <form
           onSubmit={handleSubmit(data => postInfo(data))}
           className='flex h-[869px] w-[964px] flex-col gap-6'
         >
           <div className='flex w-[964px] items-start gap-5'>
+            {/* 가게 이름 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='name'>가게 이름</label>
               <Input
@@ -94,6 +91,7 @@ const CreateStore = () => {
               />
               {errors.name && <span>{errors.name.message?.toString()}</span>}
             </div>
+            {/* 분류 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='category'>분류</label>
               <select {...register('category')}>
@@ -107,6 +105,7 @@ const CreateStore = () => {
             </div>
           </div>
           <div className='flex w-[964px] items-start gap-5'>
+            {/* 주소 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address1'>주소</label>
               <select {...register('address1')}>
@@ -118,6 +117,7 @@ const CreateStore = () => {
                 <span>{errors.address1.message?.toString()}</span>
               )}
             </div>
+            {/* 상세 주소 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address2'>상세 주소</label>
               <Input
@@ -134,6 +134,7 @@ const CreateStore = () => {
               )}
             </div>
           </div>
+          {/* 시급 작성  */}
           <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
             <label htmlFor='originalHourlyPay'>기본 시급</label>
             <Input
@@ -148,6 +149,7 @@ const CreateStore = () => {
               <span>{errors.originalHourlyPay.message?.toString()}</span>
             )}
           </div>
+          {/* 가게 이미지 추가하기  */}
           <div className='flex h-[500px] w-[472px] flex-col items-start gap-2'>
             <div>가게 이미지</div>
             <div className='h-full w-full'>
@@ -173,13 +175,14 @@ const CreateStore = () => {
               // className='hidden'
               type='text'
               {...register('imageUrl', {
-                required: '시급을 입력해주세요.',
+                required: '이미지를 추가해주세요.',
               })}
             />
             {errors.imageUrl && (
               <span>{errors.imageUrl.message?.toString()}</span>
             )}
           </div>
+          {/* 가게 상세 설명 작성 */}
           <div className='flex w-[964px] flex-col items-start gap-2'>
             <label htmlFor='description'>가게 설명</label>
             <textarea

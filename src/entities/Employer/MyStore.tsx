@@ -11,6 +11,8 @@ interface GetMyStoreProps {
   address1: string | null;
   description: string | null;
   userId: string | null;
+  storeId: string | null;
+  userType: string | null;
 }
 
 const MyStore = ({
@@ -20,16 +22,18 @@ const MyStore = ({
   address1,
   description,
   userId,
+  storeId,
+  userType,
 }: GetMyStoreProps) => {
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {
     const routes = {
-      edit: `/store/registration/store-info/${userId}`,
-      register: `/store/registration/recruitment/${userId}`,
+      edit: `/store/registration/store-info/${userType}?userId=${userId}&storeId=${storeId}`,
+      register: `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
     };
     router.push(routes[action]);
   };
-
+  // store/registration/store-info/user?userId=${userId}&userType=${userType}
   return (
     <div className='flex h-[540px] flex-col items-center justify-center gap-2'>
       <div className='flex w-[965px] flex-col gap-[23px]'>

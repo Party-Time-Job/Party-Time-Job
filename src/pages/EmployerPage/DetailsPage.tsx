@@ -13,8 +13,9 @@ import MyStore from '@/entities/Employer/MyStore';
  * 사장 가게 등록 ? <RegisteredRecruitment /> : ''
  */
 interface DetailsPageProps {
-  storeId: string | null;
+  userType: string | null;
   userId: string | null;
+  storeId: string | null;
 }
 interface StoreInfoProps {
   imageUrl: string | null;
@@ -24,7 +25,7 @@ interface StoreInfoProps {
   description: string | null;
 }
 
-const DetailsPage = ({ userId, storeId }: DetailsPageProps) => {
+const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
   const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
     imageUrl: null,
     category: null,
@@ -69,17 +70,23 @@ const DetailsPage = ({ userId, storeId }: DetailsPageProps) => {
           address1={storeInfo.address1}
           description={storeInfo.description}
           userId={userId}
+          storeId={storeId}
+          userType={userType}
         />
       ) : (
         <EmptyStore
           onClick={() =>
-            handleNavigate(`/store/registration/store-info/${userId}`)
+            handleNavigate(
+              `/store/registration/store-info/${userType}?userId=${userId}&storeId=${storeId}`,
+            )
           }
         />
       )}
       <EmptyRecruitment
         onClick={() =>
-          handleNavigate(`/store/registration/recruitment/${userId}`)
+          handleNavigate(
+            `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
+          )
         }
       />
     </>

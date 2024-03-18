@@ -7,7 +7,7 @@ import DetailsPage from '@/pages/EmployerPage/DetailsPage';
 
 const Details = () => {
   const [token, setToken] = useState<string | null>(null);
-  // const [userType, setUserType] = useState<string | null>(null);
+  const [userType, setUserType] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [storeId, setStoreId] = useState<string | null>(null);
   // 로그인 -> 계정 유형이 employer -> 디테일 페이지 이동
@@ -29,7 +29,7 @@ const Details = () => {
           );
           const userInfo = await response.json();
           if (userInfo.item.shop) setStoreId(userInfo.item.shop.item.id);
-          // setUserType(userInfo.item.type);
+          setUserType(userInfo.item.type);
           setUserId(userInfo.item.id);
         } catch (error) {
           console.log(error);
@@ -43,7 +43,7 @@ const Details = () => {
   useEffect(() => {}, [token]);
   // accountId 와 accountType Props로 내려주기
 
-  return <DetailsPage userId={userId} storeId={storeId} />;
+  return <DetailsPage userType={userType} userId={userId} storeId={storeId} />;
 };
 
 export default Details;
