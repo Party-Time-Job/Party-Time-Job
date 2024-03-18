@@ -18,6 +18,8 @@ const DetailPost = ({
   userInfo: User | undefined;
 }) => {
   const [isToggle, setIsToggle] = useState(false);
+  const [modalCategory, setModalCategory] = useState('');
+
   const handleToggle = () => {
     setIsToggle(prev => !prev);
   };
@@ -29,6 +31,8 @@ const DetailPost = ({
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
 
   useEffect(() => {
+    setIsToggle(false);
+    setModalCategory('');
     saveSeenNotice(notice);
   }, []);
 
@@ -39,6 +43,7 @@ const DetailPost = ({
       !userInfo?.item.name ||
       !userInfo?.item.phone
     ) {
+      setModalCategory('noProfile');
       setIsToggle(true);
       return;
     }
@@ -133,7 +138,9 @@ const DetailPost = ({
           신청하기
         </button>
       </div>
-      {isToggle ? <Modal handleToggle={handleToggle} /> : null}
+      {isToggle ? (
+        <Modal handleToggle={handleToggle} category={modalCategory} />
+      ) : null}
     </div>
   );
 };
