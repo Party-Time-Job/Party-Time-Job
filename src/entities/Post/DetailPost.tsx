@@ -31,12 +31,18 @@ const DetailPost = ({
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
 
   useEffect(() => {
-    setIsToggle(false);
-    setModalCategory('');
     saveSeenNotice(notice);
   }, []);
 
   const handleApplyClick = () => {
+    const token = getUserToken();
+
+    if (!token) {
+      setModalCategory('noLogin');
+      setIsToggle(true);
+      return;
+    }
+
     if (
       !userInfo?.item.address ||
       !userInfo?.item.bio ||
@@ -45,11 +51,7 @@ const DetailPost = ({
     ) {
       setModalCategory('noProfile');
       setIsToggle(true);
-      return;
     }
-
-    const token = getUserToken();
-    console.log(token);
   };
 
   useEffect(() => {

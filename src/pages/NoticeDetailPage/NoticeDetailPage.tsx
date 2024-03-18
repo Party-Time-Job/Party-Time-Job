@@ -31,14 +31,17 @@ const NoticeDetailPage = ({
     setRecentNoticeList(recent);
 
     const token = getUserToken();
-    const decoded: DecodedToken = jwtDecode(token);
-    const getUserInformation = async () => {
-      const data = await getMethod<User>(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${decoded.userId}`,
-      );
-      setUserInfo(data);
-    };
-    getUserInformation();
+
+    if (token) {
+      const decoded: DecodedToken = jwtDecode(token);
+      const getUserInformation = async () => {
+        const data = await getMethod<User>(
+          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${decoded.userId}`,
+        );
+        setUserInfo(data);
+      };
+      getUserInformation();
+    }
   }, []);
 
   return (

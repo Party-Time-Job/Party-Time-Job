@@ -13,6 +13,19 @@ const Modal = ({
 }) => {
   const router = useRouter();
 
+  const setModalComment = () => {
+    if (category === 'noProfile') {
+      return '내 프로필을 먼저 등록해 주세요.';
+    }
+    if (category === 'cancel') {
+      return '신청을 취소하시겠어요?';
+    }
+    if (category === 'noLogin') {
+      return '로그인을 해주세요.';
+    }
+    return '';
+  };
+
   const handleClickOutside = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       handleToggle();
@@ -20,8 +33,14 @@ const Modal = ({
   };
 
   const handleConfirm = () => {
-    router.push('/profile');
+    if (category === 'noProfile') {
+      router.push('/profile');
+    }
+    if (category === 'noLogin') {
+      router.push('/login');
+    }
   };
+
   return (
     <div
       onClick={handleClickOutside}
@@ -38,9 +57,7 @@ const Modal = ({
             />
           </div>
           <span className='w-[250px] text-center leading-[26px]'>
-            {category === 'noProfile'
-              ? '내 프로필을 먼저 등록해 주세요.'
-              : '신청을 취소하시겠어요?'}
+            {setModalComment()}
           </span>
         </div>
         <button
