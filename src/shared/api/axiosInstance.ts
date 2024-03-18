@@ -13,9 +13,6 @@ export const AxiosInstance: AxiosInstanceInterface = axios.create({
   timeout: 25000,
 });
 
-// 응답 interceptor
-// 응답 전에 동작
-// 인증할 때 토큰 가져오기
 AxiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     if (config && config.headers) {
@@ -29,7 +26,5 @@ AxiosInstance.interceptors.request.use(
   },
   (error: AxiosError | Error): Promise<AxiosError> => Promise.reject(error),
 );
-
-// 응답은....
 
 export default AxiosInstance;
