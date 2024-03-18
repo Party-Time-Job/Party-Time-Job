@@ -29,9 +29,7 @@ const NoticeDetailPage = ({
   useEffect(() => {
     const recent = getSavedNotice();
     setRecentNoticeList(recent);
-  }, []);
 
-  useEffect(() => {
     const token = getUserToken();
     const decoded: DecodedToken = jwtDecode(token);
     const getUserInformation = async () => {

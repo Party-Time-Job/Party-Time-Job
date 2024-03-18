@@ -33,7 +33,7 @@ const NoticeDetail = ({
     };
     getData();
   }, []);
-  console.log(userInfo);
+
   return (
     <section className='flex w-full items-center justify-center px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
       <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
@@ -46,7 +46,7 @@ const NoticeDetail = ({
           </span>
         </div>
         <div className='flex flex-col gap-3'>
-          {detail ? <DetailPost notice={detail} /> : null}
+          {detail ? <DetailPost notice={detail} userInfo={userInfo} /> : null}
           <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>
             <span className='text-[14px] font-bold md:text-[16px] md:leading-[20px]'>
               공고 설명

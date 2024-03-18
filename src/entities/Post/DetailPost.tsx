@@ -4,11 +4,18 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
-import { Notice } from './types.ts';
+import { Notice, User } from './types.ts';
 import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
 import formatHourlyPay from './utils/formatHourlyPay.ts';
+import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
 
-const DetailPost = ({ notice }: { notice: Notice }) => {
+const DetailPost = ({
+  notice,
+  userInfo,
+}: {
+  notice: Notice;
+  userInfo: User | undefined;
+}) => {
   const comparePriceRate = Math.round(
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
       100,
@@ -18,6 +25,21 @@ const DetailPost = ({ notice }: { notice: Notice }) => {
   useEffect(() => {
     saveSeenNotice(notice);
   }, []);
+
+  const handleApplyClick = () => {
+    if (
+      !userInfo?.item.address ||
+      !userInfo?.item.bio ||
+      !userInfo?.item.name ||
+      !userInfo?.item.phone
+    ) {
+      console.log('프로필 등록 하세요');
+      return;
+    }
+
+    const token = getUserToken();
+    console.log(token);
+  };
 
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
@@ -98,7 +120,10 @@ const DetailPost = ({ notice }: { notice: Notice }) => {
             </p>
           </div>
         </div>
-        <button className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'>
+        <button
+          className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+          onClick={handleApplyClick}
+        >
           신청하기
         </button>
       </div>
