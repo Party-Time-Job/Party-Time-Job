@@ -4,12 +4,11 @@ import { useState } from 'react';
 import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
-import { Notice } from '../Post/types.ts';
+import { AllNotice } from '../Post/types.ts';
 import { FilterCondition } from './types.ts';
 
 interface Props {
-  itemList: Notice[];
-  updateItemList: (sortedList: Notice[]) => void;
+  updateItemList: (sortedList: AllNotice) => void;
   filterCondition: FilterCondition;
   updateFilterCondition: (
     address?: string[],
@@ -17,22 +16,22 @@ interface Props {
     pay?: string,
   ) => void;
   applyFilter: () => void;
+  searchValue?: string;
 }
 
 /**
  * 공고 정렬기능, 상세 필터 버튼 영역
  *
  * @param {Object} props - NoticeListHeader 컴포넌트의 props
- * @param {Notice[]} props.itemList - 렌더링할 공고 목록
  * @param {Function} props.updateItemList - 정렬된 공고 목록을 업데이트하는 콜백함수
  * @returns 공고 정렬기능, 상세 필터 버튼
  */
 const NoticeListHeader = ({
-  itemList,
   updateItemList,
   filterCondition,
   updateFilterCondition,
   applyFilter,
+  searchValue,
 }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
@@ -66,10 +65,10 @@ const NoticeListHeader = ({
         />
         {isToggleSort ? (
           <SortButtonList
-            itemList={itemList}
             updateItemList={updateItemList}
             updateSortCategory={updateSortCategory}
             handleToggleSort={handleToggleSort}
+            searchValue={searchValue}
           />
         ) : null}
       </div>

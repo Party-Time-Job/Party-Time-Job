@@ -30,7 +30,7 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
     date: '',
     pay: '',
   });
-
+  console.log(itemList);
   const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
     offset: 0,
     limit: 0,
@@ -71,8 +71,8 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
     }));
   };
 
-  const updateItemList = (sortedList: Notice[]) => {
-    setItemList(sortedList);
+  const updateItemList = (sortedList: AllNotice) => {
+    setNoticeItemList(sortedList);
   };
 
   const updateNoticeCategory = (value: string) => {
@@ -109,10 +109,10 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
           {category !== 'recent' ? (
             <NoticeListHeader
               updateItemList={updateItemList}
-              itemList={itemList}
               filterCondition={filterCondition}
               updateFilterCondition={updateFilterCondition}
               applyFilter={applyFilter}
+              searchValue={searchValue}
             />
           ) : null}
         </div>
