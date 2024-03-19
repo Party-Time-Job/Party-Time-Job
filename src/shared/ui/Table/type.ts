@@ -37,8 +37,9 @@ export interface TableInterface {
   id: string;
   status: Status;
   name?: string;
-  bio?: string;
+  firstValue?: string;
   secondValue?: string;
+  bio?: string;
 }
 
 export interface ProfileTableInterface {

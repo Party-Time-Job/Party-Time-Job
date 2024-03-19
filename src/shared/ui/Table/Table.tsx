@@ -43,7 +43,7 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
         {tableData.map(item => (
           <TableBodyRow key={item.id}>
             <TableBodyCell>{item.name}</TableBodyCell>
-            <TableBodyCell>{item.bio}</TableBodyCell>
+            <TableBodyCell>{item.firstValue}</TableBodyCell>
             <TableBodyCell>{item.secondValue}</TableBodyCell>
           </TableBodyRow>
         ))}
