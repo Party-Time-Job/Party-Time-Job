@@ -19,6 +19,7 @@ import {
 import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken';
 import { getMethod } from '@/shared/api/RequestMethod';
 import { AllApply } from '@/entities/Post/types';
+import RejectModal from '@/features/RejectModal/RejectModal';
 
 /**
  *
@@ -82,6 +83,18 @@ export const StoreTable = ({
   const [applicationId, setApplicationId] = useState<string>('');
   const token = getUserToken();
 
+  const [isToggle, setIsToggle] = useState(false);
+  const [modalCategory, setModalCategory] = useState('');
+
+  const handleToggle = () => {
+    setIsToggle(prev => !prev);
+  };
+
+  const handleRejectToggle = () => {
+    setModalCategory('reject');
+    setIsToggle(prev => !prev);
+  };
+
   useEffect(() => {
     const testUserApplyList = async () => {
       const response = await getMethod<AllApply>(
@@ -111,6 +124,10 @@ export const StoreTable = ({
     window.location.reload();
   };
 
+  const rejectClick = () => {
+    rejectedNotice();
+  };
+
   const acceptedNotice = async () => {
     await fetch(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
@@ -127,33 +144,42 @@ export const StoreTable = ({
   };
 
   return (
-    <TableContainerUi pagination={pagination}>
-      <TableHeadRow>
-        <TableHeadCell>신청자</TableHeadCell>
-        <TableHeadCell>소개</TableHeadCell>
-        <TableHeadCell>전화번호</TableHeadCell>
-        <TableHeadCell>상태</TableHeadCell>
-      </TableHeadRow>
-      <TableBody>
-        {tableData.map(item => (
-          <TableBodyRow key={item.id}>
-            <TableBodyCell>{item.name}</TableBodyCell>
-            <TableBodyCell>{item.bio}</TableBodyCell>
-            <TableBodyCell>{item.secondValue}</TableBodyCell>
+    <>
+      <TableContainerUi pagination={pagination}>
+        <TableHeadRow>
+          <TableHeadCell>신청자</TableHeadCell>
+          <TableHeadCell>소개</TableHeadCell>
+          <TableHeadCell>전화번호</TableHeadCell>
+          <TableHeadCell>상태</TableHeadCell>
+        </TableHeadRow>
+        <TableBody>
+          {tableData.map(item => (
+            <TableBodyRow key={item.id}>
+              <TableBodyCell>{item.name}</TableBodyCell>
+              <TableBodyCell>{item.bio}</TableBodyCell>
+              <TableBodyCell>{item.secondValue}</TableBodyCell>
 
-            <TableBodyCell>
-              {item.status === 'pending' ? (
-                <>
-                  <button onClick={rejectedNotice}>거절하기</button>
-                  <button onClick={acceptedNotice}>승인하기</button>
-                </>
-              ) : (
-                <TableBodyStatus status={item.status} />
-              )}
-            </TableBodyCell>
-          </TableBodyRow>
-        ))}
-      </TableBody>
-    </TableContainerUi>
+              <TableBodyCell>
+                {item.status === 'pending' ? (
+                  <>
+                    <button onClick={handleRejectToggle}>거절하기</button>
+                    <button onClick={acceptedNotice}>승인하기</button>
+                  </>
+                ) : (
+                  <TableBodyStatus status={item.status} />
+                )}
+              </TableBodyCell>
+            </TableBodyRow>
+          ))}
+        </TableBody>
+      </TableContainerUi>
+      {isToggle ? (
+        <RejectModal
+          handleToggle={handleToggle}
+          category={modalCategory}
+          rejectClick={rejectClick}
+        />
+      ) : null}
+    </>
   );
 };
