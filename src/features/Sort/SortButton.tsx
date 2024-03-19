@@ -7,6 +7,8 @@ interface Props {
   updateSortCategory: (sortCategory: string) => void;
   handleToggleSort: () => void;
   searchValue?: string;
+  updatePageNumber: (value: number) => void;
+  currentPageNumber: number;
 }
 
 /**
@@ -23,6 +25,8 @@ const SortButton = ({
   updateSortCategory,
   handleToggleSort,
   searchValue,
+  updatePageNumber,
+  currentPageNumber,
 }: Props) => {
   const url = searchValue
     ? `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&keyword=${searchValue}&offset=0&limit=6`
@@ -32,11 +36,15 @@ const SortButton = ({
     const newList = await getMethod<AllNotice>(url);
     return newList;
   };
+
   const handleSortClick = async () => {
     const sortedList = await sortItemList();
     updateItemList(sortedList);
     updateSortCategory(sortCategory);
     handleToggleSort();
+    if (currentPageNumber !== 1) {
+      updatePageNumber(1);
+    }
   };
   return (
     <button

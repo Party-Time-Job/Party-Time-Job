@@ -19,6 +19,8 @@ interface Props {
   searchValue?: string;
   sortCategory: string;
   updateSortCategory: (value: string) => void;
+  updatePageNumber: (value: number) => void;
+  currentPageNumber: number;
 }
 
 /**
@@ -36,6 +38,8 @@ const NoticeListHeader = ({
   searchValue,
   sortCategory,
   updateSortCategory,
+  updatePageNumber,
+  currentPageNumber,
 }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
@@ -68,6 +72,8 @@ const NoticeListHeader = ({
             updateSortCategory={updateSortCategory}
             handleToggleSort={handleToggleSort}
             searchValue={searchValue}
+            updatePageNumber={updatePageNumber}
+            currentPageNumber={currentPageNumber}
           />
         ) : null}
       </div>

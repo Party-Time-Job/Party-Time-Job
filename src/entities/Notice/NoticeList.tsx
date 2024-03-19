@@ -134,6 +134,8 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
               searchValue={searchValue}
               sortCategory={sortCategory}
               updateSortCategory={updateSortCategory}
+              updatePageNumber={updatePageNumber}
+              currentPageNumber={currentPageNumber}
             />
           ) : null}
         </div>
