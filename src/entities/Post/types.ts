@@ -71,3 +71,54 @@ export interface Links {
   };
   query?: { offset: undefined | number; limit: undefined | number };
 }
+export interface UserItem {
+  id: string;
+  email: string;
+  type: 'employer' | 'employee';
+  name?: string;
+  phone?: string;
+  address?: string;
+  bio?: string;
+  shop: ShopItem;
+}
+export interface User {
+  item: UserItem;
+  links: Links[];
+}
+
+export interface ApplyList {
+  item: {
+    id: string;
+    status: 'pending' | 'accepted' | 'rejected' | 'canceled';
+    createdAt: string;
+    user: {
+      item: UserItem;
+      href: string;
+    };
+    shop: {
+      item: ShopItem;
+      href: string;
+    };
+    notice: {
+      item: {
+        id: string;
+        hourlyPay: number;
+        description: string;
+        startsAt: string;
+        workhour: number;
+        closed: boolean;
+      };
+      href: string;
+    };
+  };
+  links: Links[];
+}
+
+export interface AllApply {
+  offset: number;
+  limit: number;
+  count: number;
+  hasNext: boolean;
+  items: ApplyList[];
+  links: Links[];
+}

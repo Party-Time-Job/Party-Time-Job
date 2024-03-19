@@ -1,14 +1,123 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
-import { Notice } from './types.ts';
+import { Notice, User } from './types.ts';
 import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
+import formatHourlyPay from './utils/formatHourlyPay.ts';
+import Modal from '@/features/Modal/Modal.tsx';
 
-const DetailPost = ({ notice }: { notice: Notice }) => {
+interface Props {
+  notice: Notice;
+  userInfo: User | undefined;
+  shopId: string;
+  noticeId: string;
+  isApplied: boolean;
+  token: string;
+  applicationId: string;
+}
+
+const DetailPost = ({
+  notice,
+  userInfo,
+  shopId,
+  noticeId,
+  isApplied,
+  token,
+  applicationId,
+}: Props) => {
+  const [isToggle, setIsToggle] = useState(false);
+  const [modalCategory, setModalCategory] = useState('');
+
+  const handleToggle = () => {
+    setIsToggle(prev => !prev);
+  };
+
+  const handleCancelToggle = () => {
+    setModalCategory('cancel');
+    setIsToggle(prev => !prev);
+  };
+
+  const comparePriceRate = Math.round(
+    (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
+      100,
+  );
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
+
+  const applyNotice = async () => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    if (response.status === 201) {
+      setModalCategory('success');
+      setIsToggle(true);
+    }
+  };
+
+  const cancelNotice = async () => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'canceled' }),
+      },
+    );
+
+    if (response.status === 200) {
+      setModalCategory('canceled');
+      setIsToggle(true);
+    }
+  };
+
+  const handleApplyClick = () => {
+    if (!token) {
+      setModalCategory('noLogin');
+      setIsToggle(true);
+      return;
+    }
+
+    if (
+      !userInfo?.item.address ||
+      !userInfo?.item.bio ||
+      !userInfo?.item.name ||
+      !userInfo?.item.phone
+    ) {
+      setModalCategory('noProfile');
+      setIsToggle(true);
+      return;
+    }
+
+    applyNotice();
+  };
+
+  const cancelClick = () => {
+    cancelNotice();
+  };
+
+  useEffect(() => {
+    document.documentElement.style.scrollbarGutter = 'stable';
+
+    if (isToggle) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isToggle]);
 
   useEffect(() => {
     saveSeenNotice(notice);
@@ -39,11 +148,11 @@ const DetailPost = ({ notice }: { notice: Notice }) => {
             </span>
             <div className='flex items-center gap-1 md:gap-2'>
               <span className='text-[24px] font-bold leading-5 md:text-[28px]'>
-                15000원
+                {formatHourlyPay(notice.item.hourlyPay)}원
               </span>
               <div className='item-center flex gap-[2px] rounded-[20px] bg-pt-green40 px-2 py-1 md:p-[10px]'>
                 <span className='text-[12px] leading-4 text-white md:text-[14px] md:leading-[20px]'>
-                  기존 시급보다 50%
+                  기존 시급보다 {comparePriceRate}%
                 </span>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -93,10 +202,29 @@ const DetailPost = ({ notice }: { notice: Notice }) => {
             </p>
           </div>
         </div>
-        <button className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'>
-          신청하기
-        </button>
+        {isApplied ? (
+          <button
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            onClick={handleCancelToggle}
+          >
+            취소하기
+          </button>
+        ) : (
+          <button
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            onClick={handleApplyClick}
+          >
+            신청하기
+          </button>
+        )}
       </div>
+      {isToggle ? (
+        <Modal
+          handleToggle={handleToggle}
+          category={modalCategory}
+          cancelClick={cancelClick}
+        />
+      ) : null}
     </div>
   );
 };

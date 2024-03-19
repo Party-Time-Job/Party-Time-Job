@@ -9,7 +9,6 @@ const saveSeenNotice = (notice: Notice) => {
     existingNotice => existingNotice.item.id === notice.item.id,
   );
 
-  // 중복된 공지가 없는 경우에만 저장
   if (!isDuplicate) {
     noticesArray.unshift(notice);
 
