@@ -20,6 +20,7 @@ import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken';
 import { getMethod } from '@/shared/api/RequestMethod';
 import { AllApply } from '@/entities/Post/types';
 import RejectModal from '@/features/RejectModal/RejectModal';
+import AcceptModal from '@/features/AcceptModal/AcceptModal';
 
 /**
  *
@@ -86,8 +87,19 @@ export const StoreTable = ({
   const [isToggle, setIsToggle] = useState(false);
   const [modalCategory, setModalCategory] = useState('');
 
+  const [isAcceptToggle, setIsAcceptToggle] = useState(false);
+
   const handleToggle = () => {
     setIsToggle(prev => !prev);
+  };
+
+  const handleAcceptStateToggle = () => {
+    setIsAcceptToggle(prev => !prev);
+  };
+
+  const handleAcceptToggle = () => {
+    setModalCategory('accept');
+    setIsAcceptToggle(prev => !prev);
   };
 
   const handleRejectToggle = () => {
@@ -143,6 +155,10 @@ export const StoreTable = ({
     window.location.reload();
   };
 
+  const acceptClick = () => {
+    acceptedNotice();
+  };
+
   return (
     <>
       <TableContainerUi pagination={pagination}>
@@ -163,7 +179,7 @@ export const StoreTable = ({
                 {item.status === 'pending' ? (
                   <>
                     <button onClick={handleRejectToggle}>거절하기</button>
-                    <button onClick={acceptedNotice}>승인하기</button>
+                    <button onClick={handleAcceptToggle}>승인하기</button>
                   </>
                 ) : (
                   <TableBodyStatus status={item.status} />
@@ -178,6 +194,13 @@ export const StoreTable = ({
           handleToggle={handleToggle}
           category={modalCategory}
           rejectClick={rejectClick}
+        />
+      ) : null}
+      {isAcceptToggle ? (
+        <AcceptModal
+          handleToggle={handleAcceptStateToggle}
+          category={modalCategory}
+          acceptClick={acceptClick}
         />
       ) : null}
     </>
