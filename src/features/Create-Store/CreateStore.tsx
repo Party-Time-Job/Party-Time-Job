@@ -14,9 +14,10 @@ import CLASSIFICATION from '@/shared/constants/Classification';
 
 interface CreateStoreProps {
   initialValues?: StoreItem;
+  storeId: string;
 }
 
-const CreateStore = ({ initialValues }: CreateStoreProps) => {
+const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
   const {
     register,
     handleSubmit,
@@ -26,22 +27,26 @@ const CreateStore = ({ initialValues }: CreateStoreProps) => {
     defaultValues: initialValues,
   });
   const router = useRouter();
-  const postInfo = async (data: FieldValues): Promise<void> => {
+  const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     try {
-      await fetch('https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops', {
-        method: 'POST',
-        headers: {
-          Accept: '*/*',
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
+      await fetch(
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${initialValues ? storeId : ''}`,
+        {
+          method: `${initialValues ? 'PUT' : 'POST'}`,
+          headers: {
+            Accept: '*/*',
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+          body: JSON.stringify(data),
         },
-        body: JSON.stringify(data),
-      });
+      );
     } catch (error) {
       console.log(error);
     }
+    router.push('/store/details');
   };
   useEffect(() => {
     reset(initialValues);
@@ -57,7 +62,7 @@ const CreateStore = ({ initialValues }: CreateStoreProps) => {
         </div>
         {/* 여기서부터 폼 태그 */}
         <form
-          onSubmit={handleSubmit(data => postInfo(data))}
+          onSubmit={handleSubmit(data => requestInfo(data))}
           className='flex h-[869px] w-[964px] flex-col gap-6'
         >
           <div className='flex w-[964px] items-start gap-5'>

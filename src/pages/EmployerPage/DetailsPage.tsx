@@ -44,6 +44,8 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}`,
       );
       const storeData = await response.json();
+      console.log(storeData, '------detailsPage-----');
+      console.log(storeIdParams, '------storeIdParams-----');
       setStoreInfo({
         imageUrl: storeData.item.imageUrl,
         category: storeData.item.category,

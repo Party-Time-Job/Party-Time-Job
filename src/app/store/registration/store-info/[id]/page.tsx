@@ -25,7 +25,8 @@ const Store = async ({
   const { storeId } = searchParams;
   const storeData = await getStoreData(storeId);
   const { item } = storeData;
-  return <ResgistStorePage storeData={item} />;
+  console.log(item, '--------------App------------------');
+  return <ResgistStorePage storeId={storeId} storeData={item} />;
 };
 
 export default Store;

@@ -3,10 +3,12 @@ import { StoreItem } from '@/features/Create-Store/Type';
 
 interface Props {
   storeData: StoreItem;
+  storeId: string;
 }
 
-const ResgistStorePage = ({ storeData }: Props) => {
-  return <CreateStore initialValues={storeData} />;
+const ResgistStorePage = ({ storeData, storeId }: Props) => {
+  console.log(storeData, '--------------Page------------------');
+  return <CreateStore storeId={storeId} initialValues={storeData} />;
 };
 
 export default ResgistStorePage;
