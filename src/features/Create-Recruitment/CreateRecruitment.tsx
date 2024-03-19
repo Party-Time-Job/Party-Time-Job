@@ -12,9 +12,7 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
     handleSubmit,
     getValues,
     formState: { isSubmitting, errors },
-  } = useForm({
-    defaultValues: initialValues,
-  });
+  } = useForm();
 
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
