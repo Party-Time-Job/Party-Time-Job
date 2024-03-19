@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import formatTime from '@/shared/utils/formatTime';
 import {
   ProfileTableInterface,
@@ -13,6 +16,9 @@ import {
   TableBodyRow,
   TableBodyStatus,
 } from '@/shared/ui/Table/ui/TableBodyUi';
+import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken';
+import { getMethod } from '@/shared/api/RequestMethod';
+import { AllApply } from '@/entities/Post/types';
 
 /**
  *
@@ -59,7 +65,13 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
  * @returns 가게 공고 상세 페이지 내 테이블 컴포넌트
  */
 
-export const StoreTable = ({ data, pagination, page }: StoreTableInterface) => {
+export const StoreTable = ({
+  data,
+  pagination,
+  page,
+  shopId,
+  noticeId,
+}: StoreTableInterface) => {
   const tableData: TableInterface[] = data.map(item => ({
     id: item.id,
     status: item.status,
@@ -71,6 +83,53 @@ export const StoreTable = ({ data, pagination, page }: StoreTableInterface) => {
   if (!(tableData.length > 0)) {
     return <NoTableUi userType='employer' message={page !== 1} />;
   }
+
+  const [applicationId, setApplicationId] = useState<string>('');
+  const token = getUserToken();
+
+  useEffect(() => {
+    const testUserApplyList = async () => {
+      const response = await getMethod<AllApply>(
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
+      );
+      const userApply = response.items;
+
+      if (userApply.length !== 0) {
+        setApplicationId(userApply[0].item.id);
+      }
+    };
+    testUserApplyList();
+  }, []);
+
+  const rejectedNotice = async () => {
+    await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'rejected' }),
+      },
+    );
+    window.location.reload();
+  };
+
+  const acceptedNotice = async () => {
+    await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'accepted' }),
+      },
+    );
+    window.location.reload();
+  };
 
   return (
     <TableContainerUi pagination={pagination}>
@@ -90,8 +149,8 @@ export const StoreTable = ({ data, pagination, page }: StoreTableInterface) => {
             <TableBodyCell>
               {item.status === 'pending' ? (
                 <>
-                  <button>거절하기</button>
-                  <button>승인하기</button>
+                  <button onClick={rejectedNotice}>거절하기</button>
+                  <button onClick={acceptedNotice}>승인하기</button>
                 </>
               ) : (
                 <TableBodyStatus status={item.status} />

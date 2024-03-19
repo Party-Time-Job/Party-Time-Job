@@ -51,4 +51,6 @@ export interface StoreTableInterface {
   data: StoreInterface[];
   pagination: ReactNode;
   page: number;
+  shopId: string;
+  noticeId: string;
 }
