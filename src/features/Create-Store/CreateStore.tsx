@@ -46,7 +46,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
     } catch (error) {
       console.log(error);
     }
-    router.push('/store/details');
+    router.push('/store/details/111');
   };
   useEffect(() => {
     reset(initialValues);
@@ -200,7 +200,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
                 text='취소하기'
                 disabled={isSubmitting}
                 type='button'
-                onClick={() => router.push('/store/details/1')}
+                onClick={() => router.push('/store/details/11')}
               />
             )}
           </div>

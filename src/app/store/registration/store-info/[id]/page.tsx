@@ -5,6 +5,12 @@ const getStoreData = async (storeId: string): Promise<StoreData> => {
   try {
     const response = await fetch(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}`,
+      // { cache: 'no-store' },
+      {
+        next: {
+          tags: ['collection'],
+        },
+      },
     );
     const result: StoreData = await response.json();
     return result;
@@ -25,7 +31,6 @@ const Store = async ({
   const { storeId } = searchParams;
   const storeData = await getStoreData(storeId);
   const { item } = storeData;
-  console.log(item, '--------------App------------------');
   return <ResgistStorePage storeId={storeId} storeData={item} />;
 };
 

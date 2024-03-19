@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache';
 import CreateStore from '@/features/Create-Store/CreateStore';
 import { StoreItem } from '@/features/Create-Store/Type';
 
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const ResgistStorePage = ({ storeData, storeId }: Props) => {
-  console.log(storeData, '--------------Page------------------');
+  revalidateTag('collection');
   return <CreateStore storeId={storeId} initialValues={storeData} />;
 };
 
