@@ -7,6 +7,7 @@ const nextConfig = {
       'mblogthumb-phinf.pstatic.net',
       'rimage.gnst.jp',
       'static.wtable.co.kr',
+      'news.nateimg.co.kr',
     ],
   },
 };

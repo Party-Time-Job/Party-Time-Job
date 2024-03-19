@@ -41,8 +41,8 @@ export const putMethod = async <T>(
 ): Promise<T> => {
   const response = await AxiosInstance.put<ResponseInterface<T>>(
     url,
-    config as InternalAxiosRequestConfig,
     data,
+    config as InternalAxiosRequestConfig,
   );
   return response.data;
 };

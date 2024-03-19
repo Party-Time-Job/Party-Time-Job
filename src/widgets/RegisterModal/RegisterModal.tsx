@@ -130,7 +130,7 @@ const RegisterModal = ({
       >
         <BackgroundModal onClick={onClickClose}>
           <Title title='내 프로필' gap={24}>
-            <div className='grid w-full grid-cols-3 grid-rows-1 pb-6 pt-1 md:grid-cols-2 md:grid-rows-2'>
+            <div className='grid w-full grid-cols-3 grid-rows-1 pb-6 pt-1'>
               <div className='w-full pr-5'>
                 <Input
                   type='input'
@@ -157,7 +157,7 @@ const RegisterModal = ({
                   }
                 />
               </div>
-              <div className='w-full lg:pr-5'>
+              <div className='w-full'>
                 <Select
                   type='search'
                   title='선호지역*'

@@ -31,7 +31,7 @@ const PaginationUi = ({
         >
           <ArrowUi isActive={isPrevious} direction='previous' />
         </Link>
-        <div className='flex flex-col items-center justify-center gap-0.5 text-sm font-normal  md:gap-1 md:text-xs md:font-normal'>
+        <div className='flex flex-col items-center justify-center gap-0.5 text-sm font-normal'>
           {showed.map(num => (
             <Link
               key={num}
@@ -39,7 +39,7 @@ const PaginationUi = ({
               className={`${page === num ? '' : 'pointer-events-none cursor-default'}`}
             >
               <span
-                className={`${page === num ? '' : 'bg-[#6b8a8c] text-white'} flex h-[40px] w-[40px] flex-col items-center justify-center rounded text-black md:h-[32px] md:w-[32px]`}
+                className={`${page === num ? '' : 'bg-[#6b8a8c] text-white'} flex h-[40px] w-[40px] flex-col items-center justify-center rounded text-black`}
               >
                 {num}
               </span>
