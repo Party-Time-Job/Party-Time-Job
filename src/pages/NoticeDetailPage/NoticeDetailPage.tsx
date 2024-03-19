@@ -1,32 +1,53 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import NoticeDetail from '@/entities/Notice/NoticeDetail';
 import NoticeList from '@/entities/Notice/NoticeList';
-import { AllNotice, Notice } from '@/entities/Post/types';
+import getSavedNotice from '@/entities/Notice/utils/getSavedNotice';
+import { Notice, User } from '@/entities/Post/types';
+import { DecodedToken } from '@/widgets/Header/Type.ts';
+import getUserToken from './utils/getUserToken.ts';
+import { getMethod } from '@/shared/api/RequestMethod.ts';
 
-// 임시로 만든 함수. '/public/data/mock.json' 에서 데이터를 가져옵니다.
-const getNotice = async () => {
-  const response = await fetch('http://localhost:3000/data/mock.json');
-  const result = (await response.json()) as AllNotice;
-  const noticeItemList: Notice[] = result.items;
-  return noticeItemList;
-};
 /**
  *
  * @param {string} shopId router params에서 받은 가게 id
  * @param {string} noticeId router params에서 받은 공고 id
  * @returns '/detail/[shopId]/[noticeId]' 에 랜더링 될 페이지 컴포넌트
  */
-const NoticeDetailPage = async ({
+const NoticeDetailPage = ({
   shopId,
   noticeId,
 }: {
   shopId: string;
   noticeId: string;
 }) => {
-  const noticeItemList = await getNotice();
+  const [recentNoticeList, setRecentNoticeList] = useState<Notice[]>([]);
+  const [userInfo, setUserInfo] = useState<User>();
+
+  useEffect(() => {
+    const recent = getSavedNotice();
+    setRecentNoticeList(recent);
+
+    const token = getUserToken();
+
+    if (token) {
+      const decoded: DecodedToken = jwtDecode(token);
+      const getUserInformation = async () => {
+        const data = await getMethod<User>(
+          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${decoded.userId}`,
+        );
+        setUserInfo(data);
+      };
+      getUserInformation();
+    }
+  }, []);
+
   return (
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>
-      <NoticeDetail shopId={shopId} noticeId={noticeId} />
-      <NoticeList noticeItemList={noticeItemList} category='recent' />
+      <NoticeDetail shopId={shopId} noticeId={noticeId} userInfo={userInfo} />
+      <NoticeList noticeItemList={recentNoticeList} category='recent' />
     </main>
   );
 };

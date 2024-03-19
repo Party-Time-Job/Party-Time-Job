@@ -1,21 +1,22 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
-import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosError,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import { getCookie } from 'cookies-next';
 import { AxiosInstanceInterface } from '@/shared/api/axiosInstanceType';
 
-export const AxiosInstance: AxiosInstanceInterface = axios.create({
+const AxiosInstance: AxiosInstanceInterface = axios.create({
   baseURL: 'https://bootcamp-api.codeit.kr/api/3-2/the-julge/',
   headers: {
     'Content-Type': 'application/json',
     Accept: '*/*',
   },
-  timeout: 25000,
+  timeout: 30000,
 });
 
-// 응답 interceptor
-// 응답 전에 동작
-// 인증할 때 토큰 가져오기
 AxiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     if (config && config.headers) {
@@ -27,9 +28,18 @@ AxiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error: AxiosError | Error): Promise<AxiosError> => Promise.reject(error),
+  (error: AxiosError | Error): Promise<AxiosError> => {
+    return Promise.reject(error);
+  },
 );
 
-// 응답은....
+AxiosInstance.interceptors.response.use(
+  (response: AxiosResponse): AxiosResponse => {
+    return response;
+  },
+  (error: AxiosError | Error): Promise<AxiosError> => {
+    return Promise.reject(error);
+  },
+);
 
 export default AxiosInstance;

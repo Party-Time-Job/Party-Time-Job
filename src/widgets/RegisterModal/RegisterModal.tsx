@@ -122,12 +122,12 @@ const RegisterModal = ({
     <CreatePortal id='register'>
       <div
         className={
-          showModal ? 'opacity-100 transition-opacity' : 'z-10 opacity-0'
+          showModal ? 'z-10 opacity-100 transition-opacity' : 'z-10 opacity-0'
         }
       >
         <BackgroundModal onClick={onClickClose}>
           <Title title='내 프로필' gap={24}>
-            <div className='grid w-full grid-cols-3 grid-rows-1 pb-6 pt-1 lg:grid-cols-2 lg:grid-rows-2'>
+            <div className='grid w-full grid-cols-3 grid-rows-1 pb-6 pt-1 md:grid-cols-2 md:grid-rows-2'>
               <div className='w-full pr-5'>
                 <Input
                   type='input'

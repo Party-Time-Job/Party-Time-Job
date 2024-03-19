@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import Text from '@/shared/ui/Text';
+import HeaderButton from './HeaderButton';
 
 const SignUpLink = () => {
   return (
     <Link href='/signup'>
-      <Text as='span'>회원가입</Text>
+      <HeaderButton text='회원가입' />
     </Link>
   );
 };

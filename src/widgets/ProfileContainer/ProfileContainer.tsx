@@ -1,4 +1,4 @@
-import ProfileContainerUi from './ui/ProfileContainerUi';
+import ProfileContainerUi from '@/widgets/ProfileContainer/ui/ProfileContainerUi';
 
 export interface ProfileContainerInterface {
   name: string;

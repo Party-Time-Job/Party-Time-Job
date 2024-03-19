@@ -6,7 +6,7 @@ import { ResponseInterface } from '@/shared/api/axiosInstanceType';
  *
  * @param {string} url HTTP 요청 URL
  * @param {any} data 요청에 포함할 데이터
- * @param {Object} config Aixos 요청 객체
+ * @param {Object} config Axios 요청 객체
  * @returns HTTP 요청 메서드
  */
 

@@ -1,10 +1,128 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
-import { NoticeItem } from './types.ts';
+import { Notice, User } from './types.ts';
+import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
+import formatHourlyPay from './utils/formatHourlyPay.ts';
+import Modal from '@/features/Modal/Modal.tsx';
 
-const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
-  const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
+interface Props {
+  notice: Notice;
+  userInfo: User | undefined;
+  shopId: string;
+  noticeId: string;
+  isApplied: boolean;
+  token: string;
+  applicationId: string;
+}
+
+const DetailPost = ({
+  notice,
+  userInfo,
+  shopId,
+  noticeId,
+  isApplied,
+  token,
+  applicationId,
+}: Props) => {
+  const [isToggle, setIsToggle] = useState(false);
+  const [modalCategory, setModalCategory] = useState('');
+
+  const handleToggle = () => {
+    setIsToggle(prev => !prev);
+  };
+
+  const handleCancelToggle = () => {
+    setModalCategory('cancel');
+    setIsToggle(prev => !prev);
+  };
+
+  const comparePriceRate = Math.round(
+    (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
+      100,
+  );
+  const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
+
+  const applyNotice = async () => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    if (response.status === 201) {
+      setModalCategory('success');
+      setIsToggle(true);
+    }
+  };
+
+  const cancelNotice = async () => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'canceled' }),
+      },
+    );
+
+    if (response.status === 200) {
+      setModalCategory('canceled');
+      setIsToggle(true);
+    }
+  };
+
+  const handleApplyClick = () => {
+    if (!token) {
+      setModalCategory('noLogin');
+      setIsToggle(true);
+      return;
+    }
+
+    if (
+      !userInfo?.item.address ||
+      !userInfo?.item.bio ||
+      !userInfo?.item.name ||
+      !userInfo?.item.phone
+    ) {
+      setModalCategory('noProfile');
+      setIsToggle(true);
+      return;
+    }
+
+    applyNotice();
+  };
+
+  const cancelClick = () => {
+    cancelNotice();
+  };
+
+  useEffect(() => {
+    document.documentElement.style.scrollbarGutter = 'stable';
+
+    if (isToggle) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isToggle]);
+
+  useEffect(() => {
+    saveSeenNotice(notice);
+  }, []);
+
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
       <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:h-[308px] lg:w-[509px]'>
@@ -13,7 +131,7 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           width={0}
           height={0}
           sizes='100vw'
-          src={noticeItem.shop.item.imageUrl}
+          src={notice.item.shop.item.imageUrl}
           alt='preview-image'
           className='rounded-xl'
           style={{
@@ -30,11 +148,11 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
             </span>
             <div className='flex items-center gap-1 md:gap-2'>
               <span className='text-[24px] font-bold leading-5 md:text-[28px]'>
-                15000원
+                {formatHourlyPay(notice.item.hourlyPay)}원
               </span>
               <div className='item-center flex gap-[2px] rounded-[20px] bg-pt-green40 px-2 py-1 md:p-[10px]'>
                 <span className='text-[12px] leading-4 text-white md:text-[14px] md:leading-[20px]'>
-                  기존 시급보다 50%
+                  기존 시급보다 {comparePriceRate}%
                 </span>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -61,8 +179,8 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
                 className='h-4 w-4 md:h-5 md:w-5'
               />
               <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
-                {formatDateTime(noticeItem.startsAt)}~{finishTime} (
-                {noticeItem.workhour}시간)
+                {formatDateTime(notice.item.startsAt)}~{finishTime} (
+                {notice.item.workhour}시간)
               </span>
             </div>
             <div className='flex items-start gap-1.5'>
@@ -74,20 +192,39 @@ const DetailPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
                 className='h-4 w-4 md:h-5 md:w-5'
               />
               <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
-                {noticeItem.shop.item.address1}
+                {notice.item.shop.item.address1}
               </span>
             </div>
           </div>
           <div className='h-full'>
             <p className='text-[14px] leading-[22px] md:text-[16px] md:leading-[26px]'>
-              {noticeItem.shop.item.description}
+              {notice.item.shop.item.description}
             </p>
           </div>
         </div>
-        <button className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'>
-          신청하기
-        </button>
+        {isApplied ? (
+          <button
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            onClick={handleCancelToggle}
+          >
+            취소하기
+          </button>
+        ) : (
+          <button
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            onClick={handleApplyClick}
+          >
+            신청하기
+          </button>
+        )}
       </div>
+      {isToggle ? (
+        <Modal
+          handleToggle={handleToggle}
+          category={modalCategory}
+          cancelClick={cancelClick}
+        />
+      ) : null}
     </div>
   );
 };

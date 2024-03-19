@@ -7,7 +7,7 @@ import CopyRight from './ui/CopyRight';
  */
 const Footer = () => {
   return (
-    <footer className='flex h-[126px] items-center justify-between bg-[#F2F2F3] px-8 text-sm text-[#7D7986] md:h-[100px] md:px-8 lg:px-60'>
+    <footer className='flex h-[126px] items-center justify-between bg-black px-8 text-sm text-[#7D7986] md:h-[100px] md:px-8 lg:px-60'>
       <div className='hidden md:flex'>
         <CopyRight />
       </div>

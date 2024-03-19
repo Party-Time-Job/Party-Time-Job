@@ -8,8 +8,12 @@ export interface ProfileContainerUiInterface {
   bio: string;
 }
 
-const slicePhoneNumber = (phone: string) =>
-  `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}}`;
+const slicePhoneNumber = (phone: string) => {
+  if (!phone || phone.length < 11) {
+    return '';
+  }
+  return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}}`;
+};
 
 const ProfileContainerUi = ({
   name,
@@ -28,11 +32,11 @@ const ProfileContainerUi = ({
         </h1>
       </div>
       <div className='mb-7 flex flex-col gap-3'>
-        <div className='mb-7 flex flex-col items-center gap-1.5 text-base font-normal text-[#7d7986]'>
+        <div className='mb-7 flex gap-1.5 text-base font-normal text-[#7d7986]'>
           <Image src='/phone.png' alt='연락처 아이콘' width={20} height={20} />
           <span>{slicePhoneNumber(phone)}</span>
         </div>
-        <div className='mb-7 flex flex-col items-center gap-1.5 text-base font-normal text-[#7d7986] md:text-sm md:font-normal'>
+        <div className='mb-7 flex gap-1.5 text-base font-normal text-[#7d7986] md:text-sm md:font-normal'>
           <Image
             src='/address.png'
             alt='선호 지역 아이콘'

@@ -1,14 +1,7 @@
 import CustomNotice from '@/entities/Notice/CustomNotice';
 import NoticeList from '@/entities/Notice/NoticeList';
-import { AllNotice, Notice } from '@/entities/Post/types';
-
-// 임시로 만든 함수. '/public/data/mock.json' 에서 데이터를 가져옵니다.
-const getNotice = async () => {
-  const response = await fetch('http://localhost:3000/data/mock.json');
-  const result = (await response.json()) as AllNotice;
-  const noticeItemList: Notice[] = result.items;
-  return noticeItemList;
-};
+import { AllNotice } from '@/entities/Post/types';
+import { getMethod } from '@/shared/api/RequestMethod';
 
 /**
  * '/notice' url의 page 입니다. 맞춤 공고(CustomNotice)와 공고리스트(NoticeList)가 보입니다.
@@ -16,12 +9,13 @@ const getNotice = async () => {
  */
 const NoticePage = async () => {
   // TODO(이시열): 전체 공고에서 주소를 기준으로 맞춤 공고 가져오기.
-  // 전체 공고 가져오는 fetch 함수 만들기.
-  const noticeItemList = await getNotice();
+  const noticeItemList = await getMethod<AllNotice>(
+    'https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices',
+  );
   return (
     <div className='flex flex-col items-center justify-center'>
-      <CustomNotice customNoticeList={noticeItemList} />
-      <NoticeList noticeItemList={noticeItemList} />
+      <CustomNotice customNoticeList={noticeItemList.items} />
+      <NoticeList noticeItemList={noticeItemList.items} />
     </div>
   );
 };
