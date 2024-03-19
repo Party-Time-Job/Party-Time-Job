@@ -68,7 +68,6 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
 export const StoreTable = ({
   data,
   pagination,
-  page,
   shopId,
   noticeId,
 }: StoreTableInterface) => {
@@ -79,10 +78,6 @@ export const StoreTable = ({
     bio: item.bio,
     secondValue: item.phone,
   }));
-
-  if (!(tableData.length > 0)) {
-    return <NoTableUi userType='employer' message={page !== 1} />;
-  }
 
   const [applicationId, setApplicationId] = useState<string>('');
   const token = getUserToken();

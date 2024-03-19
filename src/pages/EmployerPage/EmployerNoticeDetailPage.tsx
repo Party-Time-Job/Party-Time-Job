@@ -72,7 +72,6 @@ const EmployerNoticeDetailPage = ({
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>
       <EmployerNoticeDetail shopId={shopId} noticeId={noticeId} />
       <StoreTable
-        page={1}
         shopId={shopId}
         noticeId={noticeId}
         data={applications}
