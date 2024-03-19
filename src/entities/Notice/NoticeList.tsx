@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import filterNotice from '@/features/Filter/utils/filterNotice.ts';
 import Post from '../Post/Post';
 import { Notice } from '../Post/types.ts';
 import NoticeListHeader from './NoticeListHeader';
@@ -25,13 +24,12 @@ interface Props {
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
 const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
-  const [itemList, setItemList] = useState<Notice[]>([]);
   const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
     date: '',
     pay: '',
   });
-  console.log(itemList);
+
   const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
     offset: 0,
     limit: 0,
@@ -43,6 +41,7 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
   });
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [sortCategory, setSortCategory] = useState('time');
+  const [listCategory, setListCategory] = useState(category);
 
   const updatePageNumber = (value: number) => {
     setCurrentPageNumber(value);
@@ -74,9 +73,16 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
   }, [searchValue]);
 
   const applyFilter = () => {
-    filterNotice(noticeItemList.items, filterCondition, setItemList);
+    setListCategory('filter');
+    getNoticeList(
+      setNoticeItemList,
+      0,
+      sortCategory,
+      'filter',
+      undefined,
+      filterCondition,
+    );
   };
-
   const updateFilterCondition = (
     address?: string[],
     date?: string,
@@ -136,6 +142,8 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
               updateSortCategory={updateSortCategory}
               updatePageNumber={updatePageNumber}
               currentPageNumber={currentPageNumber}
+              setListCategory={setListCategory}
+              listCategory={listCategory}
             />
           ) : null}
         </div>

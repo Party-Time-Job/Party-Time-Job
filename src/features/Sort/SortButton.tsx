@@ -10,8 +10,8 @@ interface Props {
   searchValue?: string;
   updatePageNumber: (value: number) => void;
   currentPageNumber: number;
+  listCategory: string;
 }
-
 /**
  * @param {Object} props - SortButton 컴포넌트의 props
  * @param {string} props.sortCategory - 정렬 방식
@@ -28,6 +28,7 @@ const SortButton = ({
   searchValue,
   updatePageNumber,
   currentPageNumber,
+  listCategory,
 }: Props) => {
   const url = searchValue
     ? `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&keyword=${searchValue}&offset=0&limit=6`
@@ -39,6 +40,7 @@ const SortButton = ({
   };
 
   const handleSortClick = async () => {
+    console.log(listCategory);
     const sortedList = await sortItemList();
     updateItemList(sortedList);
     updateSortCategory(sortCategory);

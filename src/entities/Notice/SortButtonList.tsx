@@ -8,6 +8,7 @@ interface Props {
   searchValue?: string;
   updatePageNumber: (value: number) => void;
   currentPageNumber: number;
+  listCategory: string;
 }
 
 /**
@@ -24,6 +25,7 @@ const SortButtonList = ({
   searchValue,
   updatePageNumber,
   currentPageNumber,
+  listCategory,
 }: Props) => {
   return (
     <div className='absolute top-10 z-10 flex flex-col items-start gap-[8px] rounded-[6px] border-[1px] border-solid border-pt-gray30 bg-white py-[12px]'>
@@ -36,6 +38,7 @@ const SortButtonList = ({
           searchValue={searchValue}
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
+          listCategory={listCategory}
         />
         <hr className='w-[105px]' />
         <SortButton
@@ -46,6 +49,7 @@ const SortButtonList = ({
           searchValue={searchValue}
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
+          listCategory={listCategory}
         />
         <hr className='w-[105px]' />
         <SortButton
@@ -56,6 +60,7 @@ const SortButtonList = ({
           searchValue={searchValue}
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
+          listCategory={listCategory}
         />
         <hr className='w-[105px]' />
         <SortButton
@@ -66,6 +71,7 @@ const SortButtonList = ({
           searchValue={searchValue}
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
+          listCategory={listCategory}
         />
       </div>
     </div>

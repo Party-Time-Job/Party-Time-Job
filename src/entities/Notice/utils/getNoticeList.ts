@@ -8,10 +8,23 @@ const getNoticeList = async (
   sortCategory: string,
   category?: string,
   searchValue?: string,
+  filterCondition?: { address?: string[]; date?: string; pay?: string },
 ) => {
   if (category === 'search') {
     const response = await getMethod<AllNotice>(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&keyword=${searchValue}`,
+    );
+    setNoticeItemList(response);
+    return;
+  }
+  if (category === 'filter') {
+    const addressQuery = filterCondition?.address
+      ? filterCondition.address
+          .map(address => `address=${encodeURIComponent(address)}`)
+          .join('&')
+      : '';
+    const response = await getMethod<AllNotice>(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&${addressQuery}`,
     );
     setNoticeItemList(response);
     return;

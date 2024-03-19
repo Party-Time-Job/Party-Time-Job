@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
@@ -21,6 +21,8 @@ interface Props {
   updateSortCategory: (value: string) => void;
   updatePageNumber: (value: number) => void;
   currentPageNumber: number;
+  setListCategory: Dispatch<SetStateAction<string>>;
+  listCategory: string;
 }
 
 /**
@@ -40,6 +42,8 @@ const NoticeListHeader = ({
   updateSortCategory,
   updatePageNumber,
   currentPageNumber,
+  setListCategory,
+  listCategory,
 }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
@@ -74,6 +78,7 @@ const NoticeListHeader = ({
             searchValue={searchValue}
             updatePageNumber={updatePageNumber}
             currentPageNumber={currentPageNumber}
+            listCategory={listCategory}
           />
         ) : null}
       </div>
@@ -91,6 +96,7 @@ const NoticeListHeader = ({
             filterCondition={filterCondition}
             updateFilterCondition={updateFilterCondition}
             applyFilter={applyFilter}
+            setListCategory={setListCategory}
           />
         ) : null}
       </div>
