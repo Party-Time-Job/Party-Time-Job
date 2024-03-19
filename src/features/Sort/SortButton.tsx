@@ -30,6 +30,7 @@ const SortButton = ({
   currentPageNumber,
   listCategory,
 }: Props) => {
+  // TODO: getNoticeList 함수로 통합
   const url = searchValue
     ? `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&keyword=${searchValue}&offset=0&limit=6`
     : `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&offset=0&limit=6`;
