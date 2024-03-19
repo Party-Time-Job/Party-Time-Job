@@ -4,16 +4,16 @@ import { UserInformationInterface } from '@/widgets/api/type';
 
 /**
  *
- * @param {string} userId 사용자 ID
+ * @param {string} userid 사용자 ID
  * @returns items, links 반환
  */
 
 const getInformation = async (
-  userId: string,
+  userid: string,
 ): Promise<UserInformationInterface | string | Error> => {
   try {
     const response = await getMethod<UserInformationInterface>(
-      `/users/${userId}`,
+      `/users/${userid}`,
     );
     return response;
   } catch (error) {

@@ -42,8 +42,9 @@ const SelectDropdownUi = forwardRef(
             <Image
               src={isOpen ? '/dropdown-up.svg' : '/dropdown.svg'}
               alt='드롭다운 아이콘'
-              width={16}
-              height={16}
+              width={10}
+              height={10}
+              className={`${type ? 'search' : ''}`}
             />
           </div>
         )}

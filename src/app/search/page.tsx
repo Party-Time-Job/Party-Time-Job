@@ -1,4 +1,4 @@
-import SearchPage from '@/pages/SearchPage/SearchPage';
+import SearchPage from '@/pages/searchPage/SearchPage';
 
 const page = ({
   searchParams: { keyword },
