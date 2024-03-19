@@ -80,9 +80,6 @@ const RegisterModal = ({
       }
     });
 
-    console.log(inputRef.current);
-    console.log(inputValue);
-
     let check = true;
     inputValue.forEach(checkValue => {
       if (checkValue === false) {
