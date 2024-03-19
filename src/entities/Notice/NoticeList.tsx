@@ -9,11 +9,11 @@ import filterNotice from '@/features/Filter/utils/filterNotice.ts';
 import { FilterCondition } from './types.ts';
 import { AllNotice } from '@/entities/Post/types';
 import { getMethod } from '@/shared/api/RequestMethod';
+import Pagination from './Pagination.tsx';
 
 interface Props {
   category?: string;
   searchValue?: string;
-  pageNumber: number;
 }
 
 /**
@@ -23,13 +23,14 @@ interface Props {
  * @param {Notice[]} props.noticeItemList - notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
-const NoticeList = ({ category = 'all', searchValue, pageNumber }: Props) => {
+const NoticeList = ({ category = 'all', searchValue }: Props) => {
   const [itemList, setItemList] = useState<Notice[]>([]);
   const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
     date: '',
     pay: '',
   });
+
   const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
     offset: 0,
     limit: 0,
@@ -39,41 +40,29 @@ const NoticeList = ({ category = 'all', searchValue, pageNumber }: Props) => {
     items: [],
     links: [],
   });
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
-  const [offsetNumber, setOffsetNumber] = useState(() => {
-    if (pageNumber === 0) {
-      return 0;
-    }
-    return pageNumber * 6 - 6;
-  });
+  const updatePageNumber = (value: number) => {
+    setCurrentPageNumber(value);
+  };
 
   useEffect(() => {
-    const updateOffsetNumber = () => {
-      setOffsetNumber(() => {
-        if (pageNumber === 0) {
-          return 0;
-        }
-        return pageNumber * 6 - 6;
-      });
-    };
-    updateOffsetNumber();
-
     const getNoticeList = async () => {
       if (category === 'search') {
         const response = await getMethod<AllNotice>(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&keyword=${searchValue}`,
+          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${0}&limit=6&keyword=${searchValue}`,
         );
         setNoticeItemList(response);
         return;
       }
       const response = await getMethod<AllNotice>(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6`,
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${0}&limit=6`,
       );
       setNoticeItemList(response);
     };
 
     getNoticeList();
-  }, [pageNumber, offsetNumber]);
+  }, []);
 
   const applyFilter = () => {
     filterNotice(noticeItemList.items, filterCondition, setItemList);
@@ -121,6 +110,7 @@ const NoticeList = ({ category = 'all', searchValue, pageNumber }: Props) => {
     }
     return null;
   };
+
   return (
     <section className='flex flex-col items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>
@@ -149,6 +139,11 @@ const NoticeList = ({ category = 'all', searchValue, pageNumber }: Props) => {
           })}
         </div>
       </div>
+      <Pagination
+        count={97}
+        currentPageNumber={currentPageNumber}
+        updatePageNumber={updatePageNumber}
+      />
     </section>
   );
 };
