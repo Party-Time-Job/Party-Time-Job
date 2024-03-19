@@ -23,16 +23,16 @@ const NotifiactionModal = ({
   };
 
   return (
-    <div className='z-1000 right-350 rounded-10 relative top-12 w-[368px] overflow-y-auto border border-solid border-[#cbc9cf] bg-[#ffebe7] px-20 py-0 pb-24 shadow-md'>
-      <div className='bg-#ffebe7] sticky top-0 flex justify-between pb-16 pt-24'>
+    <div className='relative right-[350px] top-[12px] z-[1000] w-[368px] overflow-y-auto rounded-[10px] border border-solid border-[#cbc9cf] bg-[#ffebe7] px-[20px] py-0 pb-[24px] shadow-md'>
+      <div className='sticky top-0 flex justify-between bg-[#ffebe7] pb-[16px] pt-[24px]'>
         <h1 className='text-lg font-bold'>{`알림 ${items.length}개`}</h1>
         <button type='button' onClick={handleClose}>
           <Image src={'/close.svg'} alt='닫기 아이콘' width={24} height={24} />
         </button>
       </div>
-      <div className='flex flex-col gap-8'>
+      <div className='flex flex-col gap-[8px]'>
         {items.length === 0 && (
-          <div className='h-300 flex flex-col items-center justify-center'>
+          <div className='flex h-[300px] flex-col items-center justify-center'>
             <span>알림이 없습니다!</span>
           </div>
         )}
