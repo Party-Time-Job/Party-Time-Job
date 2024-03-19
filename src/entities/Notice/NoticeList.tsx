@@ -7,11 +7,13 @@ import NoticeListHeader from './NoticeListHeader';
 import { Notice } from '../Post/types.ts';
 import filterNotice from '@/features/Filter/utils/filterNotice.ts';
 import { FilterCondition } from './types.ts';
+import { AllNotice } from '@/entities/Post/types';
+import { getMethod } from '@/shared/api/RequestMethod';
 
 interface Props {
   category?: string;
   searchValue?: string;
-  noticeItemList: Notice[] | [];
+  pageNumber: number;
 }
 
 /**
@@ -21,25 +23,60 @@ interface Props {
  * @param {Notice[]} props.noticeItemList - notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
-const NoticeList = ({
-  category = 'all',
-  searchValue,
-  noticeItemList,
-}: Props) => {
-  // TODO(이시열) : Button component 적용, 페이지네이션
+const NoticeList = ({ category = 'all', searchValue, pageNumber }: Props) => {
   const [itemList, setItemList] = useState<Notice[]>([]);
   const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
     date: '',
     pay: '',
   });
+  const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
+    offset: 0,
+    limit: 0,
+    address: [],
+    count: 0,
+    hasNext: false,
+    items: [],
+    links: [],
+  });
+
+  const [offsetNumber, setOffsetNumber] = useState(() => {
+    if (pageNumber === 0) {
+      return 0;
+    }
+    return pageNumber * 6 - 6;
+  });
 
   useEffect(() => {
-    setItemList(noticeItemList);
-  }, [noticeItemList]);
+    const updateOffsetNumber = () => {
+      setOffsetNumber(() => {
+        if (pageNumber === 0) {
+          return 0;
+        }
+        return pageNumber * 6 - 6;
+      });
+    };
+    updateOffsetNumber();
+
+    const getNoticeList = async () => {
+      if (category === 'search') {
+        const response = await getMethod<AllNotice>(
+          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&keyword=${searchValue}`,
+        );
+        setNoticeItemList(response);
+        return;
+      }
+      const response = await getMethod<AllNotice>(
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6`,
+      );
+      setNoticeItemList(response);
+    };
+
+    getNoticeList();
+  }, [pageNumber, offsetNumber]);
 
   const applyFilter = () => {
-    filterNotice(noticeItemList, filterCondition, setItemList);
+    filterNotice(noticeItemList.items, filterCondition, setItemList);
   };
 
   const updateFilterCondition = (
@@ -85,7 +122,7 @@ const NoticeList = ({
     return null;
   };
   return (
-    <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
+    <section className='flex flex-col items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>
         <div className='flex w-full flex-col items-start gap-4 md:flex-row md:justify-between'>
           {updateNoticeCategory(category)}
@@ -100,7 +137,7 @@ const NoticeList = ({
           ) : null}
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
-          {itemList.map(notice => {
+          {noticeItemList.items.map(notice => {
             return (
               <Link
                 key={notice.item.id}
