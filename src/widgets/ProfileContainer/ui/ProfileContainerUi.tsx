@@ -24,19 +24,15 @@ const ProfileContainerUi = ({
   return (
     <div className='absolute right-0 top-[60px] w-[665px] rounded-xl bg-[#ffebe7] p-8'>
       <div className='mb-3 flex flex-col gap-2'>
-        <h2 className='mb-3 flex flex-col gap-2 text-base font-bold text-[#3c6e71]'>
-          이름
-        </h2>
-        <h1 className='mb-3 flex flex-col gap-2 text-[28px] font-bold text-black'>
-          {name}
-        </h1>
+        <h2 className='text-base font-bold text-[#3c6e71]'>이름</h2>
+        <h1 className='text-[28px] font-bold text-black'>{name}</h1>
       </div>
       <div className='mb-7 flex flex-col gap-3'>
-        <div className='mb-7 flex gap-1.5 text-base font-normal text-[#7d7986]'>
+        <div className='flex gap-1.5 text-base font-normal text-[#7d7986]'>
           <Image src='/phone.png' alt='연락처 아이콘' width={20} height={20} />
           <span>{slicePhoneNumber(phone)}</span>
         </div>
-        <div className='mb-7 flex gap-1.5 text-base font-normal text-[#7d7986]'>
+        <div className='flex gap-1.5 text-base font-normal text-[#7d7986]'>
           <Image
             src='/address.png'
             alt='선호 지역 아이콘'
