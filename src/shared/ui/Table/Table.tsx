@@ -177,10 +177,20 @@ export const StoreTable = ({
 
               <TableBodyCell>
                 {item.status === 'pending' ? (
-                  <>
-                    <button onClick={handleRejectToggle}>거절하기</button>
-                    <button onClick={handleAcceptToggle}>승인하기</button>
-                  </>
+                  <div className='flex gap-2 text-xs'>
+                    <button
+                      className='rounded-lg border border-red-600 px-2 py-1 text-red-600'
+                      onClick={handleRejectToggle}
+                    >
+                      거절하기
+                    </button>
+                    <button
+                      className='rounded-lg border border-blue-600 px-2 py-1 text-blue-600'
+                      onClick={handleAcceptToggle}
+                    >
+                      승인하기
+                    </button>
+                  </div>
                 ) : (
                   <TableBodyStatus status={item.status} />
                 )}
