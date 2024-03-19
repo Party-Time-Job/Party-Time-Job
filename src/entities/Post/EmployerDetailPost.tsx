@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
@@ -11,11 +12,17 @@ interface Props {
 }
 
 const EmployerDetailPost = ({ notice }: Props) => {
+  const router = useRouter();
   const comparePriceRate = Math.round(
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
       100,
   );
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
+
+  // edit 페이지 구현하면 path 변경해주세요.
+  const moveEditPage = () => {
+    router.push('/edit/여기에 주소 추가');
+  };
 
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
@@ -96,7 +103,10 @@ const EmployerDetailPost = ({ notice }: Props) => {
             </p>
           </div>
         </div>
-        <button className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'>
+        <button
+          onClick={moveEditPage}
+          className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+        >
           공고 편집하기
         </button>
       </div>
