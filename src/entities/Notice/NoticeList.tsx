@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Post from '../Post/Post';
-import NoticeListHeader from './NoticeListHeader';
-import { Notice } from '../Post/types.ts';
 import filterNotice from '@/features/Filter/utils/filterNotice.ts';
-import { FilterCondition } from './types.ts';
-import { AllNotice } from '@/entities/Post/types';
+import Post from '../Post/Post';
+import { Notice } from '../Post/types.ts';
+import NoticeListHeader from './NoticeListHeader';
 import Pagination from './Pagination.tsx';
+import { FilterCondition } from './types.ts';
 import getNoticeList from './utils/getNoticeList.ts';
+import { AllNotice } from '@/entities/Post/types';
 
 interface Props {
   category?: string;
@@ -47,8 +47,12 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
   };
 
   useEffect(() => {
+    if (category === 'search') {
+      getNoticeList(setNoticeItemList, 0, category, searchValue);
+      return;
+    }
     getNoticeList(setNoticeItemList);
-  }, []);
+  }, [searchValue]);
 
   const applyFilter = () => {
     filterNotice(noticeItemList.items, filterCondition, setItemList);
