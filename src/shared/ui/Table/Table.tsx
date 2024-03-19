@@ -11,6 +11,7 @@ import {
   TableBody,
   TableBodyCell,
   TableBodyRow,
+  TableBodyStatus,
 } from '@/shared/ui/Table/ui/TableBodyUi';
 
 /**
@@ -42,7 +43,7 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
         {tableData.map(item => (
           <TableBodyRow key={item.id}>
             <TableBodyCell>{item.name}</TableBodyCell>
-            <TableBodyCell>{item.firstValue}</TableBodyCell>
+            <TableBodyCell>{item.bio}</TableBodyCell>
             <TableBodyCell>{item.secondValue}</TableBodyCell>
           </TableBodyRow>
         ))}
@@ -50,9 +51,6 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
     </TableContainerUi>
   );
 };
-
-const slicePhoneNumber = (phone: string) =>
-  `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}`;
 
 /**
  *
@@ -66,8 +64,8 @@ export const StoreTable = ({ data, pagination, page }: StoreTableInterface) => {
     id: item.id,
     status: item.status,
     name: item.name,
-    firstValue: item.description,
-    secondValue: item.phone && slicePhoneNumber(item.phone),
+    bio: item.bio,
+    secondValue: item.phone,
   }));
 
   if (!(tableData.length > 0)) {
@@ -86,21 +84,19 @@ export const StoreTable = ({ data, pagination, page }: StoreTableInterface) => {
         {tableData.map(item => (
           <TableBodyRow key={item.id}>
             <TableBodyCell>{item.name}</TableBodyCell>
-            <TableBodyCell>{item.firstValue}</TableBodyCell>
+            <TableBodyCell>{item.bio}</TableBodyCell>
             <TableBodyCell>{item.secondValue}</TableBodyCell>
-            {/*
+
             <TableBodyCell>
               {item.status === 'pending' ? (
-                {
-                  // 현재 상태가 진행중일 때 버튼으로 승인하기 / 거절하기 버튼만 만드시면 될 것 같습니다.
-                  // 진행 상태 아니면 따로 상태 표시는 설정해 두었습니다.
-                  // 정확하지는 않지만 shop, notice id 값 넘겨서 받아주면 되지 않을까 싶습니다... (정말 추측입니다..)
-                }
+                <>
+                  <button>거절하기</button>
+                  <button>승인하기</button>
+                </>
               ) : (
                 <TableBodyStatus status={item.status} />
               )}
             </TableBodyCell>
-              */}
           </TableBodyRow>
         ))}
       </TableBody>

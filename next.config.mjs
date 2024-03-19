@@ -8,6 +8,7 @@ const nextConfig = {
       'rimage.gnst.jp',
       'static.wtable.co.kr',
       'news.nateimg.co.kr',
+      'cdn.imweb.me',
     ],
   },
 };

@@ -27,9 +27,9 @@ export interface ProfileInterface {
 
 export interface StoreInterface {
   id: string;
-  status: Status;
+  status: 'pending' | 'accepted' | 'rejected' | 'canceled';
   name?: string;
-  description?: string;
+  bio?: string;
   phone?: string;
 }
 
@@ -37,7 +37,7 @@ export interface TableInterface {
   id: string;
   status: Status;
   name?: string;
-  firstValue?: string;
+  bio?: string;
   secondValue?: string;
 }
 
