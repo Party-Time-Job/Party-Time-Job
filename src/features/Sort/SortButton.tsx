@@ -25,8 +25,8 @@ const SortButton = ({
   searchValue,
 }: Props) => {
   const url = searchValue
-    ? `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&keyword=${searchValue}`
-    : `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}`;
+    ? `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&keyword=${searchValue}&offset=0&limit=6`
+    : `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&offset=0&limit=6`;
 
   const sortItemList = async () => {
     const newList = await getMethod<AllNotice>(url);

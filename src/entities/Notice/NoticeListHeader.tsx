@@ -17,6 +17,8 @@ interface Props {
   ) => void;
   applyFilter: () => void;
   searchValue?: string;
+  sortCategory: string;
+  updateSortCategory: (value: string) => void;
 }
 
 /**
@@ -32,10 +34,11 @@ const NoticeListHeader = ({
   updateFilterCondition,
   applyFilter,
   searchValue,
+  sortCategory,
+  updateSortCategory,
 }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
-  const [sortCategory, setSortCategory] = useState('마감임박순');
 
   const handleToggleSort = () => {
     if (isToggleFilter) {
@@ -49,10 +52,6 @@ const NoticeListHeader = ({
       setIsToggleSort(false);
     }
     setIsToggleFilter(prev => !prev);
-  };
-
-  const updateSortCategory = (value: string) => {
-    setSortCategory(value);
   };
 
   return (

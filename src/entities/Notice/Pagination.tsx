@@ -8,6 +8,7 @@ interface Props {
   currentPageNumber: number;
   updatePageNumber: (value: number) => void;
   setNoticeItemList: Dispatch<SetStateAction<AllNotice>>;
+  sortCategory: string;
 }
 
 const Pagination = ({
@@ -15,6 +16,7 @@ const Pagination = ({
   currentPageNumber,
   updatePageNumber,
   setNoticeItemList,
+  sortCategory,
 }: Props) => {
   const defaultPageStyle =
     'flex h-[40px] w-[40px] items-center justify-center p-[12px] cursor-pointer';
@@ -28,7 +30,7 @@ const Pagination = ({
     }
     updatePageNumber(page);
     const offsetNumber = page * 6 - 6;
-    getNoticeList(setNoticeItemList, offsetNumber);
+    getNoticeList(setNoticeItemList, offsetNumber, sortCategory);
   };
 
   return (

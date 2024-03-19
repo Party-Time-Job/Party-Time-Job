@@ -47,7 +47,7 @@ const NoticeDetailPage = ({
   return (
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>
       <NoticeDetail shopId={shopId} noticeId={noticeId} userInfo={userInfo} />
-      <NoticeList noticeItemList={recentNoticeList} category='recent' />
+      <NoticeList category='recent' recentNoticeList={recentNoticeList} />
     </main>
   );
 };

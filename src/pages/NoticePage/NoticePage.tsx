@@ -14,7 +14,7 @@ const NoticePage = async () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       <CustomNotice customNoticeList={noticeItemList.items} />
-      <NoticeList />
+      <NoticeList category='all' />
     </div>
   );
 };

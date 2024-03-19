@@ -4,7 +4,8 @@ import { getMethod } from '@/shared/api/RequestMethod';
 
 const getNoticeList = async (
   setNoticeItemList: Dispatch<SetStateAction<AllNotice>>,
-  offsetNumber: number = 0,
+  offsetNumber: number,
+  sortCategory: string,
   category?: string,
   searchValue?: string,
 ) => {
@@ -16,7 +17,7 @@ const getNoticeList = async (
     return;
   }
   const response = await getMethod<AllNotice>(
-    `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6`,
+    `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&sort=${sortCategory}`,
   );
   setNoticeItemList(response);
 };

@@ -12,8 +12,9 @@ import getNoticeList from './utils/getNoticeList.ts';
 import { AllNotice } from '@/entities/Post/types';
 
 interface Props {
-  category?: string;
+  category: string;
   searchValue?: string;
+  recentNoticeList?: Notice[];
 }
 
 /**
@@ -23,7 +24,7 @@ interface Props {
  * @param {Notice[]} props.noticeItemList - notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
-const NoticeList = ({ category = 'all', searchValue }: Props) => {
+const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
   const [itemList, setItemList] = useState<Notice[]>([]);
   const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
@@ -41,17 +42,35 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
     links: [],
   });
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [sortCategory, setSortCategory] = useState('time');
 
   const updatePageNumber = (value: number) => {
     setCurrentPageNumber(value);
   };
 
+  const updateSortCategory = (value: string) => {
+    setSortCategory(value);
+  };
+
+  useEffect(() => {
+    if (recentNoticeList) {
+      setNoticeItemList(prev => {
+        return {
+          ...prev,
+          items: recentNoticeList,
+        };
+      });
+    }
+  }, [recentNoticeList]);
+
   useEffect(() => {
     if (category === 'search') {
-      getNoticeList(setNoticeItemList, 0, category, searchValue);
+      getNoticeList(setNoticeItemList, 0, sortCategory, category, searchValue);
       return;
     }
-    getNoticeList(setNoticeItemList);
+    if (category === 'all') {
+      getNoticeList(setNoticeItemList, 0, sortCategory);
+    }
   }, [searchValue]);
 
   const applyFilter = () => {
@@ -113,6 +132,8 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
               updateFilterCondition={updateFilterCondition}
               applyFilter={applyFilter}
               searchValue={searchValue}
+              sortCategory={sortCategory}
+              updateSortCategory={updateSortCategory}
             />
           ) : null}
         </div>
@@ -134,6 +155,7 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
         currentPageNumber={currentPageNumber}
         updatePageNumber={updatePageNumber}
         setNoticeItemList={setNoticeItemList}
+        sortCategory={sortCategory}
       />
     </section>
   );
