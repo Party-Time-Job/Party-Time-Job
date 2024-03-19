@@ -21,12 +21,6 @@ interface ApplicationResponse {
   items: Array<{ item: ApplicationItem }>;
 }
 
-/**
- *
- * @param {string} shopId router params에서 받은 가게 id
- * @param {string} noticeId router params에서 받은 공고 id
- * @returns '/detail/[shopId]/[noticeId]' 에 랜더링 될 페이지 컴포넌트
- */
 const EmployerNoticeDetailPage = ({
   shopId,
   noticeId,
@@ -35,19 +29,12 @@ const EmployerNoticeDetailPage = ({
   noticeId: string;
 }) => {
   const [applications, setApplications] = useState<StoreInterface[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchApplications = async () => {
-      setIsLoading(true);
       try {
         const response = await fetch(
           `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
-          {
-            headers: {
-              // 인증 헤더가 필요한 경우 여기에 추가
-            },
-          },
         );
         if (!response.ok) {
           throw new Error('Failed to fetch applications');
@@ -69,9 +56,12 @@ const EmployerNoticeDetailPage = ({
 
         setApplications(formattedData);
       } catch (error) {
-        console.error('Failed to load applications:', error);
+        console.error(
+          '애플리케이션 데이터를 불러오는 중에 문제가 발생했습니다',
+          error,
+        );
       } finally {
-        setIsLoading(false);
+        //
       }
     };
 
@@ -81,11 +71,7 @@ const EmployerNoticeDetailPage = ({
   return (
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>
       <EmployerNoticeDetail shopId={shopId} noticeId={noticeId} />
-      {!isLoading && applications.length > 0 ? (
-        <StoreTable page={1} data={applications} pagination={null} />
-      ) : (
-        <p>Loading applications or No applications found...</p>
-      )}
+      <StoreTable page={1} data={applications} pagination={null} />
     </main>
   );
 };
