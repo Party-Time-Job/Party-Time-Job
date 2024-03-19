@@ -6,6 +6,18 @@ export interface LoginFormProps {
 export interface TokenResponse {
   item: {
     token: string;
+    user: {
+      href: string;
+      item: {
+        address?: string;
+        bio?: string;
+        email: string;
+        id: string;
+        name?: string;
+        phone?: string;
+        type: 'employee' | 'employer';
+      };
+    };
   };
 }
 
