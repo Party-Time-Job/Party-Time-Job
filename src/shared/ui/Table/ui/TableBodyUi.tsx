@@ -7,7 +7,7 @@ export const TableBody = ({ children }: { children: React.ReactNode }) => {
 
 export const TableBodyRow = ({ children }: { children: React.ReactNode }) => {
   return (
-    <tr className='border-b border-b-[#cbc9cf] text-base font-normal md:text-sm md:font-normal'>
+    <tr className='border-b border-b-[#cbc9cf] text-base font-normal'>
       {children}
     </tr>
   );
@@ -15,8 +15,8 @@ export const TableBodyRow = ({ children }: { children: React.ReactNode }) => {
 
 export const TableBodyCell = ({ children }: { children: React.ReactNode }) => {
   return (
-    <td className='px-3 py-5 align-middle md:px-2 md:py-[9px]'>
-      <div className='hidden-webkit flex flex-row items-center justify-start gap-3 md:gap-2'>
+    <td className='px-3 py-5 align-middle'>
+      <div className='hidden-webkit flex flex-row items-center justify-start gap-3'>
         {children}
       </div>
     </td>
