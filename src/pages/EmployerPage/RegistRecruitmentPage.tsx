@@ -6,8 +6,8 @@ interface Props {
   storeId: string;
 }
 
-const RegistRecruitmentPage = ({ noticeData, storeId }: Props) => {
-  return <CreateRecruitment initialValues={noticeData} storeId={storeId} />;
+const RegistRecruitmentPage = ({ storeId }: Props) => {
+  return <CreateRecruitment storeId={storeId} />;
 };
 
 export default RegistRecruitmentPage;

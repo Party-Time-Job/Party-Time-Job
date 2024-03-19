@@ -6,7 +6,7 @@ import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 
-const CreateRecruitment = ({ initialValues, storeId }: { storeId: string }) => {
+const CreateRecruitment = ({ storeId }: { storeId: string }) => {
   const {
     register,
     handleSubmit,
