@@ -23,6 +23,7 @@ const useSelect = ({
         setIsOpen(false);
       }
     };
+
     document.addEventListener('click', handleOutside);
 
     return () => {
