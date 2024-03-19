@@ -11,7 +11,7 @@ const NoProfileRegister = ({ text, button }: NoProfileRegisterInterface) => {
       <p className='text-base font-normal text-black md:text-sm md:font-normal'>
         {text}
       </p>
-      <div className='w-[346px] md:w-auto'>{button}</div>
+      <div className='w-[346px] sm:w-auto'>{button}</div>
     </div>
   );
 };

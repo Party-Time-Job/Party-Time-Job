@@ -40,8 +40,6 @@ const updateInformation = async (
       },
     );
     return response;
-    // 오류 처리
-    // Axios 오류 객체 반환
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (!error.response?.data.message) {
