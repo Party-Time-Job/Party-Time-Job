@@ -8,8 +8,8 @@ import { Notice } from '../Post/types.ts';
 import filterNotice from '@/features/Filter/utils/filterNotice.ts';
 import { FilterCondition } from './types.ts';
 import { AllNotice } from '@/entities/Post/types';
-import { getMethod } from '@/shared/api/RequestMethod';
 import Pagination from './Pagination.tsx';
+import getNoticeList from './utils/getNoticeList.ts';
 
 interface Props {
   category?: string;
@@ -47,21 +47,7 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
   };
 
   useEffect(() => {
-    const getNoticeList = async () => {
-      if (category === 'search') {
-        const response = await getMethod<AllNotice>(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${0}&limit=6&keyword=${searchValue}`,
-        );
-        setNoticeItemList(response);
-        return;
-      }
-      const response = await getMethod<AllNotice>(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${0}&limit=6`,
-      );
-      setNoticeItemList(response);
-    };
-
-    getNoticeList();
+    getNoticeList(setNoticeItemList);
   }, []);
 
   const applyFilter = () => {
@@ -140,9 +126,10 @@ const NoticeList = ({ category = 'all', searchValue }: Props) => {
         </div>
       </div>
       <Pagination
-        count={97}
+        count={noticeItemList.count}
         currentPageNumber={currentPageNumber}
         updatePageNumber={updatePageNumber}
+        setNoticeItemList={setNoticeItemList}
       />
     </section>
   );
