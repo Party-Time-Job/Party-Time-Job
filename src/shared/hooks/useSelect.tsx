@@ -11,11 +11,11 @@ const useSelect = ({
 }: SelectInterface) => {
   const [isOpen, setIsOpen] = useState(false);
   const [findOptions, setFindOptions] = useState(defaultValue || '');
-  const [selected, setSelected] = useState(defaultValue || '');
+  const [selectedOptions, setSelectedOptions] = useState(defaultValue || '');
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
+    const handleOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
@@ -23,32 +23,32 @@ const useSelect = ({
         setIsOpen(false);
       }
     };
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleOutside);
 
     return () => {
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener('click', handleOutside);
     };
   }, []);
 
-  const toggle = () => {
+  const toggleDown = () => {
     setIsOpen(!isOpen);
     setFindOptions('');
   };
 
   const handleSelect = (value: string) => {
-    setFindOptions(value);
+    setSelectedOptions(value);
     setIsOpen(false);
     if (onClick) {
       onClick(value);
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     if (onChange) {
       onChange(event as ChangeEvent<HTMLInputElement>);
     }
-    setSelected(inputValue);
+    setSelectedOptions(inputValue);
     setFindOptions(inputValue);
     setIsOpen(true);
   };
@@ -60,12 +60,12 @@ const useSelect = ({
   return {
     isOpen,
     findOptions,
-    selected,
+    selectedOptions,
     dropdownRef,
     filtered,
-    toggle,
-    onClick: handleSelect,
-    onChange: handleChange,
+    toggleDown,
+    onClickSelect: handleSelect,
+    onChangeInput: handleInput,
   };
 };
 
