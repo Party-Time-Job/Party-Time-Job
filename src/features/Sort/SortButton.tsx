@@ -1,5 +1,6 @@
 import { AllNotice } from '@/entities/Post/types.ts';
 import { getMethod } from '@/shared/api/RequestMethod.ts';
+import convertSortText from './utils/convertSortText.ts';
 
 interface Props {
   sortCategory: string;
@@ -46,12 +47,13 @@ const SortButton = ({
       updatePageNumber(1);
     }
   };
+
   return (
     <button
       onClick={handleSortClick}
       className='text-center text-[14px] leading-[22px]'
     >
-      {sortCategory}
+      {convertSortText(sortCategory)}
     </button>
   );
 };
