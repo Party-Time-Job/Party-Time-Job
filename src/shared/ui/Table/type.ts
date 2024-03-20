@@ -27,9 +27,9 @@ export interface ProfileInterface {
 
 export interface StoreInterface {
   id: string;
-  status: Status;
+  status: 'pending' | 'accepted' | 'rejected' | 'canceled';
   name?: string;
-  description?: string;
+  bio?: string;
   phone?: string;
 }
 
@@ -39,6 +39,7 @@ export interface TableInterface {
   name?: string;
   firstValue?: string;
   secondValue?: string;
+  bio?: string;
 }
 
 export interface ProfileTableInterface {
@@ -49,5 +50,6 @@ export interface ProfileTableInterface {
 export interface StoreTableInterface {
   data: StoreInterface[];
   pagination: ReactNode;
-  page: number;
+  shopId: string;
+  noticeId: string;
 }
