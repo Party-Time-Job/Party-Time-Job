@@ -1,6 +1,7 @@
 import { AllNotice } from '@/entities/Post/types.ts';
 import { getMethod } from '@/shared/api/RequestMethod.ts';
 import convertSortText from './utils/convertSortText.ts';
+import { FilterCondition } from '@/entities/Notice/types.ts';
 
 interface Props {
   sortCategory: string;
@@ -11,6 +12,7 @@ interface Props {
   updatePageNumber: (value: number) => void;
   currentPageNumber: number;
   listCategory: string;
+  filterCondition: FilterCondition;
 }
 /**
  * @param {Object} props - SortButton 컴포넌트의 props
@@ -20,6 +22,7 @@ interface Props {
  * @param {Function} props.handleToggleSort - 토글 상태를 업데이트 하는 콜백함수
  * @returns 공고 정렬 버튼
  */
+
 const SortButton = ({
   sortCategory,
   updateItemList,
@@ -29,19 +32,28 @@ const SortButton = ({
   updatePageNumber,
   currentPageNumber,
   listCategory,
+  filterCondition,
 }: Props) => {
-  // TODO: getNoticeList 함수로 통합
-  const url = searchValue
-    ? `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&keyword=${searchValue}&offset=0&limit=6`
-    : `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&offset=0&limit=6`;
+  let url: string = `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&offset=0&limit=6`;
+  if (searchValue) {
+    url += `&keyword=${searchValue}`;
+  }
+  if (listCategory === 'filter') {
+    const addressQuery: string = filterCondition?.address
+      ? filterCondition.address
+          .map(address => `&address=${encodeURIComponent(address)}`)
+          .join('&')
+      : '';
+    url += addressQuery;
+  }
 
   const sortItemList = async () => {
+    console.log(url);
     const newList = await getMethod<AllNotice>(url);
     return newList;
   };
 
   const handleSortClick = async () => {
-    console.log(listCategory);
     const sortedList = await sortItemList();
     updateItemList(sortedList);
     updateSortCategory(sortCategory);

@@ -23,9 +23,13 @@ const getNoticeList = async (
           .map(address => `address=${encodeURIComponent(address)}`)
           .join('&')
       : '';
-    const response = await getMethod<AllNotice>(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&${addressQuery}`,
-    );
+    let url = `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&${addressQuery}`;
+    if (searchValue) {
+      console.log(searchValue);
+      url += `&keyword=${searchValue}`;
+    }
+    console.log(url);
+    const response = await getMethod<AllNotice>(url);
     setNoticeItemList(response);
     return;
   }

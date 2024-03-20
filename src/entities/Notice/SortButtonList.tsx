@@ -1,5 +1,6 @@
 import SortButton from '@/features/Sort/SortButton';
 import { AllNotice } from '../Post/types.ts';
+import { FilterCondition } from './types.ts';
 
 interface Props {
   updateItemList: (sortedList: AllNotice) => void;
@@ -9,6 +10,7 @@ interface Props {
   updatePageNumber: (value: number) => void;
   currentPageNumber: number;
   listCategory: string;
+  filterCondition: FilterCondition;
 }
 
 /**
@@ -26,6 +28,7 @@ const SortButtonList = ({
   updatePageNumber,
   currentPageNumber,
   listCategory,
+  filterCondition,
 }: Props) => {
   return (
     <div className='absolute top-10 z-10 flex flex-col items-start gap-[8px] rounded-[6px] border-[1px] border-solid border-pt-gray30 bg-white py-[12px]'>
@@ -39,6 +42,7 @@ const SortButtonList = ({
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
           listCategory={listCategory}
+          filterCondition={filterCondition}
         />
         <hr className='w-[105px]' />
         <SortButton
@@ -50,6 +54,7 @@ const SortButtonList = ({
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
           listCategory={listCategory}
+          filterCondition={filterCondition}
         />
         <hr className='w-[105px]' />
         <SortButton
@@ -61,6 +66,7 @@ const SortButtonList = ({
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
           listCategory={listCategory}
+          filterCondition={filterCondition}
         />
         <hr className='w-[105px]' />
         <SortButton
@@ -72,6 +78,7 @@ const SortButtonList = ({
           updatePageNumber={updatePageNumber}
           currentPageNumber={currentPageNumber}
           listCategory={listCategory}
+          filterCondition={filterCondition}
         />
       </div>
     </div>

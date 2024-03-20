@@ -79,6 +79,7 @@ const NoticeListHeader = ({
             updatePageNumber={updatePageNumber}
             currentPageNumber={currentPageNumber}
             listCategory={listCategory}
+            filterCondition={filterCondition}
           />
         ) : null}
       </div>
