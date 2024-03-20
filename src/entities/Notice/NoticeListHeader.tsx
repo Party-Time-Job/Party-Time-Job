@@ -1,15 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
-import { Notice } from '../Post/types.ts';
+import { AllNotice } from '../Post/types.ts';
 import { FilterCondition } from './types.ts';
 
 interface Props {
-  itemList: Notice[];
-  updateItemList: (sortedList: Notice[]) => void;
+  updateItemList: (sortedList: AllNotice) => void;
   filterCondition: FilterCondition;
   updateFilterCondition: (
     address?: string[],
@@ -17,26 +16,37 @@ interface Props {
     pay?: string,
   ) => void;
   applyFilter: () => void;
+  searchValue?: string;
+  sortCategory: string;
+  updateSortCategory: (value: string) => void;
+  updatePageNumber: (value: number) => void;
+  currentPageNumber: number;
+  setListCategory: Dispatch<SetStateAction<string>>;
+  listCategory: string;
 }
 
 /**
  * 공고 정렬기능, 상세 필터 버튼 영역
  *
  * @param {Object} props - NoticeListHeader 컴포넌트의 props
- * @param {Notice[]} props.itemList - 렌더링할 공고 목록
  * @param {Function} props.updateItemList - 정렬된 공고 목록을 업데이트하는 콜백함수
  * @returns 공고 정렬기능, 상세 필터 버튼
  */
 const NoticeListHeader = ({
-  itemList,
   updateItemList,
   filterCondition,
   updateFilterCondition,
   applyFilter,
+  searchValue,
+  sortCategory,
+  updateSortCategory,
+  updatePageNumber,
+  currentPageNumber,
+  setListCategory,
+  listCategory,
 }: Props) => {
   const [isToggleSort, setIsToggleSort] = useState(false);
   const [isToggleFilter, setIsToggleFilter] = useState(false);
-  const [sortCategory, setSortCategory] = useState('마감임박순');
 
   const handleToggleSort = () => {
     if (isToggleFilter) {
@@ -52,10 +62,6 @@ const NoticeListHeader = ({
     setIsToggleFilter(prev => !prev);
   };
 
-  const updateSortCategory = (value: string) => {
-    setSortCategory(value);
-  };
-
   return (
     <div className='flex gap-[10px]'>
       <div className='relative flex flex-col gap-[8px]'>
@@ -66,10 +72,14 @@ const NoticeListHeader = ({
         />
         {isToggleSort ? (
           <SortButtonList
-            itemList={itemList}
             updateItemList={updateItemList}
             updateSortCategory={updateSortCategory}
             handleToggleSort={handleToggleSort}
+            searchValue={searchValue}
+            updatePageNumber={updatePageNumber}
+            currentPageNumber={currentPageNumber}
+            listCategory={listCategory}
+            filterCondition={filterCondition}
           />
         ) : null}
       </div>
@@ -87,6 +97,7 @@ const NoticeListHeader = ({
             filterCondition={filterCondition}
             updateFilterCondition={updateFilterCondition}
             applyFilter={applyFilter}
+            setListCategory={setListCategory}
           />
         ) : null}
       </div>

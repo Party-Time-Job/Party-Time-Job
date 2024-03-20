@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import convertSortText from './utils/convertSortText.ts';
 
 interface Props {
   sortCategory: string;
@@ -23,7 +24,9 @@ const SortSelect = ({
       className='flex h-[30px] items-center justify-center gap-[6px] rounded-[5px] bg-pt-gray30 p-[12px]'
       onClick={handleToggleSort}
     >
-      <span className='text-[14px] font-bold'>{sortCategory}</span>
+      <span className='text-[14px] font-bold'>
+        {convertSortText(sortCategory)}
+      </span>
       <Image
         src={'/dropdown.svg'}
         alt='image'
