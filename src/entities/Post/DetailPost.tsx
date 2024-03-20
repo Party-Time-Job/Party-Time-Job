@@ -28,6 +28,9 @@ const DetailPost = ({
   token,
   applicationId,
 }: Props) => {
+  const userType = userInfo?.item.type;
+  const disableButton =
+    userType === 'employer' ? 'opacity-50 cursor-not-allowed' : '';
   const [isToggle, setIsToggle] = useState(false);
   const [modalCategory, setModalCategory] = useState('');
 
@@ -211,8 +214,9 @@ const DetailPost = ({
           </button>
         ) : (
           <button
-            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            className={`flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px] ${disableButton}`}
             onClick={handleApplyClick}
+            disabled={userType === 'employer'}
           >
             신청하기
           </button>
