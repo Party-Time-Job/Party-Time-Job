@@ -8,10 +8,6 @@ export interface ProfileContainerUiInterface {
   bio: string;
 }
 
-const slicePhoneNumber = (phone: string) => {
-  return `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7, 11)}`;
-};
-
 const ProfileContainerUi = ({
   name,
   phone,
@@ -29,7 +25,7 @@ const ProfileContainerUi = ({
       <div className='mb-7 flex flex-col gap-3'>
         <div className='flex gap-1.5 text-sm font-normal text-[#7d7986] sm:text-base'>
           <Image src='/phone.png' alt='연락처 아이콘' width={20} height={20} />
-          <span>{slicePhoneNumber(phone)}</span>
+          <span>{phone}</span>
         </div>
         <div className='flex gap-1.5 text-sm font-normal text-[#7d7986] sm:text-base'>
           <Image
