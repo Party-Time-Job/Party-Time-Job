@@ -2,6 +2,7 @@ import { AllNotice } from '@/entities/Post/types.ts';
 import { getMethod } from '@/shared/api/RequestMethod.ts';
 import convertSortText from './utils/convertSortText.ts';
 import { FilterCondition } from '@/entities/Notice/types.ts';
+import convertDate from './utils/convertDate.ts';
 
 interface Props {
   sortCategory: string;
@@ -44,11 +45,13 @@ const SortButton = ({
           .map(address => `&address=${encodeURIComponent(address)}`)
           .join('&')
       : '';
-    url += addressQuery;
-  }
+    const dateQuery: string = filterCondition?.date
+      ? `&startsAtGte=${encodeURIComponent(convertDate(filterCondition.date))}`
+      : '';
 
+    url = url + addressQuery + dateQuery;
+  }
   const sortItemList = async () => {
-    console.log(url);
     const newList = await getMethod<AllNotice>(url);
     return newList;
   };
