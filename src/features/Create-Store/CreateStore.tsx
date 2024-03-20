@@ -189,7 +189,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text={initialValues ? '가게 수정하기' : '가게 등록하기'}
+              text={initialValues ? '정보 수정하기' : '가게 등록하기'}
               disabled={isSubmitting}
               type='submit'
             />

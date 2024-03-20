@@ -16,6 +16,7 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
 
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
+    const { startsAt } = getValues();
     try {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}/notices`,
@@ -27,21 +28,16 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            ...data,
+            startsAt: new Date(startsAt).toISOString(),
+          }),
         },
       );
-      const result = await response.json();
-      console.log(result);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const handleClick = () => {
-    const { hourlyPay, startsAt, workhour, description } = getValues();
-    console.log(Number(hourlyPay), startsAt, workhour, description);
-  };
-
   return (
     <div className='flex flex-col items-start justify-center gap-2 px-[238px] py-[60px]'>
       <div className='flex w-full flex-col items-center gap-8'>
@@ -105,7 +101,7 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
               </label>
               <Input
                 id='workhour'
-                type='time'
+                type='number'
                 placeholder='입력'
                 className='flex w-full items-center justify-between self-stretch px-5 py-4'
                 {...register('workhour', {
@@ -144,14 +140,6 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
             status='active'
           />
         </form>
-        <Button
-          disabled={isSubmitting}
-          text='겟 벨류'
-          type='button'
-          size='medium'
-          status='active'
-          onClick={handleClick}
-        />
       </div>
     </div>
   );
