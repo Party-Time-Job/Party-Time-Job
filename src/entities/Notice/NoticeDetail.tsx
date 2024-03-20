@@ -27,6 +27,7 @@ const NoticeDetail = ({
   const [detail, setDetail] = useState<Notice>();
   const [isApplied, setIsApplied] = useState(false);
   const [applicationId, setApplicationId] = useState('');
+  const [isOutDatedNotice, setIsOutDatedNotice] = useState(false);
 
   const token = getUserToken();
 
@@ -37,7 +38,26 @@ const NoticeDetail = ({
     setDetail(data);
   };
 
+  const setOutDated = async () => {
+    const notice = await getMethod<Notice>(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}`,
+    );
+    const application = await getMethod<AllApply>(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
+    );
+    const applyComplete = application.items.filter(apply => {
+      return apply.item.status === 'accepted';
+    });
+    if (
+      applyComplete.length === 0 &&
+      new Date(notice.item.startsAt) < new Date()
+    ) {
+      setIsOutDatedNotice(true);
+    }
+  };
+
   useEffect(() => {
+    setOutDated();
     getData();
   }, []);
 
@@ -84,6 +104,7 @@ const NoticeDetail = ({
               isApplied={isApplied}
               token={token}
               applicationId={applicationId}
+              isOutDatedNotice={isOutDatedNotice}
             />
           ) : null}
           <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>
