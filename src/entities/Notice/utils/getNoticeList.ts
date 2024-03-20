@@ -28,7 +28,10 @@ const getNoticeList = async (
     const dateQuery: string = filterCondition?.date
       ? `&startsAtGte=${encodeURIComponent(convertDate(filterCondition.date))}`
       : '';
-    url = url + addressQuery + dateQuery;
+    const payQuery = filterCondition?.pay
+      ? `&hourlyPayGte=${filterCondition.pay}`
+      : '';
+    url = url + addressQuery + dateQuery + payQuery;
     if (searchValue) {
       url += `&keyword=${searchValue}`;
     }

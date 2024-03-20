@@ -48,8 +48,11 @@ const SortButton = ({
     const dateQuery: string = filterCondition?.date
       ? `&startsAtGte=${encodeURIComponent(convertDate(filterCondition.date))}`
       : '';
+    const payQuery = filterCondition?.pay
+      ? `&hourlyPayGte=${filterCondition.pay}`
+      : '';
 
-    url = url + addressQuery + dateQuery;
+    url = url + addressQuery + dateQuery + payQuery;
   }
   const sortItemList = async () => {
     const newList = await getMethod<AllNotice>(url);
