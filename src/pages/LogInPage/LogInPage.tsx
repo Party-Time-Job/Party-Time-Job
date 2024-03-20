@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { setCookie } from 'cookies-next';
 import AlertModal from '@/shared/ui/AlertModal';
 import LogInForm from '@/features/LogIn/ui/LogInForm';
 import SignUpLink from '@/features/LogIn/ui/SignUpLink';
@@ -30,7 +31,9 @@ const LogInPage = () => {
         data,
       );
       if (response.status === 200) {
-        const { token } = response.data.item;
+        const { token, user } = response.data.item;
+        setCookie('token', token);
+        setCookie('userid', user.item.id);
         window.localStorage.setItem('accessToken', token);
         router.push('/notice');
       }

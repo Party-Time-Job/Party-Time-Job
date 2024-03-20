@@ -7,6 +7,8 @@ import NoRegisterUi from '@/widgets/Application/ui/NoRegisterUi';
 import NoProfile from '@/widgets/NoProfile/NoProfile';
 import getInformation from '@/widgets/api/getInformation';
 
+export const revalidate = 3600;
+
 const ProfilePage = async ({
   searchParams,
 }: {
@@ -33,7 +35,7 @@ const ProfilePage = async ({
     throw new Error(response);
   } else {
     if (response.item.type === 'employer') {
-      redirect('/shop');
+      redirect('/store');
     }
     profile = {
       name: response.item.name as string,

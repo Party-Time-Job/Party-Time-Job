@@ -23,23 +23,23 @@ const PaginationUi = ({
     : `${pathName}?page=`;
 
   return (
-    <div className='flex flex-col items-center justify-center'>
-      <div className='mb-3 mt-3 flex flex-col items-center justify-center gap-5'>
+    <div className='flex items-center justify-center'>
+      <div className='mb-3 mt-3 flex items-center justify-center gap-5'>
         <Link
           href={`${url}${page - 1}`}
           className={`${isPrevious ? '' : 'pointer-events-none cursor-default'}`}
         >
           <ArrowUi isActive={isPrevious} direction='previous' />
         </Link>
-        <div className='flex flex-col items-center justify-center gap-0.5 text-sm font-normal  md:gap-1 md:text-xs md:font-normal'>
+        <div className='flex items-center justify-center gap-0.5 text-sm font-normal'>
           {showed.map(num => (
             <Link
               key={num}
               href={`${url}${num}`}
-              className={`${page === num ? '' : 'pointer-events-none cursor-default'}`}
+              className={`${page === num ? 'pointer-events-none cursor-default' : ''}`}
             >
               <span
-                className={`${page === num ? '' : 'bg-[#6b8a8c] text-white'} flex h-[40px] w-[40px] flex-col items-center justify-center rounded text-black md:h-[32px] md:w-[32px]`}
+                className={`${page === num ? 'bg-[#395253] text-white' : ''} flex h-[40px] w-[40px] items-center justify-center rounded text-black`}
               >
                 {num}
               </span>
