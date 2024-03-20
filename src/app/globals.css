@@ -176,10 +176,8 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.hidden-webkit {
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+.first-table th:first-child,
+.first-table td:first-child {
+  z-index: 1;
+  left: 0;
 }
