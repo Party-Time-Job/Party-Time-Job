@@ -10,6 +10,7 @@ const nextConfig = {
       'news.nateimg.co.kr',
       'cdn.imweb.me',
       'www.google.com',
+      'health.chosun.com',
     ],
   },
 };
