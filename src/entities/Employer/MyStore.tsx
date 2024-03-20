@@ -16,7 +16,7 @@ interface GetMyStoreProps {
 }
 
 const MyStore = ({
-  imageUrl,
+  imageUrl = '',
   category,
   name,
   address1,
@@ -43,7 +43,7 @@ const MyStore = ({
           {/* 상호 이미지 */}
           <div className='flex h-[346px] w-full items-center justify-center rounded-xl bg-red-300'>
             <div className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl'>
-              <Image fill src={`/${imageUrl}` || ''} alt={name || ''} />
+              <Image fill src={imageUrl || ''} alt={name || ''} />
             </div>
           </div>
           <div className='flex w-[346px] flex-col items-start justify-between self-stretch pt-4'>

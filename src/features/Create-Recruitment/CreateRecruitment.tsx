@@ -18,7 +18,7 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
     const token = localStorage.getItem('accessToken');
     const { startsAt } = getValues();
     try {
-      const response = await fetch(
+      await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}/notices`,
         {
           method: 'POST',

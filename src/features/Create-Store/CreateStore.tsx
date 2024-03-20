@@ -46,7 +46,6 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
     } catch (error) {
       console.log(error);
     }
-    router.push('/store/details/111');
   };
   useEffect(() => {
     reset(initialValues);
