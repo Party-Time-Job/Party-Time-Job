@@ -50,6 +50,10 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <div id='register' />
+        <div id='toast' />
+        <div id='loader' />
+        <div id='dialog' />
       </body>
     </html>
   );
