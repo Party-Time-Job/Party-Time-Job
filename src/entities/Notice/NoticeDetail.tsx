@@ -7,6 +7,7 @@ import DetailPost from '../Post/DetailPost';
 import { AllApply, Notice, User } from '../Post/types.ts';
 import { DecodedToken } from '@/widgets/Header/Type.ts';
 import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
+import useOutDatedNotice from './hooks/useOutDatedNotice.ts';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -27,7 +28,7 @@ const NoticeDetail = ({
   const [detail, setDetail] = useState<Notice>();
   const [isApplied, setIsApplied] = useState(false);
   const [applicationId, setApplicationId] = useState('');
-  const [isOutDatedNotice, setIsOutDatedNotice] = useState(false);
+  const isOutDatedNotice = useOutDatedNotice(shopId, noticeId);
 
   const token = getUserToken();
 
@@ -38,26 +39,7 @@ const NoticeDetail = ({
     setDetail(data);
   };
 
-  const setOutDated = async () => {
-    const notice = await getMethod<Notice>(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}`,
-    );
-    const application = await getMethod<AllApply>(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
-    );
-    const applyComplete = application.items.filter(apply => {
-      return apply.item.status === 'accepted';
-    });
-    if (
-      applyComplete.length === 0 &&
-      new Date(notice.item.startsAt) < new Date()
-    ) {
-      setIsOutDatedNotice(true);
-    }
-  };
-
   useEffect(() => {
-    setOutDated();
     getData();
   }, []);
 

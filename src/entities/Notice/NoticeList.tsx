@@ -20,7 +20,7 @@ interface Props {
  * @param {Object} props - NoticeList 컴포넌트의 props
  * @param {string} props.category - 'all', or 'recent' or 'search' or filter
  * @param {string} props.searchValue - category가 'search' 일때 검색어
- * @param {Notice[]} props.noticeItemList - notice 데이터 배열
+ * @param {Notice[]} props.recentNoticeList - 최근 본 notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
 const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
