@@ -9,7 +9,6 @@ const nextConfig = {
       'static.wtable.co.kr',
       'news.nateimg.co.kr',
       'cdn.imweb.me',
-      'www.google.com',
       'health.chosun.com',
     ],
   },
