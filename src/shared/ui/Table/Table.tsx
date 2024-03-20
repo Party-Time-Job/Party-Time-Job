@@ -53,6 +53,9 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
             <TableBodyCell>{item.name}</TableBodyCell>
             <TableBodyCell>{item.firstValue}</TableBodyCell>
             <TableBodyCell>{item.secondValue}</TableBodyCell>
+            <TableBodyCell>
+              <TableBodyStatus status={item.status} />
+            </TableBodyCell>
           </TableBodyRow>
         ))}
       </TableBody>
