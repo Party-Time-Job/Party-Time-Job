@@ -22,12 +22,12 @@ const Select = forwardRef(
     const { type, title, isRequired } = props;
     const {
       isOpen,
-      selected,
+      selectedOptions,
       dropdownRef,
       filtered,
-      toggle,
-      onClick,
-      onChange,
+      toggleDown,
+      onClickSelect,
+      onChangeInput,
     } = useSelect(props);
 
     return (
@@ -36,16 +36,16 @@ const Select = forwardRef(
         title={title}
         isOpen={isOpen}
         options={filtered}
-        dropDown={toggle}
-        onClick={onClick}
+        dropDown={toggleDown}
+        onClick={onClickSelect}
         ref={dropdownRef}
       >
         <SelectDropdownUi
           type={type}
           isOpen={isOpen}
           isRequired={isRequired}
-          selected={selected}
-          onChange={onChange}
+          selected={selectedOptions}
+          onChange={onChangeInput}
           ref={ref}
         />
       </SelectUi>

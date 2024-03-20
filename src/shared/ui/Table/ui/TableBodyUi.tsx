@@ -27,7 +27,7 @@ export const TableBodyStatus = ({ status }: { status: Status }) => {
   switch (status) {
     case 'pending':
       return (
-        <div className='text-[#20a81e w-fit rounded-[20px] bg-[#d4f7d4] px-2.5 py-1.5 text-xs font-normal'>
+        <div className='w-fit rounded-[20px] bg-[#d4f7d4] px-2.5 py-1.5 text-xs font-normal text-[#20a81e]'>
           대기중
         </div>
       );

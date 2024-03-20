@@ -80,9 +80,6 @@ const RegisterModal = ({
       }
     });
 
-    console.log(inputRef.current);
-    console.log(inputValue);
-
     let check = true;
     inputValue.forEach(checkValue => {
       if (checkValue === false) {
@@ -125,7 +122,7 @@ const RegisterModal = ({
     <CreatePortal id='register'>
       <div
         className={
-          showModal ? 'z-10 opacity-100 transition-opacity' : 'z-10 opacity-0'
+          showModal ? 'z-20 opacity-100 transition-opacity' : 'z-20 opacity-0'
         }
       >
         <BackgroundModal onClick={onClickClose}>
