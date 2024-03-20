@@ -24,7 +24,7 @@ export const AcceptedItem = ({
     <button
       type='button'
       onClick={() => onClick(id)}
-      className='w-[238 flex flex-col items-start justify-start gap-[4px] rounded-[5px] border border-solid border-[white] bg-white px-[12px] py-[16px] text-start'
+      className='flex w-full flex-col items-start justify-start gap-[4px] rounded-[5px] border border-solid border-[white] bg-white px-[12px] py-[16px] text-start sm:w-[238px]'
     >
       <div className='h-[5px] w-[5px] rounded-[70px] bg-[#0080ff]'></div>
       <p className='text-sm font-normal text-black'>
