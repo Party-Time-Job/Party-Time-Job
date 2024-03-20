@@ -82,6 +82,9 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
       searchValue,
       filterCondition,
     );
+    if (currentPageNumber !== 1) {
+      updatePageNumber(1);
+    }
   };
   const updateFilterCondition = (
     address?: string[],
