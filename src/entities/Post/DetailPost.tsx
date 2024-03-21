@@ -8,6 +8,7 @@ import { Notice, User } from './types.ts';
 import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
 import formatHourlyPay from './utils/formatHourlyPay.ts';
 import Modal from '@/features/Modal/Modal.tsx';
+import ClosedNoticeImage from '@/shared/ui/ClosedNoticeImage.tsx';
 
 interface Props {
   notice: Notice;
@@ -17,6 +18,7 @@ interface Props {
   isApplied: boolean;
   token: string;
   applicationId: string;
+  isOutDatedNotice: boolean;
 }
 
 const DetailPost = ({
@@ -27,7 +29,14 @@ const DetailPost = ({
   isApplied,
   token,
   applicationId,
+  isOutDatedNotice,
 }: Props) => {
+  const userType = userInfo?.item.type;
+  const disableButton =
+    userType === 'employer' || isOutDatedNotice
+      ? 'opacity-50 cursor-not-allowed bg-[#A4A1AA]'
+      : '';
+
   const [isToggle, setIsToggle] = useState(false);
   const [modalCategory, setModalCategory] = useState('');
 
@@ -126,6 +135,7 @@ const DetailPost = ({
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
       <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:h-[308px] lg:w-[509px]'>
+        {isOutDatedNotice ? <ClosedNoticeImage text='지난 공고' /> : null}
         <Image
           priority
           width={0}
@@ -211,10 +221,13 @@ const DetailPost = ({
           </button>
         ) : (
           <button
-            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            className={`flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px] ${disableButton}`}
             onClick={handleApplyClick}
+            disabled={userType === 'employer' || isOutDatedNotice}
           >
-            신청하기
+            {userType === 'employer' || isOutDatedNotice
+              ? '신청 불가'
+              : '신청 하기'}
           </button>
         )}
       </div>

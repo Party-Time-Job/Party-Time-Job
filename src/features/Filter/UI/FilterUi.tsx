@@ -67,6 +67,11 @@ const Filter = ({
   };
 
   const handleChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectDate = new Date(e.target.value);
+    const now = new Date();
+    if (selectDate < now) {
+      return;
+    }
     setSelectedDate(e.target.value);
   };
 

@@ -1,12 +1,10 @@
 'use client';
 
-import { jwtDecode } from 'jwt-decode';
-import { useEffect, useState } from 'react';
-import { getMethod } from '@/shared/api/RequestMethod.ts';
 import DetailPost from '../Post/DetailPost';
-import { AllApply, Notice, User } from '../Post/types.ts';
-import { DecodedToken } from '@/widgets/Header/Type.ts';
-import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
+import { User } from '../Post/types.ts';
+import useOutDatedNotice from './hooks/useOutDatedNotice.ts';
+import useDetailNotice from './hooks/useDetailNotice.ts';
+import useApplication from './hooks/useApplication.ts';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -24,44 +22,9 @@ const NoticeDetail = ({
   noticeId: string;
   userInfo: User | undefined;
 }) => {
-  const [detail, setDetail] = useState<Notice>();
-  const [isApplied, setIsApplied] = useState(false);
-  const [applicationId, setApplicationId] = useState('');
-
-  const token = getUserToken();
-
-  const getData = async () => {
-    const data = await getMethod<Notice>(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}`,
-    );
-    setDetail(data);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
-    if (token) {
-      const decoded: DecodedToken = jwtDecode(token);
-      const { userId } = decoded;
-
-      const testUserApplyList = async () => {
-        const response = await getMethod<AllApply>(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
-        );
-        const userApply = response.items.filter(apply => {
-          return userId === apply.item.user.item.id;
-        });
-
-        if (userApply.length !== 0 && userApply[0].item.status === 'pending') {
-          setIsApplied(true);
-          setApplicationId(userApply[0].item.id);
-        }
-      };
-      testUserApplyList();
-    }
-  }, []);
+  const detail = useDetailNotice(shopId, noticeId);
+  const { isApplied, applicationId, token } = useApplication(shopId, noticeId);
+  const isOutDatedNotice = useOutDatedNotice(shopId, noticeId);
 
   return (
     <section className='flex w-full items-center justify-center px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
@@ -84,6 +47,7 @@ const NoticeDetail = ({
               isApplied={isApplied}
               token={token}
               applicationId={applicationId}
+              isOutDatedNotice={isOutDatedNotice}
             />
           ) : null}
           <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>

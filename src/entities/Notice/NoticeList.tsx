@@ -20,7 +20,7 @@ interface Props {
  * @param {Object} props - NoticeList 컴포넌트의 props
  * @param {string} props.category - 'all', or 'recent' or 'search' or filter
  * @param {string} props.searchValue - category가 'search' 일때 검색어
- * @param {Notice[]} props.noticeItemList - notice 데이터 배열
+ * @param {Notice[]} props.recentNoticeList - 최근 본 notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
 const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
@@ -152,12 +152,11 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
           {noticeItemList.items.map(notice => {
+            const shopId = notice.item.shop.item.id;
+            const noticeId = notice.item.id;
             return (
-              <Link
-                key={notice.item.id}
-                href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
-              >
-                <Post key={notice.item.id} noticeItem={notice.item} />
+              <Link key={noticeId} href={`/detail/${shopId}/${noticeId}`}>
+                <Post key={noticeId} noticeItem={notice.item} />
               </Link>
             );
           })}
