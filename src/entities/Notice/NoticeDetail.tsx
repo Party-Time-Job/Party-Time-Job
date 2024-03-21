@@ -5,6 +5,7 @@ import { User } from '../Post/types.ts';
 import useDetailNotice from './hooks/useDetailNotice.ts';
 import useApplication from './hooks/useApplication.ts';
 import useNoticeStatus from './hooks/useNoticeStatus.ts';
+import DetailPostLoading from '../Post/DetailPostLoading.tsx';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -50,7 +51,9 @@ const NoticeDetail = ({
               isOutDatedNotice={isOutDatedNotice}
               isClosed={isClosed}
             />
-          ) : null}
+          ) : (
+            <DetailPostLoading />
+          )}
           <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>
             <span className='text-[14px] font-bold md:text-[16px] md:leading-[20px]'>
               공고 설명
