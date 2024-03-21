@@ -11,6 +11,7 @@ type AlertItemType = {
   createdAt: string;
   startsAt: string;
   workhour: number;
+  read: boolean;
   result: 'accepted' | 'rejected';
 };
 
@@ -18,6 +19,7 @@ interface AlertItem {
   id: string;
   createdAt: string;
   result: 'accepted' | 'rejected';
+  read: boolean;
   application: {
     item: {
       id: string;
@@ -69,6 +71,29 @@ const NotificationIcon = () => {
     setIsOpen(false);
   };
 
+  const markAsRead = async (alertId: string) => {
+    try {
+      const response = await fetch(
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${userId}/alerts/${alertId}`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (response.ok) {
+        setAlerts(prevAlerts =>
+          prevAlerts.map(alert =>
+            alert.id === alertId ? { ...alert, read: true } : alert,
+          ),
+        );
+      }
+    } catch (error) {
+      console.error('읽음 처리 중 에러 발생:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchUserAlerts = async () => {
       const response = await fetch(
@@ -80,18 +105,20 @@ const NotificationIcon = () => {
         },
       );
       const data = (await response.json()) as AlertResponse;
-      console.log(data);
       if (response.ok) {
         setAlerts(
-          data.items.map(alert => ({
-            id: alert.item.id,
-            name: alert.item.shop.item.name,
-            duration: `${alert.item.notice.item.startsAt} - ${alert.item.notice.item.workhour}시간`,
-            createdAt: alert.item.createdAt,
-            startsAt: alert.item.notice.item.startsAt,
-            workhour: alert.item.notice.item.workhour,
-            result: alert.item.result,
-          })),
+          data.items
+            .filter(alert => !alert.item.read) // If you wish to exclude read alerts
+            .map(alert => ({
+              id: alert.item.id,
+              name: alert.item.shop.item.name,
+              duration: `${alert.item.notice.item.startsAt} - ${alert.item.notice.item.workhour}시간`,
+              createdAt: alert.item.createdAt,
+              startsAt: alert.item.notice.item.startsAt,
+              workhour: alert.item.notice.item.workhour,
+              result: alert.item.result,
+              read: alert.item.read,
+            })),
         );
       }
     };
@@ -103,8 +130,23 @@ const NotificationIcon = () => {
   return (
     <div className='relative'>
       <button onClick={onClick}>
-        <img src='/notification.svg' className='bg-white' alt='알림' />
-        {isOpen && <NotifiactionModal items={alerts} onClose={onClose} />}
+        {alerts.length > 0 ? (
+          <img
+            src='/active-notification.svg'
+            className='bg-white'
+            alt='알림있음'
+          />
+        ) : (
+          <img src='/notification.svg' className='bg-white' alt='알림없음' />
+        )}
+
+        {isOpen && (
+          <NotifiactionModal
+            items={alerts}
+            onClose={onClose}
+            onClick={markAsRead}
+          />
+        )}
       </button>
     </div>
   );

@@ -44,7 +44,7 @@ const NotifiactionModal = ({
               name={item.name}
               duration={item.duration}
               createdAt={item.createdAt}
-              onClick={onClick}
+              onClick={() => onClick(item.id)}
             />
           ) : (
             <RejectedItem
@@ -53,7 +53,7 @@ const NotifiactionModal = ({
               name={item.name}
               duration={item.duration}
               createdAt={item.createdAt}
-              onClick={onClick}
+              onClick={() => onClick(item.id)}
             />
           ),
         )}
