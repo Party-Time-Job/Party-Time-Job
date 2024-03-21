@@ -2,9 +2,9 @@
 
 import DetailPost from '../Post/DetailPost';
 import { User } from '../Post/types.ts';
-import useOutDatedNotice from './hooks/useOutDatedNotice.ts';
 import useDetailNotice from './hooks/useDetailNotice.ts';
 import useApplication from './hooks/useApplication.ts';
+import useNoticeStatus from './hooks/useNoticeStatus.ts';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -24,7 +24,7 @@ const NoticeDetail = ({
 }) => {
   const detail = useDetailNotice(shopId, noticeId);
   const { isApplied, applicationId, token } = useApplication(shopId, noticeId);
-  const isOutDatedNotice = useOutDatedNotice(shopId, noticeId);
+  const { isOutDatedNotice, isClosed } = useNoticeStatus(shopId, noticeId);
 
   return (
     <section className='flex w-full items-center justify-center px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
@@ -48,6 +48,7 @@ const NoticeDetail = ({
               token={token}
               applicationId={applicationId}
               isOutDatedNotice={isOutDatedNotice}
+              isClosed={isClosed}
             />
           ) : null}
           <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>

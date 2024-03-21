@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { AllApply, Notice } from '@/entities/Post/types';
 import { getMethod } from '@/shared/api/RequestMethod';
 
-const useOutDatedNotice = (shopId: string, noticeId: string) => {
+const useNoticeStatus = (shopId: string, noticeId: string) => {
   const [isOutDatedNotice, setIsOutDatedNotice] = useState(false);
+  const [isClosed, setIsClosed] = useState(false);
 
   const setOutDated = async () => {
     const notice = await getMethod<Notice>(
@@ -21,11 +22,14 @@ const useOutDatedNotice = (shopId: string, noticeId: string) => {
     ) {
       setIsOutDatedNotice(true);
     }
+    if (applyComplete.length !== 0 && notice.item.closed) {
+      setIsClosed(true);
+    }
   };
 
   useEffect(() => {
     setOutDated();
   }, []);
-  return isOutDatedNotice;
+  return { isOutDatedNotice, isClosed };
 };
-export default useOutDatedNotice;
+export default useNoticeStatus;
