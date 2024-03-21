@@ -7,6 +7,7 @@ import NoticeListHeader from './NoticeListHeader';
 import Pagination from './Pagination.tsx';
 import NoticeCategory from './NoticeCategory.tsx';
 import useNoticeListState from './hooks/useNoticeListState.ts';
+import NoticeListLoading from './NoticeListLoading.tsx';
 
 interface Props {
   category: string;
@@ -59,15 +60,19 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
           ) : null}
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
-          {noticeItemList.items.map(notice => {
-            const shopId = notice.item.shop.item.id;
-            const noticeId = notice.item.id;
-            return (
-              <Link key={noticeId} href={`/detail/${shopId}/${noticeId}`}>
-                <Post key={noticeId} noticeItem={notice.item} />
-              </Link>
-            );
-          })}
+          {noticeItemList.items.length !== 0 ? (
+            noticeItemList.items.map(notice => {
+              const shopId = notice.item.shop.item.id;
+              const noticeId = notice.item.id;
+              return (
+                <Link key={noticeId} href={`/detail/${shopId}/${noticeId}`}>
+                  <Post key={noticeId} noticeItem={notice.item} />
+                </Link>
+              );
+            })
+          ) : (
+            <NoticeListLoading />
+          )}
         </div>
       </div>
       <Pagination
