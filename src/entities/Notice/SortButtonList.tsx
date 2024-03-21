@@ -30,56 +30,26 @@ const SortButtonList = ({
   listCategory,
   filterCondition,
 }: Props) => {
+  const sortCategoryList = ['time', 'pay', 'hour', 'shop'];
   return (
     <div className='absolute top-10 z-10 flex flex-col items-start gap-[8px] rounded-[6px] border-[1px] border-solid border-pt-gray30 bg-white py-[12px]'>
       <div className='flex flex-col items-center gap-[8px] self-stretch'>
-        <SortButton
-          sortCategory='time'
-          updateItemList={updateItemList}
-          updateSortCategory={updateSortCategory}
-          handleToggleSort={handleToggleSort}
-          searchValue={searchValue}
-          updatePageNumber={updatePageNumber}
-          currentPageNumber={currentPageNumber}
-          listCategory={listCategory}
-          filterCondition={filterCondition}
-        />
-        <hr className='w-[105px]' />
-        <SortButton
-          sortCategory='pay'
-          updateItemList={updateItemList}
-          updateSortCategory={updateSortCategory}
-          handleToggleSort={handleToggleSort}
-          searchValue={searchValue}
-          updatePageNumber={updatePageNumber}
-          currentPageNumber={currentPageNumber}
-          listCategory={listCategory}
-          filterCondition={filterCondition}
-        />
-        <hr className='w-[105px]' />
-        <SortButton
-          sortCategory='hour'
-          updateItemList={updateItemList}
-          updateSortCategory={updateSortCategory}
-          handleToggleSort={handleToggleSort}
-          searchValue={searchValue}
-          updatePageNumber={updatePageNumber}
-          currentPageNumber={currentPageNumber}
-          listCategory={listCategory}
-          filterCondition={filterCondition}
-        />
-        <hr className='w-[105px]' />
-        <SortButton
-          sortCategory='shop'
-          updateItemList={updateItemList}
-          updateSortCategory={updateSortCategory}
-          handleToggleSort={handleToggleSort}
-          searchValue={searchValue}
-          updatePageNumber={updatePageNumber}
-          currentPageNumber={currentPageNumber}
-          listCategory={listCategory}
-          filterCondition={filterCondition}
-        />
+        {sortCategoryList.map(sortCategory => {
+          return (
+            <SortButton
+              key={sortCategory}
+              sortCategory={sortCategory}
+              updateItemList={updateItemList}
+              updateSortCategory={updateSortCategory}
+              handleToggleSort={handleToggleSort}
+              searchValue={searchValue}
+              updatePageNumber={updatePageNumber}
+              currentPageNumber={currentPageNumber}
+              listCategory={listCategory}
+              filterCondition={filterCondition}
+            />
+          );
+        })}
       </div>
     </div>
   );
