@@ -1,5 +1,10 @@
+export interface Item {
+  id: string;
+  email: string;
+  type: string;
+}
 export interface User {
-  item: any;
+  item: Item;
   href: string;
 }
 

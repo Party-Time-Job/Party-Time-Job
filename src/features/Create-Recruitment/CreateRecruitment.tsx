@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { FieldValues, useForm } from 'react-hook-form';
+import Link from 'next/link';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -132,13 +133,15 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
               <span>{errors.description.message?.toString()}</span>
             )}
           </div>
-          <Button
-            disabled={isSubmitting}
-            text='등록하기'
-            type='submit'
-            size='medium'
-            status='active'
-          />
+          <Link href={`/store/details/${storeId}`}>
+            <Button
+              disabled={isSubmitting}
+              text='등록하기'
+              type='submit'
+              size='medium'
+              status='active'
+            />
+          </Link>
         </form>
       </div>
     </div>

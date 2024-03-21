@@ -39,10 +39,8 @@ const Details = () => {
       getUserId(decodedToken.userId);
     }
   }, [token]);
-
-  useEffect(() => {}, [token]);
   // accountId 와 accountType Props로 내려주기
-
+  console.log(userType);
   return <DetailsPage userType={userType} userId={userId} storeId={storeId} />;
 };
 

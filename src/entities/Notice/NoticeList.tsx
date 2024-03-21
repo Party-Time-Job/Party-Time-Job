@@ -12,12 +12,16 @@ interface Props {
   category?: string;
   searchValue?: string;
   noticeItemList: Notice[] | [];
+  userType: string | null;
+  shopId: string | null;
 }
 
 /**
  * @param {Object} props - NoticeList 컴포넌트의 props
  * @param {string} props.category - 'all', or 'recent' or 'search'
  * @param {string} props.searchValue - category가 'search' 일때 검색어
+ * @param {string} props.userType - userType에 따른 공고 조건부 라우팅을 위한 props
+ * @param {string} props.shopId - '내가 등록한 공고' -> 공고 디테일 라우팅 시 shopId 필요
  * @param {Notice[]} props.noticeItemList - notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
@@ -25,6 +29,8 @@ const NoticeList = ({
   category = 'all',
   searchValue,
   noticeItemList,
+  userType,
+  shopId,
 }: Props) => {
   // TODO(이시열) : Button component 적용, 페이지네이션
   const [itemList, setItemList] = useState<Notice[]>([]);
@@ -33,7 +39,7 @@ const NoticeList = ({
     date: '',
     pay: '',
   });
-
+  console.log(userType);
   useEffect(() => {
     setItemList(noticeItemList);
   }, [noticeItemList]);
@@ -104,7 +110,11 @@ const NoticeList = ({
             return (
               <Link
                 key={notice.item.id}
-                href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
+                href={
+                  userType === 'employee'
+                    ? `/store/notice-detail/${shopId}/${notice.item.id}`
+                    : `/detail/${notice.item.shop?.item.id}/${notice.item.id}`
+                }
               >
                 <Post key={notice.item.id} noticeItem={notice.item} />
               </Link>
