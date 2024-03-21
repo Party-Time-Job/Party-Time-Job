@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Post from '../Post/Post';
 import useCustomNotice from './hooks/useCustomNotice.ts';
+import CustomNoticeLoading from './CustomNoticeLoading.tsx';
 
 /**
  * @returns '/notice' 의 맞춤 공고 영역
@@ -17,16 +18,20 @@ const CustomNotice = () => {
           맞춤 공고
         </span>
         <div className='inline-flex w-full items-start gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'>
-          {customNotice?.map(notice => {
-            return (
-              <Link
-                key={notice.item.id}
-                href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
-              >
-                <Post key={notice.item.id} noticeItem={notice.item} />
-              </Link>
-            );
-          })}
+          {customNotice ? (
+            customNotice.map(notice => {
+              return (
+                <Link
+                  key={notice.item.id}
+                  href={`/detail/${notice.item.shop.item.id}/${notice.item.id}`}
+                >
+                  <Post key={notice.item.id} noticeItem={notice.item} />
+                </Link>
+              );
+            })
+          ) : (
+            <CustomNoticeLoading />
+          )}
         </div>
       </div>
     </section>
