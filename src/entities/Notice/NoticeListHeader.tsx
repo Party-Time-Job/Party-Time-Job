@@ -31,6 +31,16 @@ interface Props {
  *
  * @param {Object} props - NoticeListHeader 컴포넌트의 props
  * @param {Function} props.updateItemList - 정렬된 공고 목록을 업데이트하는 콜백함수
+ * @param {FilterCondition} props.filterCondition - 필터링 조건
+ * @param {Function} props.updateFilterCondition - 필터링 조건 업데이트 콜백함수
+ * @param {Function} props.applyFilter - 필터링 적용해서 검색
+ * @param {string} props.searchValue - 검색어
+ * @param {string} props.sortCategory - 정렬 기준
+ * @param {Function} props.updateSortCategory - 정렬 기준 업데이트 콜백함수
+ * @param {Function} props.updatePageNumber - 페이지네이션 페이지 업데이트 콜백함수
+ * @param {number} props.currentPageNumber - 현재 페이지 번호
+ * @param {Function} props.setListCategory - 공고를 가져오는 기준 전체 or 정렬 or 필터링 업데이트 함수
+ * @param {string} props.listCategory - 공고를 가져오는 기준 전체 or 정렬 or 필터링
  * @returns 공고 정렬기능, 상세 필터 버튼
  */
 const NoticeListHeader = ({

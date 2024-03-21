@@ -18,6 +18,11 @@ interface Props {
  * @param {Function} props.updateItemList - 정렬된 공고 목록을 업데이트하는 콜백함수
  * @param {Function} props.updateSortCategory - 공고 정렬 방식 표기를 업데이트 하는 콜백함수
  * @param {Function} props.handleToggleSort - 공고 정렬 방식 선택 버튼들의 토글 상태를 업데이트 하는 콜백함수
+ * @param {string} props.searchValue - 검색어
+ * @param {Function} props.updatePageNumber - 페이지네이션 페이지 업데이트 콜백함수
+ * @param {number} props.currentPageNumber - 현재 페이지 번호
+ * @param {string} props.listCategory - 공고를 가져오는 기준 전체 or 정렬 or 필터링
+ * @param {FilterCondition} props.filterCondition - 필터링 조건
  * @returns 공고 정렬 버튼 리스트
  */
 const SortButtonList = ({
