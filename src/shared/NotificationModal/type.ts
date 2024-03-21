@@ -5,13 +5,13 @@ export interface NotificationItem {
   startsAt: string;
   workhour: number;
   createdAt: string;
-  result: string;
+  result: 'accepted' | 'rejected';
 }
 
 export interface NotificationModalInterface {
   items: NotificationItem[];
-  onClose: (isOpen: boolean) => void;
   onClick: (alertId: string) => void;
+  onClose: () => void;
 }
 
 export interface NotificationItemInterface {
