@@ -30,36 +30,34 @@ const NoticeDetail = ({
 
   return (
     <section className='flex w-full items-center justify-center px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
-      <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
-        <div className='flex flex-col gap-2'>
-          <span className='text-[14px] font-bold text-pt-green40 md:text-[16px] md:leading-[20px]'>
-            {detail?.item.shop.item.category}
-          </span>
-          <span className='text-[20px] font-bold md:text-[28px]'>
-            {detail?.item.shop.item.name}
-          </span>
+      {detail ? (
+        <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
+          <div className='flex flex-col gap-2'>
+            <span className='text-[14px] font-bold text-pt-green40 md:text-[16px] md:leading-[20px]'>
+              {detail.item.shop.item.category}
+            </span>
+            <span className='text-[20px] font-bold md:text-[28px]'>
+              {detail.item.shop.item.name}
+            </span>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <DetailPost
+              notice={detail}
+              userInfo={userInfo}
+              shopId={shopId}
+              noticeId={noticeId}
+              isApplied={isApplied}
+              token={token}
+              applicationId={applicationId}
+              isOutDatedNotice={isOutDatedNotice}
+              isClosed={isClosed}
+            />
+            <NoticeDescription detail={detail} />
+          </div>
         </div>
-        <div className='flex flex-col gap-3'>
-          {detail ? (
-            <>
-              <DetailPost
-                notice={detail}
-                userInfo={userInfo}
-                shopId={shopId}
-                noticeId={noticeId}
-                isApplied={isApplied}
-                token={token}
-                applicationId={applicationId}
-                isOutDatedNotice={isOutDatedNotice}
-                isClosed={isClosed}
-              />
-              <NoticeDescription detail={detail} />
-            </>
-          ) : (
-            <DetailPostLoading />
-          )}
-        </div>
-      </div>
+      ) : (
+        <DetailPostLoading />
+      )}
     </section>
   );
 };
