@@ -14,8 +14,6 @@ export interface CreatePortalInterface {
   children: React.ReactNode;
 }
 
-// 로딩이 완료되었는지 확인이 필요하다함
-// 따라서 브라우저 환경에서 우선 실행되는지 파악
 const CreatePortal = ({ id, children }: CreatePortalInterface) => {
   if (typeof window !== 'object') {
     return null;

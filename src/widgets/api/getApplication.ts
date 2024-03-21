@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios from 'axios';
 import { getMethod } from '@/shared/api/RequestMethod';
 import { ApplicationInterface } from '@/widgets/Application/type';

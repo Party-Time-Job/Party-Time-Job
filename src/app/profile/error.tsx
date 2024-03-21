@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable no-console */
+
 const ProfilePageError = ({
   error,
   reset,
