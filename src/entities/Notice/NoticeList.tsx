@@ -3,51 +3,92 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Post from '../Post/Post';
-import NoticeListHeader from './NoticeListHeader';
 import { Notice } from '../Post/types.ts';
-import filterNotice from '@/features/Filter/utils/filterNotice.ts';
+import NoticeListHeader from './NoticeListHeader';
+import Pagination from './Pagination.tsx';
 import { FilterCondition } from './types.ts';
+import getNoticeList from './utils/getNoticeList.ts';
+import { AllNotice } from '@/entities/Post/types';
 
 interface Props {
-  category?: string;
+  category: string;
   searchValue?: string;
   noticeItemList: Notice[] | [];
   userType: string | null;
   shopId: string | null;
+  recentNoticeList?: Notice[];
 }
 
 /**
  * @param {Object} props - NoticeList 컴포넌트의 props
- * @param {string} props.category - 'all', or 'recent' or 'search'
+ * @param {string} props.category - 'all', or 'recent' or 'search' or filter
  * @param {string} props.searchValue - category가 'search' 일때 검색어
- * @param {string} props.userType - userType에 따른 공고 조건부 라우팅을 위한 props
- * @param {string} props.shopId - '내가 등록한 공고' -> 공고 디테일 라우팅 시 shopId 필요
- * @param {Notice[]} props.noticeItemList - notice 데이터 배열
+ * @param {Notice[]} props.recentNoticeList - 최근 본 notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
-const NoticeList = ({
-  category = 'all',
-  searchValue,
-  noticeItemList,
-  userType,
-  shopId,
-}: Props) => {
-  // TODO(이시열) : Button component 적용, 페이지네이션
-  const [itemList, setItemList] = useState<Notice[]>([]);
+const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
   const [filterCondition, setFilterCondition] = useState<FilterCondition>({
     address: [],
     date: '',
     pay: '',
   });
-  console.log(userType);
-  useEffect(() => {
-    setItemList(noticeItemList);
-  }, [noticeItemList]);
 
-  const applyFilter = () => {
-    filterNotice(noticeItemList, filterCondition, setItemList);
+  const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
+    offset: 0,
+    limit: 0,
+    address: [],
+    count: 0,
+    hasNext: false,
+    items: [],
+    links: [],
+  });
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const [sortCategory, setSortCategory] = useState('time');
+  const [listCategory, setListCategory] = useState(category);
+
+  const updatePageNumber = (value: number) => {
+    setCurrentPageNumber(value);
   };
 
+  const updateSortCategory = (value: string) => {
+    setSortCategory(value);
+  };
+
+  useEffect(() => {
+    if (recentNoticeList) {
+      setNoticeItemList(prev => {
+        return {
+          ...prev,
+          items: recentNoticeList,
+        };
+      });
+    }
+  }, [recentNoticeList]);
+
+  useEffect(() => {
+    if (category === 'search') {
+      getNoticeList(setNoticeItemList, 0, sortCategory, category, searchValue);
+      return;
+    }
+    if (category === 'all') {
+      getNoticeList(setNoticeItemList, 0, sortCategory);
+    }
+  }, [searchValue]);
+
+  const applyFilter = () => {
+    setListCategory('filter');
+    getNoticeList(
+      setNoticeItemList,
+      0,
+      sortCategory,
+      'filter',
+      searchValue,
+      filterCondition,
+    );
+    if (currentPageNumber !== 1) {
+      updatePageNumber(1);
+    }
+  };
   const updateFilterCondition = (
     address?: string[],
     date?: string,
@@ -61,8 +102,8 @@ const NoticeList = ({
     }));
   };
 
-  const updateItemList = (sortedList: Notice[]) => {
-    setItemList(sortedList);
+  const updateItemList = (sortedList: AllNotice) => {
+    setNoticeItemList(sortedList);
   };
 
   const updateNoticeCategory = (value: string) => {
@@ -90,38 +131,47 @@ const NoticeList = ({
     }
     return null;
   };
+
   return (
-    <section className='flex items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
+    <section className='flex flex-col items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>
       <div className='flex flex-col gap-4 md:w-[650px] md:gap-8 lg:w-[971px]'>
         <div className='flex w-full flex-col items-start gap-4 md:flex-row md:justify-between'>
           {updateNoticeCategory(category)}
           {category !== 'recent' ? (
             <NoticeListHeader
               updateItemList={updateItemList}
-              itemList={itemList}
               filterCondition={filterCondition}
               updateFilterCondition={updateFilterCondition}
               applyFilter={applyFilter}
+              searchValue={searchValue}
+              sortCategory={sortCategory}
+              updateSortCategory={updateSortCategory}
+              updatePageNumber={updatePageNumber}
+              currentPageNumber={currentPageNumber}
+              setListCategory={setListCategory}
+              listCategory={listCategory}
             />
           ) : null}
         </div>
         <div className='grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-4 md:gap-x-[14px] md:gap-y-[32px] lg:grid-cols-3 lg:grid-rows-2'>
-          {itemList.map(notice => {
+          {noticeItemList.items.map(notice => {
+            const shopId = notice.item.shop.item.id;
+            const noticeId = notice.item.id;
             return (
-              <Link
-                key={notice.item.id}
-                href={
-                  userType === 'employee'
-                    ? `/store/notice-detail/${shopId}/${notice.item.id}`
-                    : `/detail/${notice.item.shop?.item.id}/${notice.item.id}`
-                }
-              >
-                <Post key={notice.item.id} noticeItem={notice.item} />
+              <Link key={noticeId} href={`/detail/${shopId}/${noticeId}`}>
+                <Post key={noticeId} noticeItem={notice.item} />
               </Link>
             );
           })}
         </div>
       </div>
+      <Pagination
+        count={noticeItemList.count}
+        currentPageNumber={currentPageNumber}
+        updatePageNumber={updatePageNumber}
+        setNoticeItemList={setNoticeItemList}
+        sortCategory={sortCategory}
+      />
     </section>
   );
 };

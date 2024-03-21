@@ -19,7 +19,7 @@ export const NoApplicationDataUi = () => {
         <NoProfileRegister
           text='아직 신청 내역이 없습니다.'
           button={
-            <div className='w-[346px]'>
+            <div className='w-auto sm:w-[346px]'>
               <Button
                 text='공고 보러가기'
                 size='large'

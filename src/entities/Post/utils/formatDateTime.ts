@@ -1,7 +1,7 @@
 /**
- *
+ * 한국 시간 UTC+09:00, 9시간을 더해야 함.
  * @param {date} date ex) "2023-07-07T18:00:00.000Z"
- * @returns ex) 2023-07-07 18:00
+ * @returns ex) 2023-07-08 03:00
  */
 const formatDateTime = (date: string): string => {
   const dateObject = new Date(date);

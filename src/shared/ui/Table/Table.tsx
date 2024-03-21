@@ -53,6 +53,9 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
             <TableBodyCell>{item.name}</TableBodyCell>
             <TableBodyCell>{item.firstValue}</TableBodyCell>
             <TableBodyCell>{item.secondValue}</TableBodyCell>
+            <TableBodyCell>
+              <TableBodyStatus status={item.status} />
+            </TableBodyCell>
           </TableBodyRow>
         ))}
       </TableBody>
@@ -62,8 +65,8 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
 
 /**
  *
- * @param {StoreInterface[]} data 가게 공고 상세 테이블에 필요한 데이터 -> @/shared/ui/Table/type에서 StoreInterface 타입 참고
- * @param {ReactNode} pagination 페이지네이션(아직 미구현)
+ * @param {StoreInterface[]} data 가게 공고 상세 테이블에 필요한 데이터
+ * @param {ReactNode} pagination 페이지네이션
  * @returns 가게 공고 상세 페이지 내 테이블 컴포넌트
  */
 

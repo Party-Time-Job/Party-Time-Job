@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ForwardedRef } from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface Option {
   value: string;
@@ -13,7 +13,6 @@ export interface SelectUiInterface {
   type: 'search' | 'filter';
   title?: string;
   isOpen: boolean;
-  ref: ForwardedRef<HTMLDivElement>;
   dropDown: () => void;
   onClick: (value: string) => void;
   children: React.ReactNode;

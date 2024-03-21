@@ -1,7 +1,7 @@
 export const TableHeadRow = ({ children }: { children: React.ReactNode }) => {
   return (
     <thead>
-      <tr className='h-[50px] border-b border-b-[#cbc9cf] bg-[#ffebe7] text-left text-sm font-normal leading-[50px]'>
+      <tr className='h-[40px] border-b border-b-[#cbc9cf] bg-[#ffebe7] text-left text-xs font-normal leading-[40px] sm:h-[50px] sm:text-sm sm:leading-[50px]'>
         {children}
       </tr>
     </thead>
@@ -9,5 +9,5 @@ export const TableHeadRow = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const TableHeadCell = ({ children }: { children: React.ReactNode }) => {
-  return <th className='pl-3'>{children}</th>;
+  return <th className='pl-3 sm:pl-2'>{children}</th>;
 };

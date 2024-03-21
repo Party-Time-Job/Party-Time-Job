@@ -12,7 +12,7 @@ const saveSeenNotice = (notice: Notice) => {
   if (!isDuplicate) {
     noticesArray.unshift(notice);
 
-    if (noticesArray.length >= 6) {
+    if (noticesArray.length > 6) {
       noticesArray.pop();
     }
   }

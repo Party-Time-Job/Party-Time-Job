@@ -30,7 +30,7 @@ const Title = ({
   children,
 }: TitleInterface) => {
   return (
-    <div className='relative m-0 mx-auto h-full max-w-[964px] px-0 py-[60px]'>
+    <div className='px-[12px] py-[40px] md:w-full md:max-w-none md:px-[32px] md:py-[60px] lg:relative lg:m-0 lg:mx-auto lg:h-full lg:max-w-[964px] lg:px-0 lg:py-[60px]'>
       {subtitle && (
         <h2
           style={{ fontSize: subSize }}

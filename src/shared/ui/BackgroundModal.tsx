@@ -25,7 +25,7 @@ const BackgroundModal = ({
         <button
           type='button'
           onClick={onClick}
-          className='absolute right-0 top-[60px] z-10'
+          className='absolute right-[32px] top-[60px] z-10 sm:right-0'
         >
           <Image
             src='/close.svg'

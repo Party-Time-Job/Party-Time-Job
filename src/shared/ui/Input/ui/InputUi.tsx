@@ -33,7 +33,7 @@ const InputUi = forwardRef(
             className='h-[58px] w-full rounded-[5px] border border-solid border-[#cbc9cf] px-5 py-4 text-base font-normal leading-[26px] text-black placeholder:text-[#a4a1aa]'
           />
           {addition && (
-            <span className='translateY-50 absolute right-5 top-2/4 text-base font-normal leading-[26px]'>
+            <span className='absolute right-5 top-2/4 -translate-y-2/4 text-base font-normal leading-[26px]'>
               {addition}
             </span>
           )}

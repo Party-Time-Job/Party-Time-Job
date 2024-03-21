@@ -1,6 +1,13 @@
 'use client';
 
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import Image from 'next/image';
 import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
@@ -17,6 +24,7 @@ interface Props {
     pay?: string,
   ) => void;
   applyFilter: () => void;
+  setListCategory: Dispatch<SetStateAction<string>>;
 }
 
 /**
@@ -32,6 +40,7 @@ const Filter = ({
   filterCondition,
   updateFilterCondition,
   applyFilter,
+  setListCategory,
 }: Props) => {
   const [selectedAddressList, setSelectedAddressList] = useState<string[]>(
     filterCondition.address || [],
@@ -58,6 +67,11 @@ const Filter = ({
   };
 
   const handleChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectDate = new Date(e.target.value);
+    const now = new Date();
+    if (selectDate < now) {
+      return;
+    }
     setSelectedDate(e.target.value);
   };
 
@@ -72,6 +86,7 @@ const Filter = ({
   };
 
   const handleReset = () => {
+    setListCategory('all');
     setSelectedAddressList([]);
     setSelectedDate('');
     setSelectedPay('');
@@ -111,7 +126,7 @@ const Filter = ({
               <div className='grid h-[258px] grid-cols-2 gap-[20px] overflow-y-scroll px-[28px] py-[20px]'>
                 {ADDRESS.map(item => {
                   return (
-                    <div>
+                    <div key={item.key}>
                       <span
                         key={item.key}
                         onClick={e => handleAddressClick(e)}
@@ -128,6 +143,7 @@ const Filter = ({
               {selectedAddressList.map(item => {
                 return (
                   <SelectedAddress
+                    key={item}
                     address={item}
                     removeAddress={removeAddress}
                   />
