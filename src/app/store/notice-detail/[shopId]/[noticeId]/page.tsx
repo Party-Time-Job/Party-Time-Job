@@ -1,11 +1,21 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
 import EmployerNoticeDetailPage from '@/pages/EmployerPage/EmployerNoticeDetailPage';
 
-const page = async ({
+const NoticeDetailPage = ({
   params: { shopId, noticeId },
 }: {
   params: { shopId: string; noticeId: string };
 }) => {
-  return <EmployerNoticeDetailPage shopId={shopId} noticeId={noticeId} />;
+  const searchParams = useSearchParams();
+  return (
+    <EmployerNoticeDetailPage
+      shopId={shopId}
+      noticeId={noticeId}
+      searchParams={searchParams}
+    />
+  );
 };
 
-export default page;
+export default NoticeDetailPage;
