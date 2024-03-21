@@ -1,14 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import NoticeDetail from '@/entities/Notice/NoticeDetail';
 import NoticeList from '@/entities/Notice/NoticeList';
-import getSavedNotice from '@/entities/Notice/utils/getSavedNotice';
-import { Notice, User } from '@/entities/Post/types';
-import { DecodedToken } from '@/widgets/Header/Type.ts';
-import getUserToken from './utils/getUserToken.ts';
-import { getMethod } from '@/shared/api/RequestMethod.ts';
+import useNoticeDetail from './hooks/useNoticeDetail.ts';
 
 /**
  *
@@ -23,26 +17,7 @@ const NoticeDetailPage = ({
   shopId: string;
   noticeId: string;
 }) => {
-  const [recentNoticeList, setRecentNoticeList] = useState<Notice[]>([]);
-  const [userInfo, setUserInfo] = useState<User>();
-
-  useEffect(() => {
-    const recent = getSavedNotice();
-    setRecentNoticeList(recent);
-
-    const token = getUserToken();
-
-    if (token) {
-      const decoded: DecodedToken = jwtDecode(token);
-      const getUserInformation = async () => {
-        const data = await getMethod<User>(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${decoded.userId}`,
-        );
-        setUserInfo(data);
-      };
-      getUserInformation();
-    }
-  }, []);
+  const { recentNoticeList, userInfo } = useNoticeDetail();
 
   return (
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>

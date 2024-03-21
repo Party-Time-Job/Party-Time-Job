@@ -1,19 +1,13 @@
 'use client';
 
-import {
-  ChangeEvent,
-  Dispatch,
-  MouseEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from 'react';
 import Image from 'next/image';
 import ADDRESS from '@/shared/constants/Address';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import SelectedAddress from './SelectedAddress';
 import { FilterCondition } from '@/entities/Notice/types';
+import useFilter from '../hooks/useFilter.ts';
 
 interface Props {
   handleToggleFilter: () => void;
@@ -33,6 +27,7 @@ interface Props {
  * @param {FilterCondition} props.filterCondition - 필터 조건
  * @param {Function} props.updateFilterCondition - 필터 조건 업데이트 콜백 함수
  * @param {Function} props.applyFilter - 필터 조건으로 공고 리스트 업데이트 콜백함수
+ * @param {Function} props.setListCategory - 공고를 가져오는 기준 전체 or 정렬 or 필터링 업데이트 함수
  * @returns 상세 필터 UI
  */
 const Filter = ({
@@ -42,20 +37,15 @@ const Filter = ({
   applyFilter,
   setListCategory,
 }: Props) => {
-  const [selectedAddressList, setSelectedAddressList] = useState<string[]>(
-    filterCondition.address || [],
-  );
-  const [selectedDate, setSelectedDate] = useState<string>(
-    filterCondition.date || '',
-  );
-  const [selectedPay, setSelectedPay] = useState<string>(
-    filterCondition.pay || '',
-  );
-
-  const removeAddress = (address: string) => {
-    const newList = selectedAddressList.filter(item => item !== address);
-    setSelectedAddressList(newList);
-  };
+  const {
+    selectedAddressList,
+    selectedDate,
+    selectedPay,
+    setSelectedAddressList,
+    setSelectedDate,
+    setSelectedPay,
+    removeAddress,
+  } = useFilter(filterCondition, updateFilterCondition);
 
   const handleAddressClick = (e: MouseEvent<HTMLSpanElement>) => {
     const addItem = (e.target as HTMLSpanElement).innerText;
@@ -97,12 +87,8 @@ const Filter = ({
     handleToggleFilter();
   };
 
-  useEffect(() => {
-    updateFilterCondition(selectedAddressList, selectedDate, selectedPay);
-  }, [selectedAddressList, selectedDate, selectedPay]);
-
   return (
-    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[color:var(--The-julge-gray-20,#E5E4E7)] bg-white px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
+    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[#E5E4E7] bg-white px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
         <span className='text-xl font-bold leading-normal text-[#111322] '>
           상세필터

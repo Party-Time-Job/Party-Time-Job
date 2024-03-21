@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import { Notice, User } from './types.ts';
-import saveSeenNotice from '../Notice/utils/saveSeenNotice.ts';
 import formatHourlyPay from './utils/formatHourlyPay.ts';
 import Modal from '@/features/Modal/Modal.tsx';
 import ClosedNoticeImage from '@/shared/ui/ClosedNoticeImage.tsx';
+import useDetailPost from './hooks/useDetailPost.ts';
 
 interface Props {
   notice: Notice;
@@ -19,6 +18,7 @@ interface Props {
   token: string;
   applicationId: string;
   isOutDatedNotice: boolean;
+  isClosed: boolean;
 }
 
 const DetailPost = ({
@@ -30,24 +30,22 @@ const DetailPost = ({
   token,
   applicationId,
   isOutDatedNotice,
+  isClosed,
 }: Props) => {
   const userType = userInfo?.item.type;
   const disableButton =
-    userType === 'employer' || isOutDatedNotice
+    userType === 'employer' || isOutDatedNotice || isClosed
       ? 'opacity-50 cursor-not-allowed bg-[#A4A1AA]'
       : '';
 
-  const [isToggle, setIsToggle] = useState(false);
-  const [modalCategory, setModalCategory] = useState('');
-
-  const handleToggle = () => {
-    setIsToggle(prev => !prev);
-  };
-
-  const handleCancelToggle = () => {
-    setModalCategory('cancel');
-    setIsToggle(prev => !prev);
-  };
+  const {
+    isToggle,
+    modalCategory,
+    handleToggle,
+    handleCancelToggle,
+    handleApplyClick,
+    cancelClick,
+  } = useDetailPost(shopId, noticeId, applicationId, token, notice, userInfo);
 
   const comparePriceRate = Math.round(
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
@@ -55,87 +53,11 @@ const DetailPost = ({
   );
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
 
-  const applyNotice = async () => {
-    const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-
-    if (response.status === 201) {
-      setModalCategory('success');
-      setIsToggle(true);
-    }
-  };
-
-  const cancelNotice = async () => {
-    const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status: 'canceled' }),
-      },
-    );
-
-    if (response.status === 200) {
-      setModalCategory('canceled');
-      setIsToggle(true);
-    }
-  };
-
-  const handleApplyClick = () => {
-    if (!token) {
-      setModalCategory('noLogin');
-      setIsToggle(true);
-      return;
-    }
-
-    if (
-      !userInfo?.item.address ||
-      !userInfo?.item.bio ||
-      !userInfo?.item.name ||
-      !userInfo?.item.phone
-    ) {
-      setModalCategory('noProfile');
-      setIsToggle(true);
-      return;
-    }
-
-    applyNotice();
-  };
-
-  const cancelClick = () => {
-    cancelNotice();
-  };
-
-  useEffect(() => {
-    document.documentElement.style.scrollbarGutter = 'stable';
-
-    if (isToggle) {
-      document.body.style.overflow = 'hidden';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isToggle]);
-
-  useEffect(() => {
-    saveSeenNotice(notice);
-  }, []);
-
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
       <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:h-[308px] lg:w-[509px]'>
-        {isOutDatedNotice ? <ClosedNoticeImage text='지난 공고' /> : null}
+        {isOutDatedNotice ? <ClosedNoticeImage text={'지난 공고'} /> : null}
+        {isClosed ? <ClosedNoticeImage text={'마감 공고'} /> : null}
         <Image
           priority
           width={0}
@@ -223,9 +145,9 @@ const DetailPost = ({
           <button
             className={`flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px] ${disableButton}`}
             onClick={handleApplyClick}
-            disabled={userType === 'employer' || isOutDatedNotice}
+            disabled={userType === 'employer' || isOutDatedNotice || isClosed}
           >
-            {userType === 'employer' || isOutDatedNotice
+            {userType === 'employer' || isOutDatedNotice || isClosed
               ? '신청 불가'
               : '신청 하기'}
           </button>
