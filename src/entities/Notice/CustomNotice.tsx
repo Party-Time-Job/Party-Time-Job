@@ -1,14 +1,58 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import Link from 'next/link';
 import Post from '../Post/Post';
-import { Notice } from '../Post/types.ts';
+import { AllNotice, Notice, User } from '../Post/types.ts';
+import { getMethod } from '@/shared/api/RequestMethod.ts';
+import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
+import { DecodedToken } from '@/widgets/Header/Type.ts';
 
 /**
  *
  * @param {Notice[]} customNoticeList 주소를 기준으로 가져온 notice객체 list 입니다.
  * @returns '/notice' 의 맞춤 공고 영역
  */
-const CustomNotice = ({ customNoticeList }: { customNoticeList: Notice[] }) => {
-  // TODO(이시열): 맞춤 공고 자동으로 스크롤
+const CustomNotice = () => {
+  const [customNotice, setCustomNotice] = useState<Notice[]>();
+  const token = getUserToken();
+
+  useEffect(() => {
+    if (token) {
+      const decoded: DecodedToken = jwtDecode(token);
+      const { userId } = decoded;
+
+      const getData = async () => {
+        const allNotice = await getMethod<AllNotice>(
+          'https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices',
+        );
+        const userInfo = await getMethod<User>(
+          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${userId}`,
+        );
+        const userAddress = userInfo.item.address;
+        const allNoticeList = allNotice.items;
+        const userCustomNoticeList = allNoticeList.filter(notice => {
+          return notice.item.shop.item.address1 === userAddress;
+        });
+        if (!userAddress || userCustomNoticeList.length === 0) {
+          setCustomNotice(allNoticeList);
+          return;
+        }
+        setCustomNotice(userCustomNoticeList);
+      };
+      getData();
+    } else {
+      const getData = async () => {
+        const allNotice = await getMethod<AllNotice>(
+          'https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices',
+        );
+        setCustomNotice(allNotice.items);
+      };
+      getData();
+    }
+  }, []);
+
   return (
     <section className='flex w-full items-start justify-center bg-pt-green10 px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
       <div className='flex w-full flex-col gap-4 md:gap-8 lg:w-[971px]'>
@@ -16,7 +60,7 @@ const CustomNotice = ({ customNoticeList }: { customNoticeList: Notice[] }) => {
           맞춤 공고
         </span>
         <div className='inline-flex w-full items-start gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'>
-          {customNoticeList.map(notice => {
+          {customNotice?.map(notice => {
             return (
               <Link
                 key={notice.item.id}
