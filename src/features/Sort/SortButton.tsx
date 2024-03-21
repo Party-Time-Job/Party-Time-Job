@@ -35,7 +35,7 @@ const SortButton = ({
   listCategory,
   filterCondition,
 }: Props) => {
-  let url: string = `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&offset=0&limit=6`;
+  let url: string = `/notices?sort=${sortCategory}&offset=0&limit=6`;
   if (searchValue) {
     url += `&keyword=${searchValue}`;
   }

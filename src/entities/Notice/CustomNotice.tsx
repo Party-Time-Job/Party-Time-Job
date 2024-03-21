@@ -10,8 +10,6 @@ import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken.ts';
 import { DecodedToken } from '@/widgets/Header/Type.ts';
 
 /**
- *
- * @param {Notice[]} customNoticeList 주소를 기준으로 가져온 notice객체 list 입니다.
  * @returns '/notice' 의 맞춤 공고 영역
  */
 const CustomNotice = () => {
@@ -24,12 +22,8 @@ const CustomNotice = () => {
       const { userId } = decoded;
 
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>(
-          'https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices',
-        );
-        const userInfo = await getMethod<User>(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${userId}`,
-        );
+        const allNotice = await getMethod<AllNotice>('/notices');
+        const userInfo = await getMethod<User>(`/users/${userId}`);
         const userAddress = userInfo.item.address;
         const allNoticeList = allNotice.items;
         const userCustomNoticeList = allNoticeList.filter(notice => {
@@ -44,9 +38,7 @@ const CustomNotice = () => {
       getData();
     } else {
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>(
-          'https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices',
-        );
+        const allNotice = await getMethod<AllNotice>('/notices');
         setCustomNotice(allNotice.items);
       };
       getData();

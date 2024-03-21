@@ -59,7 +59,7 @@ const DetailPost = ({
 
   const applyNotice = async () => {
     const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
+      `/shops/${shopId}/notices/${noticeId}/applications`,
       {
         method: 'POST',
         headers: {

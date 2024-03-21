@@ -18,7 +18,7 @@ const useApplication = (shopId: string, noticeId: string) => {
 
       const testUserApplyList = async () => {
         const response = await getMethod<AllApply>(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
+          `/shops/${shopId}/notices/${noticeId}/applications?limit=100`,
         );
         const userApply = response.items.filter(apply => {
           return userId === apply.item.user.item.id;
