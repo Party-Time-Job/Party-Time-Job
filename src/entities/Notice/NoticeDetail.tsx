@@ -6,6 +6,7 @@ import useDetailNotice from './hooks/useDetailNotice.ts';
 import useApplication from './hooks/useApplication.ts';
 import useNoticeStatus from './hooks/useNoticeStatus.ts';
 import DetailPostLoading from '../Post/DetailPostLoading.tsx';
+import NoticeDescription from './NoticeDescription.tsx';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -40,28 +41,23 @@ const NoticeDetail = ({
         </div>
         <div className='flex flex-col gap-3'>
           {detail ? (
-            <DetailPost
-              notice={detail}
-              userInfo={userInfo}
-              shopId={shopId}
-              noticeId={noticeId}
-              isApplied={isApplied}
-              token={token}
-              applicationId={applicationId}
-              isOutDatedNotice={isOutDatedNotice}
-              isClosed={isClosed}
-            />
+            <>
+              <DetailPost
+                notice={detail}
+                userInfo={userInfo}
+                shopId={shopId}
+                noticeId={noticeId}
+                isApplied={isApplied}
+                token={token}
+                applicationId={applicationId}
+                isOutDatedNotice={isOutDatedNotice}
+                isClosed={isClosed}
+              />
+              <NoticeDescription detail={detail} />
+            </>
           ) : (
             <DetailPostLoading />
           )}
-          <div className='flex flex-col items-start gap-2 rounded-xl bg-pt-gray20 p-[20px] lg:p-[32px]'>
-            <span className='text-[14px] font-bold md:text-[16px] md:leading-[20px]'>
-              공고 설명
-            </span>
-            <p className='text-[14px] leading-[22px] md:text-[16px] md:leading-[26px]'>
-              {detail?.item.description}
-            </p>
-          </div>
         </div>
       </div>
     </section>
