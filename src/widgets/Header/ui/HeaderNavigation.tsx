@@ -69,7 +69,6 @@ const HeaderNavigation = () => {
         <>
           <MyStoreLink />
           <LogoutButton />
-          <NotificationIcon />
         </>
       )}
     </>
