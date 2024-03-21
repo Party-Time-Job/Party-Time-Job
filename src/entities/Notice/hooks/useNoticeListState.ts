@@ -3,7 +3,7 @@ import { AllNotice, Notice } from '@/entities/Post/types';
 import getNoticeList from '../utils/getNoticeList.ts';
 import { FilterCondition } from '../types.ts';
 
-const useNoticeState = (
+const useNoticeListState = (
   category: string,
   searchValue?: string,
   recentNoticeList?: Notice[],
@@ -92,4 +92,4 @@ const useNoticeState = (
   };
 };
 
-export default useNoticeState;
+export default useNoticeListState;

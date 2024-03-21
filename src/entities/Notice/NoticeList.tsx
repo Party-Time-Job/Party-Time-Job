@@ -5,8 +5,8 @@ import Post from '../Post/Post';
 import { Notice } from '../Post/types.ts';
 import NoticeListHeader from './NoticeListHeader';
 import Pagination from './Pagination.tsx';
-import useNoticeState from './hooks/useNoticeState.ts';
 import NoticeCategory from './NoticeCategory.tsx';
+import useNoticeListState from './hooks/useNoticeListState.ts';
 
 interface Props {
   category: string;
@@ -35,7 +35,7 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
     updatePageNumber,
     setListCategory,
     setNoticeItemList,
-  } = useNoticeState(category, searchValue, recentNoticeList);
+  } = useNoticeListState(category, searchValue, recentNoticeList);
 
   return (
     <section className='flex flex-col items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>

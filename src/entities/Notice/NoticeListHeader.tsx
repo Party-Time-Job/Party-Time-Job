@@ -1,11 +1,12 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Filter from '@/features/Filter/Filter';
 import SortButtonList from './SortButtonList';
 import SortSelect from '@/features/Sort/SortSelect';
 import { AllNotice } from '../Post/types.ts';
 import { FilterCondition } from './types.ts';
+import useNoticeListHeader from './hooks/useNoticeListHeader.ts';
 
 interface Props {
   updateItemList: (sortedList: AllNotice) => void;
@@ -45,22 +46,8 @@ const NoticeListHeader = ({
   setListCategory,
   listCategory,
 }: Props) => {
-  const [isToggleSort, setIsToggleSort] = useState(false);
-  const [isToggleFilter, setIsToggleFilter] = useState(false);
-
-  const handleToggleSort = () => {
-    if (isToggleFilter) {
-      setIsToggleFilter(false);
-    }
-    setIsToggleSort(prev => !prev);
-  };
-
-  const handleToggleFilter = () => {
-    if (isToggleSort) {
-      setIsToggleSort(false);
-    }
-    setIsToggleFilter(prev => !prev);
-  };
+  const { isToggleSort, isToggleFilter, handleToggleSort, handleToggleFilter } =
+    useNoticeListHeader();
 
   return (
     <div className='flex gap-[10px]'>
