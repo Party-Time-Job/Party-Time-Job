@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
 import NotifiactionModal from '@/shared/NotificationModal/NotificationModal';
+import alertsState from '@/atoms/alertsState';
 
 type AlertItemType = {
   id: string;
@@ -59,7 +61,7 @@ interface AlertResponse {
 
 const NotificationIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [alerts, setAlerts] = useState<AlertItemType[]>([]);
+  const [alerts, setAlerts] = useRecoilState<AlertItemType[]>(alertsState);
   const userId = getCookie('userid');
   const token = getCookie('token');
 
@@ -83,10 +85,8 @@ const NotificationIcon = () => {
         },
       );
       if (response.ok) {
-        setAlerts(prevAlerts =>
-          prevAlerts.map(alert =>
-            alert.id === alertId ? { ...alert, read: true } : alert,
-          ),
+        setAlerts(currentAlerts =>
+          currentAlerts.filter(alert => alert.id !== alertId),
         );
       }
     } catch (error) {
@@ -108,16 +108,16 @@ const NotificationIcon = () => {
       if (response.ok) {
         setAlerts(
           data.items
-            .filter(alert => !alert.item.read) // If you wish to exclude read alerts
-            .map(alert => ({
-              id: alert.item.id,
-              name: alert.item.shop.item.name,
-              duration: `${alert.item.notice.item.startsAt} - ${alert.item.notice.item.workhour}시간`,
-              createdAt: alert.item.createdAt,
-              startsAt: alert.item.notice.item.startsAt,
-              workhour: alert.item.notice.item.workhour,
-              result: alert.item.result,
-              read: alert.item.read,
+            .filter(({ item }) => !item.read)
+            .map(({ item }) => ({
+              id: item.id,
+              name: item.shop.item.name,
+              duration: `${item.notice.item.startsAt} - ${item.notice.item.workhour}시간`,
+              createdAt: item.createdAt,
+              startsAt: item.notice.item.startsAt,
+              workhour: item.notice.item.workhour,
+              result: item.result,
+              read: item.read,
             })),
         );
       }
@@ -125,7 +125,7 @@ const NotificationIcon = () => {
     if (userId && token) {
       fetchUserAlerts();
     }
-  }, [userId, token]);
+  }, [userId, token, setAlerts]);
 
   return (
     <div className='relative'>
