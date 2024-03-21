@@ -72,7 +72,7 @@ const SortButton = ({
   return (
     <button
       onClick={handleSortClick}
-      className='text-center text-[14px] leading-[22px]'
+      className='w-[105px] py-[8px] text-center text-[14px] leading-[22px] hover:bg-pt-gray30'
     >
       {convertSortText(sortCategory)}
     </button>

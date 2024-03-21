@@ -32,8 +32,8 @@ const SortButtonList = ({
 }: Props) => {
   const sortCategoryList = ['time', 'pay', 'hour', 'shop'];
   return (
-    <div className='absolute top-10 z-10 flex flex-col items-start gap-[8px] rounded-[6px] border-[1px] border-solid border-pt-gray30 bg-white py-[12px]'>
-      <div className='flex flex-col items-center gap-[8px] self-stretch'>
+    <div className='absolute top-10 z-10 flex flex-col items-start gap-[8px] rounded-[6px] border-[1px] border-solid border-pt-gray30 bg-white'>
+      <div className='flex flex-col items-center self-stretch'>
         {sortCategoryList.map(sortCategory => {
           return (
             <SortButton
