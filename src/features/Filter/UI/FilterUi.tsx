@@ -27,6 +27,7 @@ interface Props {
  * @param {FilterCondition} props.filterCondition - 필터 조건
  * @param {Function} props.updateFilterCondition - 필터 조건 업데이트 콜백 함수
  * @param {Function} props.applyFilter - 필터 조건으로 공고 리스트 업데이트 콜백함수
+ * @param {Function} props.setListCategory - 공고를 가져오는 기준 전체 or 정렬 or 필터링 업데이트 함수
  * @returns 상세 필터 UI
  */
 const Filter = ({
