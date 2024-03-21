@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ReadonlyURLSearchParams } from 'next/navigation';
 import EmployerNoticeDetail from '@/entities/Employer/EmployerNoticeDetail.tsx';
 import { StoreTable } from '@/shared/ui/Table/Table.tsx';
 import { StoreInterface } from '@/shared/ui/Table/type.ts';
+import Pagination from '@/shared/ui/Pagination/Pagination';
 
 interface ApplicationItem {
   id: string;
@@ -19,22 +21,33 @@ interface ApplicationItem {
 
 interface ApplicationResponse {
   items: Array<{ item: ApplicationItem }>;
+  length: number;
+  count: number;
 }
 
 const EmployerNoticeDetailPage = ({
   shopId,
   noticeId,
+  searchParams,
 }: {
   shopId: string;
   noticeId: string;
+  searchParams: ReadonlyURLSearchParams | null;
 }) => {
   const [applications, setApplications] = useState<StoreInterface[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const MAX_ITEMS = 5;
+
+  const currentPage = searchParams
+    ? parseInt(searchParams.get('page') ?? '1', 10)
+    : 1;
 
   useEffect(() => {
     const fetchApplications = async () => {
+      const offset = (currentPage - 1) * MAX_ITEMS;
       try {
         const response = await fetch(
-          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
+          `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications?limit=${MAX_ITEMS}&offset=${offset}`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch applications');
@@ -53,7 +66,7 @@ const EmployerNoticeDetailPage = ({
           bio: item.user.item.bio,
           phone: item.user.item.phone,
         }));
-
+        setTotal(data.count);
         setApplications(formattedData);
       } catch (error) {
         console.error(
@@ -66,7 +79,7 @@ const EmployerNoticeDetailPage = ({
     };
 
     fetchApplications();
-  }, [shopId, noticeId]);
+  }, [shopId, noticeId, searchParams]);
 
   return (
     <main className='flex flex-col items-center justify-center bg-pt-gray10'>
@@ -75,7 +88,13 @@ const EmployerNoticeDetailPage = ({
         shopId={shopId}
         noticeId={noticeId}
         data={applications}
-        pagination={null}
+        pagination={
+          <Pagination
+            page={currentPage}
+            total={total}
+            showedItems={MAX_ITEMS}
+          />
+        }
       />
     </main>
   );

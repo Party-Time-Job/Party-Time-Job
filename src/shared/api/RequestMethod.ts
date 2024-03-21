@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import AxiosInstance from '@/shared/api/axiosInstance';
 import { ResponseInterface } from '@/shared/api/axiosInstanceType';
@@ -28,8 +29,8 @@ export const postMethod = async <T>(
 ): Promise<T> => {
   const response = await AxiosInstance.post<ResponseInterface<T>>(
     url,
-    config as InternalAxiosRequestConfig,
     data,
+    config as InternalAxiosRequestConfig,
   );
   return response.data;
 };
@@ -65,8 +66,8 @@ export const patchMethod = async <T>(
 ): Promise<T> => {
   const response = await AxiosInstance.patch<ResponseInterface<T>>(
     url,
-    config as InternalAxiosRequestConfig,
     data,
+    config as InternalAxiosRequestConfig,
   );
   return response.data;
 };
