@@ -15,12 +15,16 @@ const useCustomNotice = () => {
       const { userId } = decoded;
 
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices');
+        const allNotice = await getMethod<AllNotice>('/notices?limit=20');
         const userInfo = await getMethod<User>(`/users/${userId}`);
         const userAddress = userInfo.item.address;
         const allNoticeList = allNotice.items;
         const userCustomNoticeList = allNoticeList.filter(notice => {
-          return notice.item.shop.item.address1 === userAddress;
+          return (
+            notice.item.shop.item.address1 === userAddress &&
+            new Date(notice.item.startsAt) > new Date() &&
+            !notice.item.closed
+          );
         });
         if (!userAddress || userCustomNoticeList.length === 0) {
           setCustomNotice(allNoticeList);
@@ -31,13 +35,17 @@ const useCustomNotice = () => {
       getData();
     } else {
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices');
-        setCustomNotice(allNotice.items);
+        const allNotice = await getMethod<AllNotice>('/notices?limit=20');
+        const allCustomNoticeList = allNotice.items.filter(notice => {
+          return (
+            new Date(notice.item.startsAt) > new Date() && !notice.item.closed
+          );
+        });
+        setCustomNotice(allCustomNoticeList);
       };
       getData();
     }
   }, []);
-
   return customNotice;
 };
 export default useCustomNotice;
