@@ -10,6 +10,11 @@ const nextConfig = {
       'news.nateimg.co.kr',
       'cdn.imweb.me',
       'health.chosun.com',
+      'img1.daumcdn.net',
+      'recipe1.ezmember.co.kr',
+      'www.kkday.com',
+      'sitem.ssgcdn.com',
+      'www.foodjang.com',
     ],
   },
 };

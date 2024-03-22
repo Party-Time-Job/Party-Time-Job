@@ -51,9 +51,9 @@ export const RejectedItem = ({
     <button
       type='button'
       onClick={() => onClick(id)}
-      className='w-238 rounded-5 rounded-5 flex flex-col items-start justify-start gap-4 border border-solid border-[white] bg-white px-12 py-16 text-start md:w-full'
+      className='flex w-full flex-col items-start justify-start gap-[4px] rounded-[5px] border border-solid border-[white] bg-white px-[12px] py-[16px] text-start sm:w-[238px]'
     >
-      <div className='rounded-70 h-5 w-5 bg-[#ff4040]'></div>
+      <div className='h-[5px] w-[5px] rounded-[70px] bg-[#ff4040]'></div>
       <p className='text-sm font-normal text-black'>
         {name}({duration}) 공고 지원이{' '}
         <span className='text-[#ff4040]'>거절</span>되었어요.

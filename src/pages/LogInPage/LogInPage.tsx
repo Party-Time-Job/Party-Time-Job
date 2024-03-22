@@ -36,6 +36,7 @@ const LogInPage = () => {
         setCookie('userid', user.item.id);
         window.localStorage.setItem('accessToken', token);
         router.push('/notice');
+        window.location.reload();
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
