@@ -4,9 +4,9 @@ import Image from 'next/image';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import formatHourlyPay from '@/entities/Post/utils/formatHourlyPay';
-import { NoticeItem } from './types.ts';
-import useOutDatedNotice from '../Notice/hooks/useOutDatedNotice.ts';
+import { NoticeItem } from '../Post/types.ts';
 import ClosedNoticeImage from '@/shared/ui/ClosedNoticeImage.tsx';
+import useNoticeStatus from '../Notice/hooks/useNoticeStatus.ts';
 
 /**
  *
@@ -20,13 +20,14 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
   const shopId = noticeItem.shop.item.id;
   const noticeId = noticeItem.id;
-  const isOutDatedNotice = useOutDatedNotice(shopId, noticeId);
-  const disabledText = isOutDatedNotice ? 'text-[#CBC9CF]' : '';
+  const { isOutDatedNotice, isClosed } = useNoticeStatus(shopId, noticeId);
+  const disabledText = isOutDatedNotice || isClosed ? 'text-[#CBC9CF]' : '';
 
   return (
     <div className='z-0 inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
       <div className='relative flex h-[84px] w-[147px] items-center justify-center overflow-hidden rounded-xl md:h-[160px] md:w-[280px]'>
         {isOutDatedNotice ? <ClosedNoticeImage text='지난 공고' /> : null}
+        {isClosed ? <ClosedNoticeImage text={'마감 공고'} /> : null}
         <Image
           priority
           width={0}
@@ -50,14 +51,14 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           </span>
           <div className='flex w-[147px] items-start gap-1.5 self-stretch md:w-[280px] md:items-center'>
             <Image
-              src={`${isOutDatedNotice ? '/disable-clock-icon.svg' : '/clock-icon.svg'}`}
+              src={`${isOutDatedNotice || isClosed ? '/disable-clock-icon.svg' : '/clock-icon.svg'}`}
               alt='icon'
               width={20}
               height={20}
               className='h-4 w-4 md:h-5 md:w-5'
             />
             <span
-              className={`inline-block text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice ? 'text-[#CBC9CF]' : 'text-pt-gray40'}`}
+              className={`inline-block text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice || isClosed ? 'text-[#CBC9CF]' : 'text-pt-gray40'}`}
             >
               {formatDateTime(noticeItem.startsAt)}~{finishTime} (
               {noticeItem.workhour}시간)
@@ -65,14 +66,14 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           </div>
           <div className='flex items-start gap-1.5'>
             <Image
-              src={`${isOutDatedNotice ? '/disable-location-icon.svg' : '/location-icon.svg'}`}
+              src={`${isOutDatedNotice || isClosed ? '/disable-location-icon.svg' : '/location-icon.svg'}`}
               alt='icon'
               width={20}
               height={20}
               className='h-4 w-4 md:h-5 md:w-5'
             />
             <span
-              className={`text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice ? 'text-[#CBC9CF]' : 'text-pt-gray40'}`}
+              className={`text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice || isClosed ? 'text-[#CBC9CF]' : 'text-pt-gray40'}`}
             >
               {noticeItem.shop.item.address1}
             </span>
@@ -85,7 +86,7 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
             {formatHourlyPay(noticeItem.hourlyPay)}원
           </span>
           <div
-            className={`flex md:h-9 md:items-center md:rounded-[20px]  md:p-3 md:text-white ${isOutDatedNotice ? 'text-[#CBC9CF] md:bg-[#CBC9CF]' : 'text-pt-green40 md:bg-pt-green40'}`}
+            className={`flex md:h-9 md:items-center md:rounded-[20px]  md:p-3 md:text-white ${isOutDatedNotice || isClosed ? 'text-[#CBC9CF] md:bg-[#CBC9CF]' : 'text-pt-green40 md:bg-pt-green40'}`}
           >
             <div className='flex items-center md:gap-0.5'>
               <span className='pt-0.5 text-sm font-bold leading-4'>
@@ -100,7 +101,7 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               >
                 <path
                   d='M12.5001 16.6668H7.50013V10.0001H3.4668L10.0001 3.4668L16.5335 10.0001H12.5001V16.6668Z'
-                  className={`h-4 w-4  md:h-5 md:w-5 md:fill-white ${isOutDatedNotice ? 'fill-[#CBC9CF]' : 'fill-pt-green40'}`}
+                  className={`h-4 w-4  md:h-5 md:w-5 md:fill-white ${isOutDatedNotice || isClosed ? 'fill-[#CBC9CF]' : 'fill-pt-green40'}`}
                 />
               </svg>
             </div>

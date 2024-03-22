@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { EmployerPost } from './EmployerPost.tsx';
+import EmployerPost from '../Post/EmployerDetailPost.tsx';
 import { Notice } from '../Post/types.ts';
 import { AllNotice } from '@/entities/Post/types';
 
