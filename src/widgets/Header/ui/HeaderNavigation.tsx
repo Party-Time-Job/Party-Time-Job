@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useRecoilState } from 'recoil';
+import { getCookie } from 'cookies-next';
 import axios from 'axios';
 import LoginLink from './LoginLink';
 import SignUpLink from './SignUpLink';
@@ -10,6 +12,8 @@ import LogoutButton from './LogoutButton';
 import MyStoreLink from './MyStoreLink';
 import NotificationIcon from './NotificationIcon';
 import { DecodedToken } from '../Type.ts';
+import TokenState from '@/atoms/tokenState.ts';
+import userTypeState from '@/atoms/userTypeState.ts';
 
 /**
  * 로그인을 한 상태가 아닐 경우 로그인, 회원가입을 보여준다.
@@ -17,12 +21,12 @@ import { DecodedToken } from '../Type.ts';
  * 로그인을 한 상태이고, 유저 정보의 타입이 employer일 경우 내 가게, 로그아웃, 알림 아이콘을 보여준다.
  */
 const HeaderNavigation = () => {
-  const [token, setToken] = useState<string | null>(null);
-  const [userType, setUserType] = useState<string | null>(null);
+  const [token, setToken] = useRecoilState<string | null>(TokenState);
+  const [userType, setUserType] = useRecoilState<string | null>(userTypeState);
 
   useEffect(() => {
-    const storedToken = window.localStorage.getItem('accessToken');
-    // 로컬스토리지에 저장된 토큰 가져오기
+    const storedToken = getCookie('token');
+    // 쿠키에 저장된 토큰 가져오기
     if (storedToken) {
       setToken(storedToken);
       // 토큰 상태에 저장
@@ -46,8 +50,12 @@ const HeaderNavigation = () => {
       } catch (error) {
         console.error('JWT 디코드 오류:', error);
       }
+    } else {
+      // 쿠키에 토큰이 없다면 Recoil 상태 초기화
+      setToken(null);
+      setUserType(null);
     }
-  }, []);
+  }, [setToken, setUserType]);
 
   return (
     <>
