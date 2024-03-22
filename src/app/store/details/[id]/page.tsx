@@ -9,7 +9,7 @@ const Details = () => {
   const [token, setToken] = useState<string | null>(null);
   const [userType, setUserType] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
-  const [storeId, setStoreId] = useState<string | null>(null);
+  const [storeId, setStoreId] = useState<string>('');
 
   const getUserId = async (userIdParam: string): Promise<void> => {
     try {

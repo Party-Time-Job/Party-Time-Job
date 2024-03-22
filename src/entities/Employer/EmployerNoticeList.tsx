@@ -7,7 +7,7 @@ import { AllNotice } from '@/entities/Post/types';
 interface Props {
   noticeItemList?: AllNotice;
   imageUrl: string;
-  shopId: string | null;
+  shopId: string;
   originalHourlyPay: string;
   name: string;
   address1: string;

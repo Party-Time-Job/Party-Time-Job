@@ -18,7 +18,7 @@ import { AllNotice } from '@/entities/Post/types';
 interface DetailsPageProps {
   userType: string | null;
   userId: string | null;
-  storeId: string | null;
+  storeId: string;
 }
 interface StoreInfoProps {
   imageUrl: string;
