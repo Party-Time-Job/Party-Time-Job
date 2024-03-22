@@ -86,7 +86,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
             {formatHourlyPay(noticeItem.hourlyPay)}원
           </span>
           <div
-            className={`flex md:h-9 md:items-center md:rounded-lg md:p-3  ${isOutDatedNotice || isClosed ? 'border border-gray-500 text-gray-500 md:bg-black ' : 'border border-test-green text-white md:bg-black'}`}
+            className={`flex md:h-9 md:items-center md:rounded-lg md:p-3  ${isOutDatedNotice || isClosed ? 'border border-gray-500 text-gray-500 md:bg-test-black ' : 'border border-test-green text-white md:bg-test-black'}`}
           >
             <div className='flex items-center md:gap-0.5'>
               <span className='pt-0.5 text-sm font-bold leading-4'>

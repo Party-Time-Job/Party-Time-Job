@@ -82,7 +82,7 @@ const DetailPost = ({
               <span className='text-[24px] font-bold leading-5 text-white md:text-[28px]'>
                 {formatHourlyPay(notice.item.hourlyPay)}원
               </span>
-              <div className='item-center flex gap-[2px] rounded-[20px] border border-gray-500 bg-black px-2 py-1 md:p-[10px]'>
+              <div className='item-center ml-2 flex gap-[2px] rounded-md border border-test-green bg-test-black px-2 py-1 md:p-[10px]'>
                 <span className='text-[12px] leading-4 text-white md:text-[14px] md:leading-[20px]'>
                   기존 시급보다 {comparePriceRate}%
                 </span>
@@ -136,14 +136,14 @@ const DetailPost = ({
         </div>
         {isApplied ? (
           <button
-            className='flex w-full justify-center self-stretch rounded-[6px] bg-pt-primary py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px]'
+            className='flex w-full justify-center self-stretch rounded-[6px] bg-test-green py-[10px] text-[14px] font-bold text-black transition-all duration-300 hover:bg-test-blue hover:font-bold hover:text-black md:py-[14px] md:text-[16px] md:leading-[20px]'
             onClick={handleCancelToggle}
           >
             취소하기
           </button>
         ) : (
           <button
-            className={`flex w-full justify-center self-stretch rounded-[6px] border border-test-green bg-black py-[10px] text-[14px] text-white md:py-[14px] md:text-[16px] md:leading-[20px] ${disableButton}`}
+            className={`flex w-full justify-center self-stretch rounded-[6px] bg-test-green py-[10px] text-[14px] font-bold text-black transition-all duration-300 hover:bg-test-blue hover:font-bold hover:text-black md:py-[14px] md:text-[16px] md:leading-[20px] ${disableButton}`}
             onClick={handleApplyClick}
             disabled={userType === 'employer' || isOutDatedNotice || isClosed}
           >
