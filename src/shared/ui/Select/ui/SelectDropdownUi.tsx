@@ -23,7 +23,7 @@ const SelectDropdownUi = forwardRef(
               onChange={onChange}
               placeholder='선택'
               ref={ref as ForwardedRef<HTMLInputElement>}
-              className='w-full rounded-[5px] border border-solid border-[#cbc9cf] px-5 py-4 text-left text-base font-normal leading-[26px] text-black placeholder:text-[#a4a1aa]'
+              className='w-full rounded-[5px] bg-test-black px-5 py-4 text-left text-base font-normal leading-[26px] text-white placeholder:text-white'
             />
             <Image
               src={isOpen ? '/dropdown-up.svg' : '/dropdown.svg'}

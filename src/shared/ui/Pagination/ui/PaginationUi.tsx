@@ -39,7 +39,7 @@ const PaginationUi = ({
               className={`${page === num ? 'pointer-events-none cursor-default' : ''}`}
             >
               <span
-                className={`${page === num ? 'bg-[#395253] text-white' : ''} flex h-[32px] w-[32px] items-center justify-center rounded text-black sm:h-[40px] sm:w-[40px]`}
+                className={`${page === num ? ' text-white' : ''} flex h-[32px] w-[32px] items-center justify-center rounded text-gray-500 sm:h-[40px] sm:w-[40px]`}
               >
                 {num}
               </span>

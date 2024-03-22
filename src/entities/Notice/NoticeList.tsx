@@ -107,9 +107,9 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
   const updateNoticeCategory = (value: string) => {
     if (value === 'all') {
       return (
-        <div className='mb-10 flex h-10 w-28 items-center justify-center rounded-lg border border-test-green bg-black text-white'>
+        <div className='mb-10 flex h-10 w-28 items-center justify-center rounded-lg bg-test-green text-black'>
           <Text as='span' className='font-bold'>
-            맞춤공고
+            전체공고
           </Text>
         </div>
       );

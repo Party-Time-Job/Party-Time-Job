@@ -16,7 +16,7 @@ export interface NoProfileInterface {
 const NoProfile = ({ isExist, profile }: NoProfileInterface) => {
   return (
     <div className='min-h-[316px] md:min-h-[434px] lg:min-h-[376px]'>
-      <Title title='내 프로필' size={28} gap={32}>
+      <Title title='내 프로필' size={18} gap={22}>
         {!isExist && (
           <NoProfileRegister
             text='내 프로필을 등록하고 원하는 가게에 지원해 보세요.'

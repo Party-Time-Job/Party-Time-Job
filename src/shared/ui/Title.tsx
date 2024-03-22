@@ -41,7 +41,7 @@ const Title = ({
       )}
       <h1
         style={{ textAlign: align, fontSize: size, marginBottom: gap }}
-        className='font-bold'
+        className='flex h-10 w-24 items-center justify-center rounded-lg bg-test-blue font-bold text-black'
       >
         {title}
       </h1>
