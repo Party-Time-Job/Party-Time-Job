@@ -3,8 +3,6 @@ import getApplication from '@/widgets/api/getApplication';
 import ApplicationTable from '@/widgets/Application/ui/ApplicationTableUi';
 import { ProfileInterface } from '@/shared/ui/Table/type';
 
-export const revalidate = 3600;
-
 const Application = async ({ page }: { page: number }) => {
   let data;
   let total;

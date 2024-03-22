@@ -1,6 +1,5 @@
 'use client';
 
-/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable no-return-assign */
@@ -149,28 +148,7 @@ const RegisterModal = ({
                   defaultValue={defaultPhone || ''}
                   isRequired={false}
                   isValid={false}
-                  onChange={event => {
-                    const reValue = event.target.value.replace(/\D/g, '');
-                    if (reValue === '') {
-                      event.target.value = '';
-                      return;
-                    }
-                    const autoInput = reValue.match(
-                      /^(\d{3})(\d{0,4})(\d{0,4})$/,
-                    );
-                    if (autoInput) {
-                      event.target.value = [
-                        autoInput[1],
-                        autoInput[2],
-                        autoInput[3],
-                      ]
-                        .filter(Boolean)
-                        .join('-');
-                    } else {
-                      event.target.value = reValue;
-                    }
-                    handleChange(setPhone)(event);
-                  }}
+                  onChange={handleChange(setPhone)}
                   ref={(element: HTMLInputElement) =>
                     (inputRef.current[1] = element)
                   }
