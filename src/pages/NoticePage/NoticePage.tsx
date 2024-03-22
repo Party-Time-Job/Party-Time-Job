@@ -7,7 +7,7 @@ import NoticeList from '@/entities/Notice/NoticeList';
  */
 const NoticePage = () => {
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center bg-black'>
       <CustomNotice />
       <NoticeList category='all' />
     </div>
