@@ -24,7 +24,7 @@ export const EmployerPost = ({
   imageUrl: string;
   originalHourlyPay: string;
   noticeItem: NoticeItem;
-  shopId: string | null;
+  shopId: string;
   name: string;
   address1: string;
 }) => {
