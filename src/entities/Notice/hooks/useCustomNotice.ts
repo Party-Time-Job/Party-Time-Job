@@ -27,7 +27,12 @@ const useCustomNotice = () => {
           );
         });
         if (!userAddress || userCustomNoticeList.length === 0) {
-          setCustomNotice(allNoticeList);
+          const allCustomNoticeList = allNotice.items.filter(notice => {
+            return (
+              new Date(notice.item.startsAt) > new Date() && !notice.item.closed
+            );
+          });
+          setCustomNotice(allCustomNoticeList);
           return;
         }
         setCustomNotice(userCustomNoticeList);
