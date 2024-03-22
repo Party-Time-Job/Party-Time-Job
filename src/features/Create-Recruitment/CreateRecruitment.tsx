@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
-import Link from 'next/link';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -17,9 +17,10 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
 
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
+    const router = useRouter();
     const { startsAt } = getValues();
     try {
-      await fetch(
+      const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}/notices`,
         {
           method: 'POST',
@@ -35,6 +36,10 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
           }),
         },
       );
+      if (response.status === 200) {
+        router.push(`/store/details/${storeId}`);
+      }
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -133,15 +138,13 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
               <span>{errors.description.message?.toString()}</span>
             )}
           </div>
-          <Link href={`/store/details/${storeId}`}>
-            <Button
-              disabled={isSubmitting}
-              text='등록하기'
-              type='submit'
-              size='medium'
-              status='active'
-            />
-          </Link>
+          <Button
+            disabled={isSubmitting}
+            text='등록하기'
+            type='submit'
+            size='medium'
+            status='active'
+          />
         </form>
       </div>
     </div>
