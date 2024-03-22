@@ -14,10 +14,9 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
     getValues,
     formState: { isSubmitting, errors },
   } = useForm();
-
+  const router = useRouter();
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
-    const router = useRouter();
     const { startsAt } = getValues();
     try {
       const response = await fetch(
@@ -39,7 +38,6 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
       if (response.status === 200) {
         router.push(`/store/details/${storeId}`);
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
