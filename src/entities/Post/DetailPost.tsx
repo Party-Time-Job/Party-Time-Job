@@ -55,7 +55,7 @@ const DetailPost = ({
 
   return (
     <div className='inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-5 md:gap-5 md:p-[24px] lg:flex-row lg:justify-between'>
-      <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:h-[308px] lg:w-[509px]'>
+      <div className='relative flex h-auto max-h-[250px] w-full items-center justify-center overflow-hidden rounded-[12px] md:max-h-[361px] lg:w-[509px]'>
         {isOutDatedNotice ? <ClosedNoticeImage text={'지난 공고'} /> : null}
         {isClosed ? <ClosedNoticeImage text={'마감 공고'} /> : null}
         <Image
@@ -72,7 +72,7 @@ const DetailPost = ({
           }}
         />
       </div>
-      <div className='flex w-full flex-col items-start gap-6 lg:mt-4 lg:h-[292px] lg:w-[346px] lg:justify-between'>
+      <div className='flex w-full flex-col items-start gap-6 lg:mt-4 lg:w-[346px] lg:justify-between'>
         <div className='flex flex-col gap-2 md:gap-3'>
           <div className='flex flex-col items-start gap-2'>
             <span className='text-[14px] font-bold text-pt-green30 md:text-[16px]'>
