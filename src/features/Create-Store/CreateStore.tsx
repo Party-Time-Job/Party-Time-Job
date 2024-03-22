@@ -12,9 +12,20 @@ import Text from '@/shared/ui/Text';
 import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
 
+const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
+
+interface EmptyProps {
+  name: string;
+  category: string;
+  address1: string;
+  address2: string;
+  originalHourlyPay: string;
+  imageUrl: string;
+  description: string;
+}
 interface CreateStoreProps {
-  initialValues?: StoreItem;
-  storeId: string;
+  initialValues: StoreItem | EmptyProps;
+  storeId: string | null;
 }
 
 const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
@@ -27,22 +38,25 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
     defaultValues: initialValues,
   });
   const router = useRouter();
+  const url = storeId ? `${baseUrl}/shops/${storeId}` : `${baseUrl}/shops`;
+  const method = storeId ? 'PUT' : 'POST';
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     try {
-      await fetch(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${initialValues ? storeId : ''}`,
-        {
-          method: `${initialValues ? 'PUT' : 'POST'}`,
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify(data),
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      );
+        body: JSON.stringify(data),
+      });
+      console.log(response);
+      if (response.status === 200) {
+        router.push('/store/details/1');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -62,6 +76,10 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
         {/* 여기서부터 폼 태그 */}
         <form
           onSubmit={handleSubmit(data => requestInfo(data))}
+          // onSubmit={(e) => {
+          //   e.preventDefault();
+          //   console.log(URL);
+          // }}
           className='flex h-[869px] w-[964px] flex-col gap-6'
         >
           <div className='flex w-[964px] items-start gap-5'>
@@ -188,7 +206,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text={initialValues ? '정보 수정하기' : '가게 등록하기'}
+              text={storeId ? '정보 수정하기' : '가게 등록하기'}
               disabled={isSubmitting}
               type='submit'
             />

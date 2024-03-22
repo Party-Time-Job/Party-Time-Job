@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import NoticeList from '@/entities/Notice/NoticeList';
 import EmptyStore from '@/entities/Employer/EmptyStore';
 import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
 import MyStore from '@/entities/Employer/MyStore';
 import { StoreData, StoreItem } from '@/features/Create-Store/Type';
+// import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
 
 /**
  * header footer 작업 완료되면 진행 예정
@@ -29,7 +29,7 @@ interface StoreInfoProps {
 
 const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
   const [hasNotice, setNotice] = useState<boolean>(false);
-  const [noticeItemList, setNoticeItemList] = useState([]);
+  // const [noticeItemList, setNoticeItemList] = useState([]);
   const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
     imageUrl: null,
     category: null,
@@ -68,7 +68,7 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
       );
       const result = await response.json();
       if (result.count) setNotice(!hasNotice);
-      setNoticeItemList(result);
+      // setNoticeItemList(result);
     } catch (error) {
       console.log(error);
     }
@@ -102,11 +102,8 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
         />
       )}
       {hasNotice ? (
-        <NoticeList
-          shopId={storeId}
-          userType={userType}
-          noticeItemList={noticeItemList.items}
-        />
+        // <EmployerNoticeList recentNoticeList={noticeItemList} />
+        '데이터 ㅇㅇ'
       ) : (
         <EmptyRecruitment
           onClick={() =>

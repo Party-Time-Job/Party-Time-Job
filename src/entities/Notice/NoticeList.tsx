@@ -13,9 +13,6 @@ import { AllNotice } from '@/entities/Post/types';
 interface Props {
   category: string;
   searchValue?: string;
-  noticeItemList: Notice[] | [];
-  userType: string | null;
-  shopId: string | null;
   recentNoticeList?: Notice[];
 }
 

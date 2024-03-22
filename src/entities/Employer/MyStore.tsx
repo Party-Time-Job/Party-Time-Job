@@ -39,9 +39,9 @@ const MyStore = ({
         <span className='text-[28px] font-bold tracking-[0.56px] text-[#111322]'>
           내 가게
         </span>
-        <div className='inline-flex items-start justify-between gap-6 rounded-xl bg-slate-300 p-6'>
+        <div className='inline-flex items-start justify-between gap-6 rounded-xl border border-solid border-[#E5E4E7] p-6'>
           {/* 상호 이미지 */}
-          <div className='flex h-[346px] w-full items-center justify-center rounded-xl bg-red-300'>
+          <div className='flex h-[346px] w-full items-center justify-center rounded-xl'>
             <div className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl'>
               <Image fill src={imageUrl || ''} alt={name || ''} />
             </div>
