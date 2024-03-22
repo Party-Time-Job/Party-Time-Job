@@ -7,8 +7,8 @@ import { setCookie } from 'cookies-next';
 import AlertModal from '@/shared/ui/AlertModal';
 import LogInForm from '@/features/LogIn/ui/LogInForm';
 import SignUpLink from '@/features/LogIn/ui/SignUpLink';
-import LogoLink from '@/features/LogoLink/LogoLink';
 import { LoginFormProps, TokenResponse } from '@/features/LogIn/Types';
+import AccountPageLogoLink from '@/features/AccountPageLogoLink/AccountPageLogoLink';
 
 const LogInPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -65,7 +65,7 @@ const LogInPage = () => {
           onClick={handleCloseModal}
         />
       )}
-      <LogoLink />
+      <AccountPageLogoLink />
       <LogInForm onSubmit={onSubmit} />
       <SignUpLink />
     </div>

@@ -19,7 +19,9 @@ const SignUpForm = ({ onSubmit }: SignupFormComponentProps) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className='flex flex-col gap-2'>
-        <label htmlFor='email'>이메일</label>
+        <label className='text-gray-500' htmlFor='email'>
+          이메일
+        </label>
         <Input
           id='email'
           type='email'
@@ -40,7 +42,9 @@ const SignUpForm = ({ onSubmit }: SignupFormComponentProps) => {
         )}
       </div>
       <div className='flex flex-col gap-2'>
-        <label htmlFor='password'>비밀번호</label>
+        <label className='text-gray-500' htmlFor='password'>
+          비밀번호
+        </label>
         <Input
           id='password'
           type='password'
@@ -62,7 +66,9 @@ const SignUpForm = ({ onSubmit }: SignupFormComponentProps) => {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <label htmlFor='passwordConfirmation'>비밀번호 확인</label>
+        <label className='text-gray-500' htmlFor='passwordConfirmation'>
+          비밀번호 확인
+        </label>
         <Input
           id='passwordConfirmation'
           type='password'
@@ -81,10 +87,10 @@ const SignUpForm = ({ onSubmit }: SignupFormComponentProps) => {
         )}
       </div>
       <div className='flex flex-col gap-2'>
-        <label>회원 유형</label>
+        <label className='text-gray-500'>회원 유형</label>
         <div className='flex items-center justify-center gap-5'>
           <div
-            className={`flex gap-2 rounded-full border px-10 py-3 ${watch('type') === 'employer' ? 'border-pt-primary ring-pt-primary' : ''}`}
+            className={`flex gap-2 rounded-full border px-10 py-3 ${watch('type') === 'employer' ? 'border-test-green ring-test-green' : ''}`}
           >
             <input
               type='radio'
@@ -94,10 +100,12 @@ const SignUpForm = ({ onSubmit }: SignupFormComponentProps) => {
                 required: '회원 유형을 선택해 주세요.',
               })}
             />
-            <label htmlFor='employer'>사장님</label>
+            <label className='text-gray-500' htmlFor='employer'>
+              사장님
+            </label>
           </div>
           <div
-            className={`flex gap-2 rounded-full border px-10 py-3 ${watch('type') === 'employee' ? 'border-pt-primary ring-pt-primary' : ''}`}
+            className={`flex gap-2 rounded-full border px-10 py-3 ${watch('type') === 'employee' ? 'border-test-green ring-test-green' : ''}`}
           >
             <input
               type='radio'
@@ -107,7 +115,9 @@ const SignUpForm = ({ onSubmit }: SignupFormComponentProps) => {
                 required: '회원 유형을 선택해 주세요.',
               })}
             />
-            <label htmlFor='employee'>알바님</label>
+            <label className='text-gray-500' htmlFor='employee'>
+              알바님
+            </label>
           </div>
         </div>
         {errors.type && (

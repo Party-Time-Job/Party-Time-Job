@@ -23,7 +23,7 @@ interface InputComponentProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef<HTMLInputElement, InputComponentProps>(
   ({ className, width = 'w-80', height = '', ...rest }, ref) => {
-    const inputClassName = `${width} ${height} ${className || ''} flex items-start gap-2 self-stretch rounded-md border bg-white px-4 py-5`;
+    const inputClassName = `${width} ${height} ${className || ''} flex items-start gap-2 self-stretch rounded-md bg-test-black px-4 py-5`;
 
     return <input {...rest} ref={ref} className={inputClassName} />;
   },
