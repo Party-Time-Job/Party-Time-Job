@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import EmptyStore from '@/entities/Employer/EmptyStore';
 import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
 import MyStore from '@/entities/Employer/MyStore';
+import { StoreData, StoreItem } from '@/features/Create-Store/Type';
+// import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
 
 /**
  * header footer 작업 완료되면 진행 예정
@@ -26,6 +28,8 @@ interface StoreInfoProps {
 }
 
 const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
+  const [hasNotice, setNotice] = useState<boolean>(false);
+  // const [noticeItemList, setNoticeItemList] = useState([]);
   const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
     imageUrl: null,
     category: null,
@@ -43,16 +47,28 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}`,
       );
-      const storeData = await response.json();
-      console.log(storeData, '------detailsPage-----');
-      console.log(storeIdParams, '------storeIdParams-----');
+      const storeData: StoreData = await response.json();
+      const { item }: { item: StoreItem } = storeData;
+      const { imageUrl, category, name, address1, description } = item;
       setStoreInfo({
-        imageUrl: storeData.item.imageUrl,
-        category: storeData.item.category,
-        name: storeData.item.name,
-        address1: storeData.item.address1,
-        description: storeData.item.description,
+        imageUrl,
+        category,
+        name,
+        address1,
+        description,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getStoreNotice = async (storeIdParams: string): Promise<void> => {
+    try {
+      const response = await fetch(
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}/notices`,
+      );
+      const result = await response.json();
+      if (result.count) setNotice(!hasNotice);
+      // setNoticeItemList(result);
     } catch (error) {
       console.log(error);
     }
@@ -60,6 +76,7 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
   useEffect(() => {
     if (storeId) {
       getStoreInfo(storeId);
+      getStoreNotice(storeId);
     }
   }, [storeId]);
   return (
@@ -84,13 +101,18 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
           }
         />
       )}
-      <EmptyRecruitment
-        onClick={() =>
-          handleNavigate(
-            `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
-          )
-        }
-      />
+      {hasNotice ? (
+        // <EmployerNoticeList recentNoticeList={noticeItemList} />
+        '데이터 ㅇㅇ'
+      ) : (
+        <EmptyRecruitment
+          onClick={() =>
+            handleNavigate(
+              `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
+            )
+          }
+        />
+      )}
     </>
   );
 };
