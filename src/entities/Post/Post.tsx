@@ -24,7 +24,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const disabledText = isOutDatedNotice || isClosed ? 'text-[#CBC9CF]' : '';
 
   return (
-    <div className='z-0 inline-flex flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:gap-5 md:p-4'>
+    <div className='z-0 inline-flex w-[173px] flex-col items-start gap-3 rounded-xl border border-solid border-pt-gray20 bg-white p-3 md:w-[314px] md:gap-5 md:p-4'>
       <div className='relative flex h-[84px] w-[147px] items-center justify-center overflow-hidden rounded-xl md:h-[160px] md:w-[280px]'>
         {isOutDatedNotice ? <ClosedNoticeImage text='지난 공고' /> : null}
         {isClosed ? <ClosedNoticeImage text={'마감 공고'} /> : null}
@@ -42,10 +42,10 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           }}
         />
       </div>
-      <div className='flex flex-col items-start gap-4 self-stretch'>
-        <div className='flex h-[84px] flex-col items-start gap-2'>
+      <div className='flex flex-col items-start gap-3 self-stretch'>
+        <div className='flex h-[86px] flex-col items-start gap-2'>
           <span
-            className={`text-base font-bold leading-[20px] md:text-[20px] ${disabledText}`}
+            className={`text-base font-bold md:text-[20px] md:leading-[24px] ${disabledText} line-clamp-1`}
           >
             {noticeItem.shop.item.name}
           </span>
