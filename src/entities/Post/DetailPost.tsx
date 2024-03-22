@@ -73,7 +73,7 @@ const DetailPost = ({
         />
       </div>
       <div className='flex w-full flex-col items-start gap-6 lg:mt-4 lg:w-[346px] lg:justify-between'>
-        <div className='flex flex-col gap-2 md:gap-3'>
+        <div className='flex flex-col gap-2 md:gap-3 lg:min-h-[292px]'>
           <div className='flex flex-col items-start gap-2'>
             <span className='text-[14px] font-bold text-pt-green30 md:text-[16px]'>
               시급
