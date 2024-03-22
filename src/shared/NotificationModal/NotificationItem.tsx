@@ -1,5 +1,5 @@
 import { NotificationItemInterface } from '@/shared/NotificationModal/type';
-import calcDiff from '@/shared/utils/calcDiff';
+import calculateTime from '@/shared/utils/calculateTime';
 
 /**
  *
@@ -18,7 +18,7 @@ export const AcceptedItem = ({
   createdAt,
   onClick,
 }: NotificationItemInterface) => {
-  const timeDiff = calcDiff(createdAt);
+  const timeDifference = calculateTime(createdAt);
 
   return (
     <button
@@ -31,7 +31,9 @@ export const AcceptedItem = ({
         {name}({duration}) 공고 지원이{' '}
         <span className='text-[#0080ff]'>승인</span>되었어요.
       </p>
-      <span className='text-xs font-normal text-[#a4a1aa]'>{timeDiff}</span>
+      <span className='text-xs font-normal text-[#a4a1aa]'>
+        {timeDifference}
+      </span>
     </button>
   );
 };
@@ -43,20 +45,22 @@ export const RejectedItem = ({
   createdAt,
   onClick,
 }: NotificationItemInterface) => {
-  const timeDiff = calcDiff(createdAt);
+  const timeDifference = calculateTime(createdAt);
 
   return (
     <button
       type='button'
       onClick={() => onClick(id)}
-      className='w-238 rounded-5 rounded-5 flex flex-col items-start justify-start gap-4 border border-solid border-[white] bg-white px-12 py-16 text-start md:w-full'
+      className='flex w-full flex-col items-start justify-start gap-[4px] rounded-[5px] border border-solid border-[white] bg-white px-[12px] py-[16px] text-start sm:w-[238px]'
     >
-      <div className='rounded-70 h-5 w-5 bg-[#ff4040]'></div>
+      <div className='h-[5px] w-[5px] rounded-[70px] bg-[#ff4040]'></div>
       <p className='text-sm font-normal text-black'>
         {name}({duration}) 공고 지원이{' '}
         <span className='text-[#ff4040]'>거절</span>되었어요.
       </p>
-      <span className='text-xs font-normal text-[#a4a1aa]'>{timeDiff}</span>
+      <span className='text-xs font-normal text-[#a4a1aa]'>
+        {timeDifference}
+      </span>
     </button>
   );
 };

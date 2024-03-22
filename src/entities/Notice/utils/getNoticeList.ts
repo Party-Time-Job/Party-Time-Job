@@ -11,7 +11,7 @@ const getNoticeList = async (
   searchValue?: string,
   filterCondition?: { address?: string[]; date?: string; pay?: string },
 ) => {
-  let url = `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?offset=${offsetNumber}&limit=6&sort=${sortCategory}`;
+  let url = `/notices?offset=${offsetNumber}&limit=6&sort=${sortCategory}`;
 
   if (category === 'search') {
     url += `&keyword=${searchValue}`;

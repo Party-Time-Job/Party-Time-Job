@@ -19,11 +19,11 @@ const NotifiactionModal = ({
   onClick,
 }: NotificationModalInterface) => {
   const handleClose = () => {
-    onClose(false);
+    onClose();
   };
 
   return (
-    <div className='fixed right-[350px] top-[12px] z-[1000] w-full overflow-y-auto rounded-none border border-solid border-[#cbc9cf] bg-[#ffebe7] px-[20px] py-0 pb-[24px] shadow-none sm:relative sm:w-[368px] sm:rounded-[10px] sm:shadow-md'>
+    <div className='absolute right-[350px] top-[12px] z-[1000] w-full overflow-y-auto rounded-none border border-solid border-[#cbc9cf] bg-[#ffebe7] px-[20px] py-0 pb-[24px] shadow-none sm:w-[368px] sm:rounded-[10px] sm:shadow-md'>
       <div className='sticky top-0 flex justify-between bg-[#ffebe7] pb-[16px] pt-[24px]'>
         <h1 className='text-lg font-bold'>{`알림 ${items.length}개`}</h1>
         <button type='button' onClick={handleClose}>
@@ -44,7 +44,7 @@ const NotifiactionModal = ({
               name={item.name}
               duration={item.duration}
               createdAt={item.createdAt}
-              onClick={onClick}
+              onClick={() => onClick(item.id)}
             />
           ) : (
             <RejectedItem
@@ -53,7 +53,7 @@ const NotifiactionModal = ({
               name={item.name}
               duration={item.duration}
               createdAt={item.createdAt}
-              onClick={onClick}
+              onClick={() => onClick(item.id)}
             />
           ),
         )}

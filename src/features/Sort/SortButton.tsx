@@ -35,7 +35,7 @@ const SortButton = ({
   listCategory,
   filterCondition,
 }: Props) => {
-  let url: string = `https://bootcamp-api.codeit.kr/api/3-2/the-julge/notices?sort=${sortCategory}&offset=0&limit=6`;
+  let url: string = `/notices?sort=${sortCategory}&offset=0&limit=6`;
   if (searchValue) {
     url += `&keyword=${searchValue}`;
   }
@@ -72,7 +72,7 @@ const SortButton = ({
   return (
     <button
       onClick={handleSortClick}
-      className='text-center text-[14px] leading-[22px]'
+      className='w-[105px] py-[8px] text-center text-[14px] leading-[22px] hover:bg-pt-gray30'
     >
       {convertSortText(sortCategory)}
     </button>
