@@ -6,7 +6,8 @@ import EmptyStore from '@/entities/Employer/EmptyStore';
 import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
 import MyStore from '@/entities/Employer/MyStore';
 import { StoreData, StoreItem } from '@/features/Create-Store/Type';
-// import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
+import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
+import { AllNotice } from '@/entities/Post/types';
 
 /**
  * header footer 작업 완료되면 진행 예정
@@ -17,25 +18,35 @@ import { StoreData, StoreItem } from '@/features/Create-Store/Type';
 interface DetailsPageProps {
   userType: string | null;
   userId: string | null;
-  storeId: string | null;
+  storeId: string;
 }
 interface StoreInfoProps {
-  imageUrl: string | null;
-  category: string | null;
-  name: string | null;
-  address1: string | null;
-  description: string | null;
+  imageUrl: string;
+  category: string;
+  name: string;
+  address1: string;
+  description: string;
+  originalHourlyPay: string;
 }
 
 const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
   const [hasNotice, setNotice] = useState<boolean>(false);
-  // const [noticeItemList, setNoticeItemList] = useState([]);
+  const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
+    offset: 0,
+    limit: 0,
+    address: [],
+    count: 0,
+    hasNext: false,
+    items: [],
+    links: [],
+  });
   const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
-    imageUrl: null,
-    category: null,
-    name: null,
-    address1: null,
-    description: null,
+    imageUrl: '',
+    category: '',
+    name: '',
+    address1: '',
+    description: '',
+    originalHourlyPay: '',
   });
 
   const router = useRouter();
@@ -49,13 +60,21 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
       );
       const storeData: StoreData = await response.json();
       const { item }: { item: StoreItem } = storeData;
-      const { imageUrl, category, name, address1, description } = item;
+      const {
+        imageUrl,
+        category,
+        name,
+        address1,
+        description,
+        originalHourlyPay,
+      } = item;
       setStoreInfo({
         imageUrl,
         category,
         name,
         address1,
         description,
+        originalHourlyPay,
       });
     } catch (error) {
       console.log(error);
@@ -67,8 +86,10 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}/notices`,
       );
       const result = await response.json();
-      if (result.count) setNotice(!hasNotice);
-      // setNoticeItemList(result);
+      if (result.count) {
+        setNotice(!hasNotice);
+        setNoticeItemList(result);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -102,8 +123,14 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
         />
       )}
       {hasNotice ? (
-        // <EmployerNoticeList recentNoticeList={noticeItemList} />
-        '데이터 ㅇㅇ'
+        <EmployerNoticeList
+          shopId={storeId}
+          imageUrl={storeInfo.imageUrl}
+          noticeItemList={noticeItemList}
+          originalHourlyPay={storeInfo.originalHourlyPay}
+          name={storeInfo.name}
+          address1={storeInfo.address1}
+        />
       ) : (
         <EmptyRecruitment
           onClick={() =>

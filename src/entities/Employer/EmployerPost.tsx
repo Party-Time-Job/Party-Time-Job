@@ -13,12 +13,25 @@ import useNoticeStatus from '../Notice/hooks/useNoticeStatus.ts';
  * @param {NoticeItem} noticeItem notice.item 객체
  * @returns 사장님 페이지 -가게 정보 상세, 공고 리스트 페이지, 공고 상세 페이지에 쓰일 Post component
  */
-export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
+export const EmployerPost = ({
+  imageUrl,
+  noticeItem,
+  originalHourlyPay,
+  shopId,
+  name,
+  address1,
+}: {
+  imageUrl: string;
+  originalHourlyPay: string;
+  noticeItem: NoticeItem;
+  shopId: string;
+  name: string;
+  address1: string;
+}) => {
   const comparePriceRate = Math.round(
-    (noticeItem.hourlyPay / noticeItem.shop.item.originalHourlyPay) * 100 - 100,
+    (noticeItem.hourlyPay / Number(originalHourlyPay)) * 100 - 100,
   );
   const finishTime = addWorkHours(noticeItem.startsAt, noticeItem.workhour);
-  const shopId = noticeItem.shop.item.id;
   const noticeId = noticeItem.id;
   const { isOutDatedNotice, isClosed } = useNoticeStatus(shopId, noticeId);
   const disabledText = isOutDatedNotice || isClosed ? 'text-[#CBC9CF]' : '';
@@ -33,7 +46,7 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           width={0}
           height={0}
           sizes='100vw'
-          src={noticeItem.shop.item.imageUrl}
+          src={imageUrl}
           alt='preview-image'
           className='rounded-xl'
           style={{
@@ -47,7 +60,7 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
           <span
             className={`text-base font-bold leading-[20px] md:text-[20px] ${disabledText}`}
           >
-            {noticeItem.shop.item.name}
+            {name}
           </span>
           <div className='flex w-[147px] items-start gap-1.5 self-stretch md:w-[280px] md:items-center'>
             <Image
@@ -75,7 +88,7 @@ export const EmployerPost = ({ noticeItem }: { noticeItem: NoticeItem }) => {
             <span
               className={`text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice || isClosed ? 'text-[#CBC9CF]' : 'text-pt-gray40'}`}
             >
-              {noticeItem.shop.item.address1}
+              {address1}
             </span>
           </div>
         </div>
