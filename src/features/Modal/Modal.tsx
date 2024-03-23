@@ -87,7 +87,7 @@ const Modal = ({ handleToggle, category, cancelClick }: Props) => {
               />
             )}
           </div>
-          <span className='w-[250px] text-center leading-[26px]'>
+          <span className='w-[250px] text-center leading-[26px] text-[black]'>
             {setModalComment()}
           </span>
         </div>

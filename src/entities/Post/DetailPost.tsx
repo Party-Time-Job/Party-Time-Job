@@ -111,7 +111,7 @@ const DetailPost = ({
                 height={20}
                 className='h-4 w-4 md:h-5 md:w-5'
               />
-              <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
+              <span className='text-xs text-white md:text-[16px] md:leading-[22px]'>
                 {formatDateTime(notice.item.startsAt)}~{finishTime} (
                 {notice.item.workhour}시간)
               </span>
@@ -124,7 +124,7 @@ const DetailPost = ({
                 height={20}
                 className='h-4 w-4 md:h-5 md:w-5'
               />
-              <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
+              <span className='text-xs text-white md:text-[16px] md:leading-[22px]'>
                 {notice.item.shop.item.address1}
               </span>
             </div>
