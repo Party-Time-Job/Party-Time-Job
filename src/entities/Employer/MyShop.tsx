@@ -4,69 +4,79 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/shared/ui/Button';
 
-interface GetMyStoreProps {
-  imageUrl: string | null;
+interface GetMyShopProps {
+  imageUrl: string;
   category: string | null;
   name: string | null;
   address1: string | null;
   description: string | null;
-  userId: string | null;
-  storeId: string | null;
-  userType: string | null;
+  shopId: string | null;
 }
 
-const MyStore = ({
-  imageUrl = '',
+const MyShop = ({
+  imageUrl,
   category,
   name,
   address1,
   description,
-  userId,
-  storeId,
-  userType,
-}: GetMyStoreProps) => {
+  shopId,
+}: GetMyShopProps) => {
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {
     const routes = {
-      edit: `/store/registration/store-info/${userType}?userId=${userId}&storeId=${storeId}`,
-      register: `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
+      edit: `/shop/registration/shop-info/${shopId}`,
+      register: `/shop/registration/recruitment/edit?shopId=${shopId}&noticeId=`,
     };
     router.push(routes[action]);
   };
   return (
-    <div className='flex h-[540px] flex-col items-center justify-center gap-2'>
-      <div className='flex w-[965px] flex-col gap-[23px]'>
-        <span className='text-[28px] font-bold tracking-[0.56px] text-[#111322]'>
+    <div className='mt-10 flex flex-col items-center justify-center gap-2'>
+      <div className='mx-12 flex flex-col gap-[23px]'>
+        <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-blue text-xl font-bold text-black'>
           내 가게
         </span>
-        <div className='inline-flex items-start justify-between gap-6 rounded-xl border border-solid border-[#E5E4E7] p-6'>
+        <div className='flex-col items-start justify-between gap-6 rounded-xl bg-test-black p-6 sm:flex sm:flex-row'>
           {/* 상호 이미지 */}
-          <div className='flex h-[346px] w-full items-center justify-center rounded-xl'>
-            <div className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl'>
-              <Image fill src={imageUrl || ''} alt={name || ''} />
+          <div className='flex h-[346px] items-center justify-center rounded-xl'>
+            <div className='relative flex h-full w-[346px] items-center justify-center overflow-hidden rounded-xl'>
+              <Image
+                priority
+                width={0}
+                height={0}
+                sizes='100vw '
+                src={imageUrl}
+                alt='preview-image'
+                className='rounded-xl'
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                }}
+              />
             </div>
           </div>
           <div className='flex w-[346px] flex-col items-start justify-between self-stretch pt-4'>
             <div className='flex w-[346px] flex-col items-start gap-3 '>
               {/* 분류, 상호명 */}
               <div className='flex flex-col items-start gap-2'>
-                <div className='font-bold leading-5 text-[#EA3C12]'>
+                <div className='rounded-lg border border-test-blue bg-test-blue px-3 py-1 text-sm font-bold leading-5 text-black'>
                   {category}
                 </div>
-                <div className='text-[28px] font-bold tracking-[0.56px] text-[#111322]'>
+                <div className='text-[28px] font-bold tracking-[0.56px]'>
                   {name}
                 </div>
               </div>
               {/* 점포 위치 */}
               <div className='flex items-center gap-[6px]'>
                 <Image src='/location-icon.svg' alt='' width={20} height={20} />
-                <div className='leading-[26px] text-[#7D7986]'>{address1}</div>
+                <div className='leading-[26px]'>{address1}</div>
               </div>
               {/* 설명 */}
-              <div className='leading-[26px] text-[#000]'>{description}</div>
+              <div className='h-32 overflow-auto leading-[26px] scrollbar-hide'>
+                {description}
+              </div>
             </div>
             {/* 버튼 목록 */}
-            <div className='flex items-start justify-around gap-2 self-stretch'>
+            <div className='flex items-center gap-3'>
               <Button
                 status='active'
                 size='medium'
@@ -89,4 +99,4 @@ const MyStore = ({
   );
 };
 
-export default MyStore;
+export default MyShop;

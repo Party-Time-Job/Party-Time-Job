@@ -29,31 +29,32 @@ const EmployerNoticeList = ({
   address1,
 }: Props) => {
   return (
-    <div className='flex flex-col items-center gap-2'>
+    <div className='mt-10 flex flex-col items-center gap-2 border-t  border-gray-600 pt-10'>
       <div className='flex w-[965px] flex-col gap-[23px]'>
-        <span className='text-[28px] font-bold tracking-[0.56px] text-[#111322]'>
-          내가 등록한 공고
+        <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-blue text-xl font-bold text-black'>
+          내 공고
         </span>
-        <section className='flex flex-col items-center justify-center px-[12px]'>
-          <div className='flex w-full items-center gap-4'>
-            <div className='flex-flow inline-flex gap-x-2 gap-y-4'>
-              {noticeItemList?.items.map(notice => {
-                const noticeId = notice.item.id;
-                return (
-                  <Link key={noticeId} href={`/detail/${shopId}/${noticeId}`}>
-                    <EmployerPost
-                      key={noticeId}
-                      imageUrl={imageUrl}
-                      noticeItem={notice.item}
-                      originalHourlyPay={originalHourlyPay}
-                      shopId={shopId}
-                      name={name}
-                      address1={address1}
-                    />
-                  </Link>
-                );
-              })}
-            </div>
+        <section className='flex w-full'>
+          <div className='flex w-full gap-5 overflow-auto py-5 scrollbar-hide'>
+            {noticeItemList?.items.map(notice => {
+              const noticeId = notice.item.id;
+              return (
+                <Link
+                  key={noticeId}
+                  href={`/shop/notice-detail/${shopId}/${noticeId}`}
+                >
+                  <EmployerPost
+                    key={noticeId}
+                    imageUrl={imageUrl}
+                    noticeItem={notice.item}
+                    originalHourlyPay={originalHourlyPay}
+                    shopId={shopId}
+                    name={name}
+                    address1={address1}
+                  />
+                </Link>
+              );
+            })}
           </div>
         </section>
       </div>

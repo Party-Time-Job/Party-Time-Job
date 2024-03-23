@@ -9,6 +9,10 @@
   color: white;
 }
 
+input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 h1 {
   font-size: 28px;
   font-style: normal;

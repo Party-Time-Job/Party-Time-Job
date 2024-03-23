@@ -88,9 +88,9 @@ const Filter = ({
   };
 
   return (
-    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[#E5E4E7] bg-white px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
+    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[#E5E4E7] bg-test-black px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
-        <span className='text-xl font-bold leading-normal text-[#111322] '>
+        <span className='text-xl font-bold leading-normal text-white '>
           상세필터
         </span>
         <Image
@@ -105,10 +105,10 @@ const Filter = ({
       <div className='flex w-full flex-col items-start gap-10'>
         <div className='flex w-[350px] flex-col items-start gap-6 max-md:w-full'>
           <div className='flex flex-col items-start gap-3 max-md:w-full'>
-            <span className='text-base font-normal leading-[26px] text-[#111322]'>
+            <span className='text-base font-normal leading-[26px] text-white'>
               위치
             </span>
-            <div className='h-[258px] w-full rounded-md border-[1px] border-solid border-pt-gray30 md:w-[350px]'>
+            <div className='h-[258px] w-full overflow-hidden rounded-md border-[1px] border-solid border-pt-gray30 md:w-[350px]'>
               <div className='grid h-[258px] grid-cols-2 gap-[20px] overflow-y-scroll px-[28px] py-[20px]'>
                 {ADDRESS.map(item => {
                   return (
@@ -116,7 +116,7 @@ const Filter = ({
                       <span
                         key={item.key}
                         onClick={e => handleAddressClick(e)}
-                        className='cursor-pointer p-2 hover:bg-pt-gray20'
+                        className='cursor-pointer px-[10px] py-[6px] hover:rounded-[20px] hover:bg-black hover:text-test-green'
                       >
                         {item.value}
                       </span>
@@ -138,26 +138,27 @@ const Filter = ({
             </div>
           </div>
 
-          <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
+          <div className='h-0.5 self-stretch bg-gray-500'></div>
           <div className='flex items-start gap-3 self-stretch'>
             <div className='flex flex-[1_0_0] flex-col items-start gap-2'>
-              <span className='text-base font-normal leading-[26px] text-[#111322]'>
+              <span className='text-base font-normal leading-[26px] text-white'>
                 시작일
               </span>
               <Input
-                className='flex items-start gap-[10px] self-stretch px-4 py-5'
+                className='flex items-start gap-[10px] self-stretch border border-white px-4 py-5'
                 type='date'
                 onChange={e => handleChangeDate(e)}
                 value={selectedDate}
               />
             </div>
           </div>
-          <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
+          <div className='h-0.5 self-stretch bg-gray-500'></div>
           <div className='flex w-[350px] flex-col items-start justify-end gap-2 max-md:w-full'>
             <span className='text-[16px]'>금액</span>
             <div className='flex items-center justify-start gap-3 max-md:w-full'>
-              <div className='relative inline'>
+              <div className='relative inline rounded-md border border-gray-500'>
                 <Input
+                  className='border-white: border'
                   width='w-[169px]'
                   placeholder='입력'
                   type='number'

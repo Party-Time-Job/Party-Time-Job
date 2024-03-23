@@ -87,7 +87,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
             {formatHourlyPay(noticeItem.hourlyPay)}원
           </span>
           <div
-            className={`flex md:h-9 md:items-center md:rounded-lg md:p-3  ${isOutDatedNotice || isClosed ? 'border border-gray-500 text-gray-500 md:bg-test-black ' : 'border border-test-green text-white md:bg-test-black'}`}
+            className={`flex md:h-9 md:items-center md:rounded-lg md:p-3 ${isOutDatedNotice || isClosed ? 'text-gray-500 md:border md:border-gray-500 md:bg-test-black ' : 'border-test-green text-white md:border md:bg-test-black'}`}
           >
             <div className='flex items-center md:gap-0.5'>
               <span className='pt-0.5 text-sm font-bold leading-4'>
@@ -102,7 +102,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               >
                 <path
                   d='M12.5001 16.6668H7.50013V10.0001H3.4668L10.0001 3.4668L16.5335 10.0001H12.5001V16.6668Z'
-                  className={`h-4 w-4  md:h-5 md:w-5 ${isOutDatedNotice || isClosed ? 'fill-gray-500' : 'fill-white'}`}
+                  className={`h-4 w-4  md:h-5 md:w-5 ${isOutDatedNotice || isClosed ? 'fill-gray-500' : 'fill-test-green'}`}
                 />
               </svg>
             </div>

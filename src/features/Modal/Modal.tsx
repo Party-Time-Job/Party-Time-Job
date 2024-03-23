@@ -68,7 +68,7 @@ const Modal = ({ handleToggle, category, cancelClick }: Props) => {
       onClick={handleClickOutside}
       className='fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-70'
     >
-      <div className='flex flex-col items-center gap-[32px] rounded-[12px] bg-white p-[24px]'>
+      <div className='flex flex-col items-center gap-[32px] rounded-[12px] bg-test-black p-[24px]'>
         <div className='flex flex-col items-center gap-[16px]'>
           <div>
             {category === 'cancel' ? (
@@ -87,7 +87,7 @@ const Modal = ({ handleToggle, category, cancelClick }: Props) => {
               />
             )}
           </div>
-          <span className='w-[250px] text-center leading-[26px]'>
+          <span className='w-[250px] text-center leading-[26px] text-white'>
             {setModalComment()}
           </span>
         </div>
@@ -95,13 +95,13 @@ const Modal = ({ handleToggle, category, cancelClick }: Props) => {
           <div className='flex items-start gap-[8px]'>
             <button
               onClick={handleNoClick}
-              className='flex items-center justify-center rounded-[6px] border-[1px] border-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-pt-primary'
+              className='flex items-center justify-center rounded-[6px] bg-test-green px-[20px] py-[10px] text-[14px] font-bold text-black'
             >
               아니오
             </button>
             <button
               onClick={handleCancelClick}
-              className='flex items-center justify-center rounded-[6px] border-[1px] border-pt-primary bg-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-white'
+              className='flex items-center justify-center rounded-[6px]  bg-test-green px-[20px] py-[10px] text-[14px] font-bold text-black'
             >
               취소하기
             </button>
@@ -109,7 +109,7 @@ const Modal = ({ handleToggle, category, cancelClick }: Props) => {
         ) : (
           <button
             onClick={handleConfirm}
-            className='flex w-[80px] items-center justify-center rounded-[6px] border-[1px] border-pt-primary px-[20px] py-[10px] text-[14px] font-bold text-pt-primary'
+            className='flex w-[80px] items-center justify-center rounded-[6px] bg-test-green px-[20px] py-[10px] text-[14px] font-bold text-black'
           >
             확인
           </button>

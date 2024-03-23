@@ -128,16 +128,12 @@ const NotificationIcon = () => {
   }, [userId, token, setAlerts]);
 
   return (
-    <div className='relative'>
+    <div className='relative flex'>
       <button onClick={onClick}>
         {alerts.length > 0 ? (
-          <img
-            src='/active-notification.svg'
-            className='bg-white'
-            alt='알림있음'
-          />
+          <img src='/active-notification.svg' alt='알림있음' />
         ) : (
-          <img src='/notification.svg' className='bg-white' alt='알림없음' />
+          <img src='/notification.svg' alt='알림없음' />
         )}
 
         {isOpen && (

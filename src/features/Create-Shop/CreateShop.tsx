@@ -4,7 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { StoreItem } from './Type.ts';
+import { ShopItem } from './Type.ts';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -23,12 +23,12 @@ interface EmptyProps {
   imageUrl: string;
   description: string;
 }
-interface CreateStoreProps {
-  initialValues: StoreItem | EmptyProps;
-  storeId: string | null;
+interface CreateShopProps {
+  initialValues: ShopItem | EmptyProps;
+  shopId: string | null;
 }
 
-const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
+const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const {
     register,
     handleSubmit,
@@ -38,8 +38,8 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
     defaultValues: initialValues,
   });
   const router = useRouter();
-  const url = storeId ? `${baseUrl}/shops/${storeId}` : `${baseUrl}/shops`;
-  const method = storeId ? 'PUT' : 'POST';
+  const url = shopId ? `${baseUrl}/shops/${shopId}` : `${baseUrl}/shops`;
+  const method = shopId ? 'PUT' : 'POST';
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     try {
@@ -53,9 +53,8 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
         },
         body: JSON.stringify(data),
       });
-      console.log(response);
       if (response.status === 200) {
-        router.push('/store/details/1');
+        router.push('/shop/details');
       }
     } catch (error) {
       console.log(error);
@@ -65,7 +64,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
     reset(initialValues);
   }, []);
   return (
-    <div className='flex flex-col items-start gap-2 bg-[#FAFAFA] px-[238px] py-[60px]'>
+    <div className='flex flex-col items-start gap-2 px-[238px] py-[60px]'>
       <div className='flex flex-col items-center gap-8'>
         <div className='flex w-[964px] items-center justify-between'>
           <Title title='가게정보'>
@@ -101,7 +100,10 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
             {/* 분류 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='category'>분류</label>
-              <select {...register('category')}>
+              <select
+                className='flex w-[100%] items-start gap-2 self-stretch rounded-md bg-test-black px-4 py-5 text-white'
+                {...register('category')}
+              >
                 {CLASSIFICATION.map(item => (
                   <option key={item.key}>{item.value}</option>
                 ))}
@@ -115,7 +117,10 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
             {/* 주소 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address1'>주소</label>
-              <select {...register('address1')}>
+              <select
+                className='flex w-[100%] items-start gap-2 self-stretch rounded-md bg-test-black px-4 py-5 text-white'
+                {...register('address1')}
+              >
                 {ADDRESS.map(item => (
                   <option key={item.key}>{item.value}</option>
                 ))}
@@ -206,7 +211,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text={storeId ? '정보 수정하기' : '가게 등록하기'}
+              text={shopId === null ? '정보 수정하기' : '가게 등록하기'}
               disabled={isSubmitting}
               type='submit'
             />
@@ -217,7 +222,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
                 text='취소하기'
                 disabled={isSubmitting}
                 type='button'
-                onClick={() => router.push('/store/details/11')}
+                onClick={() => router.push('/shop/details')}
               />
             )}
           </div>
@@ -227,4 +232,4 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
   );
 };
 
-export default CreateStore;
+export default CreateShop;

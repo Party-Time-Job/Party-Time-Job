@@ -1,3 +1,4 @@
+import { CookieValueTypes } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import saveSeenNotice from '@/entities/Notice/utils/saveSeenNotice';
 import { Notice, User } from '../types.ts';
@@ -6,7 +7,7 @@ const useDetailPost = (
   shopId: string,
   noticeId: string,
   applicationId: string,
-  token: string,
+  token: CookieValueTypes,
   notice: Notice,
   userInfo: User | undefined,
 ) => {
@@ -28,7 +29,7 @@ const useDetailPost = (
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       },
@@ -46,7 +47,7 @@ const useDetailPost = (
       {
         method: 'PUT',
         headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ status: 'canceled' }),

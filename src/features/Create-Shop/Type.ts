@@ -8,7 +8,7 @@ export interface User {
   href: string;
 }
 
-export interface StoreItem {
+export interface ShopItem {
   id: string;
   name: string;
   category: string;
@@ -29,7 +29,7 @@ export interface Link {
   query?: any;
 }
 
-export interface StoreData {
-  item: StoreItem;
+export interface ShopData {
+  item: ShopItem;
   links: Link[];
 }
