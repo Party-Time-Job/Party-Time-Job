@@ -1,4 +1,4 @@
-import RegistRecruitmentPage from '@/pages/EmployerPage/RegistRecruitmentPage';
+import RegistRecruitmentPage from '@/page/EmployerPage/RegistRecruitmentPage';
 
 const getNoticeData = async (storeId: string): Promise<any> => {
   try {
