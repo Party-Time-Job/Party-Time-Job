@@ -2,6 +2,7 @@
 
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
+import { getCookie } from 'cookies-next';
 import { DecodedToken } from '@/widgets/Header/Type.ts';
 import DetailsPage from '@/page/EmployerPage/DetailsPage';
 import { UserData } from './type.ts';
@@ -29,7 +30,7 @@ const Details = () => {
   // 로그인 -> 계정 유형이 employer -> 디테일 페이지 이동
   // token 가져오기 (임시로 로컬스토리지)
   useEffect(() => {
-    const storedToken = localStorage.getItem('accessToken');
+    const storedToken = getCookie('token');
     if (storedToken) {
       setToken(storedToken);
     }
