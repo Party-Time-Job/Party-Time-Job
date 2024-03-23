@@ -83,7 +83,7 @@ const DetailsPage = ({ shopId }: DetailsPageProps) => {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopIdParams}/notices`,
       );
-      const result = await response.json();
+      const result: AllNotice = (await response.json()) as AllNotice;
       if (result.count) {
         setNotice(!hasNotice);
         setNoticeItemList(result);
