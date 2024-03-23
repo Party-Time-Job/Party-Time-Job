@@ -19,7 +19,11 @@ const LogoutButton = () => {
     router.push('/');
   };
 
-  return <HeaderButton text='로그아웃' onClick={handleLogout} />;
+  return (
+    <div>
+      <HeaderButton text='로그아웃' onClick={handleLogout} />
+    </div>
+  );
 };
 
 export default LogoutButton;

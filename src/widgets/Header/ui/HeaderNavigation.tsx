@@ -60,24 +60,24 @@ const HeaderNavigation = () => {
   return (
     <>
       {!token && (
-        <div className='flex gap-2'>
+        <div className='flex gap-4'>
           <LoginLink />
           <SignUpLink />
         </div>
       )}
 
       {token && userType === 'employee' && (
-        <>
+        <div className='flex gap-4'>
           <MyProfileLink />
           <LogoutButton />
           <NotificationIcon />
-        </>
+        </div>
       )}
       {token && userType === 'employer' && (
-        <>
+        <div className='flex gap-4'>
           <MyStoreLink />
           <LogoutButton />
-        </>
+        </div>
       )}
     </>
   );
