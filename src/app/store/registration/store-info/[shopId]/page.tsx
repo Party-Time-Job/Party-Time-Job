@@ -1,5 +1,5 @@
 import ResgistStorePage from '@/pages/EmployerPage/RegistStorePage';
-import { StoreItem } from '@/features/Create-Store/Type';
+import { StoreItem, StoreData } from '@/features/Create-Store/Type';
 
 interface EmptyProps {
   name: string;
@@ -36,9 +36,8 @@ const getStoreData = async (
       },
     );
     if (response.status === 200) {
-      const result: { item: StoreItem } = await response.json();
-      const { item } = result;
-      return item;
+      const result = (await response.json()) as StoreData;
+      return result.item as StoreItem;
     }
   } catch (error) {
     console.log(error);

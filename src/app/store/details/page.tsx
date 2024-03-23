@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { DecodedToken } from '@/pages/EmployerPage/Api/type';
 import DetailsPage from '@/pages/EmployerPage/DetailsPage';
+import { UserData } from './type.ts';
 
 const Details = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -14,7 +15,7 @@ const Details = () => {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${userIdParam}`,
       );
-      const userInfo = await response.json();
+      const userInfo = (await response.json()) as UserData;
       if (userInfo.item.shop) {
         setStoreId(userInfo.item.shop.item.id);
       } else {
@@ -40,7 +41,6 @@ const Details = () => {
       const decodedToken: DecodedToken = jwtDecode(token);
       // decoded token -> accountId 와 accountType 조회
       getUserId(decodedToken.userId);
-      console.log(decodedToken.userId, 'userId');
     }
   }, [token]);
 

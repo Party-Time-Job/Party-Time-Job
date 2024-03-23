@@ -25,7 +25,7 @@ const getNoticeData = async (
         },
       },
     );
-    const result: Data = await response.json();
+    const result: Data = (await response.json()) as Data;
     return result.item as Item;
   } catch (error) {
     console.log(error);

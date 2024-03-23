@@ -56,7 +56,7 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}`,
       );
-      const storeData: StoreData = await response.json();
+      const storeData = (await response.json()) as StoreData;
       const { item }: { item: StoreItem } = storeData;
       const {
         imageUrl,
