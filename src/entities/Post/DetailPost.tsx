@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { CookieValueTypes } from 'cookies-next';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import { Notice, User } from './types.ts';
@@ -15,7 +16,7 @@ interface Props {
   shopId: string;
   noticeId: string;
   isApplied: boolean;
-  token: string;
+  token: CookieValueTypes;
   applicationId: string;
   isOutDatedNotice: boolean;
   isClosed: boolean;
