@@ -1,7 +1,7 @@
 'use client';
 
 import { RecoilRoot } from 'recoil';
-import LogInPage from '@/pages/LogInPage/LogInPage';
+import LogInPage from '@/page/LogInPage/LogInPage';
 
 const page = () => {
   return (

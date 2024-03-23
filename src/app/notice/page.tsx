@@ -1,4 +1,4 @@
-import NoticePage from '@/pages/NoticePage/NoticePage';
+import NoticePage from '@/page/NoticePage/NoticePage';
 
 const page = () => {
   return <NoticePage />;

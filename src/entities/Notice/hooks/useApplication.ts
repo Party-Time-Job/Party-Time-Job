@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken';
+import getUserToken from '@/page/NoticeDetailPage/utils/getUserToken';
 import { DecodedToken } from '@/widgets/Header/Type';
 import { AllApply } from '@/entities/Post/types';
 import { getMethod } from '@/shared/api/RequestMethod';

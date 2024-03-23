@@ -16,7 +16,7 @@ import {
   TableBodyRow,
   TableBodyStatus,
 } from '@/shared/ui/Table/ui/TableBodyUi';
-import getUserToken from '@/pages/NoticeDetailPage/utils/getUserToken';
+import getUserToken from '@/page/NoticeDetailPage/utils/getUserToken';
 import { getMethod } from '@/shared/api/RequestMethod';
 import { AllApply } from '@/entities/Post/types';
 import RejectModal from '@/features/RejectModal/RejectModal';
