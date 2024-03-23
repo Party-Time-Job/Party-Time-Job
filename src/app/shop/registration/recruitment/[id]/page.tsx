@@ -33,7 +33,7 @@ const getNoticeData = async (
   }
 };
 
-const Store = async ({
+const Shop = async ({
   searchParams: { shopId, noticeId },
 }: {
   searchParams: {
@@ -51,4 +51,4 @@ const Store = async ({
   );
 };
 
-export default Store;
+export default Shop;

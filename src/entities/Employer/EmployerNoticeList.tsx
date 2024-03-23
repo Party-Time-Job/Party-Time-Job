@@ -42,7 +42,7 @@ const EmployerNoticeList = ({
                 return (
                   <Link
                     key={noticeId}
-                    href={`/store/notice-detail/${shopId}/${noticeId}`}
+                    href={`/shop/notice-detail/${shopId}/${noticeId}`}
                   >
                     <EmployerPost
                       key={noticeId}

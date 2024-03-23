@@ -4,7 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { StoreItem } from './Type.ts';
+import { ShopItem } from './Type.ts';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -23,12 +23,12 @@ interface EmptyProps {
   imageUrl: string;
   description: string;
 }
-interface CreateStoreProps {
-  initialValues: StoreItem | EmptyProps;
-  storeId: string | null;
+interface CreateShopProps {
+  initialValues: ShopItem | EmptyProps;
+  shopId: string | null;
 }
 
-const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
+const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const {
     register,
     handleSubmit,
@@ -38,8 +38,8 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
     defaultValues: initialValues,
   });
   const router = useRouter();
-  const url = storeId ? `${baseUrl}/shops/${storeId}` : `${baseUrl}/shops`;
-  const method = storeId ? 'PUT' : 'POST';
+  const url = shopId ? `${baseUrl}/shops/${shopId}` : `${baseUrl}/shops`;
+  const method = shopId ? 'PUT' : 'POST';
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     try {
@@ -53,9 +53,8 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
         },
         body: JSON.stringify(data),
       });
-      console.log(response);
       if (response.status === 200) {
-        router.push('/store/details');
+        router.push('/shop/details');
       }
     } catch (error) {
       console.log(error);
@@ -206,7 +205,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text={storeId ? '정보 수정하기' : '가게 등록하기'}
+              text={shopId ? '정보 수정하기' : '가게 등록하기'}
               disabled={isSubmitting}
               type='submit'
             />
@@ -217,7 +216,7 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
                 text='취소하기'
                 disabled={isSubmitting}
                 type='button'
-                onClick={() => router.push('/store/details')}
+                onClick={() => router.push('/shop/details')}
               />
             )}
           </div>
@@ -227,4 +226,4 @@ const CreateStore = ({ initialValues, storeId }: CreateStoreProps) => {
   );
 };
 
-export default CreateStore;
+export default CreateShop;

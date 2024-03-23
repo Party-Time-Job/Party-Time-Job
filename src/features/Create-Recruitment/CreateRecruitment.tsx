@@ -6,7 +6,9 @@ import { FieldValues, useForm } from 'react-hook-form';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
-import { Item } from '@/app/store/registration/recruitment/[id]/type';
+import { Item } from '@/app/shop/registration/recruitment/[id]/type';
+
+const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
 
 const CreateRecruitment = ({
   noticeData,
@@ -32,26 +34,27 @@ const CreateRecruitment = ({
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     const { startsAt } = getValues();
+    const url = noticeId
+      ? `${baseUrl}/shops/${shopId}/notices/${noticeId}`
+      : `${baseUrl}/shops/${shopId}/notices`;
     const method = noticeId ? 'PUT' : 'POST';
     try {
-      const response = await fetch(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices`,
-        {
-          method,
-          headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify({
-            ...data,
-            startsAt: new Date(startsAt).toISOString(),
-          }),
+      const response = await fetch(url, {
+        method,
+        headers: {
+          Accept: '*/*',
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
-      );
+        body: JSON.stringify({
+          ...data,
+          startsAt: new Date(startsAt).toISOString(),
+        }),
+      });
+      console.log(response);
       if (response.status === 200) {
-        router.push('/store/details');
+        router.push('/shop/details');
       }
     } catch (error) {
       console.log(error);

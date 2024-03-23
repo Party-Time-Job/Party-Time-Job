@@ -23,7 +23,7 @@ const EmployerDetailPost = ({ noticeId, shopId, notice }: Props) => {
 
   const moveEditPage = () => {
     router.push(
-      `/store/registration/recruitment/edit?shopId=${shopId}&noticeId=${noticeId}`,
+      `/shop/registration/recruitment/edit?shopId=${shopId}&noticeId=${noticeId}`,
     );
   };
 

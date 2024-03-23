@@ -1,10 +1,10 @@
 import EmpolyerEmptyData from './UI/EmpolyerEmptyData';
 
-interface MyStoreProps {
+interface MyShopProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const MyStore = ({ onClick }: MyStoreProps) => {
+const MyShop = ({ onClick }: MyShopProps) => {
   return (
     <div>
       <EmpolyerEmptyData
@@ -16,4 +16,4 @@ const MyStore = ({ onClick }: MyStoreProps) => {
     </div>
   );
 };
-export default MyStore;
+export default MyShop;

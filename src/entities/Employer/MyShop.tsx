@@ -4,28 +4,28 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/shared/ui/Button';
 
-interface GetMyStoreProps {
+interface GetMyShopProps {
   imageUrl: string;
   category: string | null;
   name: string | null;
   address1: string | null;
   description: string | null;
-  storeId: string | null;
+  shopId: string | null;
 }
 
-const MyStore = ({
+const MyShop = ({
   imageUrl,
   category,
   name,
   address1,
   description,
-  storeId,
-}: GetMyStoreProps) => {
+  shopId,
+}: GetMyShopProps) => {
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {
     const routes = {
-      edit: `/store/registration/store-info/${storeId}`,
-      register: `/store/registration/recruitment/edit?storeId=${storeId}&noticeId=`,
+      edit: `/shop/registration/shop-info/${shopId}`,
+      register: `/shop/registration/recruitment/edit?shopId=${shopId}&noticeId=`,
     };
     router.push(routes[action]);
   };
@@ -97,4 +97,4 @@ const MyStore = ({
   );
 };
 
-export default MyStore;
+export default MyShop;

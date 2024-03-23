@@ -2,10 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import EmptyStore from '@/entities/Employer/EmptyStore';
+import EmptyShop from '@/entities/Employer/EmptyShop';
 import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
-import MyStore from '@/entities/Employer/MyStore';
-import { StoreData, StoreItem } from '@/features/Create-Store/Type';
+import MyShop from '@/entities/Employer/MyShop';
+import { ShopData, ShopItem } from '@/features/Create-Shop/Type';
 import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
 import { AllNotice } from '@/entities/Post/types';
 
@@ -16,9 +16,9 @@ import { AllNotice } from '@/entities/Post/types';
  * 사장 가게 등록 ? <RegisteredRecruitment /> : ''
  */
 interface DetailsPageProps {
-  storeId: string;
+  shopId: string;
 }
-interface StoreInfoProps {
+interface ShopInfoProps {
   imageUrl: string;
   category: string;
   name: string;
@@ -27,7 +27,7 @@ interface StoreInfoProps {
   originalHourlyPay: string;
 }
 
-const DetailsPage = ({ storeId }: DetailsPageProps) => {
+const DetailsPage = ({ shopId }: DetailsPageProps) => {
   const [hasNotice, setNotice] = useState<boolean>(false);
   const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
     offset: 0,
@@ -38,7 +38,7 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
     items: [],
     links: [],
   });
-  const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
+  const [shopInfo, setShopInfo] = useState<ShopInfoProps>({
     imageUrl: '',
     category: '',
     name: '',
@@ -51,13 +51,13 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
   const handleNavigate = (route: string) => {
     router.push(route);
   };
-  const getStoreInfo = async (storeIdParams: string): Promise<void> => {
+  const getShopInfo = async (shopIdParams: string): Promise<void> => {
     try {
       const response = await fetch(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}`,
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopIdParams}`,
       );
-      const storeData = (await response.json()) as StoreData;
-      const { item }: { item: StoreItem } = storeData;
+      const shopData = (await response.json()) as ShopData;
+      const { item }: { item: ShopItem } = shopData;
       const {
         imageUrl,
         category,
@@ -66,7 +66,7 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
         description,
         originalHourlyPay,
       } = item;
-      setStoreInfo({
+      setShopInfo({
         imageUrl,
         category,
         name,
@@ -78,10 +78,10 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
       console.log(error);
     }
   };
-  const getStoreNotice = async (storeIdParams: string): Promise<void> => {
+  const getShopNotice = async (shopIdParams: string): Promise<void> => {
     try {
       const response = await fetch(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeIdParams}/notices`,
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopIdParams}/notices`,
       );
       const result = await response.json();
       if (result.count) {
@@ -93,43 +93,43 @@ const DetailsPage = ({ storeId }: DetailsPageProps) => {
     }
   };
   useEffect(() => {
-    if (storeId) {
-      getStoreInfo(storeId);
-      getStoreNotice(storeId);
+    if (shopId) {
+      getShopInfo(shopId);
+      getShopNotice(shopId);
     }
-  }, [storeId]);
+  }, [shopId]);
   return (
     <>
-      {storeId ? (
-        <MyStore
-          imageUrl={storeInfo.imageUrl}
-          category={storeInfo.category}
-          name={storeInfo.name}
-          address1={storeInfo.address1}
-          description={storeInfo.description}
-          storeId={storeId}
+      {shopId ? (
+        <MyShop
+          imageUrl={shopInfo.imageUrl}
+          category={shopInfo.category}
+          name={shopInfo.name}
+          address1={shopInfo.address1}
+          description={shopInfo.description}
+          shopId={shopId}
         />
       ) : (
-        <EmptyStore
+        <EmptyShop
           onClick={() =>
-            handleNavigate(`/store/registration/store-info/${storeId}`)
+            handleNavigate(`/shop/registration/shop-info/${shopId}`)
           }
         />
       )}
       {hasNotice ? (
         <EmployerNoticeList
-          shopId={storeId}
-          imageUrl={storeInfo.imageUrl}
+          shopId={shopId}
+          imageUrl={shopInfo.imageUrl}
           noticeItemList={noticeItemList}
-          originalHourlyPay={storeInfo.originalHourlyPay}
-          name={storeInfo.name}
-          address1={storeInfo.address1}
+          originalHourlyPay={shopInfo.originalHourlyPay}
+          name={shopInfo.name}
+          address1={shopInfo.address1}
         />
       ) : (
         <EmptyRecruitment
           onClick={() =>
             handleNavigate(
-              `/store/registration/recruitment/new?storeId=${storeId}`,
+              `/shop/registration/recruitment/new?shopId=${shopId}`,
             )
           }
         />

@@ -1,5 +1,5 @@
-import ResgistStorePage from '@/page/EmployerPage/RegistStorePage';
-import { StoreItem, StoreData } from '@/features/Create-Store/Type';
+import ResgistShopPage from '@/page/EmployerPage/RegistShopPage';
+import { ShopItem, ShopData } from '@/features/Create-Shop/Type';
 
 interface EmptyProps {
   name: string;
@@ -11,9 +11,9 @@ interface EmptyProps {
   description: string;
 }
 
-const getStoreData = async (
+const getShopData = async (
   shopId: string | null,
-): Promise<StoreItem | EmptyProps> => {
+): Promise<ShopItem | EmptyProps> => {
   try {
     if (!shopId) {
       return {
@@ -28,7 +28,6 @@ const getStoreData = async (
     }
     const response = await fetch(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}`,
-      // { cache: 'no-store' },
       {
         next: {
           tags: ['collection'],
@@ -36,8 +35,8 @@ const getStoreData = async (
       },
     );
     if (response.status === 200) {
-      const result = (await response.json()) as StoreData;
-      return result.item as StoreItem;
+      const result = (await response.json()) as ShopData;
+      return result.item as ShopItem;
     }
   } catch (error) {
     console.log(error);
@@ -54,7 +53,7 @@ const getStoreData = async (
   };
 };
 
-const StoreInfo = async ({
+const ShopInfo = async ({
   params,
 }: {
   params: {
@@ -63,8 +62,8 @@ const StoreInfo = async ({
 }) => {
   const shopId = params?.shopId;
   return (
-    <ResgistStorePage storeId={shopId} storeData={await getStoreData(shopId)} />
+    <ResgistShopPage shopId={shopId} shopData={await getShopData(shopId)} />
   );
 };
 
-export default StoreInfo;
+export default ShopInfo;
