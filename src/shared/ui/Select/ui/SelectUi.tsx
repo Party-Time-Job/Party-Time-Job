@@ -32,16 +32,16 @@ const SelectUi = forwardRef(
         <div className='relative w-full'>
           <div className='relative'>
             {isOpen && (
-              <ul className='absolute top-2 flex max-h-[230px] w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-solid border-[#e5e4e7] bg-white shadow-md'>
+              <ul className='absolute top-2 flex max-h-[230px] w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-solid border-[#e5e4e7] bg-test-black shadow-md'>
                 {options.map(option => (
                   <li
                     key={option.value}
-                    className='h-fit w-full border-b border-b-black text-center'
+                    className='h-fit w-full border-b border-gray-600 text-center'
                   >
                     <button
                       type='button'
                       onClick={() => onClick(option.value)}
-                      className={`${type ? 'filter' : ''} h-full w-full px-0 py-3 text-sm font-normal leading-[22px]`}
+                      className={`${type ? 'filter' : ''} h-full w-full px-0 py-3 text-sm font-normal leading-[22px] hover:text-black`}
                     >
                       {option.value}
                     </button>

@@ -9,6 +9,7 @@ import useNoticeListState from './hooks/useNoticeListState.ts';
 import NoticeCategory from './NoticeCategory.tsx';
 import NoticeListLoading from './NoticeListLoading.tsx';
 
+
 interface Props {
   category: string;
   searchValue?: string;
@@ -37,6 +38,7 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
     setListCategory,
     setNoticeItemList,
   } = useNoticeListState(category, searchValue, recentNoticeList);
+
 
   return (
     <section className='flex flex-col items-center justify-center px-[12px] pb-[80px] pt-[40px] md:px-[32px] md:py-[60px] lg:px-0'>

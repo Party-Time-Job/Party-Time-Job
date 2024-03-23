@@ -30,7 +30,7 @@ const TextAreaUi = forwardRef(
             onChange as (event: ChangeEvent<HTMLTextAreaElement>) => void
           }
           ref={ref}
-          className='h-[153px] w-full resize-none rounded-[5px] border border-solid border-[#cbc9cf] px-5 py-4 text-base font-normal leading-[26px] text-black placeholder:text-[#a4a1aa]'
+          className='h-[153px] w-full resize-none rounded-[5px] bg-test-black px-5 py-4 text-base font-normal leading-[26px] text-white placeholder:text-white'
         />
         {isValid && (
           <div className='ml-2 text-xs font-normal leading-4 text-[#ff4040]'>

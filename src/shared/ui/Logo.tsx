@@ -2,10 +2,10 @@ import Text from './Text';
 
 const Logo = () => {
   return (
-    <div className='flex items-center gap-2'>
-      <img src='/logo.png' className='h-8 w-8' />
-      <Text as='span' className='text-test-green'>
-        PARTY TIME JOB
+    <div className='logo-container flex items-center gap-2'>
+      <img src='/logo.png' className='h-10 w-10' />
+      <Text as='span' className='text-md logo-text pl-1 text-gray-400'>
+        Party Time Job
       </Text>
     </div>
   );

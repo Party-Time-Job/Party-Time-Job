@@ -17,7 +17,9 @@ const LogInForm = ({ onSubmit }: LoginFormComponentProps) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className='flex flex-col gap-2'>
-        <label htmlFor='email'>이메일</label>
+        <label htmlFor='email' className='text-gray-400'>
+          이메일
+        </label>
         <Input
           id='email'
           type='email'
@@ -38,7 +40,9 @@ const LogInForm = ({ onSubmit }: LoginFormComponentProps) => {
         )}
       </div>
       <div className='flex flex-col gap-2'>
-        <label htmlFor='password'>비밀번호</label>
+        <label htmlFor='password' className='text-gray-400'>
+          비밀번호
+        </label>
         <Input
           id='password'
           type='password'

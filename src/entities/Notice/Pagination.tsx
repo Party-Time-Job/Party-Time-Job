@@ -19,8 +19,8 @@ const Pagination = ({
   sortCategory,
 }: Props) => {
   const defaultPageStyle =
-    'flex h-[40px] w-[40px] items-center justify-center p-[12px] cursor-pointer';
-  const activePageStyle = `${defaultPageStyle} rounded-[4px] bg-pt-primary text-white`;
+    'flex h-[40px] w-[40px] items-center justify-center text-white p-[12px] cursor-pointer';
+  const activePageStyle = `${defaultPageStyle} rounded-[4px] bg-black border border-gray-500 font-blod`;
 
   const pageArray = setPagination(count, currentPageNumber);
 
@@ -34,7 +34,7 @@ const Pagination = ({
   };
 
   return (
-    <div className='mt-[40px] flex items-center justify-center'>
+    <div className='mt-[70px] flex items-center justify-center'>
       <div>
         <div className='flex items-center justify-center gap-[2px]'>
           {pageArray.map(page => {

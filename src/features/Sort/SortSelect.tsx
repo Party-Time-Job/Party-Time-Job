@@ -21,10 +21,10 @@ const SortSelect = ({
 }: Props) => {
   return (
     <button
-      className='flex h-[30px] items-center justify-center gap-[6px] rounded-[5px] bg-pt-gray30 p-[12px]'
+      className='flex h-[30px] items-center justify-center gap-[6px] rounded-[5px] bg-test-black p-[12px] text-white'
       onClick={handleToggleSort}
     >
-      <span className='text-[14px] font-bold'>
+      <span className='text-[14px] font-light'>
         {convertSortText(sortCategory)}
       </span>
       <Image
