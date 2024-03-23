@@ -24,10 +24,10 @@ export const AcceptedItem = ({
     <button
       type='button'
       onClick={() => onClick(id)}
-      className='flex w-full flex-col items-start justify-start gap-[4px] rounded-[5px] border border-solid border-[white] bg-white px-[12px] py-[16px] text-start sm:w-[238px]'
+      className='flex w-[238px] flex-col items-start justify-start gap-[4px] rounded-[5px] border border-gray-500 px-[12px] py-[16px] text-start'
     >
       <div className='h-[5px] w-[5px] rounded-[70px] bg-[#0080ff]'></div>
-      <p className='text-sm font-normal text-black'>
+      <p className='text-sm font-normal text-white'>
         {name}({duration}) 공고 지원이{' '}
         <span className='text-[#0080ff]'>승인</span>되었어요.
       </p>
@@ -51,10 +51,10 @@ export const RejectedItem = ({
     <button
       type='button'
       onClick={() => onClick(id)}
-      className='flex w-full flex-col items-start justify-start gap-[4px] rounded-[5px] border border-solid border-[white] bg-white px-[12px] py-[16px] text-start sm:w-[238px]'
+      className='flex w-[238px] flex-col items-start justify-start gap-[4px] rounded-[5px] border border-gray-500 px-[12px] py-[16px] text-start'
     >
       <div className='h-[5px] w-[5px] rounded-[70px] bg-[#ff4040]'></div>
-      <p className='text-sm font-normal text-black'>
+      <p className='text-sm font-normal text-white'>
         {name}({duration}) 공고 지원이{' '}
         <span className='text-[#ff4040]'>거절</span>되었어요.
       </p>

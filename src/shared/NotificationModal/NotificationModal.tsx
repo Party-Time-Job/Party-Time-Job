@@ -23,8 +23,8 @@ const NotifiactionModal = ({
   };
 
   return (
-    <div className='absolute right-[350px] top-[12px] z-[1000] w-full overflow-y-auto rounded-none border border-solid border-[#cbc9cf] bg-[#ffebe7] px-[20px] py-0 pb-[24px] shadow-none sm:w-[368px] sm:rounded-[10px] sm:shadow-md'>
-      <div className='sticky top-0 flex justify-between bg-[#ffebe7] pb-[16px] pt-[24px]'>
+    <div className='absolute right-0 top-[12px] z-[1000] overflow-y-auto rounded-lg border border-gray-500 bg-test-black px-[20px] py-0 pb-[24px]'>
+      <div className='sticky top-0 flex justify-between pb-[16px] pt-[24px]'>
         <h1 className='text-lg font-bold'>{`알림 ${items.length}개`}</h1>
         <button type='button' onClick={handleClose}>
           <Image src={'/close.svg'} alt='닫기 아이콘' width={24} height={24} />
