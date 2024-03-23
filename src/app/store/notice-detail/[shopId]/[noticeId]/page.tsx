@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import EmployerNoticeDetailPage from '@/pages/EmployerPage/EmployerNoticeDetailPage';
+import EmployerNoticeDetailPage from '@/page/EmployerPage/EmployerNoticeDetailPage';
 
 const NoticeDetailPage = ({
   params: { shopId, noticeId },

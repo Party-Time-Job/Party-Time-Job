@@ -2,8 +2,8 @@
 
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
-import { DecodedToken } from '@/pages/EmployerPage/Api/type';
-import DetailsPage from '@/pages/EmployerPage/DetailsPage';
+import { DecodedToken } from '@/page/EmployerPage/Api/type';
+import DetailsPage from '@/page/EmployerPage/DetailsPage';
 import { UserData } from './type.ts';
 
 const Details = () => {

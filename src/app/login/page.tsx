@@ -1,7 +1,14 @@
-import LogInPage from '@/pages/LogInPage/LogInPage';
+'use client';
+
+import { RecoilRoot } from 'recoil';
+import LogInPage from '@/page/LogInPage/LogInPage';
 
 const page = () => {
-  return <LogInPage />;
+  return (
+    <RecoilRoot>
+      <LogInPage />
+    </RecoilRoot>
+  );
 };
 
 export default page;

@@ -1,4 +1,4 @@
-import ResgistStorePage from '@/pages/EmployerPage/RegistStorePage';
+import ResgistStorePage from '@/page/EmployerPage/RegistStorePage';
 import { StoreItem, StoreData } from '@/features/Create-Store/Type';
 
 interface EmptyProps {

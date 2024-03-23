@@ -14,8 +14,8 @@ export const NoApplicationDataUi = () => {
   };
 
   return (
-    <div className='bg-[#fafafa] pb-[60px]'>
-      <Title title='신청 내역' size={28} gap={32}>
+    <div className='mt-10 border-t border-gray-600 pb-[60px]'>
+      <Title title='신청 내역' size={18} gap={22}>
         <NoProfileRegister
           text='아직 신청 내역이 없습니다.'
           button={
@@ -40,8 +40,8 @@ export const ApplicationDataUi = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className='bg-[#fafafa] pb-[60px]'>
-      <Title title='신청 내역' size={28} gap={32}>
+    <div className='mt-10 border-t border-gray-600 pb-[60px]'>
+      <Title title='신청 내역' size={18} gap={22}>
         {children}
       </Title>
     </div>

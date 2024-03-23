@@ -35,7 +35,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       onSubmit={onSubmit}
-      className={`${size} ${status} ${confirm ? 'confirm' : ''} rounded-md border`}
+      className={`${size} ${status} ${confirm ? 'confirm' : ''} rounded-md border shadow-sm shadow-test-green transition-all duration-300 hover:bg-test-green hover:font-bold hover:text-black`}
     >
       {text}
     </button>

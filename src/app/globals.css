@@ -5,6 +5,8 @@
 :root {
   margin: 0;
   padding: 0;
+  background: black;
+  color: white;
 }
 
 h1 {
@@ -77,14 +79,15 @@ h3 {
 }
 
 .active {
-  background-color: #3c6e71;
+  background-color: black;
   color: #fff;
+  border-color: #6b7280;
 }
 
 .inactive {
-  border: 1px solid #d9d9d9;
-  background-color: #d9d9d9;
-  color: fff;
+  border: 1px solid #6b7280;
+  background-color: black;
+  color: #6b7280;
   cursor: auto;
 }
 
@@ -180,4 +183,8 @@ input[type='number']::-webkit-outer-spin-button {
 .first-table td:first-child {
   z-index: 1;
   left: 0;
+}
+
+.logo-container:hover .logo-text {
+  color: #00ff85;
 }

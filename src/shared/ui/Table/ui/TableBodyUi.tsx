@@ -7,7 +7,7 @@ export const TableBody = ({ children }: { children: React.ReactNode }) => {
 
 export const TableBodyRow = ({ children }: { children: React.ReactNode }) => {
   return (
-    <tr className='border-b border-b-[#cbc9cf] text-sm font-normal sm:text-base'>
+    <tr className='border-b border-gray-600 text-sm font-normal sm:text-base'>
       {children}
     </tr>
   );

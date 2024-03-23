@@ -1,4 +1,4 @@
-import RegistRecruitmentPage from '@/pages/EmployerPage/RegistRecruitmentPage';
+import RegistRecruitmentPage from '@/page/EmployerPage/RegistRecruitmentPage';
 import { Item, Data } from './type.ts';
 import formatDateTime from '@/entities/Post/utils/formatDateTime.ts';
 
