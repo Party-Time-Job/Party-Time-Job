@@ -59,7 +59,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               className='h-4 w-4 md:h-5 md:w-5'
             />
             <span
-              className={`inline-block text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice || isClosed ? 'text-gray-500' : 'text-white'}`}
+              className={`inline-block text-xs md:text-sm md:leading-[22px] ${disabledText}`}
             >
               {formatDateTime(noticeItem.startsAt)}~{finishTime} (
               {noticeItem.workhour}시간)
@@ -74,7 +74,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
               className='h-4 w-4 md:h-5 md:w-5'
             />
             <span
-              className={`text-xs md:text-sm md:leading-[22px] ${isOutDatedNotice || isClosed ? 'text-gray-500' : 'text-white'}`}
+              className={`text-xs md:text-sm md:leading-[22px] ${disabledText}`}
             >
               {noticeItem.shop.item.address1}
             </span>
@@ -82,7 +82,7 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
         </div>
         <div className='flex flex-col items-start self-stretch md:flex-row md:items-center md:justify-between'>
           <span
-            className={`overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold leading-[22px] md:text-2xl ${disabledText} ${isOutDatedNotice || isClosed ? 'text-gray-500' : 'text-white'}`}
+            className={`overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold leading-[22px] md:text-2xl ${disabledText}`}
           >
             {formatHourlyPay(noticeItem.hourlyPay)}원
           </span>
