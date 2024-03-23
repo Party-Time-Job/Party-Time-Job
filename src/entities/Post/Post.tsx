@@ -21,7 +21,8 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
   const shopId = noticeItem.shop.item.id;
   const noticeId = noticeItem.id;
   const { isOutDatedNotice, isClosed } = useNoticeStatus(shopId, noticeId);
-  const disabledText = isOutDatedNotice || isClosed ? 'text-gray-500' : 'text-white';
+  const disabledText =
+    isOutDatedNotice || isClosed ? 'text-gray-500' : 'text-white';
 
   return (
     <div className='z-0 inline-flex w-[173px] flex-col items-start gap-3 rounded-xl border border-gray-500 bg-test-black p-3 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md hover:shadow-test-green md:w-[314px] md:gap-5 md:p-4'>
