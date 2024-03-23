@@ -64,7 +64,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     reset(initialValues);
   }, []);
   return (
-    <div className='flex flex-col items-start gap-2 bg-[#FAFAFA] px-[238px] py-[60px]'>
+    <div className='flex flex-col items-start gap-2 px-[238px] py-[60px]'>
       <div className='flex flex-col items-center gap-8'>
         <div className='flex w-[964px] items-center justify-between'>
           <Title title='가게정보'>
@@ -100,7 +100,10 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             {/* 분류 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='category'>분류</label>
-              <select {...register('category')}>
+              <select
+                className='flex w-[100%] items-start gap-2 self-stretch rounded-md bg-test-black px-4 py-5 text-white'
+                {...register('category')}
+              >
                 {CLASSIFICATION.map(item => (
                   <option key={item.key}>{item.value}</option>
                 ))}
@@ -114,7 +117,10 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             {/* 주소 */}
             <div className='flex w-[472px] flex-shrink-0 flex-col items-start gap-2'>
               <label htmlFor='address1'>주소</label>
-              <select {...register('address1')}>
+              <select
+                className='flex w-[100%] items-start gap-2 self-stretch rounded-md bg-test-black px-4 py-5 text-white'
+                {...register('address1')}
+              >
                 {ADDRESS.map(item => (
                   <option key={item.key}>{item.value}</option>
                 ))}
@@ -205,7 +211,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text={shopId ? '정보 수정하기' : '가게 등록하기'}
+              text={shopId === null ? '정보 수정하기' : '가게 등록하기'}
               disabled={isSubmitting}
               type='submit'
             />

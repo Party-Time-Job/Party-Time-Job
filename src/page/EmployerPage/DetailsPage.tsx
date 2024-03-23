@@ -112,7 +112,7 @@ const DetailsPage = ({ shopId }: DetailsPageProps) => {
       ) : (
         <EmptyShop
           onClick={() =>
-            handleNavigate(`/shop/registration/shop-info/${shopId}`)
+            handleNavigate(`/shop/registration/shop-info/new?shopId=${shopId}`)
           }
         />
       )}
