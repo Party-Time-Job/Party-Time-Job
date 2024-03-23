@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AlertModal from '@/shared/ui/AlertModal';
-import LogoLink from '@/features/LogoLink/LogoLink';
 import SignUpForm from '@/features/Signup/ui/SignUpForm';
 import { SignupFormProps, TokenResponse } from '@/features/Signup/Types';
 import LogInLink from '@/features/Signup/ui/LogInLink';
+import AccountPageLogoLink from '@/features/AccountPageLogoLink/AccountPageLogoLink';
 
 const SignUpPage = () => {
   const [completedModal, setCompletedModal] = useState<boolean>(false);
@@ -74,7 +74,7 @@ const SignUpPage = () => {
           onClick={handleCloseDuplicateModal}
         />
       )}
-      <LogoLink />
+      <AccountPageLogoLink />
       <SignUpForm onSubmit={onSubmit} />
       <LogInLink />
     </div>

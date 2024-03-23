@@ -9,6 +9,7 @@ import Pagination from './Pagination.tsx';
 import { FilterCondition } from './types.ts';
 import getNoticeList from './utils/getNoticeList.ts';
 import { AllNotice } from '@/entities/Post/types';
+import Text from '@/shared/ui/Text.tsx';
 
 interface Props {
   category: string;
@@ -106,9 +107,11 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
   const updateNoticeCategory = (value: string) => {
     if (value === 'all') {
       return (
-        <span className='text-[20px] font-bold leading-6 md:text-[28px]'>
-          전체 공고
-        </span>
+        <div className='mb-10 flex h-10 w-28 items-center justify-center rounded-lg bg-test-green text-black'>
+          <Text as='span' className='font-bold'>
+            전체공고
+          </Text>
+        </div>
       );
     }
     if (value === 'recent') {

@@ -22,7 +22,7 @@ const HeaderInput = () => {
     <div className='relative'>
       <input
         placeholder='가게 이름으로 찾아보세요'
-        className='h-10 w-[344px] rounded-md bg-[#F2F2F3] pl-10 text-sm lg:w-[450px]'
+        className='h-8 w-[344px] rounded-md bg-test-black pl-10 text-xs lg:w-[450px]'
         value={searchValue}
         onChange={e => updateSearchValue(e)}
         onKeyDown={e => handleSubmit(e)}
