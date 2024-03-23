@@ -9,9 +9,8 @@
 
 <img width='1200px' src='public/readme-1.png' />
 
-### 일자리가 급한 사람들을 위한 구인구직 서비스. 구인구직 과정을 파티처럼 즐겁고, 더욱 쉽게 만들고자 합니다.
-
-### 당신의 다음 파티는 어디에서 시작될까요? 지금 바로 시작해 보세요!
+<p>일자리가 급한 사람들을 위한 구인구직 서비스. 구인구직 과정을 파티처럼 즐겁고, 더욱 쉽게 만들고자 합니다.</p>
+<p>당신의 다음 파티는 어디에서 시작될까요? 지금 바로 시작해 보세요!</p>
 
 <br /><br />
 
@@ -80,7 +79,6 @@
   <img height='26px' src='https://img.shields.io/badge/husky-E94E2D?style=for-the-badge&logo=styledcomponent&logoColor=white' />
   <img height='26px' src='https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white' />
   <img height='26px' src='https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white' />
-  <img height='26px' src='' />
 </div>
 
 ### 배포
@@ -132,11 +130,14 @@ src
 
 ### 📄 랜딩페이지 및 로그인/회원가입 페이지
 
-(핵심 기능 작성)
+- 사용자 경험을 개선하기 위한 랜딩페이지 제작 및 디자인 변경
+- react-hook-form을 이용한 로그인 및 회원가입 기능
 
 ### 📄 일반회원 페이지
 
-(핵심 기능 작성)
+- 프로필 등록/편집 버튼 클릭 시 프로필 등록 모달로 이동
+- 연락처, 선호 지역에 맞지 않는 값 입력 시 에러 메세지 출력 기능
+- 신청한 공고 데이터를 가져와 테이블 컴포넌트에 보여주며, page를 url에 반영하는 페이지네이션 기능
 
 ### 📄 사장님 페이지
 
@@ -150,11 +151,11 @@ src
 
 # ⏏️ 추가 기능 구현
 
-(추가 기능 구현한 것 중 몇가지 필요한 기능들만 작성)
+- 커스텀 훅을 사용한 드롭다운 리스트 검색 기능 및 닫기 기능
 
 <br /><br />
 
-# 문제점 및 해결방법? 코어타임? 소통?
+# 문제점 및 해결방법? 코어타임? 필요한 리팩토링?
 
 (이 부분은 필요하면 넣고 필요없으면 빼도록 하겠습니다!)
 
