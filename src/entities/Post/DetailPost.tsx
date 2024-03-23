@@ -92,11 +92,11 @@ const DetailPost = ({
                   width='20'
                   height='20'
                   viewBox='0 0 20 20'
-                  className='h-4 w-4 fill-pt-green40 md:h-5 md:w-5 md:fill-white'
+                  className='h-4 w-4 md:h-5 md:w-5 md:fill-white'
                 >
                   <path
                     d='M12.5001 16.6668H7.50013V10.0001H3.4668L10.0001 3.4668L16.5335 10.0001H12.5001V16.6668Z'
-                    className='h-4 w-4 fill-white md:h-5 md:w-5'
+                    className='h-4 w-4  fill-test-green md:h-5 md:w-5'
                   />
                 </svg>
               </div>
