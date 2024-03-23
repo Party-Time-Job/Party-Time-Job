@@ -4,32 +4,28 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/shared/ui/Button';
 
-interface GetMyStoreProps {
-  imageUrl: string | null;
+interface GetMyShopProps {
+  imageUrl: string;
   category: string | null;
   name: string | null;
   address1: string | null;
   description: string | null;
-  userId: string | null;
-  storeId: string | null;
-  userType: string | null;
+  shopId: string | null;
 }
 
-const MyStore = ({
-  imageUrl = '',
+const MyShop = ({
+  imageUrl,
   category,
   name,
   address1,
   description,
-  userId,
-  storeId,
-  userType,
-}: GetMyStoreProps) => {
+  shopId,
+}: GetMyShopProps) => {
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {
     const routes = {
-      edit: `/store/registration/store-info/${userType}?userId=${userId}&storeId=${storeId}`,
-      register: `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
+      edit: `/shop/registration/shop-info/${shopId}`,
+      register: `/shop/registration/recruitment/edit?shopId=${shopId}&noticeId=`,
     };
     router.push(routes[action]);
   };
@@ -43,7 +39,19 @@ const MyStore = ({
           {/* 상호 이미지 */}
           <div className='flex h-[346px] w-full items-center justify-center rounded-xl'>
             <div className='relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl'>
-              <Image fill src={imageUrl || ''} alt={name || ''} />
+              <Image
+                priority
+                width={0}
+                height={0}
+                sizes='100vw'
+                src={imageUrl}
+                alt='preview-image'
+                className='rounded-xl'
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                }}
+              />
             </div>
           </div>
           <div className='flex w-[346px] flex-col items-start justify-between self-stretch pt-4'>
@@ -89,4 +97,4 @@ const MyStore = ({
   );
 };
 
-export default MyStore;
+export default MyShop;
