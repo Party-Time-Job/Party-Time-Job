@@ -6,21 +6,33 @@ import { FieldValues, useForm } from 'react-hook-form';
 import Title from '@/shared/ui/Title';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
+import { Item } from '@/app/store/registration/recruitment/[id]/type';
 
-const CreateRecruitment = ({ storeId }: { storeId: string }) => {
+const CreateRecruitment = ({
+  noticeData,
+  shopId,
+}: {
+  shopId: string;
+  noticeData: Item;
+}) => {
   const {
     register,
     handleSubmit,
     getValues,
     formState: { isSubmitting, errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      ...noticeData,
+      startsAt: new Date(noticeData.startsAt).toISOString(),
+    },
+  });
   const router = useRouter();
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     const { startsAt } = getValues();
     try {
       const response = await fetch(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}/notices`,
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices`,
         {
           method: 'POST',
           headers: {
@@ -36,7 +48,7 @@ const CreateRecruitment = ({ storeId }: { storeId: string }) => {
         },
       );
       if (response.status === 200) {
-        router.push(`/store/details/${storeId}`);
+        router.push(`/store/details/${shopId}`);
       }
     } catch (error) {
       console.log(error);

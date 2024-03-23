@@ -1,18 +1,32 @@
 import RegistRecruitmentPage from '@/pages/EmployerPage/RegistRecruitmentPage';
+import { Item, Data } from './type.ts';
+import formatDateTime from '@/entities/Post/utils/formatDateTime.ts';
 
-const getNoticeData = async (storeId: string): Promise<any> => {
+const getNoticeData = async (
+  shopId: string,
+  noticeId: string | null,
+): Promise<Item> => {
+  if (!noticeId) {
+    const TODAY = new Date();
+    return {
+      id: '',
+      hourlyPay: '',
+      startsAt: formatDateTime(String(TODAY)),
+      workhour: '',
+      description: '',
+    };
+  }
   try {
     const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}/notices`,
-      // { cache: 'no-store' },
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}`,
       {
         next: {
           tags: ['collection'],
         },
       },
     );
-    const result = await response.json();
-    return result;
+    const result: Data = await response.json();
+    return result.item as Item;
   } catch (error) {
     console.log(error);
     throw error;
@@ -20,16 +34,15 @@ const getNoticeData = async (storeId: string): Promise<any> => {
 };
 
 const Store = async ({
-  searchParams,
+  searchParams: { shopId, noticeId },
 }: {
   searchParams: {
-    storeId: string;
-    userId: string;
+    shopId: string;
+    noticeId: string | null;
   };
 }) => {
-  const { storeId } = searchParams;
-  const noticeData = await getNoticeData(storeId);
-  return <RegistRecruitmentPage noticeData={noticeData} storeId={storeId} />;
+  const noticeData = await getNoticeData(shopId, noticeId);
+  return <RegistRecruitmentPage noticeData={noticeData} shopId={shopId} />;
 };
 
 export default Store;

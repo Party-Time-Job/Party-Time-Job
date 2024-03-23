@@ -9,9 +9,11 @@ import formatHourlyPay from './utils/formatHourlyPay.ts';
 
 interface Props {
   notice: Notice;
+  noticeId: string;
+  shopId: string;
 }
 
-const EmployerDetailPost = ({ notice }: Props) => {
+const EmployerDetailPost = ({ noticeId, shopId, notice }: Props) => {
   const router = useRouter();
   const comparePriceRate = Math.round(
     (notice.item.hourlyPay / notice.item.shop.item.originalHourlyPay) * 100 -
@@ -19,9 +21,10 @@ const EmployerDetailPost = ({ notice }: Props) => {
   );
   const finishTime = addWorkHours(notice.item.startsAt, notice.item.workhour);
 
-  // edit 페이지 구현하면 path 변경해주세요.
   const moveEditPage = () => {
-    router.push('/edit/여기에 주소 추가');
+    router.push(
+      `/store/registration/recruitment/edit?shopId=${shopId}&noticeId=${noticeId}`,
+    );
   };
 
   return (

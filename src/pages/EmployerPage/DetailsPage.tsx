@@ -16,8 +16,6 @@ import { AllNotice } from '@/entities/Post/types';
  * 사장 가게 등록 ? <RegisteredRecruitment /> : ''
  */
 interface DetailsPageProps {
-  userType: string | null;
-  userId: string | null;
   storeId: string;
 }
 interface StoreInfoProps {
@@ -29,7 +27,7 @@ interface StoreInfoProps {
   originalHourlyPay: string;
 }
 
-const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
+const DetailsPage = ({ storeId }: DetailsPageProps) => {
   const [hasNotice, setNotice] = useState<boolean>(false);
   const [noticeItemList, setNoticeItemList] = useState<AllNotice>({
     offset: 0,
@@ -109,16 +107,12 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
           name={storeInfo.name}
           address1={storeInfo.address1}
           description={storeInfo.description}
-          userId={userId}
           storeId={storeId}
-          userType={userType}
         />
       ) : (
         <EmptyStore
           onClick={() =>
-            handleNavigate(
-              `/store/registration/store-info/${userType}?userId=${userId}&storeId=${storeId}`,
-            )
+            handleNavigate(`/store/registration/store-info/${storeId}`)
           }
         />
       )}
@@ -135,7 +129,7 @@ const DetailsPage = ({ userType, userId, storeId }: DetailsPageProps) => {
         <EmptyRecruitment
           onClick={() =>
             handleNavigate(
-              `/store/registration/recruitment/${userType}?userId=${userId}&storeId=${storeId}`,
+              `/store/registration/recruitment/new?storeId=${storeId}`,
             )
           }
         />

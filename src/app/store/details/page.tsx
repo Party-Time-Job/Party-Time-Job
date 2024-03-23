@@ -7,8 +7,6 @@ import DetailsPage from '@/pages/EmployerPage/DetailsPage';
 
 const Details = () => {
   const [token, setToken] = useState<string | null>(null);
-  const [userType, setUserType] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
   const [storeId, setStoreId] = useState<string>('');
 
   const getUserId = async (userIdParam: string): Promise<void> => {
@@ -22,8 +20,6 @@ const Details = () => {
       } else {
         setStoreId('');
       }
-      setUserType(userInfo.item.type);
-      setUserId(userInfo.item.id);
     } catch (error) {
       console.log(error);
     }
@@ -44,11 +40,12 @@ const Details = () => {
       const decodedToken: DecodedToken = jwtDecode(token);
       // decoded token -> accountId 와 accountType 조회
       getUserId(decodedToken.userId);
+      console.log(decodedToken.userId, 'userId');
     }
   }, [token]);
 
   // accountId 와 accountType Props로 내려주기
-  return <DetailsPage userType={userType} userId={userId} storeId={storeId} />;
+  return <DetailsPage storeId={storeId} />;
 };
 
 export default Details;

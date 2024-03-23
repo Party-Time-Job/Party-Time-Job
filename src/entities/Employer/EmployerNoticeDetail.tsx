@@ -40,7 +40,11 @@ const EmployerNoticeDetail = ({
             </span>
           </div>
           <div className='flex flex-col gap-3'>
-            <EmployerDetailPost notice={detail} />
+            <EmployerDetailPost
+              shopId={shopId}
+              noticeId={noticeId}
+              notice={detail}
+            />
             <NoticeDescription detail={detail} />
           </div>
         </div>

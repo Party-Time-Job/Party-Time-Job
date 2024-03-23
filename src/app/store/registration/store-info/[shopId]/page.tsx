@@ -12,10 +12,10 @@ interface EmptyProps {
 }
 
 const getStoreData = async (
-  storeId: string | null,
+  shopId: string | null,
 ): Promise<StoreItem | EmptyProps> => {
   try {
-    if (!storeId) {
+    if (!shopId) {
       return {
         name: '',
         category: '',
@@ -27,7 +27,7 @@ const getStoreData = async (
       };
     }
     const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${storeId}`,
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}`,
       // { cache: 'no-store' },
       {
         next: {
@@ -36,7 +36,7 @@ const getStoreData = async (
       },
     );
     if (response.status === 200) {
-      const result = await response.json();
+      const result: { item: StoreItem } = await response.json();
       const { item } = result;
       return item;
     }
@@ -56,18 +56,15 @@ const getStoreData = async (
 };
 
 const StoreInfo = async ({
-  searchParams,
+  params,
 }: {
-  searchParams: {
-    storeId: string | null;
+  params: {
+    shopId: string | null;
   };
 }) => {
-  const storeId = searchParams?.storeId;
+  const shopId = params?.shopId;
   return (
-    <ResgistStorePage
-      storeId={storeId}
-      storeData={await getStoreData(storeId)}
-    />
+    <ResgistStorePage storeId={shopId} storeData={await getStoreData(shopId)} />
   );
 };
 
