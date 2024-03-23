@@ -8,7 +8,7 @@ interface Props {
 const NoticeCategory = ({ category, searchValue }: Props) => {
   if (category === 'all') {
     return (
-      <div className='flex h-10 w-28 items-center justify-center rounded-lg border border-test-green bg-black text-white'>
+      <div className='flex h-10 w-28 items-center justify-center rounded-lg bg-test-green text-black'>
         <Text as='span' className='font-bold'>
           전체공고
         </Text>
