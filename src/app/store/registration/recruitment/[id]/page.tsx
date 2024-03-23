@@ -42,7 +42,13 @@ const Store = async ({
   };
 }) => {
   const noticeData = await getNoticeData(shopId, noticeId);
-  return <RegistRecruitmentPage noticeData={noticeData} shopId={shopId} />;
+  return (
+    <RegistRecruitmentPage
+      noticeId={noticeId}
+      noticeData={noticeData}
+      shopId={shopId}
+    />
+  );
 };
 
 export default Store;

@@ -11,9 +11,11 @@ import { Item } from '@/app/store/registration/recruitment/[id]/type';
 const CreateRecruitment = ({
   noticeData,
   shopId,
+  noticeId,
 }: {
   shopId: string;
   noticeData: Item;
+  noticeId: string | null;
 }) => {
   const {
     register,
@@ -30,11 +32,12 @@ const CreateRecruitment = ({
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const token = localStorage.getItem('accessToken');
     const { startsAt } = getValues();
+    const method = noticeId ? 'PUT' : 'POST';
     try {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices`,
         {
-          method: 'POST',
+          method,
           headers: {
             Accept: '*/*',
             Authorization: `Bearer ${token}`,
@@ -48,7 +51,7 @@ const CreateRecruitment = ({
         },
       );
       if (response.status === 200) {
-        router.push(`/store/details/${shopId}`);
+        router.push('/store/details');
       }
     } catch (error) {
       console.log(error);
@@ -150,7 +153,7 @@ const CreateRecruitment = ({
           </div>
           <Button
             disabled={isSubmitting}
-            text='등록하기'
+            text={noticeId ? '수정하기' : '등록하기'}
             type='submit'
             size='medium'
             status='active'
