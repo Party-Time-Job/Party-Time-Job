@@ -11,11 +11,14 @@ import CopyRight from './ui/CopyRight';
 const Footer = () => {
   const pathname = usePathname();
 
-  if (pathname === '/login') {
-    return null;
-  }
-
-  if (pathname === '/signup') {
+  if (
+    pathname === '/login' ||
+    pathname === '/signup' ||
+    pathname.startsWith('/shop/registration/recruitment/new') ||
+    pathname.startsWith('/shop/registration/shop-info/new') ||
+    pathname.startsWith('/shop/registration/recruitment/edit') ||
+    pathname.match(/^\/shop\/registration\/shop-info\/.+/)
+  ) {
     return null;
   }
 
