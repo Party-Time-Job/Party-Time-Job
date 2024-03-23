@@ -29,7 +29,7 @@ const NoticeCategory = ({ category, searchValue }: Props) => {
       <div className='flex gap-2'>
         <span className='flex h-10 w-28 items-center justify-center rounded-lg bg-test-blue text-lg font-bold text-black'>
           {searchValue}
-        </span>{' '}
+        </span>
         <span className='flex items-end font-bold text-test-blue'>
           검색 결과
         </span>

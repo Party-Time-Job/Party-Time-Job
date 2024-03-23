@@ -53,6 +53,9 @@ const Filter = ({
       removeAddress(addItem);
       return;
     }
+    if (selectedAddressList.length >= 3) {
+      return;
+    }
     setSelectedAddressList(prev => [...prev, addItem]);
   };
 
@@ -88,7 +91,7 @@ const Filter = ({
   };
 
   return (
-    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[#E5E4E7] bg-test-black px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
+    <div className='fixed z-10 flex w-[390px] flex-col items-start gap-5 rounded-[10px] border border-solid border-[#E5E4E7] bg-test-black px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:absolute md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
         <span className='text-xl font-bold leading-normal text-white '>
           상세필터
