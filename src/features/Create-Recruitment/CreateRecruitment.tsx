@@ -69,7 +69,12 @@ const CreateRecruitment = ({
             </Text>
           </div>
           <div className='flex'>
-            <Image width={32} height={32} src={'/close.svg'} alt='close' />
+            <Image
+              width={32}
+              height={32}
+              src={'/close-white.svg'}
+              alt='close'
+            />
           </div>
         </div>
         <form
