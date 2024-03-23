@@ -143,13 +143,15 @@ const CreateRecruitment = ({
               <span>{errors.description.message?.toString()}</span>
             )}
           </div>
-          <Button
-            disabled={isSubmitting}
-            text={noticeId ? '수정하기' : '등록하기'}
-            type='submit'
-            size='medium'
-            status='active'
-          />
+          <div className='flex justify-end'>
+            <Button
+              disabled={isSubmitting}
+              text={noticeId ? '수정하기' : '등록하기'}
+              type='submit'
+              size='medium'
+              status='active'
+            />
+          </div>
         </form>
       </div>
     </div>
