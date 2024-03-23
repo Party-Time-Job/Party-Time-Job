@@ -2,7 +2,7 @@
 
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
-import { DecodedToken } from '@/page/EmployerPage/Api/type';
+import { DecodedToken } from '@/widgets/Header/Type.ts';
 import DetailsPage from '@/page/EmployerPage/DetailsPage';
 import { UserData } from './type.ts';
 
