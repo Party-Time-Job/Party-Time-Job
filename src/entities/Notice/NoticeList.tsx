@@ -71,7 +71,10 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
               );
             })
           ) : (
-            <NoticeListLoading />
+            <NoticeListLoading
+              category={category}
+              listCategory={listCategory}
+            />
           )}
         </div>
       </div>

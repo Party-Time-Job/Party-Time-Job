@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
+import { getCookie } from 'cookies-next';
 import { jwtDecode } from 'jwt-decode';
-import getUserToken from '@/page/NoticeDetailPage/utils/getUserToken';
+import { useEffect, useState } from 'react';
 import { DecodedToken } from '@/widgets/Header/Type';
-import { AllApply } from '@/entities/Post/types';
 import { getMethod } from '@/shared/api/RequestMethod';
+import { AllApply } from '@/entities/Post/types';
 
 const useApplication = (shopId: string, noticeId: string) => {
   const [isApplied, setIsApplied] = useState(false);
   const [applicationId, setApplicationId] = useState('');
 
-  const token = getUserToken();
-
+  const token = getCookie('token');
   useEffect(() => {
     if (token) {
       const decoded: DecodedToken = jwtDecode(token);
