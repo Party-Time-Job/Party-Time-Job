@@ -54,13 +54,13 @@ const getShopData = async (
 };
 
 const ShopInfo = async ({
-  params,
+  searchParams,
 }: {
-  params: {
+  searchParams: {
     shopId: string | null;
   };
 }) => {
-  const shopId = params?.shopId;
+  const shopId = searchParams?.shopId;
   return (
     <ResgistShopPage shopId={shopId} shopData={await getShopData(shopId)} />
   );
