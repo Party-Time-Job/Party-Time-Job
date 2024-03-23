@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FieldValues, useForm } from 'react-hook-form';
 import Button from '@/shared/ui/Button';
@@ -68,14 +69,14 @@ const CreateRecruitment = ({
               공고등록
             </Text>
           </div>
-          <div className='flex'>
+          <Link href='/shop/details'>
             <Image
               width={32}
               height={32}
               src={'/close-white.svg'}
               alt='close'
             />
-          </div>
+          </Link>
         </div>
         <form
           onSubmit={handleSubmit(data => requestInfo(data))}
