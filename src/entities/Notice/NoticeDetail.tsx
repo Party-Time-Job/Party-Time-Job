@@ -33,7 +33,7 @@ const NoticeDetail = ({
       {detail ? (
         <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
           <div className='flex flex-col gap-2'>
-            <span className='flex h-8 w-14 items-center justify-center rounded-lg border border-test-green bg-black text-sm font-bold text-white'>
+            <span className='flex h-8 w-14 items-center justify-center rounded-lg bg-test-green text-sm font-bold text-black'>
               {detail.item.shop.item.category}
             </span>
             <span className='mb-2 text-4xl font-bold text-white'>

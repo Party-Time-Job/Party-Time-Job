@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { CookieValueTypes } from 'cookies-next';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import { Notice, User } from './types.ts';
@@ -15,7 +16,7 @@ interface Props {
   shopId: string;
   noticeId: string;
   isApplied: boolean;
-  token: string;
+  token: CookieValueTypes;
   applicationId: string;
   isOutDatedNotice: boolean;
   isClosed: boolean;
@@ -91,11 +92,11 @@ const DetailPost = ({
                   width='20'
                   height='20'
                   viewBox='0 0 20 20'
-                  className='h-4 w-4 fill-pt-green40 md:h-5 md:w-5 md:fill-white'
+                  className='h-4 w-4 md:h-5 md:w-5 md:fill-white'
                 >
                   <path
                     d='M12.5001 16.6668H7.50013V10.0001H3.4668L10.0001 3.4668L16.5335 10.0001H12.5001V16.6668Z'
-                    className='h-4 w-4 fill-white md:h-5 md:w-5'
+                    className='h-4 w-4  fill-test-green md:h-5 md:w-5'
                   />
                 </svg>
               </div>
@@ -110,7 +111,7 @@ const DetailPost = ({
                 height={20}
                 className='h-4 w-4 md:h-5 md:w-5'
               />
-              <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
+              <span className='text-xs text-white md:text-[16px] md:leading-[22px]'>
                 {formatDateTime(notice.item.startsAt)}~{finishTime} (
                 {notice.item.workhour}시간)
               </span>
@@ -123,7 +124,7 @@ const DetailPost = ({
                 height={20}
                 className='h-4 w-4 md:h-5 md:w-5'
               />
-              <span className='text-xs text-pt-gray40 md:text-[16px] md:leading-[22px]'>
+              <span className='text-xs text-white md:text-[16px] md:leading-[22px]'>
                 {notice.item.shop.item.address1}
               </span>
             </div>

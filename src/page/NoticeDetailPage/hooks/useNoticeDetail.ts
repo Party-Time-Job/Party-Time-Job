@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { getCookie } from 'cookies-next';
 import { Notice, User } from '@/entities/Post/types';
 import getSavedNotice from '@/entities/Notice/utils/getSavedNotice';
-import getUserToken from '../utils/getUserToken.ts';
 import { DecodedToken } from '@/widgets/Header/Type';
 import { getMethod } from '@/shared/api/RequestMethod';
 
@@ -14,7 +14,7 @@ const useNoticeDetail = () => {
     const recent = getSavedNotice();
     setRecentNoticeList(recent);
 
-    const token = getUserToken();
+    const token = getCookie('token');
 
     if (token) {
       const decoded: DecodedToken = jwtDecode(token);
