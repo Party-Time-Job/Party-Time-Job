@@ -83,7 +83,7 @@ const NoticeListHeader = ({
       <div className='md:relative'>
         <button
           type='button'
-          className='flex h-[30px] items-center rounded-[5px] bg-test-black p-[12px] text-[14px] font-light text-white'
+          className='flex h-[30px] items-center rounded-[5px] border border-gray-500 bg-test-black p-[12px] text-[14px] font-light text-white'
           onClick={handleToggleFilter}
         >
           상세 필터

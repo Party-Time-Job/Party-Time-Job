@@ -82,7 +82,7 @@ const EmployerNoticeDetailPage = ({
   }, [shopId, noticeId, searchParams]);
 
   return (
-    <main className='flex flex-col items-center justify-center bg-pt-gray10'>
+    <main className='flex flex-col items-center justify-center'>
       <EmployerNoticeDetail shopId={shopId} noticeId={noticeId} />
       <StoreTable
         shopId={shopId}

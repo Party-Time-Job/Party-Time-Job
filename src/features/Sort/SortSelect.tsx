@@ -21,7 +21,7 @@ const SortSelect = ({
 }: Props) => {
   return (
     <button
-      className='flex h-[30px] items-center justify-center gap-[6px] rounded-[5px] bg-test-black p-[12px] text-white'
+      className='flex h-[30px] items-center justify-center gap-[6px] rounded-[5px] border border-gray-500 bg-test-black p-[12px] text-white'
       onClick={handleToggleSort}
     >
       <span className='text-[14px] font-light'>
