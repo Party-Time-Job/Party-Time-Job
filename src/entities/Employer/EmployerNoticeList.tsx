@@ -40,7 +40,10 @@ const EmployerNoticeList = ({
               {noticeItemList?.items.map(notice => {
                 const noticeId = notice.item.id;
                 return (
-                  <Link key={noticeId} href={`/detail/${shopId}/${noticeId}`}>
+                  <Link
+                    key={noticeId}
+                    href={`/shop/notice-detail/${shopId}/${noticeId}`}
+                  >
                     <EmployerPost
                       key={noticeId}
                       imageUrl={imageUrl}

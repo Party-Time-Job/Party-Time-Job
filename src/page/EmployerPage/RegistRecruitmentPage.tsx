@@ -1,13 +1,20 @@
 import CreateRecruitment from '@/features/Create-Recruitment/CreateRecruitment';
-import { StoreItem } from '@/features/Create-Store/Type';
+import { Item } from '@/app/shop/registration/recruitment/[id]/type';
 
 interface Props {
-  noticeData: StoreItem;
-  storeId: string;
+  noticeData: Item;
+  shopId: string;
+  noticeId: string | null;
 }
 
-const RegistRecruitmentPage = ({ storeId }: Props) => {
-  return <CreateRecruitment storeId={storeId} />;
+const RegistRecruitmentPage = ({ noticeId, noticeData, shopId }: Props) => {
+  return (
+    <CreateRecruitment
+      noticeId={noticeId}
+      noticeData={noticeData}
+      shopId={shopId}
+    />
+  );
 };
 
 export default RegistRecruitmentPage;

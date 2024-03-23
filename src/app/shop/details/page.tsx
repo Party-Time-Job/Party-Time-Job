@@ -2,28 +2,25 @@
 
 import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
-import { DecodedToken } from '@/page/EmployerPage/Api/type';
+import { DecodedToken } from '@/widgets/Header/Type.ts';
 import DetailsPage from '@/page/EmployerPage/DetailsPage';
+import { UserData } from './type.ts';
 
 const Details = () => {
   const [token, setToken] = useState<string | null>(null);
-  const [userType, setUserType] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [storeId, setStoreId] = useState<string>('');
+  const [shopId, setShopId] = useState<string>('');
 
   const getUserId = async (userIdParam: string): Promise<void> => {
     try {
       const response = await fetch(
         `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${userIdParam}`,
       );
-      const userInfo = await response.json();
+      const userInfo = (await response.json()) as UserData;
       if (userInfo.item.shop) {
-        setStoreId(userInfo.item.shop.item.id);
+        setShopId(userInfo.item.shop.item.id);
       } else {
-        setStoreId('');
+        setShopId('');
       }
-      setUserType(userInfo.item.type);
-      setUserId(userInfo.item.id);
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +45,7 @@ const Details = () => {
   }, [token]);
 
   // accountId 와 accountType Props로 내려주기
-  return <DetailsPage userType={userType} userId={userId} storeId={storeId} />;
+  return <DetailsPage shopId={shopId} />;
 };
 
 export default Details;
