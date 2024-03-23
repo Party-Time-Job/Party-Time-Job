@@ -24,7 +24,7 @@ const CustomNotice = () => {
         </div>
         <div
           ref={containerRef}
-          className='inline-flex w-full items-center gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'
+          className='inline-flex w-full items-center gap-1 overflow-x-scroll pt-10 scrollbar-hide md:gap-[14px]'
         >
           {customNotice ? (
             customNotice.map(notice => {
