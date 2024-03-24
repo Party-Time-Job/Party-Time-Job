@@ -14,7 +14,6 @@ const LandingPage = () => {
   return (
     <>
       <LandingPageTopContents />
-
       <section className='w-full bg-black px-12'>
         <div className='flex justify-center'>
           <Text as='h1' className='text-4xl font-light text-white'>
