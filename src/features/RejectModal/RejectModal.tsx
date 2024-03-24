@@ -29,6 +29,7 @@ const RejectModal = ({ handleToggle, category, rejectClick }: Props) => {
 
   const handleRejectClick = () => {
     rejectClick();
+    handleToggle();
   };
 
   return (
