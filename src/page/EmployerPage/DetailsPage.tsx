@@ -126,13 +126,17 @@ const DetailsPage = ({ shopId }: DetailsPageProps) => {
           address1={shopInfo.address1}
         />
       ) : (
-        <EmptyRecruitment
-          onClick={() =>
-            handleNavigate(
-              `/shop/registration/recruitment/new?shopId=${shopId}`,
-            )
-          }
-        />
+        <div className='flex h-[312px] justify-center'>
+          {shopId ? (
+            <EmptyRecruitment
+              onClick={() =>
+                handleNavigate(
+                  `/shop/registration/recruitment/new?shopId=${shopId}`,
+                )
+              }
+            />
+          ) : null}
+        </div>
       )}
     </>
   );
