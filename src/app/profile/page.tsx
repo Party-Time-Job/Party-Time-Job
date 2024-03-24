@@ -1,7 +1,5 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { Suspense } from 'react';
-import Loader from '@/shared/ui/Loader';
 import Application from '@/widgets/Application/Application';
 import NoRegisterUi from '@/widgets/Application/ui/NoRegisterUi';
 import NoProfile from '@/widgets/NoProfile/NoProfile';
@@ -52,9 +50,7 @@ const ProfilePage = async ({
     <div>
       <NoProfile isExist={isRegistered} profile={profile} />
       {!isRegistered && <NoRegisterUi />}
-      <Suspense fallback={<Loader />}>
-        {isRegistered && <Application page={page} />}
-      </Suspense>
+      {isRegistered && <Application page={page} />}
     </div>
   );
 };
