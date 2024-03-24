@@ -88,6 +88,7 @@ const NotificationIcon = () => {
         setAlerts(currentAlerts =>
           currentAlerts.filter(alert => alert.id !== alertId),
         );
+        setIsOpen(true);
       }
     } catch (error) {
       console.error('읽음 처리 중 에러 발생:', error);
@@ -135,15 +136,14 @@ const NotificationIcon = () => {
         ) : (
           <img src='/notification.svg' alt='알림없음' />
         )}
-
-        {isOpen && (
-          <NotifiactionModal
-            items={alerts}
-            onClose={onClose}
-            onClick={markAsRead}
-          />
-        )}
       </button>
+      {isOpen && (
+        <NotifiactionModal
+          items={alerts}
+          onClose={onClose}
+          onClick={markAsRead}
+        />
+      )}
     </div>
   );
 };
