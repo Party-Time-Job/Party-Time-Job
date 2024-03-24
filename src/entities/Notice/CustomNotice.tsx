@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import Post from '../Post/Post';
 import useCustomNotice from './hooks/useCustomNotice.ts';
-import CustomNoticeLoading from './CustomNoticeLoading.tsx';
 import useCustomNoticeScroll from './hooks/useCustomNoticeScroll.ts';
 import Text from '@/shared/ui/Text.tsx';
+import Loader from '@/shared/ui/Loader.tsx';
 
 /**
  * @returns '/notice' 의 맞춤 공고 영역
@@ -38,7 +38,7 @@ const CustomNotice = () => {
               );
             })
           ) : (
-            <CustomNoticeLoading />
+            <Loader />
           )}
         </div>
       </div>
