@@ -32,10 +32,10 @@ const EmployerNoticeDetail = ({
       {detail ? (
         <div className='flex w-full flex-col gap-4 lg:w-[964px]'>
           <div className='flex flex-col gap-2'>
-            <span className='text-[14px] font-bold text-pt-green40 md:text-[16px] md:leading-[20px]'>
+            <span className='flex h-8 w-14 items-center justify-center rounded-lg bg-test-green text-sm font-bold text-black'>
               {detail.item.shop.item.category}
             </span>
-            <span className='text-[20px] font-bold md:text-[28px]'>
+            <span className='mb-2 text-4xl font-bold text-white'>
               {detail.item.shop.item.name}
             </span>
           </div>

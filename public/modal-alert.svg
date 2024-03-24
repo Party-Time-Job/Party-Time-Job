@@ -5,9 +5,9 @@
   viewBox='0 0 24 25'
   fill='none'
 >
-  <circle cx='12' cy='12.5' r='12' fill='#3c6e71' />
+  <circle cx='12' cy='12.5' r='12' fill='#00FF85' />
   <path
     d='M12.6486 14.7041H11.3514L11.0676 7.83463L11 5.5H13L12.9324 7.83463L12.6486 14.7041ZM13 18.5H11.027V16.115H13V18.5Z'
-    fill='white'
+    fill='black'
   />
 </svg>

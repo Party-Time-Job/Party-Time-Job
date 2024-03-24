@@ -1,11 +1,22 @@
 'use client';
 
 import { RecoilRoot } from 'recoil';
+import { usePathname } from 'next/navigation';
 import LogoLink from '@/features/LogoLink/LogoLink';
 import HeaderNavigation from './ui/HeaderNavigation';
 import HeaderInput from './ui/HeaderInput';
 
 const Header = () => {
+  const pathname = usePathname();
+
+  if (pathname === '/login') {
+    return null;
+  }
+
+  if (pathname === '/signup') {
+    return null;
+  }
+
   return (
     <RecoilRoot>
       <header className='z-10 h-24 w-full md:h-16'>

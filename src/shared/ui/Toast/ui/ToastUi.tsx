@@ -8,7 +8,7 @@ export interface ToastUiInterface {
 const ToastUi = ({ status, children }: ToastUiInterface) => {
   return (
     <div
-      className={`${status === 'appear' ? 'appear' : 'disappear'} transform-fade fixed left-2/4 top-2/4 z-[100] inline-block rounded-[5px] bg-[#6b8a8c] px-4 py-2.5 text-base font-normal leading-[26px] text-white`}
+      className={`${status === 'appear' ? 'appear' : 'disappear'} transform-fade fixed left-2/4 top-2/4 z-[100] inline-block rounded-[5px] border border-test-green bg-test-black px-4 py-2.5 text-base font-normal leading-[26px] text-white`}
     >
       {children}
     </div>

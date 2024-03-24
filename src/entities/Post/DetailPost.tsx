@@ -129,7 +129,7 @@ const DetailPost = ({
               </span>
             </div>
           </div>
-          <div className='h-12 overflow-auto scrollbar-hide'>
+          <div className='h-32 overflow-auto scrollbar-hide'>
             <p className='text-[14px] leading-[22px] text-white md:text-[16px] md:leading-[26px]'>
               {notice.item.shop.item.description}
             </p>

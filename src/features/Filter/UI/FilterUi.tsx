@@ -53,6 +53,9 @@ const Filter = ({
       removeAddress(addItem);
       return;
     }
+    if (selectedAddressList.length >= 3) {
+      return;
+    }
     setSelectedAddressList(prev => [...prev, addItem]);
   };
 
@@ -88,7 +91,7 @@ const Filter = ({
   };
 
   return (
-    <div className='absolute z-10 flex w-[390px] flex-col items-start gap-6 rounded-[10px] border border-solid border-[#E5E4E7] bg-test-black px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:right-0 md:top-10'>
+    <div className='fixed z-10 flex w-[390px] flex-col items-start gap-5 rounded-[10px] border border-solid border-[#E5E4E7] bg-test-black px-5 py-6 shadow-[0px_2px_8px_0px_rgba(120,116,134,0.25)] max-md:inset-0 max-md:w-full md:absolute md:right-0 md:top-10'>
       <div className='flex items-center justify-between self-stretch'>
         <span className='text-xl font-bold leading-normal text-white '>
           상세필터
@@ -138,7 +141,7 @@ const Filter = ({
             </div>
           </div>
 
-          <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
+          <div className='h-0.5 self-stretch bg-gray-500'></div>
           <div className='flex items-start gap-3 self-stretch'>
             <div className='flex flex-[1_0_0] flex-col items-start gap-2'>
               <span className='text-base font-normal leading-[26px] text-white'>
@@ -152,11 +155,11 @@ const Filter = ({
               />
             </div>
           </div>
-          <div className='h-0.5 self-stretch bg-[#F2F2F3]'></div>
+          <div className='h-0.5 self-stretch bg-gray-500'></div>
           <div className='flex w-[350px] flex-col items-start justify-end gap-2 max-md:w-full'>
             <span className='text-[16px]'>금액</span>
             <div className='flex items-center justify-start gap-3 max-md:w-full'>
-              <div className='relative inline'>
+              <div className='relative inline rounded-md border border-gray-500'>
                 <Input
                   className='border-white: border'
                   width='w-[169px]'
