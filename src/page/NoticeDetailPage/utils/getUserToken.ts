@@ -1,7 +1,9 @@
+import { getCookie } from 'cookies-next';
+
 const getUserToken = () => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('accessToken');
-    return token ? JSON.stringify(token) : '';
+    const token = getCookie('token');
+    return token || '';
   }
   return '';
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import formatTime from '@/shared/utils/formatTime';
 import {
   ProfileTableInterface,
@@ -17,8 +17,6 @@ import {
   TableBodyStatus,
 } from '@/shared/ui/Table/ui/TableBodyUi';
 import getUserToken from '@/page/NoticeDetailPage/utils/getUserToken';
-import { getMethod } from '@/shared/api/RequestMethod';
-import { AllApply } from '@/entities/Post/types';
 import RejectModal from '@/features/RejectModal/RejectModal';
 import AcceptModal from '@/features/AcceptModal/AcceptModal';
 
@@ -84,82 +82,74 @@ export const StoreTable = ({
     secondValue: item.phone,
   }));
 
-  const [applicationId, setApplicationId] = useState<string>('');
   const token = getUserToken();
 
-  const [isToggle, setIsToggle] = useState(false);
   const [modalCategory, setModalCategory] = useState('');
 
+  const [selectedAplicationId, setSelectedAplicationId] = useState<
+    string | null
+  >(null);
   const [isAcceptToggle, setIsAcceptToggle] = useState(false);
+  const [isRejectToggle, setIsRejectToggle] = useState(false);
 
-  const handleToggle = () => {
-    setIsToggle(prev => !prev);
+  const handleRejectedStateToggle = () => {
+    setIsRejectToggle(prev => !prev);
   };
 
   const handleAcceptStateToggle = () => {
     setIsAcceptToggle(prev => !prev);
   };
 
-  const handleAcceptToggle = () => {
+  const handleAcceptToggle = (newApplicationId: string) => {
     setModalCategory('accept');
+    setSelectedAplicationId(newApplicationId);
     setIsAcceptToggle(prev => !prev);
   };
 
-  const handleRejectToggle = () => {
+  const handleRejectToggle = (newApplicationId: string) => {
     setModalCategory('reject');
-    setIsToggle(prev => !prev);
+    setSelectedAplicationId(newApplicationId);
+    setIsRejectToggle(prev => !prev);
   };
 
-  useEffect(() => {
-    const testUserApplyList = async () => {
-      const response = await getMethod<AllApply>(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications`,
-      );
-      const userApply = response.items;
-
-      if (userApply.length !== 0) {
-        setApplicationId(userApply[0].item.id);
-      }
-    };
-    testUserApplyList();
-  }, []);
-
-  const rejectedNotice = async () => {
+  const rejectedNotice = async (newApplicationId: string) => {
     await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${newApplicationId}`,
       {
         method: 'PUT',
         headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ status: 'rejected' }),
       },
     );
-    window.location.reload();
   };
 
   const rejectClick = () => {
-    rejectedNotice();
+    if (selectedAplicationId) {
+      rejectedNotice(selectedAplicationId);
+    }
   };
 
-  const acceptedNotice = async () => {
+  const acceptedNotice = async (newApplicationId: string) => {
     await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${applicationId}`,
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${newApplicationId}`,
       {
         method: 'PUT',
         headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ status: 'accepted' }),
       },
     );
-    window.location.reload();
   };
 
   const acceptClick = () => {
-    acceptedNotice();
+    if (selectedAplicationId) {
+      acceptedNotice(selectedAplicationId);
+    }
   };
 
   return (
@@ -183,13 +173,13 @@ export const StoreTable = ({
                   <div className='flex gap-2 text-xs'>
                     <button
                       className='rounded-lg border border-red-600 px-2 py-1 text-red-600'
-                      onClick={handleRejectToggle}
+                      onClick={() => handleRejectToggle(item.id)}
                     >
                       거절하기
                     </button>
                     <button
                       className='rounded-lg border border-blue-600 px-2 py-1 text-blue-600'
-                      onClick={handleAcceptToggle}
+                      onClick={() => handleAcceptToggle(item.id)}
                     >
                       승인하기
                     </button>
@@ -202,9 +192,9 @@ export const StoreTable = ({
           ))}
         </TableBody>
       </TableContainerUi>
-      {isToggle ? (
+      {isRejectToggle ? (
         <RejectModal
-          handleToggle={handleToggle}
+          handleToggle={handleRejectedStateToggle}
           category={modalCategory}
           rejectClick={rejectClick}
         />
