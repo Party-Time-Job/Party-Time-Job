@@ -201,16 +201,28 @@ input[type='number']::-webkit-outer-spin-button {
   0% {
     color: #00ff85;
   }
-  25% {
-    color: #fffb00;
-  }
   50% {
-    color: #ff00ff;
-  }
-  75% {
     color: #3994ff;
   }
   100% {
     color: #00ff85;
+  }
+}
+
+.color-change-2 {
+  animation: color-change-2 2s infinite;
+}
+
+@keyframes color-change-2 {
+  0% {
+    color: #6b7280;
+  }
+
+  50% {
+    color: #00ff85;
+  }
+
+  100% {
+    color: #6b7280;
   }
 }
