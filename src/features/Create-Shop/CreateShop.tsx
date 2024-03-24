@@ -3,7 +3,6 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
-import { File } from 'buffer';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -44,7 +43,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState<
     string | ArrayBuffer | null
   >('');
-  const [imageName, setImageName] = useState<File | null | string>('');
+  const [imageName, setImageName] = useState<File | null>(null);
   const router = useRouter();
 
   const url = shopId ? `${baseUrl}/shops/${shopId}` : `${baseUrl}/shops`;
@@ -95,7 +94,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     }
   };
 
-  const uploadImageToS3 = async (file: any) => {
+  const uploadImageToS3 = async (file: File) => {
     try {
       const response = await fetch(presignedUrl, {
         method: 'PUT',
