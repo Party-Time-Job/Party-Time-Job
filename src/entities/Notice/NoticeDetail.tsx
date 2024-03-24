@@ -5,8 +5,8 @@ import { User } from '../Post/types.ts';
 import useDetailNotice from './hooks/useDetailNotice.ts';
 import useApplication from './hooks/useApplication.ts';
 import useNoticeStatus from './hooks/useNoticeStatus.ts';
-import DetailPostLoading from '../Post/DetailPostLoading.tsx';
 import NoticeDescription from './NoticeDescription.tsx';
+import Loader from '@/shared/ui/Loader.tsx';
 
 /**
  * @param {Object} props - NoticeDetail 컴포넌트의 props
@@ -56,7 +56,7 @@ const NoticeDetail = ({
           </div>
         </div>
       ) : (
-        <DetailPostLoading />
+        <Loader />
       )}
     </section>
   );
