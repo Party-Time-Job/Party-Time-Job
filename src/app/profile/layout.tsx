@@ -1,11 +1,23 @@
-const ProfilePageLayout = async ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+'use client';
+
+import { useEffect, useState } from 'react';
+import Loader from '@/shared/ui/Loader';
+
+const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  const LoadingSpinner = () => <Loader />;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSpinner(false), 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       {children}
+      {showSpinner && <LoadingSpinner />}
       <div id='register' />
       <div id='toast' />
       <div id='loader' />
@@ -14,4 +26,4 @@ const ProfilePageLayout = async ({
   );
 };
 
-export default ProfilePageLayout;
+export default ProfileLayout;

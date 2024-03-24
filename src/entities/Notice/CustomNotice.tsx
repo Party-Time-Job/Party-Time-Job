@@ -5,7 +5,6 @@ import Post from '../Post/Post';
 import useCustomNotice from './hooks/useCustomNotice.ts';
 import useCustomNoticeScroll from './hooks/useCustomNoticeScroll.ts';
 import Text from '@/shared/ui/Text.tsx';
-import Loader from '@/shared/ui/Loader.tsx';
 
 /**
  * @returns '/notice' 의 맞춤 공고 영역
@@ -26,7 +25,7 @@ const CustomNotice = () => {
           ref={containerRef}
           className='inline-flex w-full items-center gap-1 overflow-x-scroll pt-10 scrollbar-hide md:gap-[14px]'
         >
-          {customNotice ? (
+          {customNotice &&
             customNotice.map(notice => {
               return (
                 <Link
@@ -36,10 +35,7 @@ const CustomNotice = () => {
                   <Post key={notice.item.id} noticeItem={notice.item} />
                 </Link>
               );
-            })
-          ) : (
-            <Loader />
-          )}
+            })}
         </div>
       </div>
     </section>

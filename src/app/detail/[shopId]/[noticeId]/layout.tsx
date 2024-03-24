@@ -1,14 +1,25 @@
-const DetailPageLayout = async ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+'use client';
+
+import { useEffect, useState } from 'react';
+import Loader from '@/shared/ui/Loader';
+
+const DetailLayout = ({ children }: { children: React.ReactNode }) => {
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  const LoadingSpinner = () => <Loader />;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSpinner(false), 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       {children}
-      <div id='loader' />
+      {showSpinner && <LoadingSpinner />}
     </>
   );
 };
 
-export default DetailPageLayout;
+export default DetailLayout;

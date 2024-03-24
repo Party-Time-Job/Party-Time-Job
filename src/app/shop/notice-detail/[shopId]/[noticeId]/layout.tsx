@@ -3,7 +3,11 @@
 import { useEffect, useState } from 'react';
 import Loader from '@/shared/ui/Loader';
 
-const NoticeLayout = ({ children }: { children: React.ReactNode }) => {
+const ShopNoticeDetailLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [showSpinner, setShowSpinner] = useState(true);
 
   const LoadingSpinner = () => <Loader />;
@@ -22,4 +26,4 @@ const NoticeLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default NoticeLayout;
+export default ShopNoticeDetailLayout;
