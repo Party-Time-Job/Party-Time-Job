@@ -192,3 +192,37 @@ input[type='number']::-webkit-outer-spin-button {
 .logo-container:hover .logo-text {
   color: #00ff85;
 }
+
+.color-change {
+  animation: color-change 7s infinite;
+}
+
+@keyframes color-change {
+  0% {
+    color: #00ff85;
+  }
+  50% {
+    color: #3994ff;
+  }
+  100% {
+    color: #00ff85;
+  }
+}
+
+.color-change-2 {
+  animation: color-change-2 2s infinite;
+}
+
+@keyframes color-change-2 {
+  0% {
+    color: #6b7280;
+  }
+
+  50% {
+    color: #00ff85;
+  }
+
+  100% {
+    color: #6b7280;
+  }
+}
