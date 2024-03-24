@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-const NoticeLayout = ({ children }: { children: React.ReactNode }) => {
+const ShopNoticeDetailLayout = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [showSpinner, setShowSpinner] = useState(true);
 
   const LoadingSpinner = () => (
@@ -38,4 +42,4 @@ const NoticeLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default NoticeLayout;
+export default ShopNoticeDetailLayout;
