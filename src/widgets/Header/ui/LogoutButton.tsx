@@ -16,7 +16,7 @@ const LogoutButton = () => {
     deleteCookie('userid');
     setToken(null);
     setUserType(null);
-    router.push('/');
+    router.push('/landing');
   };
 
   return (
