@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 import { FieldValues, useForm } from 'react-hook-form';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -33,7 +34,7 @@ const CreateRecruitment = ({
   });
   const router = useRouter();
   const requestInfo = async (data: FieldValues): Promise<void> => {
-    const token = localStorage.getItem('accessToken');
+    const token = getCookie('token');
     const { startsAt } = getValues();
     const url = noticeId
       ? `${baseUrl}/shops/${shopId}/notices/${noticeId}`
@@ -56,6 +57,7 @@ const CreateRecruitment = ({
       if (response.status === 200) {
         router.push('/shop/details');
       }
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
