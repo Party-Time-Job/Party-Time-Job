@@ -7,7 +7,7 @@ import NoticeListHeader from './NoticeListHeader';
 import Pagination from './Pagination.tsx';
 import useNoticeListState from './hooks/useNoticeListState.ts';
 import NoticeCategory from './NoticeCategory.tsx';
-import Loader from '@/shared/ui/Loader.tsx';
+import NoticeListLoading from './NoticeListLoading.tsx';
 
 interface Props {
   category: string;
@@ -71,7 +71,10 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
               );
             })
           ) : (
-            <Loader />
+            <NoticeListLoading
+              category={category}
+              listCategory={listCategory}
+            />
           )}
         </div>
       </div>
