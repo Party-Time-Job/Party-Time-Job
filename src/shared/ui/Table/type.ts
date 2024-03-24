@@ -52,4 +52,6 @@ export interface StoreTableInterface {
   pagination: ReactNode;
   shopId: string;
   noticeId: string;
+  rejectedNotice: (newApplicationId: string) => Promise<void>;
+  acceptedNotice: (newApplicationId: string) => Promise<void>;
 }
