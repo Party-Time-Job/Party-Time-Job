@@ -308,7 +308,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
               />
             )}
             <label htmlFor='imageUrl'>
-              <div className='flex h-full flex-col items-center justify-center bg-test-black'>
+              <div className='flex h-full flex-col items-center justify-center rounded-lg bg-test-black'>
                 {uploadedImageUrl ? (
                   <div className='overflow-hidden'>
                     <Image
@@ -342,7 +342,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             </label>
           </div>
           <Input
-            className='w-[100%]'
+            className='hidden w-[100%]'
             id='imageUrl'
             type='file'
             {...register('imageUrl', {
