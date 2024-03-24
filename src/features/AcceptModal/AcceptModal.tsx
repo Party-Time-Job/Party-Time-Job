@@ -29,6 +29,7 @@ const AcceptModal = ({ handleToggle, category, acceptClick }: Props) => {
 
   const handleAcceptClick = () => {
     acceptClick();
+    handleToggle();
   };
 
   return (
