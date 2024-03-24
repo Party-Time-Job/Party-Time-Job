@@ -16,7 +16,6 @@ import {
   TableBodyRow,
   TableBodyStatus,
 } from '@/shared/ui/Table/ui/TableBodyUi';
-import getUserToken from '@/page/NoticeDetailPage/utils/getUserToken';
 import RejectModal from '@/features/RejectModal/RejectModal';
 import AcceptModal from '@/features/AcceptModal/AcceptModal';
 
@@ -71,8 +70,8 @@ export const ProfileTable = ({ data, pagination }: ProfileTableInterface) => {
 export const StoreTable = ({
   data,
   pagination,
-  shopId,
-  noticeId,
+  rejectedNotice,
+  acceptedNotice,
 }: StoreTableInterface) => {
   const tableData: TableInterface[] = data.map(item => ({
     id: item.id,
@@ -81,8 +80,6 @@ export const StoreTable = ({
     bio: item.bio,
     secondValue: item.phone,
   }));
-
-  const token = getUserToken();
 
   const [modalCategory, setModalCategory] = useState('');
 
@@ -112,38 +109,10 @@ export const StoreTable = ({
     setIsRejectToggle(prev => !prev);
   };
 
-  const rejectedNotice = async (newApplicationId: string) => {
-    await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${newApplicationId}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status: 'rejected' }),
-      },
-    );
-  };
-
   const rejectClick = () => {
     if (selectedAplicationId) {
       rejectedNotice(selectedAplicationId);
     }
-  };
-
-  const acceptedNotice = async (newApplicationId: string) => {
-    await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${newApplicationId}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status: 'accepted' }),
-      },
-    );
   };
 
   const acceptClick = () => {
