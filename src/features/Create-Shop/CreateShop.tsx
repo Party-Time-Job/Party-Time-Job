@@ -40,10 +40,11 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     defaultValues: initialValues,
   });
   const [presignedUrl, setPresignedUrl] = useState('');
-  const [uploadedImageUrl, setUploadedImageUrl] = useState<
-    string | ArrayBuffer | null
-  >('');
-  const [imageName, setImageName] = useState<File | null>(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | undefined>(
+    '',
+  );
+  const [imageName, setImageName] = useState<string>('');
+  const [fileName, setFileName] = useState<File | null>(null);
   const router = useRouter();
 
   const url = shopId ? `${baseUrl}/shops/${shopId}` : `${baseUrl}/shops`;
@@ -60,7 +61,10 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          imageUrl: uploadedImageUrl,
+        }),
       });
       if (response.status === 200) {
         router.push('/shop/details');
@@ -141,7 +145,8 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     if (file) {
       const reader = new FileReader();
       reader.onload = async () => {
-        setImageName(file);
+        setImageName(file.name);
+        setFileName(file);
       };
       reader.readAsDataURL(file);
     }
@@ -149,13 +154,12 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   };
 
   useEffect(() => {
-    if (presignedUrl && imageName) {
-      uploadImageToS3(imageName);
+    if (presignedUrl && fileName) {
+      uploadImageToS3(fileName);
     }
-  }, [presignedUrl, imageName]);
+  }, [presignedUrl, fileName]);
 
   useEffect(() => {
-    console.log(initialValues.imageUrl);
     setUploadedImageUrl(initialValues.imageUrl);
     reset(initialValues);
   }, []);
@@ -338,7 +342,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             </label>
           </div>
           <Input
-            className='hidden w-[100%]'
+            className='w-[100%]'
             id='imageUrl'
             type='file'
             {...register('imageUrl', {
@@ -389,3 +393,6 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
 };
 
 export default CreateShop;
+
+// 1. 프레사인 url 생성을 위해 file을 바디에 담아서 보냄 -> 잘못된 요청 에러
+// 2. file 대신에 file.name을 담아보자
