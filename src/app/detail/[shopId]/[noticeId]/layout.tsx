@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Loader from '@/shared/ui/Loader';
 
-const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
+const DetailLayout = ({ children }: { children: React.ReactNode }) => {
   const [showSpinner, setShowSpinner] = useState(true);
 
   const LoadingSpinner = () => <Loader />;
@@ -18,12 +18,8 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       {children}
       {showSpinner && <LoadingSpinner />}
-      <div id='register' />
-      <div id='toast' />
-      <div id='loader' />
-      <div id='dialog' />
     </>
   );
 };
 
-export default ProfileLayout;
+export default DetailLayout;

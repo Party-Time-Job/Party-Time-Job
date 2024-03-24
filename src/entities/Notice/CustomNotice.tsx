@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Post from '../Post/Post';
 import useCustomNotice from './hooks/useCustomNotice.ts';
-import CustomNoticeLoading from './CustomNoticeLoading.tsx';
+import useCustomNoticeScroll from './hooks/useCustomNoticeScroll.ts';
 import Text from '@/shared/ui/Text.tsx';
 
 /**
@@ -11,6 +11,7 @@ import Text from '@/shared/ui/Text.tsx';
  */
 const CustomNotice = () => {
   const customNotice = useCustomNotice();
+  const containerRef = useCustomNoticeScroll();
 
   return (
     <section className='flex w-full items-start justify-center border-b border-gray-500 bg-black px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
@@ -20,8 +21,11 @@ const CustomNotice = () => {
             맞춤공고
           </Text>
         </div>
-        <div className='inline-flex h-[400px] w-full items-center gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'>
-          {customNotice ? (
+        <div
+          ref={containerRef}
+          className='inline-flex w-full items-center gap-1 overflow-x-scroll pt-10 scrollbar-hide md:gap-[14px]'
+        >
+          {customNotice &&
             customNotice.map(notice => {
               return (
                 <Link
@@ -31,10 +35,7 @@ const CustomNotice = () => {
                   <Post key={notice.item.id} noticeItem={notice.item} />
                 </Link>
               );
-            })
-          ) : (
-            <CustomNoticeLoading />
-          )}
+            })}
         </div>
       </div>
     </section>

@@ -26,23 +26,23 @@ const EmpolyerEmptyData = ({
   onClick,
 }: EmployerEmptyDataComponentProps) => {
   return (
-    <div className='flex h-[400px] flex-col items-center justify-center gap-2'>
-      <div className='flex h-[275px] w-[965px] flex-col gap-[23px]'>
-        <span className='text-[28px] font-bold tracking-[0.56px] text-[#111322]'>
+    <div className='mx-auto mt-10 flex w-[350px] flex-col md:w-[600px] lg:w-[980px]'>
+      <div className='mb-4 flex'>
+        <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-green text-base font-bold text-black'>
           {title}
         </span>
-        <div className=' flex w-[965px] flex-col items-center justify-center gap-6 rounded-xl border border-solid border-[#E5E4E7] px-6 py-[60px]'>
-          <span className='self-stretch text-center font-normal leading-[26px] text-[#111322]'>
-            {comment}
-          </span>
-          {button}
-          <Button
-            onClick={onClick}
-            size='medium'
-            status='active'
-            text={content}
-          />
-        </div>
+      </div>
+      <div className='mb-10 flex flex-col items-center justify-center gap-6 rounded-xl bg-test-black px-6 py-[60px]'>
+        <span className='self-stretch text-center font-normal leading-[26px] text-white'>
+          {comment}
+        </span>
+        {button}
+        <Button
+          onClick={onClick}
+          size='medium'
+          status='active'
+          text={content}
+        />
       </div>
     </div>
   );
