@@ -155,6 +155,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   }, [presignedUrl, imageName]);
 
   useEffect(() => {
+    console.log(initialValues);
     reset(initialValues);
   }, []);
 
