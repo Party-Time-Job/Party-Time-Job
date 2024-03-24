@@ -155,7 +155,8 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   }, [presignedUrl, imageName]);
 
   useEffect(() => {
-    console.log(initialValues);
+    console.log(initialValues.imageUrl);
+    setUploadedImageUrl(initialValues.imageUrl);
     reset(initialValues);
   }, []);
 
@@ -313,7 +314,6 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
                       alt='Preview'
                       sizes='100vw'
                       style={{ width: '100%', height: 'auto' }}
-                      value={uploadedImageUrl}
                     />
                   </div>
                 ) : (
@@ -338,14 +338,13 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             </label>
           </div>
           <Input
-            className='w-[100%]'
+            className='hidden w-[100%]'
             id='imageUrl'
             type='file'
             {...register('imageUrl', {
               required: '이미지를 추가해주세요.',
             })}
             onChange={handleChange}
-            // value={uploadedImageUrl}
           />
           {errors.imageUrl && (
             <span>{errors.imageUrl.message?.toString()}</span>
