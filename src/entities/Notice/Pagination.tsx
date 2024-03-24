@@ -20,7 +20,7 @@ const Pagination = ({
 }: Props) => {
   const defaultPageStyle =
     'flex h-[40px] w-[40px] items-center justify-center text-white p-[12px] cursor-pointer';
-  const activePageStyle = `${defaultPageStyle} rounded-[4px] bg-black border border-gray-500 font-blod`;
+  const activePageStyle = `${defaultPageStyle} rounded-[4px] bg-black border border-test-green font-blod`;
 
   const pageArray = setPagination(count, currentPageNumber);
 

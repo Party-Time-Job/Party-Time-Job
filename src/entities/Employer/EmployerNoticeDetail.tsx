@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { getMethod } from '@/shared/api/RequestMethod.ts';
 import { Notice } from '../Post/types.ts';
 import EmployerDetailPost from '../Post/EmployerDetailPost.tsx';
-import DetailPostLoading from '../Post/DetailPostLoading.tsx';
 import NoticeDescription from '../Notice/NoticeDescription.tsx';
+import Loader from '@/shared/ui/Loader.tsx';
 
 const EmployerNoticeDetail = ({
   shopId,
@@ -49,7 +49,7 @@ const EmployerNoticeDetail = ({
           </div>
         </div>
       ) : (
-        <DetailPostLoading />
+        <Loader />
       )}
     </section>
   );

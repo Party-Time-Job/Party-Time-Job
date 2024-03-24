@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ReadonlyURLSearchParams } from 'next/navigation';
+import getUserToken from '../NoticeDetailPage/utils/getUserToken.ts';
 import EmployerNoticeDetail from '@/entities/Employer/EmployerNoticeDetail.tsx';
 import { StoreTable } from '@/shared/ui/Table/Table.tsx';
 import { StoreInterface } from '@/shared/ui/Table/type.ts';
@@ -38,9 +39,55 @@ const EmployerNoticeDetailPage = ({
   const [total, setTotal] = useState<number>(0);
   const MAX_ITEMS = 5;
 
+  const token = getUserToken();
   const currentPage = searchParams
     ? parseInt(searchParams.get('page') ?? '1', 10)
     : 1;
+
+  const updateApplicationsStatus = (
+    applicationId: string,
+    newStatus: 'pending' | 'canceled' | 'accepted' | 'rejected',
+  ) => {
+    setApplications(currentApplications =>
+      currentApplications.map(app =>
+        app.id === applicationId ? { ...app, status: newStatus } : app,
+      ),
+    );
+  };
+
+  const acceptedNotice = async (newApplicationId: string) => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${newApplicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'accepted' }),
+      },
+    );
+    if (response.ok) {
+      updateApplicationsStatus(newApplicationId, 'accepted');
+    }
+  };
+
+  const rejectedNotice = async (newApplicationId: string) => {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}/applications/${newApplicationId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'rejected' }),
+      },
+    );
+    if (response.ok) {
+      updateApplicationsStatus(newApplicationId, 'rejected');
+    }
+  };
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -88,6 +135,8 @@ const EmployerNoticeDetailPage = ({
         shopId={shopId}
         noticeId={noticeId}
         data={applications}
+        rejectedNotice={rejectedNotice}
+        acceptedNotice={acceptedNotice}
         pagination={
           <Pagination
             page={currentPage}

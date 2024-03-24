@@ -3,14 +3,16 @@
 import Link from 'next/link';
 import Post from '../Post/Post';
 import useCustomNotice from './hooks/useCustomNotice.ts';
-import CustomNoticeLoading from './CustomNoticeLoading.tsx';
+import useCustomNoticeScroll from './hooks/useCustomNoticeScroll.ts';
 import Text from '@/shared/ui/Text.tsx';
+import Loader from '@/shared/ui/Loader.tsx';
 
 /**
  * @returns '/notice' 의 맞춤 공고 영역
  */
 const CustomNotice = () => {
   const customNotice = useCustomNotice();
+  const containerRef = useCustomNoticeScroll();
 
   return (
     <section className='flex w-full items-start justify-center border-b border-gray-500 bg-black px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
@@ -20,7 +22,10 @@ const CustomNotice = () => {
             맞춤공고
           </Text>
         </div>
-        <div className='inline-flex h-[400px] w-full items-center gap-1 overflow-x-scroll scrollbar-hide md:gap-[14px]'>
+        <div
+          ref={containerRef}
+          className='inline-flex w-full items-center gap-1 overflow-x-scroll pt-10 scrollbar-hide md:gap-[14px]'
+        >
           {customNotice ? (
             customNotice.map(notice => {
               return (
@@ -33,7 +38,7 @@ const CustomNotice = () => {
               );
             })
           ) : (
-            <CustomNoticeLoading />
+            <Loader />
           )}
         </div>
       </div>

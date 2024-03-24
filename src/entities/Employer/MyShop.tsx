@@ -24,8 +24,8 @@ const MyShop = ({
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {
     const routes = {
-      edit: `/shop/registration/shop-info/${shopId}`,
-      register: `/shop/registration/recruitment/edit?shopId=${shopId}&noticeId=`,
+      edit: `/shop/registration/shop-info/edit?shopId=${shopId}`,
+      register: `/shop/registration/recruitment/regist?shopId=${shopId}&noticeId=`,
     };
     router.push(routes[action]);
   };
