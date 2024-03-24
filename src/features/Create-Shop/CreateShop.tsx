@@ -317,17 +317,17 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
                       src={uploadedImageUrl.toString()}
                       alt='Preview'
                       sizes='100vw'
-                      style={{ width: '100%', height: 'auto' }}
+                      style={{ width: '100%', height: '100%' }}
                     />
                   </div>
                 ) : (
                   <div className='flex w-full flex-col justify-center'>
                     <div className='mx-auto'>
-                      <Input
-                        type='image'
+                      <Image
+                        width={32}
+                        height={32}
                         src={'/camera.svg'}
                         alt='camera'
-                        onClick={e => e.preventDefault()}
                       />
                     </div>
                     <Text
@@ -393,6 +393,3 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
 };
 
 export default CreateShop;
-
-// 1. 프레사인 url 생성을 위해 file을 바디에 담아서 보냄 -> 잘못된 요청 에러
-// 2. file 대신에 file.name을 담아보자
