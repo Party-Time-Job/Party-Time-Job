@@ -40,7 +40,7 @@ const useCustomNotice = () => {
       getData();
     } else {
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices?limit=20');
+        const allNotice = await getMethod<AllNotice>('/notices?limit=100');
         const allCustomNoticeList = allNotice.items.filter(notice => {
           return (
             new Date(notice.item.startsAt) > new Date() && !notice.item.closed
