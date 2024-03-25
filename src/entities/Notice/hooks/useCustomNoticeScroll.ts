@@ -32,7 +32,7 @@ const useCustomNoticeScroll = () => {
       }
     };
 
-    const intervalId = setInterval(autoScroll, 1000);
+    const intervalId = setInterval(autoScroll, 2500);
 
     return () => clearInterval(intervalId);
   }, []);
