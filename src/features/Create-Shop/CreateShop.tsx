@@ -35,6 +35,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { isSubmitting, errors },
   } = useForm<FieldValues>({
     defaultValues: initialValues,
@@ -160,8 +161,10 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   }, [presignedUrl, fileName]);
 
   useEffect(() => {
-    setUploadedImageUrl(initialValues.imageUrl);
     reset(initialValues);
+    setUploadedImageUrl(initialValues.imageUrl);
+    setValue('imageUrl', initialValues.imageUrl);
+    console.log(initialValues.imageUrl);
   }, []);
 
   return (
@@ -304,13 +307,16 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
                 height={32}
                 src={'/close.svg'}
                 alt='close'
-                onClick={() => setUploadedImageUrl('')}
+                onClick={() => {
+                  setValue('imageUrl', '');
+                  setUploadedImageUrl('');
+                }}
               />
             )}
             <label htmlFor='imageUrl'>
               <div className='flex h-full flex-col items-center justify-center rounded-lg bg-test-black'>
                 {uploadedImageUrl ? (
-                  <div className='overflow-hidden'>
+                  <div className='h-[300px] w-[472px] overflow-hidden'>
                     <Image
                       width={0}
                       height={0}
@@ -342,7 +348,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             </label>
           </div>
           <Input
-            className='hidden w-[100%]'
+            className='w-[100%]'
             id='imageUrl'
             type='file'
             {...register('imageUrl', {
