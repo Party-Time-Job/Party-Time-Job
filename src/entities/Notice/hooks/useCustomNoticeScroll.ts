@@ -15,8 +15,6 @@ const useCustomNoticeScroll = () => {
         const scrollWidth = container.scrollWidth - container.clientWidth;
         let newScrollLeft = container.scrollLeft + toScroll;
 
-        console.log(scrollWidth - container.scrollLeft);
-
         if (scrollWidth - container.scrollLeft < toScroll) {
           container.scrollTop = container.scrollLeft;
         }
