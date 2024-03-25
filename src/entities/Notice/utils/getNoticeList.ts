@@ -35,6 +35,7 @@ const getNoticeList = async (
     if (searchValue) {
       url += `&keyword=${searchValue}`;
     }
+
     const response = await getMethod<AllNotice>(url);
     setNoticeItemList(response);
     return;

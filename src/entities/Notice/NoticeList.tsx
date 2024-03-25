@@ -84,6 +84,9 @@ const NoticeList = ({ category, searchValue, recentNoticeList }: Props) => {
         updatePageNumber={updatePageNumber}
         setNoticeItemList={setNoticeItemList}
         sortCategory={sortCategory}
+        listCategory={listCategory}
+        searchValue={searchValue}
+        filterCondition={filterCondition}
       />
     </section>
   );
