@@ -15,7 +15,7 @@ const CustomNotice = () => {
 
   return (
     <section className='flex w-full items-start justify-center border-b border-gray-500 bg-black px-[12px] py-[40px] md:px-[32px] md:py-[60px]'>
-      <div className='flex w-full flex-col gap-4 md:gap-8 lg:w-[971px]'>
+      <div className='flex w-full flex-col gap-4 lg:w-[971px]'>
         <div className='flex h-10 w-28 items-center justify-center rounded-lg bg-test-green text-black'>
           <Text as='span' className='font-bold'>
             맞춤공고

@@ -82,12 +82,12 @@ export const Post = ({ noticeItem }: { noticeItem: NoticeItem }) => {
         </div>
         <div className='flex flex-col items-start self-stretch md:flex-row md:items-center md:justify-between'>
           <span
-            className={`overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold leading-[22px] md:text-2xl ${disabledText}`}
+            className={`overflow-hidden text-ellipsis whitespace-nowrap text-lg font-bold leading-[22px] md:text-xl ${disabledText}`}
           >
             {formatHourlyPay(noticeItem.hourlyPay)}원
           </span>
           <div
-            className={`flex md:h-9 md:items-center md:rounded-lg md:p-3 ${isOutDatedNotice || isClosed ? 'text-gray-500 md:border md:border-gray-500 md:bg-test-black ' : 'border-test-green text-white md:border md:bg-test-black'}`}
+            className={`flex md:h-9 md:items-center md:rounded-lg md:p-2 ${isOutDatedNotice || isClosed ? 'text-gray-500 md:border md:border-gray-500 md:bg-test-black ' : 'border-test-green text-white md:border md:bg-test-black'}`}
           >
             <div className='flex items-center md:gap-0.5'>
               <span className='pt-0.5 text-sm font-bold leading-4'>
