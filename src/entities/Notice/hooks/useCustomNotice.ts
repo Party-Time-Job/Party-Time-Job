@@ -15,7 +15,7 @@ const useCustomNotice = () => {
       const { userId } = decoded;
 
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices?limit=20');
+        const allNotice = await getMethod<AllNotice>('/notices?limit=100');
         const userInfo = await getMethod<User>(`/users/${userId}`);
         const userAddress = userInfo.item.address;
         const allNoticeList = allNotice.items;
@@ -40,7 +40,7 @@ const useCustomNotice = () => {
       getData();
     } else {
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices?limit=20');
+        const allNotice = await getMethod<AllNotice>('/notices?limit=100');
         const allCustomNoticeList = allNotice.items.filter(notice => {
           return (
             new Date(notice.item.startsAt) > new Date() && !notice.item.closed
