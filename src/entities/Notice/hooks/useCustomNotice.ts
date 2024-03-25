@@ -15,7 +15,7 @@ const useCustomNotice = () => {
       const { userId } = decoded;
 
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices?limit=20');
+        const allNotice = await getMethod<AllNotice>('/notices?limit=100');
         const userInfo = await getMethod<User>(`/users/${userId}`);
         const userAddress = userInfo.item.address;
         const allNoticeList = allNotice.items;
