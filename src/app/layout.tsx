@@ -7,6 +7,9 @@ import Footer from '@/widgets/Footer/Footer';
 export const metadata: Metadata = {
   title: 'Party Time Job',
   description: 'This service for everyone who wants to join the party!',
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 const SpoqaHanSansNeo = localFont({
