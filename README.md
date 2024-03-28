@@ -4,23 +4,25 @@
 
 <br /><br />
 
-# ⭐️ 프로젝트 개요
+# 프로젝트 개요
 
 <img width='1200px' src='public/readme-1.png' />
 
 <p>일자리가 급한 사람들을 위한 구인구직 서비스. 구인구직 과정을 파티처럼 즐겁고, 더욱 쉽게 만들고자 합니다.</p>
 <p>당신의 다음 파티는 어디에서 시작될까요? 지금 바로 시작해 보세요!</p>
 
+**[PARTY TIME JOB](https://party-time-job-deploy.vercel.app/)**
+
 <br /><br />
 
-# 👨‍👨‍👧‍👧 팀원 소개
+# 팀원 소개
 
 <table>
     <tr align="center">
-        <td><img width="150" src="https://avatars.githubusercontent.com/u/150772344?v=4" /></td>
-        <td><img width="150" src="https://avatars.githubusercontent.com/u/85405709?v=4" /></td>
-        <td><img width="150" src="https://avatars.githubusercontent.com/u/135799803?v=4" /></td>
-        <td><img width="150" src="https://avatars.githubusercontent.com/u/122016324?v=4" /></td>
+        <td><img width="150" src='public/readme-2.png' /></td>
+        <td><img width="150" src='public/readme-3.png' /></td>
+        <td><img width="150" src='public/readme-4.png' /></td>
+        <td><img width="150" src='public/readme-5.png'/></td>
     </tr>
     <tr align="center">
       <td><a href="https://github.com/DanteSnow">이치현</a></td>
@@ -38,7 +40,7 @@
 
 <br /><br />
 
-# 📆 개발 기간
+# 개발 기간
 
 ### 2024.03.07 ~ 2024.03/25
 
@@ -46,7 +48,7 @@
 
 <br /><br />
 
-# 📚 기술 스택
+# 기술 스택
 
 ### 개발
 
@@ -86,7 +88,7 @@
 
 <br /><br />
 
-# 📁 FSD(Feature-Sliced Design) 폴더 구조
+# FSD(Feature-Sliced Design) 폴더 구조
 
 ```bash
 src
@@ -125,7 +127,7 @@ src
 
 <br /><br />
 
-# ⚙️ 주요 기능
+# 주요 기능
 
 ### 📄 랜딩페이지 및 로그인/회원가입 페이지
 
