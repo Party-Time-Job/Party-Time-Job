@@ -1,5 +1,5 @@
 import CreateRecruitment from '@/features/Create-Recruitment/CreateRecruitment';
-import { Item } from '@/app/shop/registration/recruitment/[id]/type';
+import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
 
 interface Props {
   noticeData: Item;
