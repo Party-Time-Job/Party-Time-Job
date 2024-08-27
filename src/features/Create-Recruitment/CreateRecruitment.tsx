@@ -7,7 +7,7 @@ import { getCookie } from 'cookies-next';
 import { FieldValues, useForm } from 'react-hook-form';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
-import { Item } from '@/app/shop/registration/recruitment/[id]/type';
+import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
 import Text from '@/shared/ui/Text';
 
 const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
@@ -96,6 +96,9 @@ const CreateRecruitment = ({
                 id='hourlyPay'
                 {...register('hourlyPay', {
                   required: '시급을 입력해주세요.',
+                  onChange: e => {
+                    console.log(e.target.value);
+                  },
                 })}
               />
               {errors.hourlyPay && (
