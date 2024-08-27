@@ -84,7 +84,7 @@ const CreateRecruitment = ({
           className='flex flex-col gap-10'
         >
           <div className='flex flex-col gap-5 lg:flex lg:flex-row'>
-            <div className='flex flex-col gap-2'>
+            <div className='relative flex flex-col gap-2'>
               <label htmlFor='hourlyPay' className='leading-[26px] text-white'>
                 시급
               </label>
@@ -98,10 +98,12 @@ const CreateRecruitment = ({
                 })}
               />
               {errors.hourlyPay && (
-                <span>{errors.hourlyPay.message?.toString()}</span>
+                <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
+                  {errors.hourlyPay.message?.toString()}
+                </span>
               )}
             </div>
-            <div className='flex flex-col gap-2'>
+            <div className='relative flex flex-col gap-2'>
               <label htmlFor='startsAt' className='leading-[26px] text-white'>
                 시작 일시
               </label>
@@ -114,10 +116,12 @@ const CreateRecruitment = ({
                 })}
               />
               {errors.startsAt && (
-                <span>{errors.startsAt.message?.toString()}</span>
+                <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
+                  {errors.startsAt.message?.toString()}
+                </span>
               )}
             </div>
-            <div className='flex flex-col gap-2'>
+            <div className='relative flex flex-col gap-2'>
               <label htmlFor='workhour' className='leading-[26px] text-white'>
                 업무 시간
               </label>
@@ -130,24 +134,28 @@ const CreateRecruitment = ({
                 })}
               />
               {errors.workhour && (
-                <span>{errors.workhour.message?.toString()}</span>
+                <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
+                  {errors.workhour.message?.toString()}
+                </span>
               )}
             </div>
           </div>
-          <div className='flex flex-col gap-2'>
+          <div className='relative flex flex-col gap-2'>
             <label htmlFor='description' className='leading-[26px] text-white'>
               공고 설명
             </label>
             <textarea
               id='description'
-              className='h-[153px] place-content-center rounded-md bg-test-black p-2.5'
+              className='h-[153px] resize-none place-content-center rounded-md bg-test-black p-2.5'
               placeholder='입력'
               {...register('description', {
                 required: '공고 설명을 작성해주세요.',
               })}
             />
             {errors.description && (
-              <span>{errors.description.message?.toString()}</span>
+              <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
+                {errors.description.message?.toString()}
+              </span>
             )}
           </div>
           <div className='flex justify-end'>
