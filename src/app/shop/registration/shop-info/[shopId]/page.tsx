@@ -10,7 +10,6 @@ const ShopInfo = async ({
 }) => {
   const shopId = searchParams?.shopId;
   const shopData = await getShopData(shopId);
-  console.log(shopData, '---shopData---');
   return <ResgistShopPage shopId={shopId} shopData={shopData} />;
 };
 

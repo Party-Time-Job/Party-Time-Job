@@ -166,8 +166,6 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     setValue('imageUrl', initialValues.imageUrl);
   }, []);
 
-  console.log(initialValues, '---initialValues---');
-
   return (
     <div className='flex flex-col items-center gap-8 px-[238px] py-[60px]'>
       <div className='flex w-[350px] justify-between md:w-[472px] lg:w-[980px]'>
