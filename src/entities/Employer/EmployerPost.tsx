@@ -4,9 +4,9 @@ import Image from 'next/image';
 import addWorkHours from '@/entities/Post/utils/getFinishTime';
 import formatDateTime from '@/entities/Post/utils/formatDateTime';
 import formatHourlyPay from '@/entities/Post/utils/formatHourlyPay';
-import { NoticeItem } from '../Post/types.ts';
 import ClosedNoticeImage from '@/shared/ui/ClosedNoticeImage.tsx';
 import useNoticeStatus from '../Notice/hooks/useNoticeStatus.ts';
+import { EmployerPostProps } from './type.ts';
 
 /**
  *
@@ -14,20 +14,11 @@ import useNoticeStatus from '../Notice/hooks/useNoticeStatus.ts';
  * @returns 사장님 페이지 -가게 정보 상세, 공고 리스트 페이지, 공고 상세 페이지에 쓰일 Post component
  */
 export const EmployerPost = ({
-  imageUrl,
   noticeItem,
-  originalHourlyPay,
   shopId,
-  name,
-  address1,
-}: {
-  imageUrl: string;
-  originalHourlyPay: string;
-  noticeItem: NoticeItem;
-  shopId: string;
-  name: string;
-  address1: string;
-}) => {
+  shopInfo,
+}: EmployerPostProps) => {
+  const { imageUrl, originalHourlyPay, name, address1 } = shopInfo;
   const comparePriceRate = Math.round(
     (noticeItem.hourlyPay / Number(originalHourlyPay)) * 100 - 100,
   );
