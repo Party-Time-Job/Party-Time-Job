@@ -1,4 +1,3 @@
-import { revalidateTag } from 'next/cache';
 import ResgistShopPage from '@/page/EmployerPage/RegistShopPage';
 import getShopData from './model/Api.ts';
 
@@ -11,7 +10,7 @@ const ShopInfo = async ({
 }) => {
   const shopId = searchParams?.shopId;
   const shopData = await getShopData(shopId);
-  revalidateTag('collection');
+  console.log(shopData, '---shopData---');
   return <ResgistShopPage shopId={shopId} shopData={shopData} />;
 };
 

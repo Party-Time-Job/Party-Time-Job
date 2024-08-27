@@ -19,9 +19,7 @@ const getNoticeData = async (
     const response = await fetch(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}/notices/${noticeId}`,
       {
-        next: {
-          tags: ['collection'],
-        },
+        cache: 'no-cache',
       },
     );
     const result: Data = (await response.json()) as Data;

@@ -19,9 +19,7 @@ const getShopData = async (
     const response = await fetch(
       `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}`,
       {
-        next: {
-          tags: ['collection'],
-        },
+        cache: 'no-cache',
       },
     );
     if (response.status === 200) {
