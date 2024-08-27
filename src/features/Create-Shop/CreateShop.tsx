@@ -39,7 +39,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     reset,
     setValue,
     getValues,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, errors, isSubmitted },
     control,
   } = useForm<FieldValues>({
     defaultValues: initialValues,
@@ -77,10 +77,6 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
         }),
       });
       if (response.status === 200) {
-        await fetch('/api/revalidate', {
-          method: 'POST',
-        });
-
         router.push('/shop/details');
         router.refresh();
       }
@@ -88,30 +84,6 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
       console.error(error);
     }
   };
-
-  // const retrievePresignedUrlForViewing = async () => {
-  //   const urlObj = new URL(presignedUrl);
-  //   const originalUrl = presignedUrl;
-  //   const parameterToRemove = 'X-Amz-Algorithm';
-  //   const modifiedUrl = removeQueryParameter(originalUrl, parameterToRemove);
-
-  //   try {
-  //     const response = await fetch(urlObj.origin);
-  //     if (response.ok) {
-  //       setUploadedImageUrl(`${modifiedUrl}`);
-  //     } else {
-  //       console.error(
-  //         'Failed to retrieve pre-signed URL for viewing image:',
-  //         response,
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error(
-  //       'Error retrieving pre-signed URL for viewing image:',
-  //       error,
-  //     );
-  //   }
-  // };
 
   const generatePresignedUrl = async () => {
     const token = getCookie('token');
@@ -433,18 +405,12 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
               text='취소하기'
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSubmitted}
               type='button'
-              onClick={() => router.push('/shop/details')}
             />
           )}
         </div>
       </form>
-      {/* <Modal
-        handleToggle={() => console.log('1')}
-        category=''
-        cancelClick={() => console.log('1')}
-      /> */}
     </div>
   );
 };
