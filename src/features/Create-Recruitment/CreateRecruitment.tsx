@@ -55,9 +55,8 @@ const CreateRecruitment = ({
         }),
       });
       if (response.status === 200) {
-        router.push('/shop/details');
+        router.push(`/shop/details/${shopId}`);
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +70,7 @@ const CreateRecruitment = ({
               공고등록
             </Text>
           </div>
-          <Link href='/shop/details'>
+          <Link href={`/shop/details/${shopId}`}>
             <Image
               width={32}
               height={32}
@@ -96,9 +95,6 @@ const CreateRecruitment = ({
                 id='hourlyPay'
                 {...register('hourlyPay', {
                   required: '시급을 입력해주세요.',
-                  onChange: e => {
-                    console.log(e.target.value);
-                  },
                 })}
               />
               {errors.hourlyPay && (

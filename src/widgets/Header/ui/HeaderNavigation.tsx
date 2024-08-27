@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
@@ -23,6 +23,7 @@ import userTypeState from '@/atoms/userTypeState.ts';
 const HeaderNavigation = () => {
   const [token, setToken] = useRecoilState<string | null>(TokenState);
   const [userType, setUserType] = useRecoilState<string | null>(userTypeState);
+  const [shopId, setShopId] = useState<string>('null');
 
   useEffect(() => {
     const storedToken = getCookie('token');
@@ -41,6 +42,10 @@ const HeaderNavigation = () => {
               `https://bootcamp-api.codeit.kr/api/3-2/the-julge/users/${decoded.userId}`,
             )
             .then(response => {
+              if (response.data.item.shop) {
+                setShopId(response.data.item.shop.item.id);
+              }
+
               setUserType(response.data.item.type);
             })
             .catch(error => console.error('유저 정보 가져오기 실패:', error));
@@ -75,7 +80,7 @@ const HeaderNavigation = () => {
       )}
       {token && userType === 'employer' && (
         <div className='flex gap-4'>
-          <MyStoreLink />
+          <MyStoreLink shopId={shopId} />
           <LogoutButton />
         </div>
       )}

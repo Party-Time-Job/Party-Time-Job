@@ -2,10 +2,10 @@ import ResgistShopPage from '@/page/EmployerPage/RegistShopPage';
 import getShopData from './model/Api.ts';
 
 const ShopInfo = async ({
-  searchParams: { shopId },
+  params: { shopId },
 }: {
-  searchParams: {
-    shopId: string | null;
+  params: {
+    shopId: string;
   };
 }) => {
   const shopData = await getShopData(shopId);

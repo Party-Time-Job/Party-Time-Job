@@ -12,7 +12,7 @@ interface EmptyProps {
 }
 interface Props {
   shopData: ShopItem | EmptyProps;
-  shopId: string | null;
+  shopId: string;
 }
 
 const ResgistShopPage = ({ shopData, shopId }: Props) => {

@@ -13,6 +13,7 @@ import Text from '@/shared/ui/Text';
 import Select from '@/shared/ui/Select/Select.tsx';
 import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
+import getShopId from './model/Api.ts';
 
 const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
 
@@ -29,7 +30,7 @@ interface EmptyProps {
 }
 interface CreateShopProps {
   initialValues: ShopItem | EmptyProps;
-  shopId: string | null;
+  shopId: string;
 }
 
 const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
@@ -54,8 +55,9 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
 
   const registerImageUrl = register('imageUrl');
 
-  const url = shopId ? `${baseUrl}/shops/${shopId}` : `${baseUrl}/shops`;
-  const method = shopId ? 'PUT' : 'POST';
+  const url =
+    shopId === 'null' ? `${baseUrl}/shops` : `${baseUrl}/shops/${shopId}`;
+  const method = shopId === 'null' ? 'POST' : 'PUT';
 
   const requestInfo = async (data: FieldValues): Promise<void> => {
     const originalHourlyPay = getValues('originalHourlyPay') as string;
@@ -77,7 +79,12 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
         }),
       });
       if (response.status === 200) {
-        router.push('/shop/details');
+        if (shopId === 'null') {
+          const currentShopId = await getShopId();
+          router.push(`/shop/details/${currentShopId}`);
+        } else {
+          router.push(`/shop/details/${shopId}`);
+        }
         router.refresh();
       }
     } catch (error) {
@@ -174,7 +181,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             가게 정보
           </Text>
         </div>
-        <Link href='/shop/details' className='flex'>
+        <Link href={`/shop/details/${shopId}`} className='flex'>
           <Image src={'/close.svg'} alt='close' width={32} height={32} />
         </Link>
       </div>
@@ -233,7 +240,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
           <div className='z-10  flex w-[350px] flex-col gap-2 md:w-[472px]'>
             <div className='relative w-[100%]'>
               <Controller
-                name='category'
+                name='address1'
                 control={control}
                 render={({ field }) => (
                   <Select
@@ -408,7 +415,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
               text='취소하기'
               disabled={isSubmitting || isSubmitted}
               type='button'
-              onClick={() => router.push('/shop/details')}
+              onClick={() => router.push(`/shop/details/${shopId}`)}
             />
           )}
         </div>

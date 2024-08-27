@@ -15,9 +15,7 @@ const MyShop = ({ onClick, shopId }: MyShopProps) => {
   };
   return (
     <div
-      onClick={() =>
-        handleNavigate(`/shop/registration/shop-info/new?shopId=${shopId}`)
-      }
+      onClick={() => handleNavigate(`/shop/registration/shop-info/${shopId}`)}
     >
       <EmpolyerEmptyData
         title='내 가게'

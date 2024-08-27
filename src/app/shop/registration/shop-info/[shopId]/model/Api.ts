@@ -1,10 +1,8 @@
 import { ShopItem, ShopData } from '@/features/Create-Shop/Type';
 import { EmptyProps } from './Type.ts';
 
-const getShopData = async (
-  shopId: string | null,
-): Promise<ShopItem | EmptyProps> => {
-  if (!shopId) {
+const getShopData = async (shopId: string): Promise<ShopItem | EmptyProps> => {
+  if (shopId === 'null') {
     return {
       name: '',
       category: '',
