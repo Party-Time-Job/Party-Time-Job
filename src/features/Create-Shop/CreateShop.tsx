@@ -397,7 +397,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             size='medium'
             status={isSubmitting ? 'inactive' : 'active'}
             text={shopId === null ? '정보 수정하기' : '가게 등록하기'}
-            disabled={isSubmitting}
+            disabled={isSubmitting || isSubmitted}
             type='submit'
           />
           {initialValues && (
@@ -407,6 +407,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
               text='취소하기'
               disabled={isSubmitting || isSubmitted}
               type='button'
+              onClick={() => router.push('/shop/details')}
             />
           )}
         </div>
