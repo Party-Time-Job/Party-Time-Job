@@ -4,17 +4,7 @@ import { EmptyProps } from './Type.ts';
 const getShopData = async (
   shopId: string | null,
 ): Promise<ShopItem | EmptyProps> => {
-  try {
-    const response = await fetch(
-      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}`,
-      {
-        cache: 'no-cache',
-      },
-    );
-    if (response.status === 200) {
-      const result = (await response.json()) as ShopData;
-      return result.item as ShopItem;
-    }
+  if (!shopId) {
     return {
       name: '',
       category: '',
@@ -24,6 +14,16 @@ const getShopData = async (
       imageUrl: '',
       description: '',
     };
+  }
+  try {
+    const response = await fetch(
+      `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopId}`,
+      {
+        cache: 'no-cache',
+      },
+    );
+    const result = (await response.json()) as ShopData;
+    return result.item as ShopItem;
   } catch (error) {
     console.log(error);
     throw error;
