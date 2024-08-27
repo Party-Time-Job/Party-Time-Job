@@ -3,24 +3,14 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/shared/ui/Button';
+import { ShopInfo } from './type.ts';
 
 interface GetMyShopProps {
-  imageUrl: string;
-  category: string | null;
-  name: string | null;
-  address1: string | null;
-  description: string | null;
+  shopInfo: ShopInfo;
   shopId: string | null;
 }
 
-const MyShop = ({
-  imageUrl,
-  category,
-  name,
-  address1,
-  description,
-  shopId,
-}: GetMyShopProps) => {
+const MyShop = ({ shopInfo, shopId }: GetMyShopProps) => {
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {
     const routes = {
@@ -29,6 +19,7 @@ const MyShop = ({
     };
     router.push(routes[action]);
   };
+  const { imageUrl, category, name, address1, description } = shopInfo;
   return (
     <div className='mt-10 flex flex-col items-center justify-center gap-2'>
       <div className='mx-12 flex flex-col gap-[23px]'>

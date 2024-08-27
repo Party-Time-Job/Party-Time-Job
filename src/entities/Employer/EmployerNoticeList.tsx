@@ -3,14 +3,12 @@
 import Link from 'next/link';
 import EmployerPost from './EmployerPost';
 import { AllNotice } from '@/entities/Post/types';
+import { ShopInfo } from './type.ts';
 
 interface Props {
-  noticeItemList?: AllNotice;
-  imageUrl: string;
+  noticeItemList: AllNotice | null;
   shopId: string;
-  originalHourlyPay: string;
-  name: string;
-  address1: string;
+  shopInfo: ShopInfo;
 }
 
 /**
@@ -20,14 +18,7 @@ interface Props {
  * @param {Notice[]} props.recentNoticeList - 최근 본 notice 데이터 배열
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
-const EmployerNoticeList = ({
-  noticeItemList,
-  imageUrl,
-  shopId,
-  originalHourlyPay,
-  name,
-  address1,
-}: Props) => {
+const EmployerNoticeList = ({ noticeItemList, shopId, shopInfo }: Props) => {
   return (
     <div className='mt-10 flex flex-col items-center gap-2 border-t  border-gray-600 pt-10'>
       <div className='flex w-[965px] flex-col gap-[23px]'>
@@ -45,12 +36,9 @@ const EmployerNoticeList = ({
                 >
                   <EmployerPost
                     key={noticeId}
-                    imageUrl={imageUrl}
                     noticeItem={notice.item}
-                    originalHourlyPay={originalHourlyPay}
                     shopId={shopId}
-                    name={name}
-                    address1={address1}
+                    shopInfo={shopInfo}
                   />
                 </Link>
               );
