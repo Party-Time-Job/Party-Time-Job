@@ -1,4 +1,3 @@
-import { revalidateTag } from 'next/cache';
 import CreateShop from '@/features/Create-Shop/CreateShop';
 import { ShopItem } from '@/features/Create-Shop/Type';
 
@@ -17,7 +16,6 @@ interface Props {
 }
 
 const ResgistShopPage = ({ shopData, shopId }: Props) => {
-  revalidateTag('collection');
   return <CreateShop shopId={shopId} initialValues={shopData} />;
 };
 
