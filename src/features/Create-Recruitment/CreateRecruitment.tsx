@@ -9,8 +9,13 @@ import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
 import Text from '@/shared/ui/Text';
+import formatDate from '@/entities/Post/utils/formatDate';
 
 const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
+
+interface ErrorResponse {
+  message: string;
+}
 
 const CreateRecruitment = ({
   noticeData,
@@ -29,7 +34,7 @@ const CreateRecruitment = ({
   } = useForm({
     defaultValues: {
       ...noticeData,
-      startsAt: new Date(noticeData.startsAt).toISOString(),
+      startsAt: formatDate(noticeData.startsAt),
     },
   });
   const router = useRouter();
@@ -54,13 +59,21 @@ const CreateRecruitment = ({
           startsAt: new Date(startsAt).toISOString(),
         }),
       });
-      if (response.status === 200) {
+
+      if (response.ok) {
         router.push(`/shop/details/${shopId}`);
+      } else {
+        const errorResponse = (await response.json()) as ErrorResponse;
+        throw new Error(errorResponse.message || '예상치 못한 오류 발생');
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        // eslint-disable-next-line no-alert
+        alert(error.message);
+      }
     }
   };
+
   return (
     <div className='flex h-screen w-full items-center justify-center'>
       <div className='flex flex-col gap-10 rounded-lg border p-10'>
