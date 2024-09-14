@@ -3,9 +3,8 @@
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { CreateShopProps } from './model/Type.ts';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
@@ -13,11 +12,9 @@ import Text from '@/shared/ui/Text';
 import Select from '@/shared/ui/Select/Select.tsx';
 import ADDRESS from '@/shared/constants/Address';
 import CLASSIFICATION from '@/shared/constants/Classification';
-import getShopId from './model/Api.ts';
-
-const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
-
-const MINIMUM_WAGE = 9860;
+import useCreateShopRequest from './hooks/useCreateShopRequest.tsx';
+import { generatePresignedUrl, uploadImageToS3 } from './model/Api.ts';
+import { MINIMUM_WAGE } from '@/shared/constants/Wage.ts';
 
 const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const {
@@ -38,94 +35,19 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const [imageName, setImageName] = useState<string>('');
   const [fileName, setFileName] = useState<File | null>(null);
   const router = useRouter();
+  const { requestInfo } = useCreateShopRequest({
+    shopId,
+    uploadedImageUrl,
+    getValues,
+  });
 
-  const registerImageUrl = register('imageUrl');
-
-  const url =
-    shopId === 'null' ? `${baseUrl}/shops` : `${baseUrl}/shops/${shopId}`;
-  const method = shopId === 'null' ? 'POST' : 'PUT';
-
-  const requestInfo = async (data: FieldValues): Promise<void> => {
-    const originalHourlyPay = getValues('originalHourlyPay') as string;
-    const uploadPay = originalHourlyPay.replaceAll(',', '');
-    const token = getCookie('token');
-    try {
-      const response = await fetch(url, {
-        method,
-        headers: {
-          Accept: '*/*',
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({
-          ...data,
-          imageUrl: uploadedImageUrl,
-          originalHourlyPay: uploadPay,
-        }),
-      });
-      if (response.status === 200) {
-        if (shopId === 'null') {
-          const currentShopId = await getShopId();
-          router.push(`/shop/details/${currentShopId}`);
-        } else {
-          router.push(`/shop/details/${shopId}`);
-        }
-        router.refresh();
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const generatePresignedUrl = async () => {
-    const token = getCookie('token');
-    try {
-      const response = await fetch(`${baseUrl}/images`, {
-        method: 'POST',
-        headers: {
-          Accept: '*/*',
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({ name: imageName }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setPresignedUrl(data.item.url);
-      } else {
-        console.error('Failed to generate pre-signed URL:', data);
-      }
-    } catch (error) {
-      console.error('Error generating pre-signed URL:', error);
-    }
-  };
-
-  const uploadImageToS3 = async (file: File) => {
-    try {
-      const response = await fetch(presignedUrl, {
-        method: 'PUT',
-        body: file,
-      });
-      if (response.ok) {
-        const imageUrl = presignedUrl.split('?')[0]; // Query 파라미터를 제거한 URL
-        setUploadedImageUrl(imageUrl);
-      } else {
-        console.error('Failed to upload image:', response);
-      }
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
       setImageName(file.name);
       setFileName(file);
     }
-    generatePresignedUrl();
+    generatePresignedUrl({ imageName, setPresignedUrl });
     setValue('imageUrl', '');
     setUploadedImageUrl('');
   };
@@ -149,7 +71,7 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
 
   useEffect(() => {
     if (presignedUrl && fileName) {
-      uploadImageToS3(fileName);
+      uploadImageToS3({ fileName, presignedUrl, setUploadedImageUrl });
     }
   }, [presignedUrl]);
 
@@ -356,8 +278,8 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
                 },
               })}
               onChange={e => {
-                registerImageUrl.onChange(e);
-                handleChange(e);
+                register('imageUrl').onChange(e);
+                handleFileChange(e);
               }}
             />
             {errors.imageUrl && (

@@ -1,3 +1,6 @@
+import { FieldValues, UseFormGetValues } from 'react-hook-form';
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Item {
   id: string;
   email: string;
@@ -47,4 +50,21 @@ export interface EmptyProps {
 export interface CreateShopProps {
   initialValues: ShopItem | EmptyProps;
   shopId: string;
+}
+
+export interface UseCreateShopRequestProps {
+  shopId: string;
+  uploadedImageUrl: string | undefined;
+  getValues: UseFormGetValues<FieldValues>;
+}
+
+export interface GeneratePresignedUrlType {
+  imageName: string;
+  setPresignedUrl: Dispatch<SetStateAction<string>>;
+}
+
+export interface UploadImageToS3Type {
+  fileName: File | null;
+  presignedUrl: string;
+  setUploadedImageUrl: Dispatch<SetStateAction<string | undefined>>;
 }
