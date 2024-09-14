@@ -7,15 +7,15 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateShopProps } from './model/Type.ts';
 import Button from '@/shared/ui/Button';
-import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';
 import useCreateShopRequest from './hooks/useCreateShopRequest.tsx';
-import { generatePresignedUrl, uploadImageToS3 } from './model/Api.ts';
+import { uploadImageToS3 } from './model/Api.ts';
 import ShopNameInput from './ShopNameInput.tsx';
 import CategorySelect from './CategorySelect.tsx';
 import AddressSelect from './AddressSelect.tsx';
 import AddressDetailSelect from './AddressDetailSelect.tsx';
 import OriginalHourlyPayInput from './OriginalHourlyPayInput.tsx';
+import CustomImageUploadInput from './CustomImageUploadInput.tsx';
 
 const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const {
@@ -41,17 +41,6 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
     uploadedImageUrl,
     getValues,
   });
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    if (file) {
-      setImageName(file.name);
-      setFileName(file);
-    }
-    generatePresignedUrl({ imageName, setPresignedUrl });
-    setValue('imageUrl', '');
-    setUploadedImageUrl('');
-  };
 
   useEffect(() => {
     if (presignedUrl && fileName) {
@@ -103,85 +92,18 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             errors={errors}
             setValue={setValue}
           />
-          {/* 가게 이미지 추가하기  */}
-          <div className='relative flex h-[400px] w-[350px] flex-col gap-2 overflow-hidden md:w-[472px]'>
-            <div>가게 이미지 *</div>
-            <div className='relative h-full w-full'>
-              {/* 클로즈 X 아이콘 */}
-              {uploadedImageUrl && (
-                <Image
-                  className='absolute right-3 top-3 cursor-pointer'
-                  width={32}
-                  height={32}
-                  src={'/close.svg'}
-                  alt='close'
-                  onClick={() => {
-                    setValue('imageUrl', '');
-                    setUploadedImageUrl('');
-                  }}
-                />
-              )}
-              <label htmlFor='imageUrl'>
-                <div className='flex h-full flex-col items-center justify-center rounded-lg bg-test-black'>
-                  {uploadedImageUrl ? (
-                    <div className='h-[300px] overflow-hidden'>
-                      <Image
-                        priority
-                        width={0}
-                        height={0}
-                        src={uploadedImageUrl}
-                        alt='Preview'
-                        sizes='100vw'
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className='flex w-full flex-col justify-center'>
-                      <div className='mx-auto'>
-                        <Image
-                          width={32}
-                          height={32}
-                          src={'/camera.svg'}
-                          alt='camera'
-                        />
-                      </div>
-                      <Text
-                        as='p'
-                        className='cursor-pointer text-center font-bold leading-5 text-[#A4A1AA]'
-                      >
-                        이미지 추가하기
-                      </Text>
-                    </div>
-                  )}
-                </div>
-              </label>
-            </div>
-            <Input
-              className='invisible h-[0px] w-[100%]'
-              id='imageUrl'
-              type='file'
-              accept='.jpg,.jpeg,.png,.svg,.webp'
-              {...register('imageUrl', {
-                validate: {
-                  hasImage: () => uploadedImageUrl !== '',
-                },
-              })}
-              onChange={e => {
-                register('imageUrl').onChange(e);
-                handleFileChange(e);
-              }}
-            />
-            {errors.imageUrl && (
-              <span className='absolute bottom-[25px] left-1 text-xs text-red-500'>
-                이미지를 등록해주세요.
-              </span>
-            )}
-          </div>
+          <CustomImageUploadInput
+            register={register}
+            errors={errors}
+            setValue={setValue}
+            uploadedImageUrl={uploadedImageUrl}
+            setUploadedImageUrl={setUploadedImageUrl}
+            imageName={imageName}
+            setImageName={setImageName}
+            setFileName={setFileName}
+            setPresignedUrl={setPresignedUrl}
+          />
         </div>
-        {/* 가게 상세 설명 작성 */}
         <div className='relative flex flex-col gap-2'>
           <label htmlFor='description'>가게 설명 *</label>
           <textarea

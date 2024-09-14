@@ -89,3 +89,12 @@ export interface CategorySelectType {
 export interface OriginalHourlyPayInputType extends CreateShopInputProps {
   setValue: UseFormSetValue<FieldValues>;
 }
+
+export interface CustomImageUploadInputType extends OriginalHourlyPayInputType {
+  uploadedImageUrl: string | undefined;
+  setUploadedImageUrl: Dispatch<SetStateAction<string | undefined>>;
+  imageName: string;
+  setImageName: Dispatch<SetStateAction<string>>;
+  setFileName: Dispatch<SetStateAction<File | null>>;
+  setPresignedUrl: Dispatch<SetStateAction<string>>;
+}
