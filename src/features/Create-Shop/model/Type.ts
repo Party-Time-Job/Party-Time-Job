@@ -1,4 +1,10 @@
-import { FieldValues, UseFormGetValues } from 'react-hook-form';
+import {
+  Control,
+  FieldErrors,
+  FieldValues,
+  UseFormGetValues,
+  UseFormRegister,
+} from 'react-hook-form';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface Item {
@@ -67,4 +73,14 @@ export interface UploadImageToS3Type {
   fileName: File | null;
   presignedUrl: string;
   setUploadedImageUrl: Dispatch<SetStateAction<string | undefined>>;
+}
+export interface CreateShopInputProps {
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+}
+
+export interface CategorySelectType {
+  control: Control<FieldValues, any>;
+  initialValues: ShopItem | EmptyProps;
+  errors: FieldErrors<FieldValues>;
 }

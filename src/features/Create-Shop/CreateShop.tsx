@@ -1,6 +1,6 @@
 'use client';
 
-import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -9,12 +9,13 @@ import { CreateShopProps } from './model/Type.ts';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';
-import Select from '@/shared/ui/Select/Select.tsx';
-import ADDRESS from '@/shared/constants/Address';
-import CLASSIFICATION from '@/shared/constants/Classification';
 import useCreateShopRequest from './hooks/useCreateShopRequest.tsx';
 import { generatePresignedUrl, uploadImageToS3 } from './model/Api.ts';
 import { MINIMUM_WAGE } from '@/shared/constants/Wage.ts';
+import ShopNameInput from './ShopNameInput.tsx';
+import CategorySelect from './CategorySelect.tsx';
+import AddressSelect from './AddressSelect.tsx';
+import AddressDetailSelect from './AddressDetailSelect.tsx';
 
 const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const {
@@ -93,96 +94,27 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
           <Image src={'/close.svg'} alt='close' width={32} height={32} />
         </Link>
       </div>
-      {/* 여기서부터 폼 태그 */}
       <form
         onSubmit={handleSubmit(data => requestInfo(data))}
         className='flex flex-col gap-6'
       >
         <div className='flex flex-col items-center gap-5 lg:flex-row'>
-          {/* 가게 이름 */}
-          <div className='relative flex w-[350px] flex-col gap-2 md:w-[472px]'>
-            <label htmlFor='name'>가게 이름 *</label>
-            <Input
-              width='w-[100%]'
-              id='name'
-              type='text'
-              placeholder='입력'
-              {...register('name', {
-                required: '가게 이름 입력은 필수 입니다.',
-              })}
-            />
-            {errors.name && (
-              <span className='absolute bottom-[-22px] left-1 text-xs text-red-500'>
-                {errors.name.message?.toString()}
-              </span>
-            )}
-          </div>
-          {/* 분류 */}
-          <div className='z-20 flex w-[350px] flex-col gap-2 md:w-[472px]'>
-            <div className='relative w-[100%]'>
-              <Controller
-                name='category'
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    type='search'
-                    title='분류'
-                    defaultValue={initialValues.category || '한식'}
-                    options={CLASSIFICATION}
-                    isRequired
-                    onClick={value => {
-                      field.onChange(value);
-                    }}
-                  />
-                )}
-              />
-            </div>
-            {errors.category && (
-              <span>{errors.category.message?.toString()}</span>
-            )}
-          </div>
+          <ShopNameInput register={register} errors={errors} />
+          <CategorySelect
+            control={control}
+            initialValues={initialValues}
+            errors={errors}
+          />
         </div>
         <div className='flex flex-col items-center gap-5 lg:flex-row'>
           {/* 주소 */}
-          <div className='z-10  flex w-[350px] flex-col gap-2 md:w-[472px]'>
-            <div className='relative w-[100%]'>
-              <Controller
-                name='address1'
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    type='search'
-                    title='주소'
-                    defaultValue={initialValues.address1 || '서울시 강동구'}
-                    options={ADDRESS}
-                    isRequired
-                    onClick={value => field.onChange(value)}
-                  />
-                )}
-              />
-            </div>
-            {errors.address1 && (
-              <span>{errors.address1.message?.toString()}</span>
-            )}
-          </div>
+          <AddressSelect
+            control={control}
+            initialValues={initialValues}
+            errors={errors}
+          />
           {/* 상세 주소 */}
-          <div className='relative flex w-[350px] flex-shrink-0 flex-col items-start gap-2 md:w-[472px]'>
-            <label htmlFor='address2'>상세 주소</label>
-            <Input
-              width='w-full'
-              id='address2'
-              type='text'
-              placeholder='입력'
-              {...register('address2')}
-            />
-            {errors.address2 && (
-              <span className='absolute bottom-[-22px] left-1 text-xs text-red-500'>
-                {errors.address2.message?.toString()}
-              </span>
-            )}
-          </div>
+          <AddressDetailSelect register={register} errors={errors} />
         </div>
         <div className='flex flex-col items-center gap-7 lg:items-start'>
           {/* 시급 작성  */}
