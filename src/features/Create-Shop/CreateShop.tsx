@@ -17,7 +17,18 @@ import OriginalHourlyPayInput from './OriginalHourlyPayInput.tsx';
 import CustomImageUploadInput from './CustomImageUploadInput.tsx';
 import DescriptionTextArea from './DescriptionTextArea.tsx';
 
-const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
+/**
+ * 공고를 등록을 위한 폼 컴포넌트
+ *
+ * @param {ShopItem | EmptyProps} initialValues - 첫 가게 등록 시 폼 컨트롤러에 빈 값을 출력하고 편집을 위해 페이지에 들어왔다면 기존 정보가 출력됩니다.
+ * @param {string} shopId - 외부 DOM에서 가게를 식별하는 ID. 렌더링할 요소의 ID입니다.
+ * @return {JSX.Element} 가게 등록을 위한 폼 컴포넌트를 렌더링하는 JSX 요소를 반환합니다.
+ */
+
+const CreateShop = ({
+  initialValues,
+  shopId,
+}: CreateShopProps): JSX.Element => {
   const {
     register,
     handleSubmit,
