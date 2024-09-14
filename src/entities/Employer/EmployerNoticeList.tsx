@@ -2,23 +2,22 @@
 
 import Link from 'next/link';
 import EmployerPost from './EmployerPost';
-import { AllNotice } from '@/entities/Post/types';
-import { ShopInfo } from './type.ts';
-
-interface Props {
-  noticeItemList: AllNotice | null;
-  shopId: string;
-  shopInfo: ShopInfo;
-}
+import { EmployerNoticeListProps } from './type.ts';
 
 /**
- * @param {Object} props - NoticeList 컴포넌트의 props
- * @param {string} props.category - 'all', or 'recent' or 'search' or filter
- * @param {string} props.searchValue - category가 'search' 일때 검색어
- * @param {Notice[]} props.recentNoticeList - 최근 본 notice 데이터 배열
+ * 가게 공고 목록을 출력하는 컴포넌트 입니다.
+ *
+ * @param {AllNotice | null} noticeItemList - 공고 목록 아이템들을 전달받아 화면에 출력합니다.
+ * @param {string} shopId - 공고 클릭시, 라우팅 또는 공고 조회를 위해서 props로 전달합니다.
+ * @param {string} shopInfo - 공고 카드를 통해 shopInfo를 출력하기 위해서 props로 전달합니다.
  * @returns 전체 공고 리스트, 검색 결과 공고 리스트, 최근 본 공고 리스트
  */
-const EmployerNoticeList = ({ noticeItemList, shopId, shopInfo }: Props) => {
+
+const EmployerNoticeList = ({
+  noticeItemList,
+  shopId,
+  shopInfo,
+}: EmployerNoticeListProps) => {
   return (
     <div className='mt-10 flex flex-col items-center gap-2 border-t  border-gray-600 pt-10'>
       <div className='flex w-[965px] flex-col gap-[23px]'>

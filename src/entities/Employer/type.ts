@@ -1,4 +1,5 @@
 import { NoticeItem } from '../Post/types.ts';
+import { AllNotice } from '@/entities/Post/types';
 
 export interface ShopInfo {
   imageUrl: string;
@@ -22,4 +23,10 @@ export interface GetMyShopProps {
 export interface EmptyShopProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   shopId: string;
+}
+
+export interface EmployerNoticeListProps {
+  noticeItemList: AllNotice | null;
+  shopId: string;
+  shopInfo: ShopInfo;
 }
