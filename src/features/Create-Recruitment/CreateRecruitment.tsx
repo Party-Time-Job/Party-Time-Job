@@ -3,14 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { MINIMUM_WAGE, LIMIT_WAGE } from '@/shared/constants/Wage.ts';
 import Button from '@/shared/ui/Button';
-import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';
 import formatDate from '@/entities/Post/utils/formatDate';
-import useCustomTodayDate from './hooks/useCustomTodayDate.ts';
 import useRequestInfo from './hooks/useRequestInfo.ts';
-import { CreateRecruitmentProps } from './model/Type.ts';
+import { CreateRecruitmentProps, CreateRecruitmentForm } from './model/Type.ts';
+import HourlyPayInput from './HourlyPayInput.tsx';
+import StartsAtInput from './StartsAtInput.tsx';
+import WorkhourInput from './WorkhourInput.tsx';
+import DescriptionTextarea from './DescriptionTextarea.tsx';
 
 /**
  * 공고를 등록을 위한 폼 컴포넌트
@@ -31,7 +32,7 @@ const CreateRecruitment = ({
     handleSubmit,
     getValues,
     formState: { isSubmitting, errors },
-  } = useForm({
+  } = useForm<CreateRecruitmentForm>({
     defaultValues: {
       ...noticeData,
       startsAt: formatDate(noticeData.startsAt),
@@ -39,7 +40,6 @@ const CreateRecruitment = ({
   });
 
   const { requestInfo } = useRequestInfo({ noticeId, shopId, getValues });
-  const { now } = useCustomTodayDate();
 
   return (
     <div className='flex h-screen w-full items-center justify-center'>
@@ -64,98 +64,11 @@ const CreateRecruitment = ({
           className='flex flex-col gap-10'
         >
           <div className='flex flex-col gap-5 lg:flex lg:flex-row'>
-            <div className='relative flex flex-col gap-2'>
-              <label htmlFor='hourlyPay' className='leading-[26px] text-white'>
-                시급
-              </label>
-              <Input
-                placeholder='시급'
-                className='px-5 py-4'
-                type='number'
-                id='hourlyPay'
-                {...register('hourlyPay', {
-                  required: '시급을 입력해주세요.',
-                  validate: {
-                    minimumValidate: value =>
-                      Number(value) > MINIMUM_WAGE ||
-                      '시급은 최저시급 이상이어야 합니다.',
-                    limitValidate: value =>
-                      Number(value) < LIMIT_WAGE ||
-                      '시급은 1000000000원을 넘을 수 없습니다.',
-                  },
-                })}
-              />
-              {errors.hourlyPay && (
-                <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
-                  {errors.hourlyPay.message?.toString()}
-                </span>
-              )}
-            </div>
-            <div className='relative flex flex-col gap-2'>
-              <label htmlFor='startsAt' className='leading-[26px] text-white'>
-                시작 일시
-              </label>
-              <Input
-                id='startsAt'
-                type='date'
-                placeholder='입력'
-                {...register('startsAt', {
-                  required: '시작일시를 입력해주세요',
-                  validate: {
-                    timeCheck: value =>
-                      new Date(value) >= new Date(formatDate(now)) ||
-                      '오늘 이후 날짜로 등록해주세요.',
-                  },
-                })}
-              />
-              {errors.startsAt && (
-                <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
-                  {errors.startsAt.message?.toString()}
-                </span>
-              )}
-            </div>
-            <div className='relative flex flex-col gap-2'>
-              <label htmlFor='workhour' className='leading-[26px] text-white'>
-                근무 시간
-              </label>
-              <Input
-                id='workhour'
-                type='number'
-                placeholder='입력'
-                {...register('workhour', {
-                  required: '근무시간을 입력해주세요',
-                  validate: {
-                    workHour: value =>
-                      (Number(value) >= 1 && Number(value) <= 24) ||
-                      '근무시간은 1시간 이상 24시간 이하로 작성해주세요.',
-                  },
-                })}
-              />
-              {errors.workhour && (
-                <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
-                  {errors.workhour.message?.toString()}
-                </span>
-              )}
-            </div>
+            <HourlyPayInput register={register} errors={errors} />
+            <StartsAtInput register={register} errors={errors} />
+            <WorkhourInput register={register} errors={errors} />
           </div>
-          <div className='relative flex flex-col gap-2'>
-            <label htmlFor='description' className='leading-[26px] text-white'>
-              공고 설명
-            </label>
-            <textarea
-              id='description'
-              className='h-[153px] resize-none place-content-center rounded-md bg-test-black p-2.5'
-              placeholder='입력'
-              {...register('description', {
-                required: '공고 설명을 작성해주세요.',
-              })}
-            />
-            {errors.description && (
-              <span className='absolute bottom-[-20px] left-1 text-xs text-red-500'>
-                {errors.description.message?.toString()}
-              </span>
-            )}
-          </div>
+          <DescriptionTextarea register={register} errors={errors} />
           <div className='flex justify-end'>
             <Button
               disabled={isSubmitting}

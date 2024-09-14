@@ -1,5 +1,17 @@
-import { UseFormGetValues } from 'react-hook-form';
+import {
+  FieldErrors,
+  UseFormGetValues,
+  UseFormRegister,
+} from 'react-hook-form';
 import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
+
+export interface CreateRecruitmentForm {
+  startsAt: string;
+  id: string;
+  hourlyPay: string;
+  workhour: string;
+  description: string;
+}
 
 export interface UseRequestInfoProps {
   noticeId: string | null;
@@ -21,4 +33,9 @@ export interface CreateRecruitmentProps {
 
 export interface ErrorResponse {
   message: string;
+}
+
+export interface RecruitmentInputProps {
+  register: UseFormRegister<CreateRecruitmentForm>;
+  errors: FieldErrors<CreateRecruitmentForm>;
 }
