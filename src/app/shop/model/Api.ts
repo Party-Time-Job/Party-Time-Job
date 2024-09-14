@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { cookies } from 'next/headers';
 import { DecodedToken } from '@/widgets/Header/Type.ts';
 import { AllNotice } from '@/entities/Post/types';
-import { ShopData, ShopItem } from '@/features/Create-Shop/Type';
+import { ShopData, ShopItem } from '@/features/Create-Shop/model/Type';
 
 export const getUserId = (): string | undefined => {
   const cookieStore = cookies();

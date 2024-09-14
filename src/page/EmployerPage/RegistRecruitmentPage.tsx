@@ -1,13 +1,11 @@
 import CreateRecruitment from '@/features/Create-Recruitment/CreateRecruitment';
-import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
+import { RegistRecruitmentPageProps } from './type.ts';
 
-interface Props {
-  noticeData: Item;
-  shopId: string;
-  noticeId: string | null;
-}
-
-const RegistRecruitmentPage = ({ noticeId, noticeData, shopId }: Props) => {
+const RegistRecruitmentPage = ({
+  noticeId,
+  noticeData,
+  shopId,
+}: RegistRecruitmentPageProps) => {
   return (
     <CreateRecruitment
       noticeId={noticeId}
