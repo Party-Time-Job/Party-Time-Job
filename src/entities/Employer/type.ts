@@ -19,3 +19,7 @@ export interface GetMyShopProps {
   shopInfo: ShopInfo;
   shopId: string | null;
 }
+export interface EmptyShopProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  shopId: string;
+}
