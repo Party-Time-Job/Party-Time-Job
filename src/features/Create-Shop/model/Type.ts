@@ -4,6 +4,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
 import { Dispatch, SetStateAction } from 'react';
 
@@ -83,4 +84,8 @@ export interface CategorySelectType {
   control: Control<FieldValues, any>;
   initialValues: ShopItem | EmptyProps;
   errors: FieldErrors<FieldValues>;
+}
+
+export interface OriginalHourlyPayInputType extends CreateShopInputProps {
+  setValue: UseFormSetValue<FieldValues>;
 }
