@@ -1,4 +1,4 @@
-import { ShopItem, ShopData } from '@/features/Create-Shop/Type';
+import { ShopItem, ShopData } from '@/features/Create-Shop/model/Type';
 import { EmptyProps } from './Type.ts';
 
 const getShopData = async (shopId: string): Promise<ShopItem | EmptyProps> => {
