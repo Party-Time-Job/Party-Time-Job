@@ -5,6 +5,16 @@ import Image from 'next/image';
 import Button from '@/shared/ui/Button';
 import { GetMyShopProps } from './type.ts';
 
+/**
+ * 가게 상세 정보를 표시하는 컴포넌트
+ *
+ * 편집하기 & 공고 등록하기 버튼의 이벤트핸들러는 인자로 전달받은 action을 통해 분기처리됩니다.
+ *
+ * @param {ShopItem} shopInfo - 가게의 상세 정보를 포함하는 객체. 렌더링할 DOM 요소에 대한 정보를 제공합니다.
+ * @param {string | null} shopId - 외부 DOM에서 가게를 식별하는 ID. 렌더링할 요소의 ID입니다.
+ * @return {JSX.Element} 가게 정보를 렌더링하는 JSX 요소를 반환합니다.
+ */
+
 const MyShop = ({ shopInfo, shopId }: GetMyShopProps) => {
   const router = useRouter();
   const handleClick = (action: 'edit' | 'register') => {

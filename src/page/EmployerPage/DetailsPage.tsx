@@ -6,10 +6,12 @@ import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
 import { ShopDetailsPageProps } from './type.ts';
 
 /**
- * @param {ShopItem | null} shopInfo - 렌더링 대상 DOM 요소의 id
- * @param {string} shopId - 외부 DOM에 렌더링할 요소
- * @param {AllNotice | null} noticeItemList - DOM에 렌더링할 요소
- * @return 가게 정보 및 가게 등록 공고 리스트
+ * 가게 상세 정보를 표시하는 컴포넌트
+ *
+ * @param {ShopItem | null} shopInfo - 가게의 상세 정보를 포함하는 객체 또는 null. 렌더링할 DOM 요소에 대한 정보를 제공합니다.
+ * @param {string} shopId - 외부 DOM에서 가게를 식별하는 ID. 렌더링할 요소의 ID입니다.
+ * @param {AllNotice | null} noticeItemList - 가게 등록 공고 리스트를 포함하는 객체 또는 null. DOM에 렌더링할 공고 리스트입니다.
+ * @return {JSX.Element} 가게 정보 및 공고 리스트를 렌더링하는 JSX 요소를 반환합니다.
  */
 
 const DetailsPage = ({
