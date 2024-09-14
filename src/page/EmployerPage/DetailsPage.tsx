@@ -3,27 +3,20 @@ import EmptyShop from '@/entities/Employer/EmptyShop';
 import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
 import MyShop from '@/entities/Employer/MyShop';
 import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
-import { AllNotice } from '@/entities/Post/types';
-import { ShopItem } from '@/features/Create-Shop/Type';
+import { ShopDetailsPageProps } from './type.ts';
 
 /**
- * header footer 작업 완료되면 진행 예정
- * 사장 id 정보 조회 후 그 사장이 등록한 가게 정보가 없으면
- * 조건부 렌더링을 통해 <RegisteredRecruitment /> 보여주지 않기
- * 사장 가게 등록 ? <RegisteredRecruitment /> : ''
+ * @param {ShopItem | null} shopInfo - 렌더링 대상 DOM 요소의 id
+ * @param {string} shopId - 외부 DOM에 렌더링할 요소
+ * @param {AllNotice | null} noticeItemList - DOM에 렌더링할 요소
+ * @return 가게 정보 및 가게 등록 공고 리스트
  */
-
-interface DetailsPageProps {
-  shopInfo: ShopItem | null;
-  shopId: string;
-  noticeItemList: AllNotice | null;
-}
 
 const DetailsPage = ({
   shopInfo,
   shopId,
   noticeItemList,
-}: DetailsPageProps) => {
+}: ShopDetailsPageProps) => {
   return (
     <>
       {shopInfo ? (

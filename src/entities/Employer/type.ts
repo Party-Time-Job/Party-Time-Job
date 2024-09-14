@@ -14,3 +14,8 @@ export interface EmployerPostProps {
   shopId: string;
   shopInfo: ShopInfo;
 }
+
+export interface GetMyShopProps {
+  shopInfo: ShopInfo;
+  shopId: string | null;
+}

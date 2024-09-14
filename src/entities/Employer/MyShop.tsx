@@ -3,12 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/shared/ui/Button';
-import { ShopInfo } from './type.ts';
-
-interface GetMyShopProps {
-  shopInfo: ShopInfo;
-  shopId: string | null;
-}
+import { GetMyShopProps } from './type.ts';
 
 const MyShop = ({ shopInfo, shopId }: GetMyShopProps) => {
   const router = useRouter();
