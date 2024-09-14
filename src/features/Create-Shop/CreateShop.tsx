@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ShopItem } from './Type.ts';
+import { ShopItem } from './model/Type.ts';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';

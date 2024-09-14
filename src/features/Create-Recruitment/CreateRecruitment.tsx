@@ -26,7 +26,7 @@ const CreateRecruitment = ({
   noticeData,
   shopId,
   noticeId,
-}: CreateRecruitmentProps) => {
+}: CreateRecruitmentProps): JSX.Element => {
   const {
     register,
     handleSubmit,
