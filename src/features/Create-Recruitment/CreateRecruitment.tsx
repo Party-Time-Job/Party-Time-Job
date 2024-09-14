@@ -2,33 +2,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { getCookie } from 'cookies-next';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
 import Text from '@/shared/ui/Text';
 import formatDate from '@/entities/Post/utils/formatDate';
-import formatDateTime from '@/entities/Post/utils/formatDateTime';
-
-const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
-const MINIMUM_WAGE = 9860;
-const LIMIT_WAGE = 1000000000;
-const TODAY = new Date();
-const NOW = formatDateTime(TODAY.toISOString());
-
-interface ErrorResponse {
-  message: string;
-}
+import useCustomTodayDate from './hooks/useCustomTodayDate.ts';
+import { MINIMUM_WAGE, LIMIT_WAGE } from '@/shared/constants/Wage.ts';
+import useRequestInfo from './hooks/useRequestInfo.ts';
 
 const CreateRecruitment = ({
   noticeData,
   shopId,
   noticeId,
 }: {
-  shopId: string;
   noticeData: Item;
+  shopId: string;
   noticeId: string | null;
 }) => {
   const {
@@ -42,42 +32,8 @@ const CreateRecruitment = ({
       startsAt: formatDate(noticeData.startsAt),
     },
   });
-  const router = useRouter();
-  const requestInfo = async (data: FieldValues): Promise<void> => {
-    const token = getCookie('token');
-    const { startsAt } = getValues();
-    const url = noticeId
-      ? `${baseUrl}/shops/${shopId}/notices/${noticeId}`
-      : `${baseUrl}/shops/${shopId}/notices`;
-    const method = noticeId ? 'PUT' : 'POST';
-    try {
-      const response = await fetch(url, {
-        method,
-        headers: {
-          Accept: '*/*',
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({
-          ...data,
-          startsAt: new Date(startsAt).toISOString(),
-        }),
-      });
-
-      if (response.ok) {
-        router.push(`/shop/details/${shopId}`);
-      } else {
-        const errorResponse = (await response.json()) as ErrorResponse;
-        throw new Error(errorResponse.message || '예상치 못한 오류 발생');
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        // eslint-disable-next-line no-alert
-        alert(error.message);
-      }
-    }
-  };
+  const { requestInfo } = useRequestInfo({ noticeId, shopId, getValues });
+  const { now } = useCustomTodayDate();
 
   return (
     <div className='flex h-screen w-full items-center justify-center'>
@@ -141,7 +97,7 @@ const CreateRecruitment = ({
                   required: '시작일시를 입력해주세요',
                   validate: {
                     timeCheck: value =>
-                      new Date(value) >= new Date(formatDate(NOW)) ||
+                      new Date(value) >= new Date(formatDate(now)) ||
                       '오늘 이후 날짜로 등록해주세요.',
                   },
                 })}
