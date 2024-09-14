@@ -1,20 +1,22 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';
-import { generatePresignedUrl } from './model/Api.ts';
+import { generatePresignedUrl, uploadImageToS3 } from './model/Api.ts';
 import { CustomImageUploadInputType } from './model/Type.ts';
 
 const CustomImageUploadInput = ({
   register,
   errors,
   setValue,
+  initialValues,
+  reset,
   uploadedImageUrl,
   setUploadedImageUrl,
-  imageName,
-  setImageName,
-  setFileName,
-  setPresignedUrl,
 }: CustomImageUploadInputType) => {
+  const [presignedUrl, setPresignedUrl] = useState('');
+  const [imageName, setImageName] = useState<string>('');
+  const [fileName, setFileName] = useState<File | null>(null);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
@@ -25,6 +27,17 @@ const CustomImageUploadInput = ({
     setValue('imageUrl', '');
     setUploadedImageUrl('');
   };
+  useEffect(() => {
+    if (presignedUrl && fileName) {
+      uploadImageToS3({ fileName, presignedUrl, setUploadedImageUrl });
+    }
+  }, [presignedUrl]);
+
+  useEffect(() => {
+    reset(initialValues);
+    setUploadedImageUrl(initialValues.imageUrl);
+    setValue('imageUrl', initialValues.imageUrl);
+  }, []);
 
   return (
     <div className='relative flex h-[400px] w-[350px] flex-col gap-2 overflow-hidden md:w-[472px]'>

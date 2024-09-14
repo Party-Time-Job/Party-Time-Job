@@ -4,6 +4,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormReset,
   UseFormSetValue,
 } from 'react-hook-form';
 import { Dispatch, SetStateAction } from 'react';
@@ -91,10 +92,8 @@ export interface OriginalHourlyPayInputType extends CreateShopInputProps {
 }
 
 export interface CustomImageUploadInputType extends OriginalHourlyPayInputType {
+  initialValues: ShopItem | EmptyProps;
+  reset: UseFormReset<FieldValues>;
   uploadedImageUrl: string | undefined;
   setUploadedImageUrl: Dispatch<SetStateAction<string | undefined>>;
-  imageName: string;
-  setImageName: Dispatch<SetStateAction<string>>;
-  setFileName: Dispatch<SetStateAction<File | null>>;
-  setPresignedUrl: Dispatch<SetStateAction<string>>;
 }

@@ -3,13 +3,12 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreateShopProps } from './model/Type.ts';
 import Button from '@/shared/ui/Button';
 import Text from '@/shared/ui/Text';
 import useCreateShopRequest from './hooks/useCreateShopRequest.tsx';
-import { uploadImageToS3 } from './model/Api.ts';
 import ShopNameInput from './ShopNameInput.tsx';
 import CategorySelect from './CategorySelect.tsx';
 import AddressSelect from './AddressSelect.tsx';
@@ -30,30 +29,15 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   } = useForm<FieldValues>({
     defaultValues: initialValues,
   });
-  const [presignedUrl, setPresignedUrl] = useState('');
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | undefined>(
     '',
   );
-  const [imageName, setImageName] = useState<string>('');
-  const [fileName, setFileName] = useState<File | null>(null);
   const router = useRouter();
   const { requestInfo } = useCreateShopRequest({
     shopId,
     uploadedImageUrl,
     getValues,
   });
-
-  useEffect(() => {
-    if (presignedUrl && fileName) {
-      uploadImageToS3({ fileName, presignedUrl, setUploadedImageUrl });
-    }
-  }, [presignedUrl]);
-
-  useEffect(() => {
-    reset(initialValues);
-    setUploadedImageUrl(initialValues.imageUrl);
-    setValue('imageUrl', initialValues.imageUrl);
-  }, []);
 
   return (
     <div className='flex flex-col items-center gap-8 px-[238px] py-[60px]'>
@@ -97,12 +81,10 @@ const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
             register={register}
             errors={errors}
             setValue={setValue}
+            initialValues={initialValues}
+            reset={reset}
             uploadedImageUrl={uploadedImageUrl}
             setUploadedImageUrl={setUploadedImageUrl}
-            imageName={imageName}
-            setImageName={setImageName}
-            setFileName={setFileName}
-            setPresignedUrl={setPresignedUrl}
           />
         </div>
         <DescriptionTextArea register={register} errors={errors} />
