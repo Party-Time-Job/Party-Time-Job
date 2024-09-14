@@ -3,24 +3,29 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { MINIMUM_WAGE, LIMIT_WAGE } from '@/shared/constants/Wage.ts';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
-import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
 import Text from '@/shared/ui/Text';
 import formatDate from '@/entities/Post/utils/formatDate';
 import useCustomTodayDate from './hooks/useCustomTodayDate.ts';
-import { MINIMUM_WAGE, LIMIT_WAGE } from '@/shared/constants/Wage.ts';
 import useRequestInfo from './hooks/useRequestInfo.ts';
+import { CreateRecruitmentProps } from './model/Type.ts';
+
+/**
+ * 공고를 등록을 위한 폼 컴포넌트
+ *
+ * @param {Item} noticeData - 만약 편집을 위해 CreateRecruitment가 렌더링되었다면 기존 내용을 불러옵니다.
+ * @param {string} shopId - 외부 DOM에서 가게를 식별하는 ID. 렌더링할 요소의 ID입니다.
+ * @param {string | null} noticeId - 외부 DOM에서 공고를 식별하는 ID. 렌더링할 요소의 ID입니다.
+ * @return {JSX.Element} 공고 등록을 위한 폼 컴포넌트를 렌더링하는 JSX 요소를 반환합니다.
+ */
 
 const CreateRecruitment = ({
   noticeData,
   shopId,
   noticeId,
-}: {
-  noticeData: Item;
-  shopId: string;
-  noticeId: string | null;
-}) => {
+}: CreateRecruitmentProps) => {
   const {
     register,
     handleSubmit,
@@ -32,6 +37,7 @@ const CreateRecruitment = ({
       startsAt: formatDate(noticeData.startsAt),
     },
   });
+
   const { requestInfo } = useRequestInfo({ noticeId, shopId, getValues });
   const { now } = useCustomTodayDate();
 
