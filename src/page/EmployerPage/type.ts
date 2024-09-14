@@ -1,5 +1,5 @@
 import { AllNotice } from '@/entities/Post/types';
-import { ShopItem } from '@/features/Create-Shop/Type';
+import { ShopItem } from '@/features/Create-Shop/model/Type';
 import { Item } from '@/app/shop/registration/recruitment/[id]/model/Type';
 
 export interface DecodedToken {

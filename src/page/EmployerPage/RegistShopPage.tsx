@@ -1,5 +1,5 @@
 import CreateShop from '@/features/Create-Shop/CreateShop';
-import { ShopItem } from '@/features/Create-Shop/Type';
+import { ShopItem } from '@/features/Create-Shop/model/Type';
 
 interface EmptyProps {
   name: string;
