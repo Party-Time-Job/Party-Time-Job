@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ShopItem } from './model/Type.ts';
+import { CreateShopProps } from './model/Type.ts';
 import Button from '@/shared/ui/Button';
 import Input from '@/shared/ui/Input';
 import Text from '@/shared/ui/Text';
@@ -18,20 +18,6 @@ import getShopId from './model/Api.ts';
 const baseUrl = 'https://bootcamp-api.codeit.kr/api/3-2/the-julge';
 
 const MINIMUM_WAGE = 9860;
-
-interface EmptyProps {
-  name: string;
-  category: string;
-  address1: string;
-  address2: string;
-  originalHourlyPay: string;
-  imageUrl: string;
-  description: string;
-}
-interface CreateShopProps {
-  initialValues: ShopItem | EmptyProps;
-  shopId: string;
-}
 
 const CreateShop = ({ initialValues, shopId }: CreateShopProps) => {
   const {

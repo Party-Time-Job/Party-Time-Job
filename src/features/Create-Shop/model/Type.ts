@@ -33,3 +33,18 @@ export interface ShopData {
   item: ShopItem;
   links: Link[];
 }
+
+export interface EmptyProps {
+  name: string;
+  category: string;
+  address1: string;
+  address2: string;
+  originalHourlyPay: string;
+  imageUrl: string;
+  description: string;
+}
+
+export interface CreateShopProps {
+  initialValues: ShopItem | EmptyProps;
+  shopId: string;
+}
