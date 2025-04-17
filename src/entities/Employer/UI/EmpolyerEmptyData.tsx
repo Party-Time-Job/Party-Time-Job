@@ -7,14 +7,12 @@
  * 버튼 이름을 작성해주세요
  */
 
-import { ReactNode } from 'react';
 import Button from '@/shared/ui/Button';
 
 interface EmployerEmptyDataComponentProps {
   title: string;
   comment: string;
-  content: string;
-  button?: ReactNode;
+  content?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -22,7 +20,6 @@ const EmpolyerEmptyData = ({
   title,
   comment,
   content,
-  button,
   onClick,
 }: EmployerEmptyDataComponentProps) => {
   return (
@@ -36,13 +33,14 @@ const EmpolyerEmptyData = ({
         <span className='self-stretch text-center font-normal leading-[26px] text-white'>
           {comment}
         </span>
-        {button}
-        <Button
-          onClick={onClick}
-          size='medium'
-          status='active'
-          text={content}
-        />
+        {content && (
+          <Button
+            onClick={onClick}
+            size='medium'
+            status='active'
+            text={content}
+          />
+        )}
       </div>
     </div>
   );

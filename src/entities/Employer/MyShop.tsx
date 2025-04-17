@@ -72,7 +72,7 @@ const MyShop = ({ shopInfo, shopId }: GetMyShopProps) => {
               </div>
             </div>
             {/* 버튼 목록 */}
-            <div className='flex w-full justify-end'>
+            <div className='flex w-full justify-end gap-2'>
               <Button
                 status='active'
                 size='medium'
@@ -80,13 +80,13 @@ const MyShop = ({ shopInfo, shopId }: GetMyShopProps) => {
                 text='편집하기'
                 onClick={() => handleClick('edit')}
               />
-              {/* <Button
+              <Button
                 status='active'
                 size='medium'
                 type='submit'
                 text='공고 등록하기'
                 onClick={() => handleClick('register')}
-              /> */}
+              />
             </div>
           </div>
         </div>

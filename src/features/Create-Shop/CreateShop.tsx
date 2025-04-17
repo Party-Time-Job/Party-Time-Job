@@ -52,7 +52,7 @@ const CreateShop = ({
 
   return (
     <div className='flex justify-center p-5 py-[60px] md:p-10'>
-      <div className='rounded-lg border p-5 md:p-10'>
+      <div className='p-2 md:rounded-lg md:border md:p-10'>
         <div className='mb-8 flex justify-between md:mb-12 md:w-[472px] lg:w-[980px]'>
           <div className='flex h-10 w-20 items-center justify-center rounded-lg bg-test-blue text-black'>
             <Text as='span' className='font-bold'>
