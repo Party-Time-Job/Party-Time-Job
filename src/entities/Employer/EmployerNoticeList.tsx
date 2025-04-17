@@ -20,7 +20,7 @@ const EmployerNoticeList = ({
   shopInfo,
 }: EmployerNoticeListProps) => {
   return (
-    <div className='mt-10 flex flex-col gap-2 border-t  border-gray-600 px-10 pt-10'>
+    <div className='md:px-30 mt-10 flex flex-col  gap-2 border-t border-gray-600 px-20 pt-10 lg:px-52'>
       <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-green text-base font-bold text-black'>
         {'등록한 공고'}
       </span>
