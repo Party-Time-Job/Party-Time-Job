@@ -18,6 +18,7 @@ import {
 } from '@/shared/ui/Table/ui/TableBodyUi';
 import RejectModal from '@/features/RejectModal/RejectModal';
 import AcceptModal from '@/features/AcceptModal/AcceptModal';
+import EmpolyerEmptyData from '@/entities/Employer/UI/EmpolyerEmptyData';
 
 /**
  *
@@ -123,44 +124,52 @@ export const StoreTable = ({
 
   return (
     <>
-      <TableContainerUi pagination={pagination}>
-        <TableHeadRow>
-          <TableHeadCell>신청자</TableHeadCell>
-          <TableHeadCell>소개</TableHeadCell>
-          <TableHeadCell>전화번호</TableHeadCell>
-          <TableHeadCell>상태</TableHeadCell>
-        </TableHeadRow>
-        <TableBody>
-          {tableData.map(item => (
-            <TableBodyRow key={item.id}>
-              <TableBodyCell>{item.name}</TableBodyCell>
-              <TableBodyCell>{item.bio}</TableBodyCell>
-              <TableBodyCell>{item.secondValue}</TableBodyCell>
+      {data.length ? (
+        <TableContainerUi pagination={pagination}>
+          <TableHeadRow>
+            <TableHeadCell>신청자</TableHeadCell>
+            <TableHeadCell>소개</TableHeadCell>
+            <TableHeadCell>전화번호</TableHeadCell>
+            <TableHeadCell>상태</TableHeadCell>
+          </TableHeadRow>
+          <TableBody>
+            {tableData.map(item => (
+              <TableBodyRow key={item.id}>
+                <TableBodyCell>{item.name}</TableBodyCell>
+                <TableBodyCell>{item.bio}</TableBodyCell>
+                <TableBodyCell>{item.secondValue}</TableBodyCell>
 
-              <TableBodyCell>
-                {item.status === 'pending' ? (
-                  <div className='flex gap-2 text-xs'>
-                    <button
-                      className='rounded-lg border border-red-600 px-2 py-1 text-red-600'
-                      onClick={() => handleRejectToggle(item.id)}
-                    >
-                      거절하기
-                    </button>
-                    <button
-                      className='rounded-lg border border-blue-600 px-2 py-1 text-blue-600'
-                      onClick={() => handleAcceptToggle(item.id)}
-                    >
-                      승인하기
-                    </button>
-                  </div>
-                ) : (
-                  <TableBodyStatus status={item.status} />
-                )}
-              </TableBodyCell>
-            </TableBodyRow>
-          ))}
-        </TableBody>
-      </TableContainerUi>
+                <TableBodyCell>
+                  {item.status === 'pending' ? (
+                    <div className='flex gap-2 text-xs'>
+                      <button
+                        className='rounded-lg border border-red-600 px-2 py-1 text-red-600'
+                        onClick={() => handleRejectToggle(item.id)}
+                      >
+                        거절하기
+                      </button>
+                      <button
+                        className='rounded-lg border border-blue-600 px-2 py-1 text-blue-600'
+                        onClick={() => handleAcceptToggle(item.id)}
+                      >
+                        승인하기
+                      </button>
+                    </div>
+                  ) : (
+                    <TableBodyStatus status={item.status} />
+                  )}
+                </TableBodyCell>
+              </TableBodyRow>
+            ))}
+          </TableBody>
+        </TableContainerUi>
+      ) : (
+        <EmpolyerEmptyData
+          title='신청자 목록'
+          comment='아직 아무도 지원하지 않았어요. 😭'
+        />
+      )}
+
       {isRejectToggle ? (
         <RejectModal
           handleToggle={handleRejectedStateToggle}

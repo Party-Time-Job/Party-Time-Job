@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
 import EmployerPost from './EmployerPost';
 import { EmployerNoticeListProps } from './type.ts';
 
@@ -19,29 +20,35 @@ const EmployerNoticeList = ({
   shopInfo,
 }: EmployerNoticeListProps) => {
   return (
-    <div className='mt-10 flex flex-col items-center gap-2 border-t  border-gray-600 pt-10'>
-      <div className='flex w-[965px] flex-col gap-[23px]'>
-        <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-blue text-xl font-bold text-black'>
-          내 공고
-        </span>
+    <div className='mt-10 flex flex-col gap-2 border-t  border-gray-600 px-10 pt-10'>
+      <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-green text-base font-bold text-black'>
+        {'등록한 공고'}
+      </span>
+      <div className='flex flex-col gap-[23px]'>
         <section className='flex w-full'>
           <div className='flex w-full gap-5 overflow-auto py-5 scrollbar-hide'>
-            {noticeItemList?.items.map(notice => {
-              const noticeId = notice.item.id;
-              return (
-                <Link
-                  key={noticeId}
-                  href={`/shop/notice-detail/${shopId}/${noticeId}`}
-                >
-                  <EmployerPost
+            {noticeItemList?.items.length ? (
+              noticeItemList?.items.map(notice => {
+                const noticeId = notice.item.id;
+                return (
+                  <Link
                     key={noticeId}
-                    noticeItem={notice.item}
-                    shopId={shopId}
-                    shopInfo={shopInfo}
-                  />
-                </Link>
-              );
-            })}
+                    href={`/shop/notice-detail/${shopId}/${noticeId}`}
+                  >
+                    <EmployerPost
+                      key={noticeId}
+                      noticeItem={notice.item}
+                      shopId={shopId}
+                      shopInfo={shopInfo}
+                    />
+                  </Link>
+                );
+              })
+            ) : (
+              <div className='flex h-[420px] justify-center'>
+                {shopId ? <EmptyRecruitment shopId={shopId} /> : null}
+              </div>
+            )}
           </div>
         </section>
       </div>

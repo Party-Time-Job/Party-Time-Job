@@ -2,8 +2,8 @@ import { useRouter } from 'next/navigation';
 import { useSetRecoilState } from 'recoil';
 import { deleteCookie } from 'cookies-next';
 import HeaderButton from './HeaderButton';
-import TokenState from '@/atoms/tokenState';
-import userTypeState from '@/atoms/userTypeState';
+import TokenState from '@/shared/atoms/tokenState';
+import userTypeState from '@/shared/atoms/userTypeState';
 
 const LogoutButton = () => {
   const router = useRouter();

@@ -7,14 +7,12 @@
  * 버튼 이름을 작성해주세요
  */
 
-import { ReactNode } from 'react';
 import Button from '@/shared/ui/Button';
 
 interface EmployerEmptyDataComponentProps {
   title: string;
   comment: string;
-  content: string;
-  button?: ReactNode;
+  content?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -22,11 +20,10 @@ const EmpolyerEmptyData = ({
   title,
   comment,
   content,
-  button,
   onClick,
 }: EmployerEmptyDataComponentProps) => {
   return (
-    <div className='mx-auto mt-10 flex w-[350px] flex-col md:w-[600px] lg:w-[980px]'>
+    <div className='mx-auto flex w-[350px] flex-col md:w-[600px] lg:w-[980px]'>
       <div className='mb-4 flex'>
         <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-green text-base font-bold text-black'>
           {title}
@@ -36,13 +33,14 @@ const EmpolyerEmptyData = ({
         <span className='self-stretch text-center font-normal leading-[26px] text-white'>
           {comment}
         </span>
-        {button}
-        <Button
-          onClick={onClick}
-          size='medium'
-          status='active'
-          text={content}
-        />
+        {content && (
+          <Button
+            onClick={onClick}
+            size='medium'
+            status='active'
+            text={content}
+          />
+        )}
       </div>
     </div>
   );

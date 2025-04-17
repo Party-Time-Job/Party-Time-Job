@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import EmptyShop from '@/entities/Employer/EmptyShop';
-import EmptyRecruitment from '@/entities/Employer/EmptyRecruitment';
 import MyShop from '@/entities/Employer/MyShop';
 import EmployerNoticeList from '@/entities/Employer/EmployerNoticeList';
 import { ShopDetailsPageProps } from './type.ts';
@@ -27,19 +26,13 @@ const DetailsPage = ({
         <EmptyShop shopId={shopId} />
       )}
       {shopInfo ? (
-        noticeItemList ? (
-          <EmployerNoticeList
-            shopId={shopId}
-            shopInfo={shopInfo}
-            noticeItemList={noticeItemList}
-          />
-        ) : (
-          <div className='flex h-[420px] justify-center'>
-            {shopId ? <EmptyRecruitment shopId={shopId} /> : null}
-          </div>
-        )
+        <EmployerNoticeList
+          shopId={shopId}
+          shopInfo={shopInfo}
+          noticeItemList={noticeItemList}
+        />
       ) : (
-        ''
+        <div className='h-[400px]' />
       )}
     </>
   );
