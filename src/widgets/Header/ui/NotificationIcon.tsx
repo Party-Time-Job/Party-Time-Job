@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
 import NotifiactionModal from '@/shared/NotificationModal/NotificationModal';
-import alertsState from '@/atoms/alertsState';
+import alertsState from '@/shared/atoms/alertsState';
 
 type AlertItemType = {
   id: string;

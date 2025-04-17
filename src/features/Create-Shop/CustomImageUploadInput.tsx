@@ -24,8 +24,8 @@ const CustomImageUploadInput = ({
       setFileName(file);
     }
     generatePresignedUrl({ imageName, setPresignedUrl });
-    setValue('imageUrl', '');
-    setUploadedImageUrl('');
+    // setValue('imageUrl', '');
+    // setUploadedImageUrl('');
   };
   useEffect(() => {
     if (presignedUrl && fileName) {

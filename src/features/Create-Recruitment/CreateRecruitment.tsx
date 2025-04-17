@@ -43,7 +43,7 @@ const CreateRecruitment = ({
 
   return (
     <div className='flex h-screen w-full items-center justify-center'>
-      <div className='flex flex-col gap-10 rounded-lg border p-10'>
+      <div className='flex flex-col gap-10 rounded-lg border p-5 md:p-10'>
         <div className='flex justify-between'>
           <div className='flex h-10 w-28 items-center justify-center rounded-lg bg-test-blue text-black'>
             <Text as='span' className='font-bold'>

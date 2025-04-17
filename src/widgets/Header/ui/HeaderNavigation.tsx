@@ -12,8 +12,8 @@ import LogoutButton from './LogoutButton';
 import MyStoreLink from './MyStoreLink';
 import NotificationIcon from './NotificationIcon';
 import { DecodedToken } from '../Type.ts';
-import TokenState from '@/atoms/tokenState.ts';
-import userTypeState from '@/atoms/userTypeState.ts';
+import TokenState from '@/shared/atoms/tokenState.ts';
+import userTypeState from '@/shared/atoms/userTypeState.ts';
 
 /**
  * 로그인을 한 상태가 아닐 경우 로그인, 회원가입을 보여준다.
