@@ -51,74 +51,76 @@ const CreateShop = ({
   });
 
   return (
-    <div className='flex flex-col items-center gap-8 py-[60px]'>
-      <div className='flex w-[350px] justify-between md:w-[472px] lg:w-[980px]'>
-        <div className='flex h-10 w-20 items-center justify-center rounded-lg bg-test-blue text-black'>
-          <Text as='span' className='font-bold'>
-            가게 정보
-          </Text>
+    <div className='flex justify-center p-5 py-[60px] md:p-10'>
+      <div className='rounded-lg border p-5 md:p-10'>
+        <div className='mb-8 flex justify-between md:mb-12 md:w-[472px] lg:w-[980px]'>
+          <div className='flex h-10 w-20 items-center justify-center rounded-lg bg-test-blue text-black'>
+            <Text as='span' className='font-bold'>
+              가게 정보
+            </Text>
+          </div>
+          <Link href={`/shop/details/${shopId}`} className='flex'>
+            <Image src={'/close.svg'} alt='close' width={32} height={32} />
+          </Link>
         </div>
-        <Link href={`/shop/details/${shopId}`} className='flex'>
-          <Image src={'/close.svg'} alt='close' width={32} height={32} />
-        </Link>
-      </div>
-      <form
-        onSubmit={handleSubmit(data => requestInfo(data))}
-        className='flex flex-col gap-6'
-      >
-        <div className='flex flex-col items-center gap-5 lg:flex-row'>
-          <ShopNameInput register={register} errors={errors} />
-          <CategorySelect
-            control={control}
-            initialValues={initialValues}
-            errors={errors}
-          />
-        </div>
-        <div className='flex flex-col items-center gap-5 lg:flex-row'>
-          <AddressSelect
-            control={control}
-            initialValues={initialValues}
-            errors={errors}
-          />
-          <AddressDetailSelect register={register} errors={errors} />
-        </div>
-        <div className='flex flex-col items-center gap-7 lg:items-start'>
-          <OriginalHourlyPayInput
-            register={register}
-            errors={errors}
-            setValue={setValue}
-          />
-          <CustomImageUploadInput
-            register={register}
-            errors={errors}
-            setValue={setValue}
-            initialValues={initialValues}
-            reset={reset}
-            uploadedImageUrl={uploadedImageUrl}
-            setUploadedImageUrl={setUploadedImageUrl}
-          />
-        </div>
-        <DescriptionTextArea register={register} errors={errors} />
-        <div className='itens-center mt-5 flex justify-center gap-10'>
-          <Button
-            size='medium'
-            status={isSubmitting ? 'inactive' : 'active'}
-            text={shopId === null ? '정보 수정하기' : '가게 등록하기'}
-            disabled={isSubmitting || isSubmitted}
-            type='submit'
-          />
-          {initialValues && (
+        <form
+          onSubmit={handleSubmit(data => requestInfo(data))}
+          className='flex flex-col gap-6'
+        >
+          <div className='flex flex-col items-center gap-5 lg:flex-row'>
+            <ShopNameInput register={register} errors={errors} />
+            <CategorySelect
+              control={control}
+              initialValues={initialValues}
+              errors={errors}
+            />
+          </div>
+          <div className='flex flex-col items-center gap-5 lg:flex-row'>
+            <AddressSelect
+              control={control}
+              initialValues={initialValues}
+              errors={errors}
+            />
+            <AddressDetailSelect register={register} errors={errors} />
+          </div>
+          <div className='flex flex-col items-center gap-7 lg:items-start'>
+            <OriginalHourlyPayInput
+              register={register}
+              errors={errors}
+              setValue={setValue}
+            />
+            <CustomImageUploadInput
+              register={register}
+              errors={errors}
+              setValue={setValue}
+              initialValues={initialValues}
+              reset={reset}
+              uploadedImageUrl={uploadedImageUrl}
+              setUploadedImageUrl={setUploadedImageUrl}
+            />
+          </div>
+          <DescriptionTextArea register={register} errors={errors} />
+          <div className='itens-center mt-5 flex justify-center gap-10'>
             <Button
               size='medium'
               status={isSubmitting ? 'inactive' : 'active'}
-              text='취소하기'
+              text={shopId === null ? '정보 수정하기' : '가게 등록하기'}
               disabled={isSubmitting || isSubmitted}
-              type='button'
-              onClick={() => router.push(`/shop/details/${shopId}`)}
+              type='submit'
             />
-          )}
-        </div>
-      </form>
+            {initialValues && (
+              <Button
+                size='medium'
+                status={isSubmitting ? 'inactive' : 'active'}
+                text='취소하기'
+                disabled={isSubmitting || isSubmitted}
+                type='button'
+                onClick={() => router.push(`/shop/details/${shopId}`)}
+              />
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

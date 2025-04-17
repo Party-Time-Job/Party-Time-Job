@@ -26,7 +26,7 @@ const EmpolyerEmptyData = ({
   onClick,
 }: EmployerEmptyDataComponentProps) => {
   return (
-    <div className='mx-auto mt-10 flex w-[350px] flex-col md:w-[600px] lg:w-[980px]'>
+    <div className='mx-auto flex w-[350px] flex-col md:w-[600px] lg:w-[980px]'>
       <div className='mb-4 flex'>
         <span className='flex h-12 w-24 items-center justify-center rounded-lg bg-test-green text-base font-bold text-black'>
           {title}
