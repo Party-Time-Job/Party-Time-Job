@@ -22,11 +22,13 @@ export const getUserId = (): string | undefined => {
 
 export const getShopNotice = async (
   shopIdParams: string,
+  offset: number = 0,
+  limit: number = 5,
 ): Promise<AllNotice | null> => {
   if (shopIdParams !== 'null') {
     try {
       const response = await fetch(
-        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopIdParams}/notices`,
+        `https://bootcamp-api.codeit.kr/api/3-2/the-julge/shops/${shopIdParams}/notices?offset=${offset}&limit=${limit}`,
         {
           next: {
             tags: ['noticeItemList'],

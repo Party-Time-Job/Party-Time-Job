@@ -8,7 +8,6 @@ import { DecodedToken } from '@/widgets/Header/Type';
 const useCustomNotice = () => {
   const [customNotice, setCustomNotice] = useState<Notice[]>();
   const token = getCookie('token');
-
   useEffect(() => {
     if (token) {
       const decoded: DecodedToken = jwtDecode(token);
