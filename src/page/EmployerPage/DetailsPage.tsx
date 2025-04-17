@@ -39,7 +39,7 @@ const DetailsPage = ({
           </div>
         )
       ) : (
-        ''
+        <div className='h-[400px]' />
       )}
     </>
   );

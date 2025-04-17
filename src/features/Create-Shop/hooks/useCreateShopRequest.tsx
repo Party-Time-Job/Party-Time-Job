@@ -35,7 +35,7 @@ const useCreateShopRequest = ({
         }),
       });
       if (response.status === 200) {
-        if (shopId === 'null') {
+        if (shopId === null) {
           const currentShopId = await getShopId();
           router.push(`/shop/details/${currentShopId}`);
         } else {

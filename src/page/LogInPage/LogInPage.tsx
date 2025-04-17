@@ -10,8 +10,8 @@ import LogInForm from '@/features/LogIn/ui/LogInForm';
 import SignUpLink from '@/features/LogIn/ui/SignUpLink';
 import { LoginFormProps, TokenResponse } from '@/features/LogIn/Types';
 import AccountPageLogoLink from '@/features/AccountPageLogoLink/AccountPageLogoLink';
-import TokenState from '@/atoms/tokenState';
-import userTypeState from '@/atoms/userTypeState';
+import TokenState from '@/shared/atoms/tokenState';
+import userTypeState from '@/shared/atoms/userTypeState';
 
 const LogInPage = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
