@@ -14,7 +14,10 @@ const useCustomNotice = () => {
       const { userId } = decoded;
 
       const getData = async () => {
-        const allNotice = await getMethod<AllNotice>('/notices?limit=100');
+        // 공고 데이터가 쌓여 offset 0->100으로 변경 (임시)
+        const allNotice = await getMethod<AllNotice>(
+          '/notices?offset=100&limit=100',
+        );
         const userInfo = await getMethod<User>(`/users/${userId}`);
         const userAddress = userInfo.item.address;
         const allNoticeList = allNotice.items;
